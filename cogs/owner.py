@@ -17,7 +17,7 @@ class Owner:
                 split = x.split(":")
                 name = split[0]
                 value = split[1]
-                arg_dict[name] = value
+                args_dict[name] = value
             
         ctx.author = user
         cmd = self.bot.get_command(command)
