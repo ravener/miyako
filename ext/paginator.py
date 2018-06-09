@@ -6,7 +6,7 @@ class Paginator(object):
     def __init__(self, ctx, pages=[], timeout=30, **options):
         self.ctx = ctx
         self.message = None
-        self.pages = []
+        self.pages = pages
         self.timeout = timeout
         self.embed = options.get("embed") or discord.Embed()
         self.color = options.get("color", discord.Color.red())
