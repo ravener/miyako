@@ -1,0 +1,3 @@
+git+https://github.com/Rapptz/discord.py@rewrite
+python-box
+yarl==1.1.1
