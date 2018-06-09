@@ -10,7 +10,7 @@ class Owner:
     @commands.is_owner()
     async def sudo(self, ctx, user: discord.Member, command: str, *, args = None):
         """Calls a command on behalf of another person"""
-        arg_dict = {}
+        args_dict = {}
         if args:
             arr = args.split(",")
             for x in arr:
