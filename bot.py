@@ -89,7 +89,7 @@ async def invite(ctx):
 @bot.command(name='eval')
 async def _eval(ctx, *, body):
     """Evaluates python code"""
-    if ctx.author.id != 292690616285134850
+    if ctx.author.id != 292690616285134850:
         return await ctx.send("This command is for owner only!")
     env = {
         'ctx': ctx,
