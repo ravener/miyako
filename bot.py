@@ -14,6 +14,8 @@ import aiohttp
 bot = commands.Bot(command_prefix="lb.", description="A simple Miraculous discord bot.", owner_id=292690616285134850)
 bot._last_result = None
 bot.session = aiohttp.ClientSession()
+bot.commands_ran = 0
+bot.cogs_list = [ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ]
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
@@ -21,7 +23,6 @@ def cleanup_code(content):
     if content.startswith('```') and content.endswith('```'):
         return '\n'.join(content.split('\n')[1:-1])
     return content.strip('` \n')
-
 
 @bot.event
 async def on_message(message):
@@ -37,11 +38,17 @@ async def on_message(message):
 async def on_ready():
     print("Bot is online!")
     print(f"Logged in as {bot.user.name}#{bot.user.discriminator} ({bot.user.id})")
-    print("Servers: {len(bot.guilds)}")
-    print("Users: {len(bot.users)}")
-    print("Channels: {channel_count(bot)}")
-    print("WebSocket Ping: {bot.latency:.4f} ms")
+    print(f"Servers: {len(bot.guilds)}")
+    print(f"Users: {len(bot.users)}")
+    print(f"Channels: {channel_count(bot)}")
+    print(f"WebSocket Ping: {bot.latency:.4f} ms")
     await bot.change_presence(activity=discord.Game(f"lb.help | {len(bot.guilds)} servers!"))
+    print("Loading cogs...")
+    for x in bot.cogs_list:
+        try:
+            bot.load_extension(x)
+        except Exception as e:
+            print(f"LoadError in {x}:\n{e}")
    
 
 @bot.event
@@ -53,8 +60,8 @@ async def on_guild_join(guild):
     em.description = guild.name
     if guild.icon_url:
         em.set_thumbnail(url=guild.icon_url)
-    em.add_field("Owner", f"{guild.owner}")
-    em.add_field("Member Count", f"{guild.member_count}")
+    em.add_field(name="Owner", value=f"{guild.owner}")
+    em.add_field(name="Member Count", value=f"{guild.member_count}")
     em.set_footer(text=f"{guild.id}")
     channel = bot.get_channel(454776806869041154)
     await channel.send(embed=em)
@@ -69,12 +76,34 @@ async def on_guild_remove(guild):
     em.description = guild.name
     if guild.icon_url:
         em.set_thumbnail(url=guild.icon_url)
-    em.add_field("Owner", f"{guild.owner}")
-    em.add_field("Member Count", f"{guild.member_count}")
+    em.add_field(name="Owner", value=f"{guild.owner}")
+    em.add_field(name="Member Count", value=f"{guild.member_count}")
     em.set_footer(text=f"{guild.id}")
     channel = bot.get_channel(454776806869041154)
     await channel.send(embed=em)
     await bot.change_presence(activity=discord.Game(f"lb.help | {len(bot.guilds)} servers!"))
+    
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.NotOwner):
+        return await ctx.send("This command is for owner only!")
+    if isinstance(error, commands.MissingPermissions):
+        perms = list(map(capitalize, error.missing_perms))
+        return await ctx.send(f"Your missing permission(s) to run this command:\n{'\n'.join(perms)}")
+    if isinstance(error, commands.CommandNotFound):
+        return
+  
+    em = discord.Embed()
+    em.color = 0xff0000
+    em.title = "CommandError"
+    em.description = f"An Error occured in command: {ctx.command}\n```py\n{error}\n```"
+    em.set_footer(text=f"User: {ctx.author}, Guild: {ctx.guild}")
+    logs = bot.get_channel(454776836929617921)
+    await logs.send(embed=em)
+
+@bot.event
+async def on_command(ctx):
+    bot.commands_ran += 1
 
 @bot.command()
 async def ping(ctx):
@@ -86,19 +115,22 @@ async def invite(ctx):
     """Want me in your server?"""
     await ctx.send(f"Invite me to your server: https://discordapp.com/oauth2/authorize?client_id={bot.user.id}&scope=bot&permissions=470281463")
     
-@bot.command(name='eval')
+@bot.command(name="eval", aliases=["ev"])
 async def _eval(ctx, *, body):
     """Evaluates python code"""
     if ctx.author.id != 292690616285134850:
         return await ctx.send("This command is for owner only!")
     env = {
+        'bot': bot,
         'ctx': ctx,
         'channel': ctx.channel,
         'author': ctx.author,
         'guild': ctx.guild,
         'message': ctx.message,
+        'msg': ctx.message,
         '_': bot._last_result,
         'source': inspect.getsource,
+        'src': inspect.getsource,
         'session': bot.session
     }
 
@@ -168,5 +200,6 @@ async def _eval(ctx, *, body):
         await ctx.message.add_reaction('\u2049')  # x
     else:
         await ctx.message.add_reaction('\u2705')
-    
-bot.run(os.environ.get("TOKEN"))
+
+if __name__ == "__main__":    
+    bot.run(os.environ.get("TOKEN"))
