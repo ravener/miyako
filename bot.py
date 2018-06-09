@@ -89,7 +89,7 @@ async def on_command_error(ctx, error):
         return await ctx.send("This command is for owner only!")
     if isinstance(error, commands.MissingPermissions):
         perms = list(map(capitalize, error.missing_perms))
-        return await ctx.send(f"Your missing permission(s) to run this command:\n{'\n'.join(perms)}")
+        return await ctx.send("Your missing permission(s) to run this command:\n{}".format("\n".join(perms)))
     if isinstance(error, commands.CommandNotFound):
         return
   
