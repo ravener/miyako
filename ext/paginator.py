@@ -34,7 +34,7 @@ class Paginator(object):
         if self.killed: return
         if not self.message:
             self.embed.description = self.pages[0]
-            if self.page_count:
+            if self.show_page_count:
                 self.embed.title = f"Page {self.current_page + 1}/{len(self.pages)}"
             self.message = await self.ctx.send(embed=self.embed)
         else:
