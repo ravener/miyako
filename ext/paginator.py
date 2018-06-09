@@ -9,7 +9,7 @@ class Paginator(object):
         self.pages = []
         self.timeout = timeout
         self.embed = options.get("embed") or discord.Embed()
-        self.color = options.get("color", discord.Color.yellow())
+        self.color = options.get("color", discord.Color.red())
         self.embed.color = self.color
         self.current_page = 0
         self.killed = False
