@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import random
+from ext.paginator import Paginator
 
 class Fun:
     """Some fun commands."""
@@ -33,6 +34,20 @@ class Fun:
           "Very doubtful"
         ]
         await ctx.send(f"**Question**```{question}```\n**8ball**```{random.choice(responses)}```")
+
+    @commands.command(aliases=["ud"])
+    async def urban(self, ctx, *, term: str):
+        """Get a term from urban dictionary!"""
+        try:
+            resp = await (await self.bot.session.get(f"https://api.urbandictionary.com/v0/define?term={term}")).json()
+            pages = []
+            for x in resp["list"]:
+                pages.append(f"{x['definition']}\n\n*{x['example']}*\n\n**Votes**\n:thumbsup: {x['thumbs_up']} :thumbsdown: {x['thumbs_down']}")
+            paginator = Paginator(ctx, pages=pages, page_count=True)
+            await paginator.run()
+        except Exception as e:
+            await ctx.send("Unknown term.")
+        
 
 def setup(bot):
     bot.add_cog(Fun(bot))

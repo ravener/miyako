@@ -31,6 +31,7 @@ class Owner:
     @commands.command()
     @commands.is_owner()
     async def unload(self, ctx, cog: str = None):
+        """Unloads all or a specific cog"""
         if not cog:
             return await ctx.send("Mention the cog you want to unload, or all to unload all")
         if cog.lower() == "all":
@@ -52,6 +53,7 @@ class Owner:
     @commands.command()
     @commands.is_owner()
     async def load(self, ctx, cog: str = None):
+        """Loads all or a specific cog"""
         if not cog:
             return await ctx.send("Mention the cog you want to load, or all to load all")
         if cog.lower() == "all":
@@ -72,6 +74,7 @@ class Owner:
     @commands.command()
     @commands.is_owner()
     async def reload(self, ctx, cog: str = None):
+        """Reloads all or a specific cog"""
         if not cog:
             return await ctx.send("Mention the cog you want to reload, or all to reload all")
         if cog.lower() == "all":
