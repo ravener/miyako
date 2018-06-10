@@ -38,13 +38,13 @@ class Owner:
                 try:
                     if x == "cogs.owner":
                         continue
-                    bot.unload_extension(f"cogs.{cog}")
+                    self.bot.unload_extension(f"cogs.{cog}")
                 except Exception as e:
                     await ctx.send(f"Error unloading {x}\n```py\n{e}\n```")
             await ctx.send("Done unloading all cogs.")
         else:
             try:
-                bot.unload_extension(f"cogs.{cog}")
+                self.bot.unload_extension(f"cogs.{cog}")
                 await ctx.send(f"Loaded {cog}!")
             except Exception as e:
                 await ctx.send(f"Error unloading {cog}\n```py\n{e}\n```")
@@ -57,14 +57,14 @@ class Owner:
         if cog.lower() == "all":
             for x in self.bot.cog_list:
                 try:
-                    bot.load_extension(f"cogs.{cog}")
+                    self.bot.load_extension(f"cogs.{cog}")
                 except Exception as e:
                     await ctx.send(f"Error loading {x}\n```py\n{e}\n```")
             await ctx.send("Done loading all cogs.")
                    
         else:
             try:
-                bot.load_extension(f"cogs.{cog}")
+                self.bot.load_extension(f"cogs.{cog}")
                 await ctx.send(f"Loaded {cog}!")
             except Exception as e:
                 await ctx.send(f"Error loading {cog}\n```py\n{e}\n```")
@@ -77,15 +77,15 @@ class Owner:
         if cog.lower() == "all":
             for x in self.bot.cogs_list:
                 try:
-                    bot.unload_extension(x)
-                    bot.load_extension(x)
+                    self.bot.unload_extension(x)
+                    self.bot.load_extension(x)
                 except Exception as e:
                     await ctx.send(f"Error loading {x}\n```py\n{e}\n```")
             await ctx.send("Done reloading all cogs.")
         else:
             try:
-                bot.unload_extension(f"cogs.{cog}")
-                bot.load_extension(f"cogs.{cog}")
+                self.bot.unload_extension(f"cogs.{cog}")
+                self.bot.load_extension(f"cogs.{cog}")
                 await ctx.send(f"Reloaded {cog}!")
             except Exception as e:
                 await ctx.send(f"Error loading {cog}\n```py\n{e}\n```")
