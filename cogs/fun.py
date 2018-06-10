@@ -32,7 +32,7 @@ class Fun:
           "Outlook not so good",
           "Very doubtful"
         ]
-        await ctx.send(random.choice(responses))
+        await ctx.send(f"**Question**```{question}```\n**8ball**```{random.choice(responses)}```")
 
 def setup(bot):
     bot.add_cog(Fun(bot))
