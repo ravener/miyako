@@ -68,7 +68,9 @@ class Owner:
                 await ctx.send(f"Loaded {cog}!")
             except Exception as e:
                 await ctx.send(f"Error loading {cog}\n```py\n{e}\n```")
- 
+    
+    @commands.command()
+    @commands.is_owner()
     async def reload(self, ctx, cog: str = None):
         if not cog:
             return await ctx.send("Mention the cog you want to reload, or all to reload all")

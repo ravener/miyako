@@ -201,5 +201,5 @@ async def _eval(ctx, *, body):
     else:
         await ctx.message.add_reaction('\u2705')
 
-if __name__ == "__main__":    
+if __name__ == "__main__":
     bot.run(os.environ.get("TOKEN"))
