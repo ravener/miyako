@@ -46,8 +46,15 @@ class Fun:
             paginator = Paginator(ctx, pages=pages, page_count=True)
             await paginator.run()
         except Exception as e:
-            await ctx.send(f"Unknown term.```{e}```")
-        
+            await ctx.send(f"Unknown term.")
+
+    @commands.command(aliases=["pick"])
+    async def choose(self, ctx, *, choices):
+        """Picks a random choice, sperate choices with commas"""
+        split = choices.split(",")
+        if len(split) < 2:
+            return await ctx.send("Not enough choices to pick from.")
+        await ctx.send(f"I think `{random.choice(split)}`")
 
 def setup(bot):
     bot.add_cog(Fun(bot))
