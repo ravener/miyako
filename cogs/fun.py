@@ -46,7 +46,7 @@ class Fun:
             paginator = Paginator(ctx, pages=pages, page_count=True)
             await paginator.run()
         except Exception as e:
-            await ctx.send("Unknown term.")
+            await ctx.send(f"Unknown term.```{e}```")
         
 
 def setup(bot):
