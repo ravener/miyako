@@ -33,6 +33,7 @@ class Fun:
           "Outlook not so good",
           "Very doubtful"
         ]
+        await ctx.send(question) # debug
         await ctx.send(f"**Question**```{question}```\n**8ball**```{random.choice(responses)}```")
 
     @commands.command(aliases=["ud"])
