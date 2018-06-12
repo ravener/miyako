@@ -10,7 +10,7 @@ class Owner:
     def __init__(self, bot):
         self.bot = bot
         
-    def cleanup_code(content):
+    def cleanup_code(self, content):
         '''Automatically removes code blocks from the code.'''
         # remove ```py\n```
         if content.startswith('```') and content.endswith('```'):
