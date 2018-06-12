@@ -106,6 +106,8 @@ async def on_command_error(ctx, error):
         return await ctx.send(f"Please wait {resp} before using this command again.")
     if isinstance(error, commands.NoPrivateMessage):
         return await ctx.send("This command can only be ran in a server!")
+    if isinstance(error, commands.MissingRequiredArgument):
+        return await ctx.send(error)
  
     em = discord.Embed()
     em.color = 0xff0000
