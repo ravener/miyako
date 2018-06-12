@@ -15,7 +15,7 @@ class Owner:
         ctx.message.content = f"{ctx.prefix}{command}"
         ctx.message.author = user
         context = await self.bot.get_context(ctx.message, cls=Context)
-        if not context.cmd:
+        if not context.command:
             return await ctx.send(f"Command does not exist")
         await self.bot.invoke(context)
 
