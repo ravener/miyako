@@ -50,6 +50,7 @@ class Paginator(object):
         if rec.message.id != self.message.id: return False
         if usr.id != self.ctx.author.id: return False
         if rec.emoji in self.emojis.keys(): return True
+        return False
 
     async def run(self):
         if not self.message:

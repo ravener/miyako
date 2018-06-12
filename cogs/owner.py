@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import copy
 
 class Owner:
     """Core class for owner commands"""
@@ -8,25 +9,13 @@ class Owner:
     
     @commands.command()
     @commands.is_owner()
-    async def sudo(self, ctx, user: discord.Member, command: str, *, args = None):
+    async def sudo(self, ctx, user: discord.Member, *, command):
         """Calls a command on behalf of another person"""
-        args_dict = {}
-        if args:
-            arr = args.split(",")
-            for x in arr:
-                split = x.split(":")
-                name = split[0]
-                value = split[1]
-                args_dict[name] = value
-            
+        ctx.message.content = f"{ctx.prefix}{command}"
         ctx.author = user
-        cmd = self.bot.get_command(command)
-        if not cmd:
-            return await ctx.send(f"Command {command} does not exist.")
-        if len(args_dict) > 0:
-            await ctx.invoke(cmd, **args_dict)
-        else:
-            await ctx.invoke(cmd)
+        if not self.bot.get_command(command):
+            return await ctx.send(f"Command `{command}` does not exist")
+        await self.bot.invoke(ctx)
 
     @commands.command()
     @commands.is_owner()

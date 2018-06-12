@@ -92,7 +92,21 @@ async def on_command_error(ctx, error):
         return await ctx.send("Your missing permission(s) to run this command:\n{}".format("\n".join(perms)))
     if isinstance(error, commands.CommandNotFound):
         return
-  
+    if isinstance(error, commands.CommandOnCooldown):
+        resp = None
+        if error.retry_after < 60:
+            resp = f"{error.retry_after} seconds"
+        elif 60 >= error.retry_after < 3600:
+            resp = f"{int(error.retry_after / 60)} minutes"
+        elif 3600 >= error.retry_after < 86400:
+            resp = f"{int(error.try_after / 3600)} hours"
+        elif error.retry_after >= 86400:
+            resp = f"{int(error.retry_after / 86400)} days"
+        
+        return await ctx.send(f"Please wait {resp} before using this command again.")
+    if isinstance(error, commands.NoPrivateMessage):
+        return await ctx.send("This command can only be ran in a server!")
+ 
     em = discord.Embed()
     em.color = 0xff0000
     em.title = "CommandError"
@@ -116,10 +130,9 @@ async def invite(ctx):
     await ctx.send(f"Invite me to your server: https://discordapp.com/oauth2/authorize?client_id={bot.user.id}&scope=bot&permissions=470281463")
     
 @bot.command(name="eval", aliases=["ev"])
+@commands.is_owner()
 async def _eval(ctx, *, body):
-    """Evaluates python code"""
-    if ctx.author.id != 292690616285134850:
-        return await ctx.send("This command is for owner only!")
+    """Evaluates python code."""
     env = {
         'bot': bot,
         'ctx': ctx,

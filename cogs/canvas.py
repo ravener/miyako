@@ -10,10 +10,12 @@ class Canvas:
         
     @commands.command()
     async def triggered(self, ctx, user: discord.Member = None):
+        if not user:
+            user = ctx.author
         try:
             await ctx.send(file=discord.File(await self.client.triggered(user.avatar_url_as(format="png", size=2048)), "triggered.gif"))
         except Exception as e:
-            await ctx.send("Something went wrong, please try again later.")
+            await ctx.send(f"Something went wrong, please try again later.```{e}```")
             print(e)
             
 def setup(bot):
