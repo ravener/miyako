@@ -9,7 +9,7 @@ class Fun:
         self.bot = bot
     
     @commands.command(aliases=["8ball"])
-    async def eightball(self, ctx, *, question: str):
+    async def eightball(self, ctx, *, question):
         """Ask the magic 8ball anything."""
         responses = [
           "It is certain",
