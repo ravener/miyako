@@ -13,8 +13,10 @@ class Owner:
         """Calls a command on behalf of another person"""
         ctx.message.content = f"{ctx.prefix}{command}"
         ctx.author = user
-        if not self.bot.get_command(command):
+        cmd = self.bot.get_command(command)
+        if not cmd:
             return await ctx.send(f"Command `{command}` does not exist")
+        ctx.command = cmd
         await self.bot.invoke(ctx)
 
     @commands.command()
