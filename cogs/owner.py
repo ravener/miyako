@@ -12,7 +12,7 @@ class Owner:
     @commands.is_owner()
     async def sudo(self, ctx, user: discord.Member, *, command):
         """Calls a command on behalf of another person"""
-        msg = copy.deepcopy(ctx.message)
+        msg = ctx.message
         msg.content = f"{ctx.prefix}{command}"
         msg.author = user
         context = await self.bot.get_context(msg, cls=Context)
