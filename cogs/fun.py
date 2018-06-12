@@ -9,7 +9,7 @@ class Fun:
         self.bot = bot
     
     @commands.command(aliases=["8ball"])
-    async def eightball(self, ctx, *, question):
+    async def eightball(self, ctx, *, question: str):
         """Ask the magic 8ball anything."""
         responses = [
           "It is certain",
@@ -33,8 +33,8 @@ class Fun:
           "Outlook not so good",
           "Very doubtful"
         ]
-        await ctx.send(question) # debug
-        await ctx.send(f"**Question**```{question}```\n**8ball**```{random.choice(responses)}```")
+        q = question
+        await ctx.send(f"**Question**```\n{q}\n```\n**8ball**```\n{random.choice(responses)}\n```")
 
     @commands.command(aliases=["ud"])
     async def urban(self, ctx, *, term: str):
