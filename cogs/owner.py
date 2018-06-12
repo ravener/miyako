@@ -12,9 +12,10 @@ class Owner:
     @commands.is_owner()
     async def sudo(self, ctx, user: discord.Member, *, command):
         """Calls a command on behalf of another person"""
-        ctx.message.content = f"{ctx.prefix}{command}"
-        ctx.message.author = user
-        context = await self.bot.get_context(ctx.message, cls=Context)
+        msg = copy.deepcopy(ctx.message)
+        msg.content = f"{ctx.prefix}{command}"
+        msg.author = user
+        context = await self.bot.get_context(msg, cls=Context)
         if not context.command:
             return await ctx.send(f"Command does not exist")
         await self.bot.invoke(context)
