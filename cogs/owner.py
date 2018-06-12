@@ -95,7 +95,7 @@ class Owner:
             except Exception as e:
                 await ctx.send(f"Error loading {cog}\n```py\n{e}\n```")
 
-    @commands.command(name="exec" aliases=["bash", "shell"])
+    @commands.command(name="exec", aliases=["bash", "shell"])
     @commands.is_owner()
     async def _exec(self, ctx, *, code: str):
         code = self.cleanup_code(code)
