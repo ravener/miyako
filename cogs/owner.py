@@ -2,11 +2,21 @@ import discord
 from discord.ext import commands
 import copy
 from ext.context import Context
+import os
+import subprocess
 
 class Owner:
     """Core class for owner commands"""
     def __init__(self, bot):
         self.bot = bot
+        
+    def cleanup_code(content):
+        '''Automatically removes code blocks from the code.'''
+        # remove ```py\n```
+        if content.startswith('```') and content.endswith('```'):
+            return '\n'.join(content.split('\n')[1:-1])
+        return content.strip('` \n')
+
     
     @commands.command()
     @commands.is_owner()
@@ -84,6 +94,17 @@ class Owner:
                 await ctx.send(f"Reloaded {cog}!")
             except Exception as e:
                 await ctx.send(f"Error loading {cog}\n```py\n{e}\n```")
+
+    @commands.command(name="exec" aliases=["bash", "shell"])
+    @commands.is_owner()
+    async def _exec(self, ctx, *, code: str):
+        code = self.cleanup_code(code)
+        res = subprocess.run(code, shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        err = res.stderr.decode("utf-8")
+        msg = res.stdout.decode("utf-8")
+        if err:
+            return await ctx.send(f"```\n{err}\n```")
+        await ctx.send(f"```\n{msg}\n```")
 
 def setup(bot):
     bot.add_cog(Owner(bot))        
