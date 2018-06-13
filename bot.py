@@ -112,7 +112,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.NoPrivateMessage):
         return await ctx.send("This command can only be ran in a server!")
     if isinstance(error, commands.BadArgument):
-        x = re.match('Member ".*" not found.', error):
+        x = re.match('Member ".*" not found.', error)
         if x:
             return await ctx.send(f"Could not find the member: `{x.group(1)}`")
     if isinstance(error, commands.MissingRequiredArgument):
