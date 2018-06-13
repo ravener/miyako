@@ -7,8 +7,8 @@ class Mod:
         self.bot = bot
     
     @commands.command()
-    @commands.has_permissions(kick_members=True)
     @commands.guild_only()
+    @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, user: discord.Member = None, *, reason: str = None):
         """Kicks a user from the server."""
         if not user:
