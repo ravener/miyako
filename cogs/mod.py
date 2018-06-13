@@ -23,6 +23,8 @@ class Mod:
             await ctx.send(f"Kicked {user}{res}")
         except discord.Forbidden:
             await ctx.send("I don't have permissions to kick that user.")
+        except Exception as e:
+            raise e
 
 def setup(bot):
     bot.add_cog(Mod(bot))

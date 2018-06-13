@@ -10,6 +10,7 @@ from contextlib import redirect_stdout
 import textwrap
 import traceback
 import aiohttp
+import re
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("lb."), description="A simple Miraculous discord bot.", owner_id=292690616285134850)
 bot._last_result = None
@@ -95,7 +96,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         resp = None
         if error.retry_after < 60:
-            resp = f"{error.retry_after} seconds"
+            resp = f"{int(error.retry_after)} seconds"
         elif 60 >= error.retry_after < 3600:
             resp = f"{int(error.retry_after / 60)} minutes"
         elif 3600 >= error.retry_after < 86400:
@@ -103,13 +104,17 @@ async def on_command_error(ctx, error):
         elif error.retry_after >= 86400:
             resp = f"{int(error.retry_after / 86400)} days"
         else:
-            resp = f"{retry_after} seconds"
+            resp = f"{int(retry_after)} seconds"
         
         if ctx.author.id == 292690616285134850:
             return await ctx.reinvoke()
         return await ctx.send(f"Please wait **{resp}** before using this command again.")
     if isinstance(error, commands.NoPrivateMessage):
         return await ctx.send("This command can only be ran in a server!")
+    if isinstance(error, commands.BadArgument):
+        x = re.match('Member ".*" not found.', error):
+        if x:
+            return await ctx.send(f"Could not find the member: `{x.groups(1)}`")
     if isinstance(error, commands.MissingRequiredArgument):
         return await ctx.send(error)
  
