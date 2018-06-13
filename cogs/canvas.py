@@ -9,6 +9,7 @@ class Canvas:
         self.client = idioticapi.Client(os.environ.get("IDIOTICAPI"), dev=True)
         
     @commands.command()
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def triggered(self, ctx, user: discord.Member = None):
         if not user:
             user = ctx.author

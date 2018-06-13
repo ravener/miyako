@@ -11,9 +11,9 @@ import textwrap
 import traceback
 import aiohttp
 
-bot = commands.Bot(command_prefix="lb.", description="A simple Miraculous discord bot.", owner_id=292690616285134850)
+bot = commands.Bot(command_prefix=commands.when_mentioned_or("lb."), description="A simple Miraculous discord bot.", owner_id=292690616285134850)
 bot._last_result = None
-bot.session = aiohttp.ClientSession()
+bot.session = aiohttp.ClientSession(loop=bot.loop)
 bot.commands_ran = 0
 bot.cogs_list = [ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ]
 
@@ -102,8 +102,12 @@ async def on_command_error(ctx, error):
             resp = f"{int(error.try_after / 3600)} hours"
         elif error.retry_after >= 86400:
             resp = f"{int(error.retry_after / 86400)} days"
+        else:
+            resp = f"{retry_after} seconds"
         
-        return await ctx.send(f"Please wait {resp} before using this command again.")
+        if ctx.author.id == 292690616285134850:
+            return await ctx.reinvoke()
+        return await ctx.send(f"Please wait **{resp}** before using this command again.")
     if isinstance(error, commands.NoPrivateMessage):
         return await ctx.send("This command can only be ran in a server!")
     if isinstance(error, commands.MissingRequiredArgument):
@@ -121,16 +125,8 @@ async def on_command_error(ctx, error):
 async def on_command(ctx):
     bot.commands_ran += 1
 
-@bot.command()
-async def ping(ctx):
-    """Checks if bot is working and measures websocket latency"""
-    await ctx.send(f"Pong! WebSocket Latency: **{bot.latency:.4f} ms**")
     
-@bot.command()
-async def invite(ctx):
-    """Want me in your server?"""
-    await ctx.send(f"Invite me to your server: https://discordapp.com/oauth2/authorize?client_id={bot.user.id}&scope=bot&permissions=470281463")
-    
+
 @bot.command(name="eval", aliases=["ev"])
 @commands.is_owner()
 async def _eval(ctx, *, body):

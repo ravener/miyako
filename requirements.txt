@@ -2,3 +2,5 @@ git+https://github.com/Rapptz/discord.py@rewrite
 python-box
 yarl==1.1.1
 git+https://github.com/freetnt5852/idioticapi
+pillow
+beautifulsoup4
