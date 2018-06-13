@@ -9,10 +9,8 @@ class Mod:
     @commands.command()
     @commands.guild_only()
     @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx, user: discord.Member = None, *, reason: str = None):
+    async def kick(self, ctx, user: discord.Member, *, reason: str = None):
         """Kicks a user from the server."""
-        if not user:
-            return await ctx.send("Mention a user to kick!")
         if user == ctx.author:
             return await ctx.send("Kicking yourself? smh.")
         if user == self.bot.user:
