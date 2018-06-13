@@ -114,7 +114,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.BadArgument):
         x = re.match('Member ".*" not found.', error):
         if x:
-            return await ctx.send(f"Could not find the member: `{x.groups(1)}`")
+            return await ctx.send(f"Could not find the member: `{x.group(1)}`")
     if isinstance(error, commands.MissingRequiredArgument):
         return await ctx.send(error)
  
