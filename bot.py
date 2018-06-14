@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from utils.utils import *
 from ext.context import Context
-import json
 import os
 import inspect
 import io
@@ -10,13 +9,13 @@ from contextlib import redirect_stdout
 import textwrap
 import traceback
 import aiohttp
-import re
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("lb."), description="A simple Miraculous discord bot.", owner_id=292690616285134850)
 bot._last_result = None
 bot.session = aiohttp.ClientSession(loop=bot.loop)
 bot.commands_ran = 0
 bot.cogs_list = [ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ]
+
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
@@ -25,15 +24,17 @@ def cleanup_code(content):
         return '\n'.join(content.split('\n')[1:-1])
     return content.strip('` \n')
 
+
 @bot.event
 async def on_message(message):
     if message.author.bot:
         return
-    
+
     ctx = await bot.get_context(message, cls=Context)
     if not ctx.command:
         return
     await bot.invoke(ctx)
+
 
 @bot.event
 async def on_ready():
@@ -50,7 +51,7 @@ async def on_ready():
             bot.load_extension(x)
         except Exception as e:
             print(f"LoadError in {x}:\n{e}")
-   
+
 
 @bot.event
 async def on_guild_join(guild):
@@ -67,7 +68,8 @@ async def on_guild_join(guild):
     channel = bot.get_channel(454776806869041154)
     await channel.send(embed=em)
     await bot.change_presence(activity=discord.Game(f"lb.help | {len(bot.guilds)} servers!"))
-    
+
+
 @bot.event
 async def on_guild_remove(guild):
     print(f"Left {guild.name} ({guild.id})")
@@ -83,7 +85,8 @@ async def on_guild_remove(guild):
     channel = bot.get_channel(454776806869041154)
     await channel.send(embed=em)
     await bot.change_presence(activity=discord.Game(f"lb.help | {len(bot.guilds)} servers!"))
-    
+
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.NotOwner):
@@ -104,8 +107,8 @@ async def on_command_error(ctx, error):
         elif error.retry_after >= 86400:
             resp = f"{int(error.retry_after / 86400)} days"
         else:
-            resp = f"{int(retry_after)} seconds"
-        
+            resp = f"{int(error.retry_after)} seconds"
+
         if ctx.author.id == 292690616285134850:
             return await ctx.reinvoke()
         return await ctx.send(f"Please wait **{resp}** before using this command again.")
@@ -115,7 +118,7 @@ async def on_command_error(ctx, error):
         return await ctx.send(error)
     if isinstance(error, commands.MissingRequiredArgument):
         return await ctx.send(error)
- 
+
     em = discord.Embed()
     em.color = 0xff0000
     em.title = "CommandError"
@@ -124,11 +127,11 @@ async def on_command_error(ctx, error):
     logs = bot.get_channel(454776836929617921)
     await logs.send(embed=em)
 
+
 @bot.event
 async def on_command(ctx):
     bot.commands_ran += 1
 
-    
 
 @bot.command(name="eval", aliases=["ev"])
 @commands.is_owner()

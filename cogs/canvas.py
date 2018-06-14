@@ -16,6 +16,7 @@ class Canvas:
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def triggered(self, ctx, user: discord.Member = None):
+        """TRI GGE RED"""
         if not user:
             user = ctx.author
         try:
