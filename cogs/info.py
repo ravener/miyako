@@ -10,8 +10,8 @@ class Info:
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(aliases=["botinfo", "info", "stats"])
-    async def bot(self, ctx):
+    @commands.command(name="bot", aliases=["botinfo", "info", "stats"])
+    async def _bot(self, ctx):
         em = discord.Embed(color=0xff0000)
         em.title = "Bot Information/Stats"
         RAM = psutil.virtual_memory()
