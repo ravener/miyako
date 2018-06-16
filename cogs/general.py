@@ -16,7 +16,7 @@ class General:
         finally:
             await ctx.send(msg)
 
-    @commands.command
+    @commands.command()
     async def ping(self, ctx):
         """Checks if bot is working and measures websocket latency"""
         await ctx.send(f"Pong! WebSocket Latency: **{self.bot.latency * 1000:.4f} ms**")
