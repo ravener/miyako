@@ -31,3 +31,5 @@ class Info:
         em.add_field(name="Platform", value=platform.platform())
         em.set_footer(text="LadyBug Bot by Free TNT#5796")
         
+def setup(bot):
+    bot.add_cog(Info(bot))
