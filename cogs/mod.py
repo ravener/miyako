@@ -5,7 +5,7 @@ class Mod:
     """Useful moderation commands to keep the server under control."""
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.command()
     @commands.guild_only()
     @commands.has_permissions(kick_members=True)

@@ -21,7 +21,7 @@ class Paginator(object):
           "⏭": self.last_page
         }
         self.show_page_count = options.get("page_count", False)
-        
+
     async def add_reactions(self):
         if not self.ctx.message:
             raise Exception("Pagination message is not sent yet")
@@ -29,7 +29,7 @@ class Paginator(object):
             if len(self.pages) == 2 and x in "⏮⏭":
                 continue
             await self.message.add_reaction(x)
-    
+
     async def show_page(self, index: int):
         if self.killed: return
         if not self.message:
@@ -74,7 +74,7 @@ class Paginator(object):
 
     async def first_page(self):
         await self.show_page(0)
-    
+
     async def next_page(self):
         if self.current_page == len(self.pages) - 1:
             await self.show_page(0)
@@ -84,7 +84,7 @@ class Paginator(object):
     async def kill(self, timeout=None, delete=True):
         if timeout:
             await asyncio.sleep(timeout)
-            
+
         self.killed = True
         if self.message:
             try:
@@ -102,4 +102,4 @@ class Paginator(object):
             await self.show_page(self.current_page - 1)
 
     async def last_page(self):
-        await self.show_page(len(self.pages) - 1) 
+        await self.show_page(len(self.pages) - 1)

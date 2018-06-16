@@ -4,3 +4,4 @@ yarl==1.1.1
 git+https://github.com/freetnt5852/idioticapi
 pillow
 beautifulsoup4
+psutil

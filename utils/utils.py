@@ -1,4 +1,4 @@
-import os
+
 
 def channel_count(bot):
     res = []
@@ -6,7 +6,7 @@ def channel_count(bot):
         for channel in guild.channels:
             res.append(channel)
     return len(res)
-   
+
 def capitialize(msg: str):
     res = []
     snakes = msg.split("_")

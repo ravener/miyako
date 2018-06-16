@@ -7,7 +7,7 @@ class Fun:
     """Some fun commands."""
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.command(aliases=["8ball"])
     async def eightball(self, ctx, *, question: str):
         """Ask the magic 8ball anything."""

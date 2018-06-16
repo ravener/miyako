@@ -4,12 +4,13 @@ import copy
 from ext.context import Context
 import os
 import subprocess
+from utils.utils import paginate
 
 class Owner:
     """Core class for owner commands"""
     def __init__(self, bot):
         self.bot = bot
-        
+
     def cleanup_code(self, content):
         '''Automatically removes code blocks from the code.'''
         # remove ```py\n```
@@ -17,7 +18,7 @@ class Owner:
             return '\n'.join(content.split('\n')[1:-1])
         return content.strip('` \n')
 
-    
+
     @commands.command()
     @commands.is_owner()
     async def sudo(self, ctx, user: discord.Member, *, command):
@@ -65,14 +66,14 @@ class Owner:
                 except Exception as e:
                     await ctx.send(f"Error loading {x}\n```py\n{e}\n```")
             await ctx.send("Done loading all cogs.")
-                   
+
         else:
             try:
                 self.bot.load_extension(f"cogs.{cog}")
                 await ctx.send(f"Loaded {cog}!")
             except Exception as e:
                 await ctx.send(f"Error loading {cog}\n```py\n{e}\n```")
-    
+
     @commands.command()
     @commands.is_owner()
     async def reload(self, ctx, cog: str = None):
@@ -104,7 +105,7 @@ class Owner:
         msg = res.stdout.decode("utf-8")
         if err:
             return await ctx.send(f"```\n{err}\n```")
-        await ctx.send(f"```\n{msg}\n```")
+        await ctx.paginate(msg, "```", "```")
 
 def setup(bot):
-    bot.add_cog(Owner(bot))        
+    bot.add_cog(Owner(bot))
