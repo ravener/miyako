@@ -29,6 +29,7 @@ class Info:
         v = sys.version_info
         em.add_field(name="Python Version", value=f"{v.major}.{v.minor}.{v.micro}")
         em.add_field(name="Platform", value=platform.platform())
+        em.add_field(name="Commands Ran", value=str(self.bot.commands_ran))
         em.set_footer(text="LadyBug Bot by Free TNT#5796")
         await ctx.send(embed=em)
         
