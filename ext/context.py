@@ -6,7 +6,7 @@ from utils.utils import paginate as text_paginate
 class Context(commands.Context):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+    
     async def prompt(self, msg: str, timeout=20, yesorno=False):
         check = lambda x: x.author.id == self.author.id
         try:
@@ -26,8 +26,12 @@ class Context(commands.Context):
 
     async def reply(self, msg: str):
         return await self.send(f"{self.author.mention}, {msg}")
-
+    
     async def paginate(self, msg: str, prefix="", suffix=""):
         pages = text_paginate(msg)
         for x in pages:
+            if x == pages[0]:
+                await self.send(f"{prefix}{x}{suffix}")
+                break
             await self.send(f"{prefix}{x}{suffix}")
+            
