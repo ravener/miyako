@@ -30,7 +30,7 @@ class Context(commands.Context):
     async def paginate(self, msg: str, prefix="", suffix=""):
         pages = text_paginate(msg)
         for x in pages:
-            if x == pages[0]:
+            if x == pages[-1]:
                 await self.send(f"{prefix}{x}{suffix}")
                 break
             await self.send(f"{prefix}{x}{suffix}")
