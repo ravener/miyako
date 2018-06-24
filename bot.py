@@ -31,6 +31,7 @@ bot.session = aiohttp.ClientSession(loop=bot.loop)
 bot.commands_ran = 0
 bot.cogs_list = [ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ]
 bot.db = AsyncIOMotorClient(os.environ.get("MONGODB")).ladybug
+bot.remove_command("help")
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
