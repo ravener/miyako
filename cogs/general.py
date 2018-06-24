@@ -41,7 +41,7 @@ class General:
                 return await ctx.send(embed=em)
             cmds = self.bot.get_cog_commands(command)
             em = discord.Embed(color=0xff0000)
-            em.description = cmd.__doc__ or "No Description\n\n`"
+            em.description = cmd.__doc__ + "\n\n`" if cmd.__doc__ else "No Description\n\n`"
             em.set_footer(text=f"{ctx.prefix}help <cmd> for more info on a command.")
             for x in cmds:
                 msg = f"{ctx.prefix}{x.signature} {x.short_doc}\n"
