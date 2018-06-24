@@ -37,8 +37,11 @@ class Fun:
         await ctx.send(f"**Question**```\n{q}\n```\n**8ball**```\n{random.choice(responses)}\n```")
 
     @commands.command(aliases=["ud"])
+    @commands.guild_only()
     async def urban(self, ctx, *, term: str):
         """Get a term from urban dictionary!"""
+        if not ctx.channel.nsfw:
+            return await ctx.send(f"Due to urban having some inappropriate words and discord does not allow NSFW outisde of NSFW channels we have made urban to work in NSFW channels only.")
         try:
             resp = await (await self.bot.session.get(f"https://api.urbandictionary.com/v0/define?term={term}")).json()
             pages = []
