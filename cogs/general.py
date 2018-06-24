@@ -56,7 +56,7 @@ class General:
                 cog = self.bot.get_cog(x)
                 msg = cog.__doc__ + "\n\n`" if cog.__doc__ else "No Description\n\n`"
                 for cmd in cmds:
-                    cmd_msg = f"{ctx.prefix}{cmd.signature} {cmd.short_doc}"
+                    cmd_msg = f"{ctx.prefix}{cmd.signature} {cmd.short_doc}\n"
                     msg += cmd_msg
                 msg += "`"
                 pages.append(msg)
