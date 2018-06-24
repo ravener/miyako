@@ -11,12 +11,26 @@ import textwrap
 import traceback
 import aiohttp
 import re
+from motor.motor_asyncio import AsyncIOMotorClient
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("lb."), description="A simple Miraculous discord bot.", owner_id=292690616285134850)
+async def getprefix(bot, message):
+    if isinstance(message.channel, discord.DMChannel):
+        return commands.when_mentioned_or("lb.")(bot, message)
+    try:
+        guild = await bot.db.prefix.find_one({ "_id": message.guild.id })
+        if not guild:
+            return "lb."
+        prefix = guild["prefix"]
+        return commands.when_mentioned_or(prefix)(bot, message)
+    except:
+        return "lb."
+
+bot = commands.Bot(command_prefix=getprefix, description="A simple Miraculous discord bot.", owner_id=292690616285134850)
 bot._last_result = None
 bot.session = aiohttp.ClientSession(loop=bot.loop)
 bot.commands_ran = 0
 bot.cogs_list = [ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ]
+bot.db = AsyncIOMotorClient(os.environ.get("MONGODB")).ladybug
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
