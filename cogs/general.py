@@ -49,14 +49,15 @@ class General:
             em.description += "`"
             return await ctx.send(embed=em)
         else:
-            cogs = list(map(lambda x: x.__class__.__name__, self.bot.cogs))
+            cogs = self.bot.cogs.keys()
             pages = []
             for x in cogs:
                 cmds = self.bot.get_cog_commands(x)
                 cog = self.bot.get_cog(x)
-                msg = cog.__doc__ or "No Description\n\n`"
+                msg = cog.__doc__ + "\n\n`" if cog.__doc__ else "No Description\n\n`"
                 for cmd in cmds:
-                    msg += f"{ctx.prefix}{cmd.signature} {cmd.short_doc}"
+                    cmd_msg = f"{ctx.prefix}{cmd.signature} {cmd.short_doc}"
+                    msg += cmd_msg
                 msg += "`"
                 pages.append(msg)
             em = discord.Embed(color=0xff0000)
