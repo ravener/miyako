@@ -45,7 +45,8 @@ class General:
             em.set_footer(text=f"{ctx.prefix}help <cmd> for more info on a command.")
             for x in cmds:
                 msg = f"{ctx.prefix}{x.signature} {x.short_doc}\n"
-            em.description += msg + "`"
+                em.description += msg
+            msg += "`"
             return await ctx.send(embed=em)
         else:
             cogs = list(map(lambda x: x.__class__.__name__, self.bot.cogs))
@@ -53,7 +54,7 @@ class General:
             for x in cogs:
                 cmds = self.bot.get_cog_commands(x)
                 cog = self.bot.get_cog(x)
-                msg = x.__doc__ or "No Description\n\n`"
+                msg = cog.__doc__ or "No Description\n\n`"
                 for cmd in cmds:
                     msg += f"{ctx.prefix}{cmd.signature} {cmd.short_doc}"
                 msg += "`"
