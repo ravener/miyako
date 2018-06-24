@@ -41,7 +41,7 @@ class Fun:
     async def urban(self, ctx, *, term: str):
         """Get a term from urban dictionary!"""
         if not ctx.channel.nsfw:
-            return await ctx.send(f"Due to urban having some inappropriate words and discord does not allow NSFW outisde of NSFW channels we have made urban to work in NSFW channels only.")
+            return await ctx.send(f"Due to urban having some inappropriate words and discord does not allow NSFW outside of NSFW channels we have made urban to work in NSFW channels only.")
         try:
             resp = await (await self.bot.session.get(f"https://api.urbandictionary.com/v0/define?term={term}")).json()
             pages = []
