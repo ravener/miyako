@@ -52,7 +52,7 @@ class General:
             cogs = self.bot.cogs.keys()
             pages = []
             for x in cogs:
-                if x == "Owner":
+                if x == "Owner" and ctx.author.id != 292690616285134850:
                     continue
                 cmds = self.bot.get_cog_commands(x)
                 cog = self.bot.get_cog(x)
