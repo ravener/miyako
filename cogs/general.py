@@ -55,7 +55,7 @@ class General:
                 cog = self.bot.get_cog(x)
                 msg = x.__doc__ or "No Description\n\n`"
                 for cmd in cmds:
-                    msg += f"{ctx.prefix{cmd.signature} {cmd.short_doc}"
+                    msg += f"{ctx.prefix}{cmd.signature} {cmd.short_doc}"
                 msg += "`"
                 pages.append(msg)
             em = discord.Embed(color=0xff0000)
