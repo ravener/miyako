@@ -52,6 +52,8 @@ class General:
             cogs = self.bot.cogs.keys()
             pages = []
             for x in cogs:
+                if x == "Owner":
+                    continue
                 cmds = self.bot.get_cog_commands(x)
                 cog = self.bot.get_cog(x)
                 msg = cog.__doc__ + "\n\n`" if cog.__doc__ else "No Description\n\n`"
