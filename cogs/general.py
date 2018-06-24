@@ -46,7 +46,7 @@ class General:
             for x in cmds:
                 msg = f"{ctx.prefix}{x.signature} {x.short_doc}\n"
                 em.description += msg
-            msg += "`"
+            em.description += "`"
             return await ctx.send(embed=em)
         else:
             cogs = list(map(lambda x: x.__class__.__name__, self.bot.cogs))
