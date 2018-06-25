@@ -71,7 +71,7 @@ class Fun:
                 em = discord.Embed(color=0xff0000)
                 em.title = meme["title"]
                 em.set_image(url=meme["preview"]["images"][0]["source"]["url"])
-                em.set_footer(text=f"👍 {meme['ups']}, 👎 {data['downs']}")
+                em.set_footer(text=f"👍 {meme['ups']}, 👎 {meme['downs']}")
                 await ctx.send(embed=em)
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
