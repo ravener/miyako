@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from ext.paginator import Paginator
 
 class General:
     """Some general commands."""
@@ -43,6 +44,46 @@ class General:
         await msg.add_reaction("❌")
         res = " to the support server" if ctx.guild.id != 397479560876261377 else ""
         await ctx.send(f"You idea has been successfully submitted{res}, we will reply to you in DM if we have any feedback.")
+
+    @commands.command(name="help", aliases=["h", "halp", "commands", "cmds"])
+    async def _help(self, ctx, command: str = None):
+        if command:
+            cmd = self.bot.get_command(command.lower()) or self.bot.get_cog(command)
+            if not cmd:
+                return await ctx.send(f"Command or category '{command}' not found.")
+            if isinstance(cmd, commands.Command):
+                em = discord.Embed(color=0xff0000)
+                em.title = cmd.name
+                em.description = cmd.help or "No Description"
+                em.description += "\nUsage: {}{}".format(ctx.prefix, cmd.signature)
+                return await ctx.send(embed=em)
+            cmds = self.bot.get_cog_commands(command)
+            em = discord.Embed(color=0xff0000)
+            em.description = cmd.__doc__ + "\n\n`" if cmd.__doc__ else "No Description\n\n`" 
+            em.set_footer(text=f"{ctx.prefix}help <cmd> for more info on a command.")
+            for x in cmds:
+                msg = f"{ctx.prefix}{x.signature} {x.short_doc}\n"
+                em.description += msg
+            em.description += "`"
+            return await ctx.send(embed=em)
+        else:
+            cogs = self.bot.cogs.keys()
+            pages = []
+            for x in cogs:
+                if x == "Owner" and ctx.author.id != 292690616285134850:
+                    continue
+                cmds = self.bot.get_cog_commands(x)
+                cog = self.bot.get_cog(x)
+                msg = cog.__doc__ + "\n\n`" if cog.__doc__ else "No Description\n\n`"
+                for cmd in cmds:
+                    cmd_msg = f"{ctx.prefix}{cmd.signature} {cmd.short_doc}\n"
+                    msg += cmd_msg
+                msg += "`"
+                pages.append(msg)
+            em = discord.Embed(color=0xff0000)- 
+            em.set_footer(text=f"{ctx.prefix}help <cmd> for more information on a command.")
+            paginator = Paginator(ctx, pages=pages, page_count=True, embed=em)
+            await paginator.run()
 
 def setup(bot):
     bot.add_cog(General(bot))
