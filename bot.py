@@ -29,7 +29,7 @@ bot = commands.Bot(command_prefix=getprefix, description="A simple Miraculous di
 bot._last_result = None
 bot.session = aiohttp.ClientSession(loop=bot.loop)
 bot.commands_ran = 0
-bot.cogs_list = [ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ]
+bot.cogs_list = sorted([ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ])
 bot.db = AsyncIOMotorClient(os.environ.get("MONGODB")).ladybug
 bot.remove_command("help")
 
