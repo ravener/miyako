@@ -50,6 +50,30 @@ class Info:
         except Exception as err:
             await ctx.send("Something went wrong, please try again later.")
             raise err
+
+    @commands.command(aliases=["ui"])
+    @commands.guild_only()
+    async def userinfo(self, ctx, user: discord.Member = None):
+        if not user:
+            user = ctx.author
+        member_number = sorted(ctx.guild.members, key=lambda m: m.joined_at).index(user) + 1
+print(member_number)
+        em = discord.Embed(color=0xff0000)
+        em.title = "User Info"
+        em.set_author(name=str(user), icon_url=user.avatar_url)
+        em.set_thumbnail(url=user.avatar_url)
+        em.add_field(name="Nickname", value=user.nick)
+        em.add_field(name="Member Number", value=member_number)
+        if user.activity:
+            em.add_field(name="Activity", value=user.activity.name)
+        time = user.joined_at.strftime("%d %h %A %Y")
+        days = (datetime.datetime.now() - user.joined_at).days
+        created_time = user.created_at.strftime("%d %h %A %Y")
+        created_days = (datetime.datetime.now() - user.created_at).days
+        em.add_field(name="Joined at", value=f"{time} ({days} Days ago!)")
+        em.add_field(name="Account Created At", value=f"{created_time} ({created_days} Days ago!)")
+        em.add_field(name="Status", value=user.status)
+        await ctx.send(embed=em)
         
 def setup(bot):
     bot.add_cog(Info(bot))

@@ -42,7 +42,10 @@ class General:
         msg = await channel.send(embed=em)
         await msg.add_reaction("✅")
         await msg.add_reaction("❌")
-        res = " to the support server" if ctx.guild.id != 397479560876261377 else ""
+        if ctx.guild:
+            res = " to the support server" if ctx.guild.id != 397479560876261377 else ""
+        else:
+            res = " to the support server"
         await ctx.send(f"You idea has been successfully submitted{res}, we will reply to you in DM if we have any feedback.")
 
     @commands.command(name="help", aliases=["h", "halp", "commands", "cmds"])

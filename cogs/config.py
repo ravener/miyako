@@ -8,6 +8,8 @@ class Config:
         self.bot = bot
 
     @commands.command()
+    @commands.guild_only()
+    @commands.has_permissions(manage_guild=True)
     async def prefix(self, ctx, *, prefix: str):
         try:
             await self.bot.db.prefix.update_one({ "_id": ctx.guild.id }, { "$set": { "prefix": prefix } }, upsert=True)
