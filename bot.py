@@ -109,27 +109,32 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         return
     if isinstance(error, commands.CommandOnCooldown):
-        resp = None
-        if error.retry_after < 60:
-            resp = f"{int(error.retry_after)} seconds"
-        elif 60 >= error.retry_after < 3600:
-            resp = f"{int(error.retry_after / 60)} minutes"
-        elif 3600 >= error.retry_after < 86400:
-            resp = f"{int(error.try_after / 3600)} hours"
-        elif error.retry_after >= 86400:
-            resp = f"{int(error.retry_after / 86400)} days"
-        else:
-            resp = f"{int(retry_after)} seconds"
+        
+        hours, remainder = divmod(int(error.retry_after), 3600)
+        minutes, seconds = divmod(remainder, 60)
+        days, hours = divmod(hours, 24)
+        fmt = "{s} seconds"
+        if minutes:
+            fmt = "{m}m {s}s"
+        if hours:
+            fmt = "{h}h {m}m {s}s"
+        if days:
+            fmt = "{d}d {h}h {m}m {s}s"
+        cooldown = fmt.format(d=days, h=hours, m=minutes, s=seconds)
 
         if ctx.author.id == 292690616285134850:
             return await ctx.reinvoke()
-        return await ctx.send(f"Please wait **{resp}** before using this command again.")
+        return await ctx.send(f"Please wait **{cooldown}** before using this command again.")
     if isinstance(error, commands.NoPrivateMessage):
         return await ctx.send("This command can only be ran in a server!")
     if isinstance(error, commands.BadArgument):
         return await ctx.send(error)
     if isinstance(error, commands.MissingRequiredArgument):
         return await ctx.send(error)
+    if isinstance(error, commands.DisabledCommand):
+        if ctx.author.id == 292690616285134850:
+            return await ctx.reinvoke()
+        return await ctx.send("Sorry, this command is disabled.")
 
     em = discord.Embed()
     em.color = 0xff0000
