@@ -5,7 +5,7 @@ class Mod:
     """Useful moderation commands to keep the server under control."""
     def __init__(self, bot):
         self.bot = bot
-
+    
     @commands.command()
     @commands.guild_only()
     @commands.has_permissions(kick_members=True)
@@ -23,6 +23,19 @@ class Mod:
             await ctx.send("I don't have permissions to kick that user.")
         except Exception as e:
             raise e
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def purge(self, ctx, amount):
+        try:
+            amount = int(amount)
+        except ValueError:
+            return await ctx.send("Enter a number only!")
+        try:
+            await ctx.channel.purge(amount)
+            await ctx.send(f"Purged **{amount}** messages", delete_after=3)
+        except discord.Forbidden:
+            await ctx.send(f"I need the `Manage Messages` permission to do this.")
 
 def setup(bot):
     bot.add_cog(Mod(bot))
