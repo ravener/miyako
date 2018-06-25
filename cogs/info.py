@@ -43,6 +43,7 @@ class Info:
             em.title = "News"
             em.description = data["psa"]
             em.set_footer(text=f"Published at {data['day']}/{data['month']}/{data['year']}")
+            await ctx.send(embed=em)
         except Exception as err:
             await ctx.send("Something went wrong, please try again later.")
             raise err
