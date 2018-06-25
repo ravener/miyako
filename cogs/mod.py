@@ -17,7 +17,7 @@ class Mod:
             return await ctx.send("I can't kick myself.")
         res = f", for reason: `{reason}`" if reason else ""
         try:
-            await user.kick(reason)
+            await user.kick(reason=reason)
             await ctx.send(f"Kicked {user}{res}")
         except discord.Forbidden:
             await ctx.send("I don't have permissions to kick that user.")
@@ -33,7 +33,7 @@ class Mod:
         except ValueError:
             return await ctx.send("Enter a number only!")
         try:
-            await ctx.channel.purge(amount)
+            await ctx.channel.purge(limit=amount+1)
             await ctx.send(f"Purged **{amount}** messages", delete_after=3)
         except discord.Forbidden:
             await ctx.send(f"I need the `Manage Messages` permission to do this.")
