@@ -43,7 +43,7 @@ class Owner:
         if not cog:
             return await ctx.send("Mention the cog you want to unload, or all to unload all")
         if cog.lower() == "all":
-            for x in self.bot.cog_list:
+            for x in self.bot.cogs_list:
                 try:
                     if x == "cogs.owner":
                         continue
@@ -65,7 +65,7 @@ class Owner:
         if not cog:
             return await ctx.send("Mention the cog you want to load, or all to load all")
         if cog.lower() == "all":
-            for x in self.bot.cog_list:
+            for x in self.bot.cogs_list:
                 try:
                     self.bot.load_extension(f"cogs.{cog}")
                 except Exception as e:
