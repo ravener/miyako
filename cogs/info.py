@@ -67,6 +67,7 @@ class Info:
         em.add_field(name="Member Number", value=member_number)
         if user.activity:
             em.add_field(name="Activity", value=user.activity.name)
+        em.add_field(name="User ID", value=str(user.id))
         time = user.joined_at.strftime("%A %h %d/%m/%Y")
         days = (datetime.datetime.now() - user.joined_at).days
         created_time = user.created_at.strftime("%A %h %d/%m/%Y")
