@@ -40,7 +40,8 @@ class General:
         msg = await channel.send(embed=em)
         await msg.add_reaction("✅")
         await msg.add_reaction("❌")
-        await ctx.send("You idea has been successfully submitted to the support server, we will reply to you in DM if we have any feedback.")
+        res = " to the support server" if ctx.guild.id != 397479560876261377 else ""
+        await ctx.send(f"You idea has been successfully submitted{res}, we will reply to you in DM if we have any feedback.")
 
 def setup(bot):
     bot.add_cog(General(bot))
