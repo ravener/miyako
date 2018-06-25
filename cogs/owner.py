@@ -8,6 +8,7 @@ from contextlib import redirect_stdout
 import textwrap
 import traceback
 import inspect
+import datetime
 import io
 
 class Owner:
@@ -182,6 +183,19 @@ class Owner:
             await ctx.message.add_reaction('\u2049')  # x
         else:
             await ctx.message.add_reaction('\u2705')
+
+    @commands.command()
+    @commands.is_owner()
+    async def psa(self, ctx, *, msg: str):
+        """Publishes an announcement"""
+        if len(msg) > 1024:
+            return await ctx.send("Message too long.")
+        if msg.lower() == "delete":
+            await self.bot.db.psa.delete_one({ "_id": "psa" })
+            return await ctx.send("Deleted the current PSA")
+        time = datetime.datetime.now()
+        await self.bot.db.psa.update_one({ "_id": "psa" }, { "$set": { "psa": msg, "day": time.day, "month": time.month, "year": time.year } }, upsert=True)
+        await ctx.send("Announcement successfully sent.")
 
 
 def setup(bot):

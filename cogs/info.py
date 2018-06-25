@@ -32,6 +32,20 @@ class Info:
         em.add_field(name="Commands Ran", value=str(self.bot.commands_ran))
         em.set_footer(text="LadyBug Bot by Free TNT#5796")
         await ctx.send(embed=em)
+    
+    @commands.command(aliases=["updates", "announcements"])
+    async def news(self, ctx):
+        try:
+            data = await self.bot.db.psa.find_one({ "_id": "psa" })
+            if not data:
+                return await ctx.send("There is no any announcements at this time.")
+            em = discord.Embed(color=0xff0000)
+            em.title = "News"
+            em.description = data["psa"]
+            em.set_footer(text=f"Published at {data['day']}/{data['month']}/{data['year']}")
+        except Exception as err:
+            await ctx.send("Something went wrong, please try again later.")
+            raise err
         
 def setup(bot):
     bot.add_cog(Info(bot))
