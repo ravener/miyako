@@ -73,7 +73,7 @@ class Info:
         created_days = (datetime.datetime.now() - user.created_at).days
         em.add_field(name="Joined at", value=f"{time} ({days} Days ago!)")
         em.add_field(name="Account Created At", value=f"{created_time} ({created_days} Days ago!)")
-        em.add_field(name="Status", value=user.status)
+        em.add_field(name="Status", value=user.status.name.title())
         await ctx.send(embed=em)
         
 def setup(bot):
