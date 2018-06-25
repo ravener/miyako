@@ -27,6 +27,7 @@ class Mod:
     @commands.command()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, amount):
+        """Purges X amount of messages from a channel"""
         try:
             amount = int(amount)
         except ValueError:

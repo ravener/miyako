@@ -12,6 +12,7 @@ class Info:
     
     @commands.command(name="bot", aliases=["botinfo", "info", "stats"])
     async def _bot(self, ctx):
+        """Some information about the bot."""
         em = discord.Embed(color=0xff0000)
         em.title = "Bot Information/Stats"
         RAM = psutil.virtual_memory()
@@ -22,7 +23,7 @@ class Info:
         em.add_field(name="Servers", value=str(len(self.bot.guilds)))
         em.add_field(name="Users", value=str(len(self.bot.users)))
         em.add_field(name="Channels", value=str(channel_count(self.bot)))
-        em.add_field(name="Memory Usage", value=f"{used} MB ({percent}%)")
+        em.add_field(name="Memory Usage (Virtual Memory)", value=f"{used} MB ({percent}%)")
         em.add_field(name="GitHub", value=f"[Click Here](https://github.com/freetnt5852/LadyBug-Bot)")
         em.add_field(name="Discord Server", value=f"[Click Here](https://discord.gg/mDkMbEh)")
         em.add_field(name="Language/Library", value="[Python](https://python.org)/[discord.py 1.0.0a](https://github.com/Rapptz/discord.py/blob/rewrite)")
@@ -35,6 +36,7 @@ class Info:
     
     @commands.command(aliases=["updates", "announcements"])
     async def news(self, ctx):
+        """Gets latest announcements of the bot"""
         try:
             data = await self.bot.db.psa.find_one({ "_id": "psa" })
             if not data:
