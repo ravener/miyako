@@ -6,7 +6,7 @@ import os
 class Canvas:
     def __init__(self, bot):
         self.bot = bot
-        self.client = idioticapi.Client(os.environ.get("IDIOTICAPI"), dev=True)
+        self.client = idioticapi.Client(os.environ.get("IDIOTICAPI"), dev=True, session=self.bot.session)
 
     def av(self, user):
         # is this a d.py bug? size 2048 isn't allowed.
