@@ -66,11 +66,12 @@ class Fun:
         """Gets a random meme from r/dankmemes"""
         try:
             res = await (await self.bot.session.get("https://api.reddit.com/u/kerdaloo/m/dankmemer/top/.json?sort=top&t=day&limit=500")).json()
-            meme = random.choice(res["data"]["children"])["data"]
+            pos = random.randint(0, len(res["data"]["children"]))
+            meme = res["data"]["children"][pos]["data"]
             em = discord.Embed(color=0xff0000)
             em.title = meme["title"]
             em.set_image(url=meme["preview"]["images"][0]["source"]["url"])
-            em.set_footer(text=":thumbsup: {meme['ups']}, :thumbsdown: {data['downs']}")
+            em.set_footer(text="👍 {meme['ups']}, 👎 {data['downs']}")
             await ctx.send(embed=em)
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
