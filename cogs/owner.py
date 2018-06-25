@@ -113,7 +113,7 @@ class Owner:
 
     @commands.command(name="eval", aliases=["ev"])
     @commands.is_owner()
-    async def _eval(ctx, *, body):
+    async def _eval(self, ctx, *, body):
         """Evaluates python code."""
         env = {
             "bot": self.bot,
