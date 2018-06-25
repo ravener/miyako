@@ -196,6 +196,14 @@ class Owner:
         time = datetime.datetime.now()
         await self.bot.db.psa.update_one({ "_id": "psa" }, { "$set": { "psa": msg, "day": time.day, "month": time.month, "year": time.year } }, upsert=True)
         await ctx.send("Announcement successfully sent.")
+    
+    @commands.command(aliases=["src"])
+    @commands.is_owner()
+    async def source(self, ctx, command: str):
+        cmd = self.bot.get_command(command)
+        if not cmd:
+            return await ctx.send(f"Command `{command}` not found.")
+        await ctx.paginate(inspect.getsource(cmd.callback), "```py\n", "\n```")
 
 
 def setup(bot):
