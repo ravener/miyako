@@ -80,7 +80,7 @@ class General:
                     msg += cmd_msg
                 msg += "`"
                 pages.append(msg)
-            em = discord.Embed(color=0xff0000)- 
+            em = discord.Embed(color=0xff0000)
             em.set_footer(text=f"{ctx.prefix}help <cmd> for more information on a command.")
             paginator = Paginator(ctx, pages=pages, page_count=True, embed=em)
             await paginator.run()
