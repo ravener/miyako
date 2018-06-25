@@ -65,7 +65,7 @@ class Fun:
     async def meme(self, ctx):
         """Gets a random meme from r/dankmemes"""
         try:
-            res = (await self.bot.session.get("https://api.reddit.com/u/kerdaloo/m/dankmemer/top/.json?sort=top&t=day&limit=500")).json()
+            res = await (await self.bot.session.get("https://api.reddit.com/u/kerdaloo/m/dankmemer/top/.json?sort=top&t=day&limit=500")).json()
             meme = random.choice(res["data"]["children"])["data"]
             em = discord.Embed(color=0xff0000)
             em.title = meme["title"]
