@@ -4,6 +4,7 @@ import psutil
 from utils.utils import channel_count
 import platform
 import sys
+import datetime
 
 class Info:
     """Commands for getting information about various things"""
@@ -54,10 +55,10 @@ class Info:
     @commands.command(aliases=["ui"])
     @commands.guild_only()
     async def userinfo(self, ctx, user: discord.Member = None):
+        """Gets some info about a user"""
         if not user:
             user = ctx.author
         member_number = sorted(ctx.guild.members, key=lambda m: m.joined_at).index(user) + 1
-print(member_number)
         em = discord.Embed(color=0xff0000)
         em.title = "User Info"
         em.set_author(name=str(user), icon_url=user.avatar_url)
