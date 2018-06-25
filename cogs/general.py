@@ -37,6 +37,7 @@ class General:
         em.description = idea
         em.set_footer(text=f"User ID: {ctx.author.id}")
         em.set_thumbnail(url=ctx.author.avatar_url)
+        em.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
         msg = await channel.send(embed=em)
         await msg.add_reaction("✅")
         await msg.add_reaction("❌")
