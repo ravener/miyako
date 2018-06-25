@@ -1,16 +1,20 @@
 import discord
 from discord.ext import commands
-import copy
 from ext.context import Context
 import os
 import subprocess
 from utils.utils import paginate
+from contextlib import redirect_stdout
+import textwrap
+import traceback
+import inspect
+import io
 
 class Owner:
     """Core class for owner commands"""
     def __init__(self, bot):
         self.bot = bot
-
+        
     def cleanup_code(self, content):
         '''Automatically removes code blocks from the code.'''
         # remove ```py\n```
@@ -18,7 +22,7 @@ class Owner:
             return '\n'.join(content.split('\n')[1:-1])
         return content.strip('` \n')
 
-
+    
     @commands.command()
     @commands.is_owner()
     async def sudo(self, ctx, user: discord.Member, *, command):
@@ -66,14 +70,14 @@ class Owner:
                 except Exception as e:
                     await ctx.send(f"Error loading {x}\n```py\n{e}\n```")
             await ctx.send("Done loading all cogs.")
-
+                   
         else:
             try:
                 self.bot.load_extension(f"cogs.{cog}")
                 await ctx.send(f"Loaded {cog}!")
             except Exception as e:
                 await ctx.send(f"Error loading {cog}\n```py\n{e}\n```")
-
+    
     @commands.command()
     @commands.is_owner()
     async def reload(self, ctx, cog: str = None):
@@ -107,5 +111,78 @@ class Owner:
             return await ctx.send(f"```\n{err}\n```")
         await ctx.paginate(msg, "```", "```")
 
+    @commands.command(name="eval", aliases=["ev"])
+    @commands.is_owner()
+    async def _eval(ctx, *, body):
+        """Evaluates python code."""
+        env = {
+            "bot": self.bot,
+            "ctx": ctx,
+            "channel": ctx.channel,
+            "author": ctx.author,
+            "guild": ctx.guild,
+            "message": ctx.message,
+            "msg": ctx.message,
+            "_": self.bot._last_result,
+            "source": inspect.getsource,
+            "src": inspect.getsource,
+            "session": self.bot.session
+        }
+
+        env.update(globals())
+
+        body = self.cleanup_code(body)
+        stdout = io.StringIO()
+        err = out = None
+
+        to_compile = f'async def func():\n{textwrap.indent(body, "  ")}'
+
+        try:
+            exec(to_compile, env)
+        except Exception as e:
+            err = await ctx.send(f'```py\n{e.__class__.__name__}: {e}\n```')
+            return await ctx.message.add_reaction('\u2049')
+
+        func = env['func']
+        try:
+            with redirect_stdout(stdout):
+                ret = await func()
+        except Exception as e:
+            value = stdout.getvalue()
+            err = await ctx.send(f'```py\n{value}{traceback.format_exc()}\n```')
+        else:
+            value = stdout.getvalue()
+            if ret is None:
+                if value:
+                    try:
+
+                        out = await ctx.send(f'```py\n{value}\n```')
+                    except:
+                        paginated_text = paginate(value)
+                        for page in paginated_text:
+                            if page == paginated_text[-1]:
+                                out = await ctx.send(f'```py\n{page}\n```')
+                                break
+                            await ctx.send(f'```py\n{page}\n```')
+            else:
+                self.bot._last_result = ret
+                try:
+                    out = await ctx.send(f'```py\n{value}{ret}\n```')
+                except:
+                    paginated_text = paginate(f"{value}{ret}")
+                    for page in paginated_text:
+                        if page == paginated_text[-1]:
+                            out = await ctx.send(f'```py\n{page}\n```')
+                            break
+                        await ctx.send(f'```py\n{page}\n```')
+
+        if out:
+            await ctx.message.add_reaction('\u2705')  # tick
+        elif err:
+            await ctx.message.add_reaction('\u2049')  # x
+        else:
+            await ctx.message.add_reaction('\u2705')
+
+
 def setup(bot):
-    bot.add_cog(Owner(bot))
+    bot.add_cog(Owner(bot))        
