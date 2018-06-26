@@ -21,9 +21,15 @@ class Utils:
                 if len(a) < 1:
                     return await ctx.send("No Results Found.")
                 elem = a[0].find("a")
-                if not elem:
+                if not elem or not elem.get("href"):
                     return await ctx.send("No Results Found.")
-                await ctx.send(f"{elem.text} {elem.get('href')}")
+                url = elem.get("href")
+                regex = r".*(&sa=.*)"
+                m = re.match(reg, url)
+                if m:
+                    url = url.replace(m.group(1), "")
+                url = url.replace("/url?q=", "")
+                await ctx.send(f"{elem.text} {url}")
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
             raise e
