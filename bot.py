@@ -112,12 +112,16 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.NotOwner):
         return await ctx.send("This command is for owner only!")
     if isinstance(error, commands.MissingPermissions):
+        if ctx.author.id == 292690616285134850:
+            return await ctx.reinvoke()
         perms = list(map(capitalize, error.missing_perms))
         return await ctx.send("Your missing permission(s) to run this command:\n{}".format("\n".join(perms)))
     if isinstance(error, commands.CommandNotFound):
         return
     if isinstance(error, commands.CommandOnCooldown):
-        
+    
+        if ctx.author.id == 292690616285134850:
+            return await ctx.reinvoke()
         hours, remainder = divmod(int(error.retry_after), 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
@@ -129,9 +133,6 @@ async def on_command_error(ctx, error):
         if days:
             fmt = "{d}d {h}h {m}m {s}s"
         cooldown = fmt.format(d=days, h=hours, m=minutes, s=seconds)
-
-        if ctx.author.id == 292690616285134850:
-            return await ctx.reinvoke()
         return await ctx.send(f"Please wait **{cooldown}** before using this command again.")
     if isinstance(error, commands.NoPrivateMessage):
         return await ctx.send("This command can only be ran in a server!")

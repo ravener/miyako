@@ -77,5 +77,22 @@ class Fun:
             await ctx.send("Something went wrong, please try again later.")
             raise e
 
+    @commands.command(aliases=["fuckmylife"])
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def fml(self, ctx):
+        try:
+            res = await self.bot.session.get("http://www.fmylife.com/random")
+            html = await res.text()
+            data = BeautifulSoup(html, "lxml.parser")
+            article = data.find_all("p", { "class": "block" })[0].text
+            em = discord.Embed(color=0xff0000)
+            em.title = "Fuck My Life"
+            em.description = article
+            em.set_footer(text=f"Requested by: {ctx.author}")
+            await ctx.send(embed=em)
+        except Exception as e:
+            await ctx.send("Something went wrong, please try again later.")
+            raise e
+
 def setup(bot):
     bot.add_cog(Fun(bot))
