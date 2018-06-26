@@ -84,7 +84,7 @@ class Fun:
         try:
             res = await self.bot.session.get("http://www.fmylife.com/random")
             html = await res.text()
-            data = BeautifulSoup(html, "lxml.parser")
+            data = BeautifulSoup(html, "lxml")
             article = data.find_all("p", { "class": "block" })[0].text
             em = discord.Embed(color=0xff0000)
             em.title = "Fuck My Life"
