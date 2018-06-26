@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from bs4 import BeautifulSoup
+import re
 
 class Utils:
     def __init__(self, bot):
