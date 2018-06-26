@@ -26,7 +26,7 @@ class Utils:
                     return await ctx.send("No Results Found.")
                 url = elem.get("href")
                 regex = r".*(&sa=.*)"
-                m = re.match(reg, url)
+                m = re.match(regex, url)
                 if m:
                     url = url.replace(m.group(1), "")
                 url = url.replace("/url?q=", "")
