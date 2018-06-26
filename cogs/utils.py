@@ -22,7 +22,7 @@ class Utils:
                 if len(a) < 1:
                     return await ctx.send("No Results Found.")
                 elem = a[0].find("a")
-                if not elem or not elem.get("href"):
+                if not elem:
                     return await ctx.send("No Results Found.")
                 url = elem.get("href")
                 regex = r".*(&sa=.*)"
