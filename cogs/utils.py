@@ -10,7 +10,7 @@ class Utils:
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def google(self, ctx, *, query: str):
         """Searches google"""
-        params = { "q": query, "safe": str(ctx.channel.nsfw).lower() }
+        params = { "q": query, "safe": "off" if ctx.channel.nsfw else "on" }
         headers = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36" }
         try:
             async with ctx.typing():
