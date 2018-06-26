@@ -27,4 +27,6 @@ class Utils:
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
             raise e
-    
+ 
+def setup(bot):
+    bot.add_cog(Utils(bot))   
