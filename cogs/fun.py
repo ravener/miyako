@@ -112,7 +112,7 @@ class Fun:
                 resp = box.Box(await res.json())
                 em = discord.Embed(color=0xff0000)
                 em.title = resp.epicUserHandle
-                em.description = f"Profile for {resp.epicUserHandle} in platform {resp.platformNameLong}"
+                em.description = f"Profile for {resp.epicUserHandle} on {resp.platformNameLong}"
                 em.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
                 em.set_thumbnail(url="https://cdn.discordapp.com/attachments/460894620545449986/461579014394609665/IMG_20180627_200804.png")
                 em.add_field(name="Solo", value=f"**Wins:** {resp.stats.p2.top1.value}\n**Top 25:** {resp.stats.p2.top25.displayValue}\n**Top 10:** {resp.stats.p2.top10.displayValue}\n**KD:** {resp.stats.p2.kd.displayValue}\n**Win Ratio:** {resp.stats.p2.winRatio.displayValue}%\n**Kills:** {resp.stats.p2.kills.displayValue}\n**Matches Played:** {resp.stats.p2.matches.displayValue}\n**Kills Per Match:** {resp.stats.p2.kpg.displayValue}")
