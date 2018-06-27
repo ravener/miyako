@@ -107,9 +107,10 @@ class Fun:
         async with ctx.typing():
             try:
                 res = await self.bot.session.get(f"https://api.fortnitetracker.com/v1/profile/{platform.lower()}/{username}", headers={ "TRN-Api-Key": os.environ.get("FORTNITE") })
-                if res.status == 404:
-                    return await ctx.send("Could not find that username")
-                resp = box.Box(await res.json())
+                data = await res.json()
+                if data.get("error", "") == "Player Not Found":
+                    return await ctx.send("Could not find that player.")
+                resp = box.Box(data)
                 em = discord.Embed(color=0xff0000)
                 em.title = resp.epicUserHandle
                 em.description = f"Profile for {resp.epicUserHandle} on {resp.platformNameLong}"
