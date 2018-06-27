@@ -3,6 +3,8 @@ from discord.ext import commands
 import random
 from ext.paginator import Paginator
 from bs4 import BeautifulSoup
+import os
+import box
 
 class Fun:
     """Some fun commands."""
