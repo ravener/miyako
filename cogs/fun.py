@@ -116,10 +116,22 @@ class Fun:
                 em.description = f"Profile for {resp.epicUserHandle} on {resp.platformNameLong}"
                 em.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
                 em.set_thumbnail(url="https://cdn.discordapp.com/attachments/460894620545449986/461579014394609665/IMG_20180627_200804.png")
-                em.add_field(name="Solo", value=f"**Wins:** {resp.stats.p2.top1.value}\n**Top 25:** {resp.stats.p2.top25.displayValue}\n**Top 10:** {resp.stats.p2.top10.displayValue}\n**KD:** {resp.stats.p2.kd.displayValue}\n**Win Ratio:** {resp.stats.p2.winRatio.displayValue}%\n**Kills:** {resp.stats.p2.kills.displayValue}\n**Matches Played:** {resp.stats.p2.matches.displayValue}\n**Kills Per Match:** {resp.stats.p2.kpg.displayValue}")
-                em.add_field(name="Duos", value=f"**Wins:** {resp.stats.p10.top1.value}\n**Top 5:** {resp.stats.p10.top5.displayValue}\n**Top 12:** {resp.stats.p10.top12.displayValue}\n**KD:** {resp.stats.p10.kd.displayValue}\n**Win Ratio:** {resp.stats.p10.winRatio.displayValue}%\n**Kills:** {resp.stats.p10.kills.displayValue}\n**Matches Played:** {resp.stats.p10.matches.displayValue}\n**Kills Per Match:** {resp.stats.p10.kpg.displayValue}")
-                em.add_field(name="Squads", value=f"**Wins:** {resp.stats.p9.top1.value}\n**Top 3:** {resp.stats.p9.top3.displayValue}\n**Top 6:** {resp.stats.p9.top6.displayValue}\n**KD:** {resp.stats.p9.kd.displayValue}\n**Win Ratio:** {resp.stats.p9.winRatio.displayValue}%\n**Kills:** {resp.stats.p9.kills.displayValue}\n**Matches Played:** {resp.stats.p9.matches.displayValue}\n**Kills Per Match:** {resp.stats.p9.kpg.displayValue}")
-                em.add_field(name="Life Time Stats", value=f"**Score**: {resp.lifeTimeStats[6].value}\n**Matches Played:** {resp.lifeTimeStats[7].value}\n**Wins:** {resp.lifeTimeStats[8].value}\n**Win Ratio:** {resp.lifeTimeStats[9].value}\n**Kills:** {resp.lifeTimeStats[10].value}\n**KD:** {resp.lifeTimeStats[11].value}")
+                try:
+                    em.add_field(name="Solo", value=f"**Wins:** {resp.stats.p2.top1.value}\n**Top 25:** {resp.stats.p2.top25.displayValue}\n**Top 10:** {resp.stats.p2.top10.displayValue}\n**KD:** {resp.stats.p2.kd.displayValue}\n**Win Ratio:** {resp.stats.p2.winRatio.displayValue}%\n**Kills:** {resp.stats.p2.kills.displayValue}\n**Matches Played:** {resp.stats.p2.matches.displayValue}\n**Kills Per Match:** {resp.stats.p2.kpg.displayValue}")
+                except box.BoxKeyError:
+                    em.add_field(name="Solo", value="**No Solos Played Yet**")
+                try:
+                    em.add_field(name="Duos", value=f"**Wins:** {resp.stats.p10.top1.value}\n**Top 5:** {resp.stats.p10.top5.displayValue}\n**Top 12:** {resp.stats.p10.top12.displayValue}\n**KD:** {resp.stats.p10.kd.displayValue}\n**Win Ratio:** {resp.stats.p10.winRatio.displayValue}%\n**Kills:** {resp.stats.p10.kills.displayValue}\n**Matches Played:** {resp.stats.p10.matches.displayValue}\n**Kills Per Match:** {resp.stats.p10.kpg.displayValue}")
+                except box.BoxKeyError:
+                    em.add_field(name="Duos", value="**No Duos Played Yet**")
+                try:
+                    em.add_field(name="Squads", value=f"**Wins:** {resp.stats.p9.top1.value}\n**Top 3:** {resp.stats.p9.top3.displayValue}\n**Top 6:** {resp.stats.p9.top6.displayValue}\n**KD:** {resp.stats.p9.kd.displayValue}\n**Win Ratio:** {resp.stats.p9.winRatio.displayValue}%\n**Kills:** {resp.stats.p9.kills.displayValue}\n**Matches Played:** {resp.stats.p9.matches.displayValue}\n**Kills Per Match:** {resp.stats.p9.kpg.displayValue}")
+                except box.BoxKeyError:
+                    em.add_field(name="Squads", value="**No Squads Played Yet**")
+                try:
+                    em.add_field(name="Life Time Stats", value=f"**Score**: {resp.lifeTimeStats[6].value}\n**Matches Played:** {resp.lifeTimeStats[7].value}\n**Wins:** {resp.lifeTimeStats[8].value}\n**Win Ratio:** {resp.lifeTimeStats[9].value}\n**Kills:** {resp.lifeTimeStats[10].value}\n**KD:** {resp.lifeTimeStats[11].value}")
+                except box.BoxKeyError:
+                    em.add_field(name="Life Time Stats", value="**Failed to get life time stats**")
                 await ctx.send(embed=em)
             except Exception as e:
                 await ctx.send("Something went wrong, please try again later.")
