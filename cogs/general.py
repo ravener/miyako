@@ -25,7 +25,7 @@ class General:
     @commands.command()
     async def invite(self, ctx):
         """Want me in your server?"""
-        await ctx.send(f"Invite me to your server: https://discordapp.com/oauth2/authorize?client_id={self.bot.user.id}&scope=bot&permissions=470281463")
+        await ctx.send(f"<Invite me to your server: https://discordapp.com/oauth2/authorize?client_id={self.bot.user.id}&scope=bot&permissions=470281463>")
     
     @commands.command()
     @commands.cooldown(1, 60, commands.BucketType.user)
