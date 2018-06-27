@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import re
 
 class Utils:
+    """Utility commands to make your life easier"""
     def __init__(self, bot):
         self.bot = bot
     

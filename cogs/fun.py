@@ -90,11 +90,39 @@ class Fun:
                 em = discord.Embed(color=0xff0000)
                 em.title = "Fuck My Life"
                 em.description = article
-                em.set_footer(text=f"Requested by: {ctx.author}")
+                em.set_footer(text=f"Requested by: {ctx.author} | Powered by fmylife.com")
                 await ctx.send(embed=em)
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
             raise e
+
+    @commands.command(aliases=["fn", "fnprofile"])
+    @comands.cooldown(1, 2, commands.BucketType.default)
+    async def fortnite(self, ctx, platform: str, *, username: str):
+        """Gets your fortnite stats"""
+        if platform.lower() not in ("xbl", "psn", "pc"):
+            return await ctx.send("Invalid platform, platform can be one of `xbl, psn, pc`")
+        async with ctx.typing():
+            try:
+                res = await self.bot.session.get(f"https://api.fortnitetracker.com/v1/profile/{platform}/{username}", headers={ "TRN-Api-Key": os.environ.get("FORTNITE") })
+                if res.status == 404:
+                    return await ctx.send("Could not find that username")
+                resp = box.Box(await res.json())
+                em = discord.Embed(color=0xff0000)
+                em.title = resp.body.epicUserHandle
+                em.description = f"Profile for {resp.body.epicUserHandle} in platform {resp.body.platformNameLong}"
+                em.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
+                em.set_thumbnail(url="https://cdn.discordapp.com/attachments/460894620545449986/461579014394609665/IMG_20180627_200804.png")
+                em.add_field(name="Solo", value=f"**Wins:** {resp.body.stats.p2.top1.value}\n**Top 25:** {resp.body.stats.p2.top25.displayValue}\n**Top 10:** {resp.body.stats.p2.top10.displayValue}\n**KD:** {resp.body.stats.p2.kd.displayValue}\n**Win Ratio:** {resp.body.stats.p2.winRatio.percentile}%\n**Time Played:** ${resp.body.stats.p2.minutesPlayed.displayValue}\n**Kills:** {resp.body.stats.p2.kills.displayValue}\n**Matches Played:** {resp.body.stats.p2.matches.displayValue}\n**Kills Per Match:** {resp.body.stats.p2.kpg.displayValue}\n**Average Time Played:** {resp.body.stats.p2.avgTimePlayed.displayValue}")
+                em.add_field(name="Duos", value=f"**Wins:** {resp.body.stats.p10.top1.value}\n**Top 5:** {resp.body.stats.p10.top5.displayValue}\n**Top 12:** {resp.body.stats.p10.top12.displayValue}\n**KD:** {resp.body.stats.p10.kd.displayValue}\n**Win Ratio:** {resp.body.stats.p10.winRatio.percentile}%\n**Time Played:** {resp.body.stats.p10.minutesPlayed.displayValue}\n**Kills:** {resp.body.stats.p10.kills.displayValue}\n**Matches Played:** {resp.body.stats.p10.matches.displayValue}\n**Kills Per Match:** {resp.body.stats.p10.kpg.displayValue}\n**Average Time Played:** {resp.body.stats.p10.avgTimePlayed.displayValue}")
+                em.add_field(name="Squads", value=f"**Wins:** {resp.body.stats.p9.top1.value}\n**Top 3:** {resp.body.stats.p9.top3.displayValue}\n**Top 6:** {resp.body.stats.p9.top6.displayValue}\n**KD:** {resp.body.stats.p9.kd.displayValue}\n**Win Ratio:** {resp.body.stats.p9.winRatio.percentile}%\n**Time Played:** {resp.body.stats.p9.minutesPlayed.displayValue}\n**Kills:** {resp.body.stats.p9.kills.displayValue}\n**Matches Played:** {resp.body.stats.p9.matches.displayValue}\n**Kills Per Match:** {resp.body.stats.p9.kpg.displayValue}\n**Average Time Played:** {resp.body.stats.p9.avgTimePlayed.displayValue}")
+                em.add_field(name="\u200b", value="\u200b")
+                em.add_field(name="Life Time Stats", value=f"**Score**: {resp.body.lifeTimeStats[6].value}\n**Matches Played:** {resp.body.lifeTimeStats[7].value}\n**Wins:** {resp.body.lifeTimeStats[8].value}\n**Win Ratio:** {resp.body.lifeTimeStats[9].value}\n**Kills:** {resp.body.lifeTimeStats[10].value}\n**KD:** {resp.body.lifeTimeStats[11].value}\n**Time Played:** {resp.body.lifeTimeStats[13].value}\n**Average Survival Time:** {resp.body.lifeTimeStats[14].value}")
+                await ctx.send(embed=em)
+            except Exception as e:
+                await ctx.send("Something went wrong, please try again later.")
+                raise e
+            
 
 def setup(bot):
     bot.add_cog(Fun(bot))

@@ -30,6 +30,7 @@ class General:
     @commands.command()
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def suggest(self, ctx, *, idea: str):
+        """Suggest an idea to improve the bot"""
         channel = self.bot.get_channel(460801007769616394)
         if len(idea) > 1024:
             return await ctx.send("Idea too long, please keep it below 1024 chars.")
@@ -50,6 +51,7 @@ class General:
 
     @commands.command(name="help", aliases=["h", "halp", "commands", "cmds"])
     async def _help(self, ctx, command: str = None):
+        """Shows all commands"""
         if command:
             cmd = self.bot.get_command(command.lower()) or self.bot.get_cog(command)
             if not cmd:
