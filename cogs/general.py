@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from ext.paginator import Paginator
+from utils.utils import _command_signature
 
 class General:
     """Some general commands."""
@@ -60,9 +61,9 @@ class General:
                 em = discord.Embed(color=0xff0000)
                 em.title = cmd.name
                 em.description = cmd.help or "No Description"
-                em.description += "\nUsage: `{}{}`".format(ctx.prefix, cmd.signature)
+                em.description += "\nUsage: `{}{}`".format(ctx.prefix, _command_signature(cmd))
                 if cmd.aliases:
-                    em.description += "\nAliases: {}".format(", ".join(cmd.aliases))
+                    em.description += "\nAliases: `{}`".format(", ".join(cmd.aliases))
                 return await ctx.send(embed=em)
             cmds = self.bot.get_cog_commands(command)
             em = discord.Embed(color=0xff0000)
@@ -83,7 +84,7 @@ class General:
                 cog = self.bot.get_cog(x)
                 msg = cog.__doc__ + "\n\n`" if cog.__doc__ else "No Description\n\n`"
                 for cmd in cmds:
-                    cmd_msg = f"{ctx.prefix}{cmd.signature} {cmd.short_doc}\n"
+                    cmd_msg = f"{ctx.prefix}{_command_signature(cmd)} {cmd.short_doc}\n"
                     msg += cmd_msg
                 msg += "`"
                 pages.append(msg)
