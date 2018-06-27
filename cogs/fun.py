@@ -97,14 +97,14 @@ class Fun:
             raise e
 
     @commands.command(aliases=["fn", "fnprofile"])
-    @comands.cooldown(1, 2, commands.BucketType.default)
+    @commands.cooldown(1, 2, commands.BucketType.default)
     async def fortnite(self, ctx, platform: str, *, username: str):
         """Gets your fortnite stats"""
-        if platform.lower() not in ("xbl", "psn", "pc"):
+        if not platform.lower() in ("xbl", "psn", "pc"):
             return await ctx.send("Invalid platform, platform can be one of `xbl, psn, pc`")
         async with ctx.typing():
             try:
-                res = await self.bot.session.get(f"https://api.fortnitetracker.com/v1/profile/{platform}/{username}", headers={ "TRN-Api-Key": os.environ.get("FORTNITE") })
+                res = await self.bot.session.get(f"https://api.fortnitetracker.com/v1/profile/{platform.lower()}/{username}", headers={ "TRN-Api-Key": os.environ.get("FORTNITE") })
                 if res.status == 404:
                     return await ctx.send("Could not find that username")
                 resp = box.Box(await res.json())
