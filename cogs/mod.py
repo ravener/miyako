@@ -25,7 +25,7 @@ class Mod:
             raise e
 
     @commands.command()
-    @comnands.guild_only()
+    @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx, amount):
         """Purges X amount of messages from a channel"""
