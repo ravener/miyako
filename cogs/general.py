@@ -60,7 +60,9 @@ class General:
                 em = discord.Embed(color=0xff0000)
                 em.title = cmd.name
                 em.description = cmd.help or "No Description"
-                em.description += "\nUsage: {}{}".format(ctx.prefix, cmd.signature)
+                em.description += "\nUsage: `{}{}`".format(ctx.prefix, cmd.signature)
+                if cmd.aliases:
+                    em.description += "\nAliases: {}".format(", ".join(cmd.aliases))
                 return await ctx.send(embed=em)
             cmds = self.bot.get_cog_commands(command)
             em = discord.Embed(color=0xff0000)
