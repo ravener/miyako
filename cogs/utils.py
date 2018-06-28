@@ -53,7 +53,7 @@ class Utils:
         emojis = [ "1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟" ]
         choices_len = len(choices) - 1
         emojis = emojis[:choices_len]
-        choice_map = list(map(lambda x: f"{choices[1:].index(x) + 1}. {x}", choices))
+        choice_map = list(map(lambda x: f"{choices[1:].index(x) + 1}. {x}", choices[:1]))
         msg = "\n".join(choice_map)
         if len(msg) > 2048:
             return await ctx.send("Results too long, make sure total chars of all answers is less than 2000")
