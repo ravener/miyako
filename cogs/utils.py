@@ -40,9 +40,11 @@ class Utils:
 
     @commands.command()
     async def poll(self, ctx, *, choices: str):
+        """Creates a poll
+        Seperate choices with |, the first one is the question"""
         choices = choices.split("|")
         if len(choices) < 3:
-            return await ctx.send("Not enough choices")
+            return await ctx.send(f"Not enough choices, seperate choices with `|`, example: `{ctx.prefix}poll What should we have for dinner? | Pizza | Cheese Burger | None`")
         try:
             await ctx.message.delete()
         except discord.Forbidden:
@@ -52,6 +54,8 @@ class Utils:
             return await ctx.send("Question too long!")
         emojis = [ "1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟" ]
         choices_len = len(choices) - 1
+        if choices_len > 10:
+            return await ctx.send("You may use upto 10 choices.")
         emojis = emojis[:choices_len]
         choice_map = list(map(lambda x: f"{choices[1:].index(x) + 1}. {x}", choices[1:]))
         msg = "\n".join(choice_map)
