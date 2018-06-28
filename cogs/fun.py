@@ -5,6 +5,7 @@ from ext.paginator import Paginator
 from bs4 import BeautifulSoup
 import os
 import box
+import json
 
 class Fun:
     """Some fun commands."""
