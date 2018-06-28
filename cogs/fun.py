@@ -136,6 +136,21 @@ class Fun:
             except Exception as e:
                 await ctx.send("Something went wrong, please try again later.")
                 raise e
+
+    @commands.command(aliases=["urmom"])
+    @commands.cooldown(1, 2, commands.BucketType.user)
+    async def yomomma(self, ctx, user: discord.Member = None):
+        """Insult someone's mom with this."""
+        try:
+            async with ctx.typing():
+                res = await self.bot.session.get("http://api.yomomma.info")
+                joke = json.loads(await res.text())["joke"]
+                msg = f"{user.mention}, " if user else ""
+                await ctx.send(f"{msg}{joke}")
+        except Exception as e:
+            await ctx.send("Something went wrong, please try again later.")
+            raise e
+      
             
 
 def setup(bot):
