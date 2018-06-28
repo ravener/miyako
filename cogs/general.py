@@ -82,7 +82,7 @@ class General:
                     continue
                 cmds = self.bot.get_cog_commands(x)
                 cog = self.bot.get_cog(x)
-                msg = cog.__doc__ + "\n\n`" if cog.__doc__ else "No Description\n\n`"
+                msg = cog.__class__.__name__ + + "\n" cog.__doc__ + "\n\n`" if cog.__doc__ else cog.__class__.__name__ + "\nNo Description\n\n`"
                 for cmd in cmds:
                     cmd_msg = f"{ctx.prefix}{_command_signature(cmd)} {cmd.short_doc}\n"
                     msg += cmd_msg
