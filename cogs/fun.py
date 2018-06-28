@@ -151,6 +151,22 @@ class Fun:
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
             raise e
+
+    @commands.command()
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def joke(self, ctx):
+        """Gets a random joke"""
+        try:
+            async with ctx.typing():
+                res = await self.bot.session.get("https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_joke")
+                data = await res.json()
+                em = discord.Embed(color=0xff0000)
+                em.title = f"Joke {data['type'].title()}#{data['id']}"
+                em.description = f"{data['setup']}\n{data['punchline']}"
+                await ctx.send(embed=em)
+        except Exception as e:
+            await ctx.send("Something went wrong, please try again later.")
+            raise e
       
             
 
