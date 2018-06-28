@@ -17,6 +17,8 @@ class Utils:
         try:
             async with ctx.typing():
                 res = await self.bot.session.get("https://google.com/search", params=params, headers=headers)
+                if res.status != 200:
+                    return await ctx.send("Google has failed to respond.")
                 html = await res.text()
                 data = BeautifulSoup(html, "lxml")
                 a = data.find_all("h3", { "class": "r" })
