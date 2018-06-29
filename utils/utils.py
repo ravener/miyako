@@ -1,4 +1,4 @@
-
+from functools import partial
 
 def channel_count(bot):
     res = []
@@ -61,4 +61,11 @@ def _command_signature(cmd):
     return ' '.join(result)
 
 async def run_async(loop, func, *args, **kwargs):
-    return await loop.run_in_executor(None, func, *args, **kwargs)
+    use_kwargs = False
+    try:
+        use_kwargs = kwargs.pop("kwargs")
+    except KeyError:
+        pass
+    if use_kwargs:
+        func = partial(func, *args, **kwargs)
+    return await loop.run_in_executor(None, func, *args)
