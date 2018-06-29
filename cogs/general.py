@@ -95,5 +95,15 @@ class General:
             paginator = Paginator(ctx, pages=pages, page_count=True, embed=em)
             await paginator.run()
 
+    @commands.command(aliases=["server", "discord"])
+    async def support(self, ctx):
+        """Get a link to our support server"""
+        try:
+            await ctx.author.send("Here's link to the server: https://discord.gg/mDkMbEh")
+            if isinstance(ctx.channel, discord.TextChannel):
+                await ctx.send("Check your DMs!")
+        except discord.Forbidden:
+            await ctx.send("Couldn't DM link, make sure you didn't block DMs from this server.")
+
 def setup(bot):
     bot.add_cog(General(bot))

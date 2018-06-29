@@ -10,6 +10,7 @@ import traceback
 import inspect
 import datetime
 import io
+from utils.utils import run_async
 
 class Owner:
     """Core class for owner commands"""
@@ -105,7 +106,7 @@ class Owner:
     @commands.is_owner()
     async def _exec(self, ctx, *, code: str):
         code = self.cleanup_code(code)
-        res = subprocess.run(code, shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        res = await run_async(self.bot.loop, subprocess.run, code, shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         err = res.stderr.decode("utf-8")
         msg = res.stdout.decode("utf-8")
         if err:

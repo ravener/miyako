@@ -59,3 +59,6 @@ def _command_signature(cmd):
             result.append(f'<{name}>')
 
     return ' '.join(result)
+
+async def run_async(loop, func, *args, **kwargs):
+    return await loop.run_in_executor(None, func, *args, **kwargs)
