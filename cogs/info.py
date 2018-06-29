@@ -14,7 +14,7 @@ class Info:
     @commands.command(name="bot", aliases=["botinfo", "info", "stats"])
     async def _bot(self, ctx):
         """Some information about the bot."""
-        uptime = datetime.utcnow() - self.bot.start_time
+        uptime = datetime.datetime.utcnow() - self.bot.start_time
         hours, remainder = divmod(int(uptime.total_seconds()), 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
@@ -35,7 +35,7 @@ class Info:
         v = sys.version_info
         em.add_field(name="Python Version", value=f"{v.major}.{v.minor}.{v.micro}")
         em.add_field(name="Platform", value=platform.platform())
-        em.add_field(name="Uptime", value=f"{days}d {hours}h {minutes}m {seconds}s")
+        em.add_field(name="Uptime", value=f"**{days}d, {hours}h, {minutes}m, {seconds}s**")
         em.add_field(name="Commands Ran (Since Uptime)", value=str(self.bot.commands_ran))
         em.set_footer(text="LadyBug Bot by Free TNT#5796")
         await ctx.send(embed=em)

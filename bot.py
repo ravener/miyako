@@ -29,7 +29,7 @@ async def getprefix(bot, message):
 bot = commands.Bot(command_prefix=getprefix, description="A simple Miraculous discord bot.", owner_id=292690616285134850)
 bot._last_result = None
 bot.session = aiohttp.ClientSession(loop=bot.loop)
-bot.start_time = datetime.utcnow()
+bot.start_time = datetime.datetime.utcnow()
 bot.commands_ran = 0
 bot.cogs_list = sorted([ "cogs." + x.replace(".py", "") for x in os.listdir("cogs") if x.endswith(".py") ])
 bot.db = AsyncIOMotorClient(os.environ.get("MONGODB")).ladybug
