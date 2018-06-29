@@ -106,7 +106,7 @@ class Owner:
     @commands.is_owner()
     async def _exec(self, ctx, *, code: str):
         code = self.cleanup_code(code)
-        res = await run_async(self.bot.loop, subprocess.run, code, shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        res = await run_async(self.bot.loop, subprocess.run, code, shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, kwargs=True)
         err = res.stderr.decode("utf-8")
         msg = res.stdout.decode("utf-8")
         if err:
