@@ -68,4 +68,5 @@ async def run_async(loop, func, *args, **kwargs):
         pass
     if use_kwargs:
         func = partial(func, *args, **kwargs)
+        return await loop.run_in_executor(None, func)
     return await loop.run_in_executor(None, func, *args)
