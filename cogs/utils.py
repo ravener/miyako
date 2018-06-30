@@ -111,5 +111,17 @@ class Utils:
             await ctx.send("Something went wrong, please try again later.")
             raise e
 
+    @commands.command(aliases=["pfp"])
+    async def avatar(self, ctx, user: discord.Member = None):
+        if not user:
+            user = ctx.author
+        url = user.avatar_url.replace("1024", "2048")
+        em = discord.Embed(color=0xff0000)
+        em.title = f"{user}'s Avatar"
+        em.set_author(name=str(user), icon_url=url)
+        em.set_image(url=url)
+        await ctx.send(embed=em)
+       
+         
 def setup(bot):
     bot.add_cog(Utils(bot))   
