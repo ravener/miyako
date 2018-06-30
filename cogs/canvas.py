@@ -4,6 +4,7 @@ import idioticapi
 import os
 
 class Canvas:
+    """Some fun image commands"""
     def __init__(self, bot):
         self.bot = bot
         self.client = idioticapi.Client(os.environ.get("IDIOTICAPI"), dev=True, session=self.bot.session)
