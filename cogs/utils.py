@@ -115,7 +115,7 @@ class Utils:
     async def avatar(self, ctx, user: discord.Member = None):
         if not user:
             user = ctx.author
-        url = user.avatar_url.replace("1024", "2048")
+        url = user.avatar_url.replace("1024", "2048").replace("webp", "png")
         em = discord.Embed(color=0xff0000)
         em.title = f"{user}'s Avatar"
         em.set_author(name=str(user), icon_url=url)
