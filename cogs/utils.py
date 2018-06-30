@@ -75,6 +75,7 @@ class Utils:
     @commands.command(aliases=["tr"])
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def translate(self, ctx, lang: str, *, text: str):
+        """Translate text to any language!"""
         try:
             async with ctx.typing():
                 lang = lang.lower()
@@ -84,10 +85,11 @@ class Utils:
                 html = await res.text()
                 data = BeautifulSoup(html, "lxml")
                 translated = data.find("div", { "class": "t0" }).text
+                translated_lang = data.find_all("a", { "class": "s1" })[1].text
                 em = discord.Embed(color=0xff0000)
                 em.title = "Translated"
                 em.add_field(name="Original Text", value=f"```\n{text}\n```")
-                em.add_field(name="Translated Text", value=f"Language: {lang.title()}\n```\n{translated}\n```")
+                em.add_field(name="Translated Text", value=f"Language: {translated_lang}\n```\n{translated}\n```")
                 await ctx.send(embed=em)
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
