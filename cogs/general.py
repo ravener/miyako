@@ -105,5 +105,18 @@ class General:
         except discord.Forbidden:
             await ctx.send("Couldn't DM link, make sure you didn't block DMs from this server.")
 
+    @commands.command(aliases=["bugreport"])
+    @commands.cooldown(1, 60, commands.BucketType.user)
+    async def bug(self, ctx, *, msg: str):
+        if len(msg) > 1024:
+            return await ctx.send("Message too long, please keep it below 1024 chars")
+        channel = self.bot.get_channel(460800229667504148)
+        em = discord.Embed(color=0xff0000)
+        em.title = "Bug Report"
+        em.description = msg
+        em.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
+        em.set_footer(text=ctx.author.id)
+        message = await channel.send(embed=em)
+
 def setup(bot):
     bot.add_cog(General(bot))
