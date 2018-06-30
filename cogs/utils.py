@@ -94,6 +94,18 @@ class Utils:
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
             raise e
+
+    @commands.command()
+    async def hastebin(self, ctx, *, text: str):
+        """Hastebin any text"""
+        try:
+            async with ctx.typing():
+                res = await self.bot.session.post("https://hastebin.com/documents", data=text)
+                data = await res.json()
+                await ctx.send(f"Hastebin-ified: https://hastebin.com/{data['key']}")
+        except Exception as e:
+            await ctx.send("Something went wrong, please try again later.")
+            raise e
  
 def setup(bot):
     bot.add_cog(Utils(bot))   
