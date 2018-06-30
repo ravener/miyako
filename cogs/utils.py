@@ -12,7 +12,10 @@ class Utils:
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def google(self, ctx, *, query: str):
         """Searches google for a query"""
-        params = { "q": query, "safe": "off" if ctx.channel.nsfw else "on" }
+        safe = "on"
+        if not isinstance(ctx.channel, discord.DMChannel) and ctx.channel.nsfw:
+            safe = "off"
+        params = { "q": query, "safe": safe }
         headers = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36" }
         try:
             async with ctx.typing():
@@ -107,6 +110,6 @@ class Utils:
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
             raise e
- 
+
 def setup(bot):
     bot.add_cog(Utils(bot))   
