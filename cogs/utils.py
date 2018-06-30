@@ -88,6 +88,7 @@ class Utils:
                 em.title = "Translated"
                 em.add_field(name="Original Text", value=f"```\n{text}\n```")
                 em.add_field(name="Translated Text", value=f"Language: {lang.title()}\n```\n{translated}\n```")
+                await ctx.send(embed=em)
         except Exception as e:
             await ctx.send("Something went wrong, please try again later.")
             raise e
