@@ -34,7 +34,6 @@ class Info:
         em.add_field(name="Language/Library", value="[Python](https://python.org)/[discord.py 1.0.0a](https://github.com/Rapptz/discord.py/blob/rewrite)")
         v = sys.version_info
         em.add_field(name="Python Version", value=f"{v.major}.{v.minor}.{v.micro}")
-        em.add_field(name="Platform", value=platform.platform())
         em.add_field(name="Uptime", value=f"**{days} days, {hours} hours, {minutes} minutes, {seconds}s**")
         em.add_field(name="Commands Ran (Since Uptime)", value=str(self.bot.commands_ran + 1))
         em.set_footer(text="LadyBug Bot by Free TNT#5796")
