@@ -72,7 +72,25 @@ class Utils:
             except discord.Forbidden:
                 pass
         
-        
+    @commands.command(aliases=["tr"])
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def translate(self, ctx, lang: str, *, text: str):
+        try:
+            async with ctx.typing():
+                lang = lang.lower()
+                url = "http://translate.google.com/m?hl=%s&sl=%s&q=%s" % (lang, "auto", text)
+                headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36"}
+                res = await self.bot.session.get(url, headers=headers)
+                html = await res.text()
+                data = BeautifulSoup(html, "lxml")
+                translated = data.find("div", { "class": "t0" }).text
+                em = discord.Embed(color=0xff0000)
+                em.title = "Translated"
+                em.add_field(name="Original Text", value=f"```\n{text}\n```")
+                em.add_field(name="Translated Text", value=f"Language: {lang.title()}\n```\n{translated}\n```")
+        except Exception as e:
+            await ctx.send("Something went wrong, please try again later.")
+            raise e
  
 def setup(bot):
     bot.add_cog(Utils(bot))   
