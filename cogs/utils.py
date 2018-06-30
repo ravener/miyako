@@ -96,6 +96,7 @@ class Utils:
             raise e
 
     @commands.command()
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def hastebin(self, ctx, *, text: str):
         """Hastebin any text"""
         try:
