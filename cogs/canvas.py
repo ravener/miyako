@@ -26,5 +26,15 @@ class Canvas:
             await ctx.send(f"Something went wrong, please try again later.```{e}```")
             print(e)
 
+    @commands.command()
+    async def blame(self, ctx, *, text: str):
+        if len(ctx.message.mentions) >= 1:
+            text = ctx.message.mentions[0].name
+        try:
+            await ctx.send(file=discord.File(await self.client.blame(text), "blame.png"))
+        except Exception as e:
+            await ctx.send("Something went wrong, please try again later.")
+            raise e
+
 def setup(bot):
     bot.add_cog(Canvas(bot))
