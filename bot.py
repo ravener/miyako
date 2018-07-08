@@ -145,7 +145,9 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.DisabledCommand):
         if ctx.author.id == 292690616285134850:
             return await ctx.reinvoke()
-        return await ctx.send("Sorry, this command is disabled.")
+        return await ctx.send("Sorry, this command is currently disabled.")
+        
+    await ctx.send("Something went wrong, please try again later.")
 
     em = discord.Embed()
     em.color = 0xff0000
