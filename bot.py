@@ -18,10 +18,10 @@ async def getprefix(bot, message):
     if isinstance(message.channel, discord.DMChannel):
         return commands.when_mentioned_or("lb.")(bot, message)
     try:
-        guild = await bot.db.prefix.find_one({ "_id": message.guild.id })
+        guild = await bot.db.config.find_one({ "_id": message.guild.id })
         if not guild:
             return "lb."
-        prefix = guild["prefix"]
+        prefix = guild.get("prefix", "lb.")
         return commands.when_mentioned_or(prefix)(bot, message)
     except:
         return "lb."
