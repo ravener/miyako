@@ -111,7 +111,7 @@ class Utils:
             await ctx.send("Something went wrong, please try again later.")
             raise e
 
-    @commands.command(aliases=["pfp"])
+    @commands.command(aliases=["pfp", "av"])
     async def avatar(self, ctx, user: discord.Member = None):
         if not user:
             user = ctx.author
