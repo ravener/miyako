@@ -29,7 +29,7 @@ class Canvas:
     @commands.command()
     async def blame(self, ctx, *, text: str):
         if len(ctx.message.mentions) >= 1:
-            text = ctx.message.mentions[0].name
+            text = ctx.message.mentions[0].display_name
         try:
             await ctx.send(file=discord.File(await self.client.blame(text), "blame.png"))
         except Exception as e:
