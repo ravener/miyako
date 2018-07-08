@@ -53,6 +53,7 @@ class General:
     @commands.command(name="help", aliases=["h", "halp", "commands", "cmds"])
     async def _help(self, ctx, command: str = None):
         """Shows all commands"""
+        prefix = (await self.bot.get_prefix(ctx.message))[0]
         if command:
             cmd = self.bot.get_command(command.lower()) or self.bot.get_cog(command)
             if not cmd:
@@ -68,7 +69,7 @@ class General:
             cmds = self.bot.get_cog_commands(command)
             em = discord.Embed(color=0xff0000)
             em.description = cmd.__doc__ + "\n\n`" if cmd.__doc__ else "No Description\n\n`" 
-            em.set_footer(text=f"{ctx.prefix}help <cmd> for more info on a command.")
+            em.set_footer(text=f"{prefix}help <cmd> for more info on a command.")
             for x in cmds:
                 msg = f"{ctx.prefix}{x.signature} {x.short_doc}\n"
                 em.description += msg
@@ -91,7 +92,7 @@ class General:
                 msg += "`"
                 pages.append(msg)
             em = discord.Embed(color=0xff0000)
-            em.set_footer(text=f"{ctx.prefix}help <cmd> for more information on a command.")
+            em.set_footer(text=f"{prefix}help <cmd> for more information on a command.")
             paginator = Paginator(ctx, pages=pages, page_count=True, embed=em)
             await paginator.run()
 
