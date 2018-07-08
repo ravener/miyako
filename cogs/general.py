@@ -53,7 +53,7 @@ class General:
     @commands.command(name="help", aliases=["h", "halp", "commands", "cmds"])
     async def _help(self, ctx, command: str = None):
         """Shows all commands"""
-        prefix = (await self.bot.get_prefix(ctx.message))[0]
+        prefix = (await self.bot.get_prefix(ctx.message))[1]
         if command:
             cmd = self.bot.get_command(command.lower()) or self.bot.get_cog(command)
             if not cmd:
