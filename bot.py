@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from utils.utils import *
 from ext.context import Context
-import json
 import os
 import inspect
 import io
@@ -20,11 +19,11 @@ async def getprefix(bot, message):
     try:
         guild = await bot.db.config.find_one({ "_id": message.guild.id })
         if not guild:
-            return "lb."
+            return commands.when_mentioned_or("lb.")(bot, message)
         prefix = guild.get("prefix", "lb.")
         return commands.when_mentioned_or(prefix)(bot, message)
     except:
-        return "lb."
+        return commands.when_mentioned_or("lb.")(bot, message)
 
 bot = commands.Bot(command_prefix=getprefix, description="A simple Miraculous discord bot.", owner_id=292690616285134850)
 bot._last_result = None
