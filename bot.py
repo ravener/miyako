@@ -34,13 +34,6 @@ bot.cogs_list = sorted([ "cogs." + x.replace(".py", "") for x in os.listdir("cog
 bot.db = AsyncIOMotorClient(os.environ.get("MONGODB")).ladybug
 bot.remove_command("help")
 
-def cleanup_code(content):
-    '''Automatically removes code blocks from the code.'''
-    # remove ```py\n```
-    if content.startswith('```') and content.endswith('```'):
-        return '\n'.join(content.split('\n')[1:-1])
-    return content.strip('` \n')
-
 @bot.event
 async def on_message(message):
     if message.author.bot:
