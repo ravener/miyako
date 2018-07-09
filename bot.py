@@ -76,7 +76,7 @@ async def on_member_join(member):
     if not channel:
         return
     try:
-        await channel.send(message.replace("{user}", member.mention).replace("{guild}", member.guild.name).replace("{name}", member.name).replace("{count}", guild.member_count))
+        await channel.send(message.replace("{user}", member.mention).replace("{guild}", member.guild.name).replace("{name}", member.name).replace("{count}", member.guild.member_count))
     except Exception as e:
         print(e)
 
@@ -94,7 +94,7 @@ async def on_member_remove(member):
     if not channel:
         return
     try:
-        await channel.send(message.replace("{guild}", member.guild.name).replace("{name}", member.name).replace("{count}", guild.member_count))
+        await channel.send(message.replace("{guild}", member.guild.name).replace("{name}", member.name).replace("{count}", member.guild.member_count))
     except Exception as e:
         print(e)
 
