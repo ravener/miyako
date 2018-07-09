@@ -90,14 +90,10 @@ async def on_guild_remove(guild):
     channel = bot.get_channel(454776806869041154)
     await channel.send(embed=em)
     await bot.change_presence(activity=discord.Game(f"lb.help | {len(bot.guilds)} servers!"))
-    collections = await bot.db.list_collection_names()
-    collections.remove("system.indexes")
-    for x in collections:
-        db = getattr(bot.db, x)
-        try:
-            await db.delete_one({ "_id": guild.id })
-        except Exception as e:
-            print(e)
+    try:
+        await bot.db.config.delete_one({ "_id": guild.id })
+    except Exception as e:
+        print(e)
 
 @bot.event
 async def on_command_error(ctx, error):
