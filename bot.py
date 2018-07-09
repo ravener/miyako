@@ -34,6 +34,7 @@ bot.cogs_list = sorted([ "cogs." + x.replace(".py", "") for x in os.listdir("cog
 bot.db = AsyncIOMotorClient(os.environ.get("MONGODB")).ladybug
 bot.remove_command("help")
 
+
 @bot.event
 async def on_message(message):
     if message.author.bot:
@@ -43,6 +44,7 @@ async def on_message(message):
     if not ctx.command:
         return
     await bot.invoke(ctx)
+
 
 @bot.event
 async def on_ready():
@@ -62,6 +64,42 @@ async def on_ready():
 
 
 @bot.event
+async def on_member_join(member):
+    welcome = await bot.db.config.find_one({ "_id": member.guild.id })
+    if not welcome:
+        return
+    channel_id = welcome.get("welcome_channel", None)
+    message = welcome.get("welcome_message", None)
+    if not channel_id or not message:
+        return
+    channel = bot.get_channel(channel_id)
+    if not channel:
+        return
+    try:
+        await channel.send(message.replace("{user}", member.mention).replace("{guild}", member.guild.name).replace("{name}", member.name).replace("{count}", guild.member_count))
+    except Exception as e:
+        print(e)
+
+
+@bot.event
+async def on_member_remove(member):
+    leave = await bot.db.config.find_one({ "_id": member.guild.id })
+    if not leave:
+        return
+    channel_id = leave.get("leave_channel", None)
+    message = leave.get("leave_message", None)
+    if not channel_id or not message:
+        return
+    channel = bot.get_channel(channel_id)
+    if not channel:
+        return
+    try:
+        await channel.send(message.replace("{guild}", member.guild.name).replace("{name}", member.name).replace("{count}", guild.member_count))
+    except Exception as e:
+        print(e)
+
+
+@bot.event
 async def on_guild_join(guild):
     em = discord.Embed()
     em.color = 0x00ff00
@@ -75,6 +113,7 @@ async def on_guild_join(guild):
     channel = bot.get_channel(454776806869041154)
     await channel.send(embed=em)
     await bot.change_presence(activity=discord.Game(f"lb.help | {len(bot.guilds)} servers!"))
+
 
 @bot.event
 async def on_guild_remove(guild):
@@ -94,6 +133,7 @@ async def on_guild_remove(guild):
         await bot.db.config.delete_one({ "_id": guild.id })
     except Exception as e:
         print(e)
+
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -142,6 +182,7 @@ async def on_command_error(ctx, error):
     em.set_footer(text=f"User: {ctx.author}, Guild: {ctx.guild}")
     logs = bot.get_channel(454776836929617921)
     await logs.send(embed=em)
+
 
 @bot.event
 async def on_command(ctx):
