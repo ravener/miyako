@@ -44,7 +44,7 @@ class Config:
     @commands.command(aliases=["setleave", "leavemessages"])
     @commands.guild_only()
     @commands.has_permissions(manage_guild=True)
-    async def welcome(self, ctx, action: str = "on"):
+    async def leave(self, ctx, action: str = "on"):
         action = action.lower()
         if action not in ["on", "off"]:
             return await ctx.send("Invalid choice, Usage: `leave on/off`")
