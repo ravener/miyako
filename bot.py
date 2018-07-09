@@ -63,7 +63,6 @@ async def on_ready():
 
 @bot.event
 async def on_guild_join(guild):
-    print(f"Joined {guild.name} ({guild.id})")
     em = discord.Embed()
     em.color = 0x00ff00
     em.title = "Ladybug joined a new server!"
@@ -79,7 +78,6 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_guild_remove(guild):
-    print(f"Left {guild.name} ({guild.id})")
     em = discord.Embed()
     em.color = 0xff0000
     em.title = "Ladybug left a server."
