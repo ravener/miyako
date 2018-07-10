@@ -78,7 +78,8 @@ class Utils:
     @commands.command(aliases=["tr"])
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def translate(self, ctx, lang: str, *, text: str):
-        """Translate text to any language!"""
+        """Translate text to any language!
+        Not that atm the languages should be an aliase, i.e fr instead of french"""
         try:
             async with ctx.typing():
                 lang = lang.lower()
@@ -113,6 +114,7 @@ class Utils:
 
     @commands.command(aliases=["pfp", "av"])
     async def avatar(self, ctx, user: discord.Member = None):
+        """Get someone's profile picture with this"""
         if not user:
             user = ctx.author
         url = user.avatar_url.replace("1024", "2048").replace("webp", "png")
@@ -125,6 +127,7 @@ class Utils:
     @commands.command(aliases=["serverlogo"])
     @commands.guild_only()
     async def servericon(self, ctx):
+        """Returns the server icon"""
         if not ctx.guild.icon_url:
             return await ctx.send("There is no icon in this server.")
         em = discord.Embed()

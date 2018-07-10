@@ -105,6 +105,7 @@ class Owner:
     @commands.command(name="exec", aliases=["bash", "shell"])
     @commands.is_owner()
     async def _exec(self, ctx, *, code: str):
+        """Executes any command line code"""
         code = self.cleanup_code(code)
         res = await run_async(self.bot.loop, subprocess.run, code, shell=True, cwd=os.getcwd(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, kwargs=True)
         err = res.stderr.decode("utf-8")
@@ -201,6 +202,7 @@ class Owner:
     @commands.command(aliases=["src"])
     @commands.is_owner()
     async def source(self, ctx, command: str):
+        """Returns source code of any command"""
         cmd = self.bot.get_command(command)
         if not cmd:
             return await ctx.send(f"Command `{command}` not found.")

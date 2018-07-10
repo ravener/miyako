@@ -109,6 +109,7 @@ class General:
     @commands.command(aliases=["bugreport"])
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def bug(self, ctx, *, msg: str):
+        """Found a bug? report it with this"""
         if len(msg) > 1024:
             return await ctx.send("Message too long, please keep it below 1024 chars")
         channel = self.bot.get_channel(460800229667504148)
