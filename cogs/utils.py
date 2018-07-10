@@ -121,7 +121,17 @@ class Utils:
         em.set_author(name=str(user), icon_url=url)
         em.set_image(url=url)
         await ctx.send(embed=em)
-       
+
+    @commands.command(aliases=["serverlogo"])
+    @commands.guild_only()
+    async def servericon(self, ctx):
+        if not ctx.guild.icon_url:
+            return await ctx.send("There is no icon in this server.")
+        em = discord.Embed()
+        em.title = f"{ctx.guild.name}'s icon"
+        em.set_image(url=ctx.guild.icon_url_as(format="png", size=1024).replace("1024", "2048"))
+        em.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=em)
          
 def setup(bot):
     bot.add_cog(Utils(bot))   

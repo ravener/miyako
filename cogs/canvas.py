@@ -20,21 +20,16 @@ class Canvas:
         """TRI GGE RED"""
         if not user:
             user = ctx.author
-        try:
+        async with ctx.typing():
             await ctx.send(file=discord.File(await self.client.triggered(self.av(user)), "triggered.gif"))
-        except Exception as e:
-            await ctx.send(f"Something went wrong, please try again later.```{e}```")
-            print(e)
 
     @commands.command()
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def blame(self, ctx, *, text: str):
         if len(ctx.message.mentions) >= 1:
             text = ctx.message.mentions[0].display_name
-        try:
+        async with ctx.typing():
             await ctx.send(file=discord.File(await self.client.blame(text), "blame.png"))
-        except Exception as e:
-            await ctx.send("Something went wrong, please try again later.")
-            raise e
 
 def setup(bot):
     bot.add_cog(Canvas(bot))
