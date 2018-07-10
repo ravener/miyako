@@ -25,6 +25,7 @@ class Config:
     @commands.guild_only()
     @commands.has_permissions(manage_guild=True)
     async def welcome(self, ctx, action: str = "on"):
+        """Turns on/off the welcome messages for this server"""
         action = action.lower()
         if action not in ["on", "off"]:
             return await ctx.send("Invalid choice, Usage: `welcome on/off`")
@@ -45,6 +46,7 @@ class Config:
     @commands.guild_only()
     @commands.has_permissions(manage_guild=True)
     async def leave(self, ctx, action: str = "on"):
+        """Turns on/off the leave messages for this server"""
         action = action.lower()
         if action not in ["on", "off"]:
             return await ctx.send("Invalid choice, Usage: `leave on/off`")

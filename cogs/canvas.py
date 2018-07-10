@@ -26,6 +26,7 @@ class Canvas:
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def blame(self, ctx, *, text: str):
+        """Blame something or someone"""
         if len(ctx.message.mentions) >= 1:
             text = ctx.message.mentions[0].display_name
         async with ctx.typing():
