@@ -65,6 +65,8 @@ async def on_ready():
 
 @bot.event
 async def on_raw_reaction_add(payload):
+    if payload.user_id == bot.user.id:
+        return
     channel = bot.get_channel(payload.channel_id)
     if not channel:
         return
