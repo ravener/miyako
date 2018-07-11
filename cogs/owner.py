@@ -227,7 +227,7 @@ class Owner:
         }
 
         if ctx.channel.id in self.sessions:
-            await ctx.send('Already running a REPL session in this channel. Exit it with `quit`.')
+            await ctx.send("Already running a REPL session in this channel. Exit it with `quit`.")
             return
 
         self.sessions.add(ctx.channel.id)
@@ -292,7 +292,10 @@ class Owner:
 
             try:
                 if fmt is not None:
-                    await ctx.paginate(fmt)
+                    if len(fmt) > 2000:
+                        await ctx.send("Output too long.")
+                    else:
+                        await ctx.send(fmt)
             except discord.Forbidden:
                 pass
             except discord.HTTPException as e:
