@@ -16,7 +16,7 @@ class Owner:
     """Core class for owner commands"""
     def __init__(self, bot):
         self.bot = bot
-        self.session = set()
+        self.sessions = set()
         
     def cleanup_code(self, content):
         '''Automatically removes code blocks from the code.'''
