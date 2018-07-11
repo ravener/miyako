@@ -118,7 +118,8 @@ class General:
         em.description = msg
         em.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
         em.set_footer(text=ctx.author.id)
-        await channel.send(embed=em)
+        msg = await channel.send(embed=em)
+        await msg.add_reaction(self.bot.get_emoji(466669201025925120))
         await ctx.send("Your bug has been reported successfully.")
 
 def setup(bot):

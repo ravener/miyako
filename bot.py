@@ -64,6 +64,37 @@ async def on_ready():
 
 
 @bot.event
+async def on_raw_reaction_add(payload):
+    channel = bot.get_channel(payload.channel_id)
+    if not channel:
+        return
+    if channel.id != 460800229667504148:
+        return
+    emoji = payload.emoji
+    if emoji.is_custom_emoji():
+        emoji = emoji.id
+    if emoji != 466669201025925120:
+        return
+    msg = await channel.get_message(payload.message_id)
+    if not msg:
+        return
+    user = bot.get_user(int(msg.embeds[0].footer.text))
+    if not user:
+        return
+    try:
+        me = bot.get_user(292690616285134850)
+        em = discord.Embed(color=0xff0000)
+        em.set_author(name=str(me), icon_url=me.avatar_url)
+        em.title = "Invalid Report"
+        em.description = f"Your bug report ```\n{msg.embeds[0].description}\n```has been marked invalid, please be more specific next time."
+        await user.send(embed=em)
+    except:
+        pass
+    await msg.delete()
+    
+   
+
+@bot.event
 async def on_member_join(member):
     welcome = await bot.db.config.find_one({ "_id": member.guild.id })
     if not welcome:
