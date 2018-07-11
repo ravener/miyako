@@ -71,7 +71,7 @@ class General:
             em.description = cmd.__doc__ + "\n\n`" if cmd.__doc__ else "No Description\n\n`" 
             em.set_footer(text=f"{prefix}help <cmd> for more info on a command.")
             for x in cmds:
-                msg = f"{ctx.prefix}{x.signature} {x.short_doc}\n"
+                msg = f"{prefix}{x.signature} {x.short_doc}\n"
                 em.description += msg
             em.description += "`"
             return await ctx.send(embed=em)
@@ -110,6 +110,8 @@ class General:
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def bug(self, ctx, *, msg: str):
         """Found a bug? report it with this"""
+        if len(msg) < 5:
+            return await ctx.send("Too short, please be more detailed.")
         if len(msg) > 1024:
             return await ctx.send("Message too long, please keep it below 1024 chars")
         channel = self.bot.get_channel(460800229667504148)
