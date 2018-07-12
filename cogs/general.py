@@ -21,7 +21,9 @@ class General:
     @commands.command()
     async def ping(self, ctx):
         """Checks if bot is working and measures websocket latency"""
-        await ctx.send(f"Pong! WebSocket Latency: **{self.bot.latency * 1000:.4f} ms**")
+         embed = discord.Embed(color=0x00ff00)
+         embed.description =(f"Pong! WebSocket Latency: **{self.bot.latency * 1000:.4f} ms**")
+        await ctx.send(embed=embed)
 
     @commands.command()
     async def invite(self, ctx):
