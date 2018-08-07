@@ -1,0 +1,26 @@
+[
+  {
+    "message": "@Ladybug help | {guilds} servers!",
+    "type": "PLAYING"
+  },
+  {
+    "message": "Tikki, Spots on!",
+    "type": "PLAYING"
+  },
+  {
+    "message": "Chat Noir",
+    "type": "LISTENING"
+  },
+  {
+    "message": "Thinking about Adrien",
+    "type": "PLAYING"
+  },
+  {
+    "message": "Miraculous Ladybug",
+    "type": "WATCHING"
+  },
+  {
+    "message": "with {users} users",
+    "type": "PLAYING"
+  }
+]

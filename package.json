@@ -1,0 +1,37 @@
+{
+  "name": "ladybug-bot",
+  "version": "1.0.0",
+  "description": "A simple discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint .",
+    "fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freetnt5852/LadyBug-Bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "api",
+    "discordapp",
+    "discord.js",
+    "klasa"
+  ],
+  "author": "Free TNT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freetnt5852/LadyBug-Bot/issues"
+  },
+  "homepage": "https://github.com/freetnt5852/LadyBug-Bot#readme",
+  "dependencies": {
+    "discordjs": "discordjs/discord.js",
+    "klasa": "github:dirigeants/klasa",
+    "superagent": "^3.8.3",
+    "cheerio": "^1.0.0-rc.2",
+    "mongodb": "^3.1.1",
+    "idiotic-api": "^0.2.11",
+    "figlet": "^1.2.0"
+  }
+}
