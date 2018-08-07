@@ -23,10 +23,10 @@ class Help extends Command {
         .setColor(0xff0000)
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
         .setDescription([
-          `**${util.isFunction(command.description) ? command.description(msg) : command.description}**`, 
+          `**${util.isFunction(command.description) ? command.description(msg.language) : command.description}**`, 
           msg.language.get("COMMAND_HELP_USAGE", command.usage.fullUsage(msg)),
           msg.language.get("COMMAND_HELP_EXTENDED"),
-          `\`${util.isFunction(command.extendedHelp) ? command.extendedHelp(msg) : command.extendedHelp}\``
+          `\`${util.isFunction(command.extendedHelp) ? command.extendedHelp(msg.language) : command.extendedHelp}\``
         ].join("\n"));
       return msg.send({ embed });
     }
@@ -62,7 +62,7 @@ class Help extends Command {
         .then(() => {
           if (!help.hasOwnProperty(command.category)) help[command.category] = {};
           if (!help[command.category].hasOwnProperty(command.subCategory)) help[command.category][command.subCategory] = [];
-          const description = typeof command.description === "function" ? command.description(message) : command.description;
+          const description = typeof command.description === "function" ? command.description(message.language) : command.description;
           help[command.category][command.subCategory].push(`${message.guildConfigs.prefix}${command.name.padEnd(longest)} ${description}`);
         })
         .catch(() => {
