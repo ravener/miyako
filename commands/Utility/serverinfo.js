@@ -35,7 +35,7 @@ class ServerInfo extends Command {
       .setThumbnail(msg.guild.iconURL())
       .addField("❯ Name", msg.guild.name, true)
       .addField("❯ ID", msg.guild.id, true)
-      .addField("❯ Creation Date", `${this.timestamp.display(msg.guild.createdAt)} (${days} ago!)`, true)
+      .addField("❯ Creation Date", `${this.timestamp.display(msg.guild.createdAt)} (${days} days ago!)`, true)
       .addField("❯ Region", msg.guild.region, true)
       .addField("❯ Explicit Filter", this.filterLevels[msg.guild.explicitContentFilter], true)
       .addField("❯ Verification Level", this.verificationLevels[msg.guild.verificationLevel], true)
