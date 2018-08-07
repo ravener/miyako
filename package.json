@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/freetnt5852/LadyBug-Bot#readme",
   "dependencies": {
-    "discordjs": "discordjs/discord.js",
+    "discord.js": "discordjs/discord.js",
     "klasa": "github:dirigeants/klasa",
     "superagent": "^3.8.3",
     "cheerio": "^1.0.0-rc.2",
