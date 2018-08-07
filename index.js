@@ -9,7 +9,7 @@ class LadybugClient extends Client {
     super({
       fetchAllMembers: false,
       permissionLevels: perms,
-      prefix: "lb!",
+      prefix: "lb.",
       regexPrefix: /(hey\s*)?ladybug,?\s*/i,
       providers: { default: "mongodb", mongodb: { url: process.env.MONGODB, db: "ladybug", options: { useNewUrlParser: true } } },
       commandEditing: true,
