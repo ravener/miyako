@@ -5,10 +5,11 @@ class CoinFlip extends Command {
     super(...args, {
       aliases: ["coin"],
       description: "Flips one or more coins",
-      usage: "(coins:coins{,1000})"
+      usage: "(coins:coins)"
     });
     
     this.createCustomResolver("coins", (arg, possible, message) => {
+      possible.max = 1000;
       if(!arg) return undefined;
       return this.client.arguments.get("integer").run(arg, possible, message);
     });
