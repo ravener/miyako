@@ -11,10 +11,10 @@ class UserInfo extends Command {
     });
     
     this.statuses = {
-      online: "💚 Online",
-      idle: "💛 Idle",
-      dnd: "❤ Do Not Disturb",
-      offline: "💔 Offline"
+      online: "<:online:473263910045351957> Online",
+      idle: "<:idle:473264190346493964> Idle",
+      dnd: "<:dnd:473264076852559873> Do Not Disturb",
+      offline: "Offline"
     };
     this.timestamp = new Timestamp("d MMMM YYYY");
   }
