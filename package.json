@@ -12,7 +12,7 @@
     "url": "git+https://github.com/freetnt5852/LadyBug-Bot.git"
   },
   "engines": {
-    "node": "10.1.0"
+    "node": "10.8.0"
   },
   "keywords": [
     "discord",
