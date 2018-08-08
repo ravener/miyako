@@ -34,6 +34,7 @@ class Tag extends Command {
   
   async create(msg, [name, ...content]) {
     if(!name) throw "Name is a required argument.";
+    if(["new", "list", "all", "create", "info", "remove", "delete"].includes(name)) throw "That is a reserved name!";
     if(!content.length) throw "Content is a required argument";
     if(msg.guild.configs.tags.find((x) => x.name === name)) throw "A tag with that name already exists.";
     const obj = { user: msg.author.id, date: Date.now(), content: content.join(" "), name, uses: 0 };
