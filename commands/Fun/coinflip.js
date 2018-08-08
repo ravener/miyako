@@ -5,7 +5,7 @@ class CoinFlip extends Command {
     super(...args, {
       aliases: ["coin"],
       description: "Flips one or more coins",
-      usage: "[coins:int]"
+      usage: "[coins:int{,1000}]"
     });
   }
   
