@@ -11,8 +11,11 @@ class Discrim extends Command {
     
     this.createCustomResolver("discrim", (arg, possible, msg) => {
       if(!arg) return undefined;
-      possible.max = 9999; 
-      return String(this.client.arguments.get("integer").run(arg, possible, msg));
+      possible.max = 9999;
+      // For validation
+      this.client.arguments.get("integer").run(arg, possible, msg);
+      // Don't use results of arg as numbers like 0001 won't give expected results.
+      return arg;
     });
   }
   
