@@ -10,7 +10,7 @@ class Discrim extends Command {
     });
     
     this.createCustomResolver("discrim", (arg, possible, msg) => {
-      if(arg) return undefined;
+      if(!arg) return undefined;
       possible.max = 9999; 
       return String(this.client.arguments.get("integer").run(arg, possible, msg));
     });
