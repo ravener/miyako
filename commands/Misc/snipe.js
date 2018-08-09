@@ -17,6 +17,7 @@ class Snipe extends Command {
       .setDescription(channel.snipe.content)
       .setAuthor(channel.snipe.author.tag, channel.snipe.author.displayAvatarURL())
       .setFooter(`Sent by ${channel.snipe.author.tag}`)
+      .setTimestamp(channel.snipe.createdAt)
       .setColor(0xff0000);
     return msg.send({ embed });
   }

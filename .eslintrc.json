@@ -16,6 +16,11 @@
               "SwitchCase": 1
             }
         ],
+        "no-var": "warn",
+        "object-curly-spacing": ["error", "always", {
+          "arraysInObjects": true,
+          "objectsInObjects": true
+        }],
         "no-var": "error",
         "camelcase": "error",
         "linebreak-style": [
