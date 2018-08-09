@@ -21,6 +21,7 @@ class GuildCreate extends Event {
     }
     
     channel.send({ embed });
+    this.client.setActivity(`@Ladybug help | ${this.client.guilds.size} servers!`);
   }
 }
 

@@ -17,6 +17,7 @@ class GuildDelete extends Event {
       .addField("Member Count", guild.memberCount)
       .setFooter(guild.id);
     channel.send({ embed });
+    this.client.setActivity(`@Ladybug help | ${this.client.guilds.size} servers!`);
   }
 }
 

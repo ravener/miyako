@@ -12,6 +12,7 @@ class Blame extends Command {
   }
   
   async run(msg, [text = msg.member.displayName]) {
+    if(typeof text !== "string" && text.displayName) text = text.displayName;
     return await msg.send(new MessageAttachment(await this.client.idioticapi.blame(text), "blame.png"));
   }
 }

@@ -20,7 +20,7 @@ class LadybugClient extends Client {
       typing: true,
       ownerID: "292690616285134850",
       readyMessage: (client) => `Successfully initialized. Logged in as ${client.user.tag} (${client.user.id}), Ready to serve ${client.users.size} users in ${client.guilds.size} guilds with ${client.channels.size} channels!`,
-      commandLogging: true
+      prefixCaseInsensitive: true
     });
     this.commandsRan = 0;
     this.idioticapi = new IdioticAPI.Client(process.env.IDIOTICAPI, { dev: true });
