@@ -27,7 +27,7 @@ class Tag extends Command {
     if(!key) throw "Tag name is required.";
     const tag = msg.guild.configs.tags.find((x) => x.name === key);
     if(!tag) throw "That tag doesn't exist.";
-    if(tag.user !== msg.author.id && !await msg.hasAtleastPermissionLevel(6)) throw "You cannot delete that tag.";
+    if(tag.user !== msg.author.id && !await msg.hasAtLeastPermissionLevel(6)) throw "You cannot delete that tag.";
     await msg.guild.configs.update("tags", tag, { action: "remove" });
     return msg.send(`Successfully deleted the tag with the name **${tag.name}**`);
   }
