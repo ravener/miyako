@@ -22,3 +22,5 @@ class Quote extends Command {
     return msg.send({ embed });
   }
 }
+
+module.exports = Quote;
