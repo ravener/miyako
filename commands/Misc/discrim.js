@@ -33,7 +33,7 @@ class Discrim extends Command {
       display.addPage((em) => em.setDescription(curr.map((x) => `• **${x.tag}**`)));
     } 
     
-    return display.run(await msg.send("Loading..."));
+    return display.run(await msg.send("Loading..."), { filter: (reaction, user) => user.id === msg.author.id });
   }
 }
 
