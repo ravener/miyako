@@ -18,7 +18,8 @@ class Quote extends Command {
       .setDescription(message.content)
       .setTimestamp(message.createdAt)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
-      .setThumbnail(message.author.displayAvatarURL());
+      .setThumbnail(message.author.displayAvatarURL())
+      .setColor(0xff0000);
     return msg.send({ embed });
   }
 }
