@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { MessageAttachment } = require("discord.js");
 
 class Blame extends Command {
   constructor(...args) {
@@ -11,7 +12,7 @@ class Blame extends Command {
   }
   
   async run(msg, [text = msg.member.displayName]) {
-    return await msg.sendFile(await this.client.idioticapi.blame(text));
+    return await msg.send(new MessageAttachment(await this.client.idioticapi.blame(text), "blame.png"));
   }
 }
 

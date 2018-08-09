@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { MessageAttachment } = require("discord.js");
 
 class Triggered extends Command {
   constructor(...args) {
@@ -10,7 +11,7 @@ class Triggered extends Command {
   }
   
   async run(msg, [user = msg.author]) {
-    await msg.sendFile(await this.client.idioticapi.triggered(user.displayAvatarURL({ size: 2048, format: "png" })));
+    await msg.send(new MessageAttachment(await this.client.idioticapi.triggered(user.displayAvatarURL({ size: 2048, format: "png" })), "triggered.gif"));
   }
 }
 
