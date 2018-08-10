@@ -24,10 +24,9 @@ class Modlogs extends Event {
         channel.send(this.embed(`👋 ${data.member.user.tag} Joined\nUser ID: ${data.member.id}\n\n**Member Count**: ${data.member.guild.memberCount}`, "#8089DE", { title: "Member Joined", user: data.member.user, thumbnail: "user" }));
         break;
       case "memberLeave":
-        channel.send(this.embed(`👋 {data.member.user.tag} Left\n**User ID:** ${data.member.id}`, 0xff0000, { user: data.member.user, thumbnail: "user", title: "Member Left" }));
+        channel.send(this.embed(`👋 ${data.member.user.tag} Left\n**User ID:** ${data.member.id}`, 0xff0000, { user: data.member.user, thumbnail: "user", title: "Member Left" }));
         break;
       case "messageUpdate":
-        if(data.old.content === data.message.content) break;
         channel.send(this.embed(`📝 Message by ${data.message.member} edited in ${data.message.channel}\n\n**Content Before:** ${data.old.content}\n\n**Content Now:** ${data.message.content}`, "#8089DE", { title: "Message Edited", user: data.message.author }));
         break;
       case "kick":

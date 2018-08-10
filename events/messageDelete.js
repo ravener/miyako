@@ -6,10 +6,10 @@ class MessageDelete extends Event {
     if(message.channel.type === "text") message.channel.snipe = message;
     let image = null;
     if(message.attachments.size) {
-      const attach = message.attachments.filter((x) => /(jpg|jpeg|png|gif|webp)/ig.test(x.url));
+      const attach = message.attachments.filter((x) => x.width && x.height && x.url);
       if(attach.size) image = attach.first().url;
     }
-    if(!image && message.embeds.size) {
+    if(!image && message.embeds.length) {
       const images = message.embeds.filter((em) => em.image && em.image.url);
       if(images.size) image = images.first().image.url;
     }
