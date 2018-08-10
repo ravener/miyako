@@ -11,7 +11,7 @@ class MessageDelete extends Event {
     }
     if(!image && message.embeds.length) {
       const images = message.embeds.filter((em) => em.image && em.image.url);
-      if(images.size) image = images.first().image.url;
+      if(images.size) image = images[0].image.url;
     }
     
     const match = /(?:https?)?(discord\.gg|discord\.me|discord\.io|discordapp\.com\/invite)\/(\S+)/i.test(message.content);
