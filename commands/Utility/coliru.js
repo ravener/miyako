@@ -12,8 +12,8 @@ class Coliru extends Command {
     });
     
     this.commands = {
-      cpp: "g++ main.cpp -Wall -Wextra && ./a.out",
-      c: "mv main.cpp main.c && gcc main.c -Wall -Wextra && ./a.out",
+      cpp: "g++ main.cpp -pthread -pedantic -Wall -Wextra && ./a.out",
+      c: "mv main.cpp main.c && gcc main.c -pedantic -02 -pthread -Wall -Wextra && ./a.out",
       ruby: "ruby main.cpp",
       lua: "lua main.cpp",
       python: "python main.cpp",
