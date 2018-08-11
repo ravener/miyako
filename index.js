@@ -11,7 +11,7 @@ class LadybugClient extends Client {
       permissionLevels: perms,
       prefix: "lb.",
       regexPrefix: /(hey\s*)?ladybug,?\s*/i,
-      providers: { default: "mongodb", mongodb: { url: process.env.MONGODB, db: "ladybug", options: { useNewUrlParser: true } } },
+      providers: { default: "mongodb", mongodb: { url: this.config.mongodb, db: "ladybug", options: { useNewUrlParser: true } } },
       commandEditing: true,
       pieceDefaults: {
         commands: { deletable: true },
@@ -22,15 +22,16 @@ class LadybugClient extends Client {
       readyMessage: (client) => `Successfully initialized. Logged in as ${client.user.tag} (${client.user.id}), Ready to serve ${client.users.size} users in ${client.guilds.size} guilds with ${client.channels.size} channels!`,
       prefixCaseInsensitive: true
     });
+    this.config = require("./config.json");
     this.commandsRan = 0;
-    this.idioticapi = new IdioticAPI.Client(process.env.IDIOTICAPI, { dev: true });
+    this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
     this.registerStore(this.rawEvents);
     this.constants = Constants;
   }
   
   login() {
-    return super.login(process.env.TOKEN);
+    return super.login(this.config.token);
   }
 }
 

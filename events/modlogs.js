@@ -36,7 +36,7 @@ class Modlogs extends Event {
         channel.send(this.embed(`🔨 ${data.user.tag} got **banned**`, 0xff0000, { title: "Member Banned", user: data.user, thumbnail: "user" }));
         break;
       case "unban":
-        channel.send(this.embed(`✌ ${data.user.tag} got **unbanned**`, "#8089DE", { user: data.user, title: "Member Unbanned", thumbnail: "user" }));
+        channel.send(this.embed(`✌ ${data.user.tag} got **unbanned**\n**User ID:** ${data.user.id}`, "#8089DE", { user: data.user, title: "Member Unbanned", thumbnail: "user" }));
         break;
       case "invite":
         channel.send(this.embed(`❕ Invite link posted in ${data.message.channel} by ${data.message.author}\n\n**Invite Information**\n**URL:** https://${data.link.base}/${data.link.code}${data.link.data && data.link.data.guild ? `\n**Server:** ${data.link.data.guild.name}\n**Server ID:** ${data.link.data.guild.id}` : ""}${data.link.data ? `\n**Channel:** ${data.link.data.channel.name}\n**Channel ID:** ${data.link.data.channel.id}` : ""}${data.link.data && data.link.data.inviter ? `\n**Inviter:** ${data.link.data.inviter.tag}\n**Inviter ID:** ${data.link.data.inviter.id}` : ""}`, "#8089DE", { title: "Invite Posted.", user: data.message.author, thumbnail: data.link.data && data.link.data.guild ? data.link.data.guild.iconURL() : null }));

@@ -1,0 +1,5 @@
+{
+  "token": "https://discordapp.com/developers",
+  "idioticapi": "https://api.anidiots.guide",
+  "mongodb": "mongodb://localhost"
+}
