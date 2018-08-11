@@ -63,7 +63,7 @@ class Help extends Command {
           if (!help.hasOwnProperty(command.category)) help[command.category] = {};
           if (!help[command.category].hasOwnProperty(command.subCategory)) help[command.category][command.subCategory] = [];
           const description = typeof command.description === "function" ? command.description(message.language) : command.description;
-          help[command.category][command.subCategory].push(`${message.guildConfigs.prefix}${command.name.padEnd(longest)} ${description}`);
+          help[command.category][command.subCategory].push(`${message.guildSettings.prefix}${command.name.padEnd(longest)} ${description}`);
         })
         .catch(() => {
           // noop
