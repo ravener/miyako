@@ -15,13 +15,13 @@ class Prefix extends Command {
   async run(msg, [prefix]) {
     if(prefix === "reset") return this.reset(msg);
     if(prefix.length > 10) throw "Prefix should not be longer than 10 characters.";
-    if(prefix === msg.guild.configs.prefix) throw "That is already the current prefix!";
-    await msg.guild.configs.update("prefix", prefix);
+    if(prefix === msg.guild.settings.prefix) throw "That is already the current prefix!";
+    await msg.guild.settings.update("prefix", prefix);
     return msg.send(`Successfully updated prefix to: \`${escapeMarkdown(prefix, true)}\``);
   }
   
   async reset(msg) {
-    await msg.guild.configs.update("prefix", this.client.options.prefix);
+    await msg.guild.settings.update("prefix", this.client.options.prefix);
     return msg.send(`Reset the prefix for this server to \`${this.client.options.prefix}\``);
   }
 }

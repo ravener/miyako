@@ -7,12 +7,12 @@ class GuildMemberRemove extends Event {
     this.client.emit("modlogs", member.guild, "memberLeave", { member, name: "leave" });
     
     const guild = member.guild;
-    if(!guild.configs.leave.enabled || !guild.configs.leave.message || !guild.configs.leave.channel) return;
+    if(!guild.settings.leave.enabled || !guild.settings.leave.message || !guild.settings.leave.channel) return;
     
-    const channel = guild.configs.welcome.channel;
+    const channel = guild.channels.get(guild.settings.welcome.channel);
     if(!channel || !channel.postable) return;
     
-    const msg = guild.configs.welcome.message
+    const msg = guild.settings.welcome.message
       .replace(/{guild}/ig, guild.name)
       .replace(/{server}/ig, guild.name)
       .replace(/{name}/ig, member.displayName)

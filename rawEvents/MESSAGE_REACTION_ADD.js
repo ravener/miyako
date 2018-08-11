@@ -12,15 +12,14 @@ class MessageReactionAdd extends RawEvent {
     if(!channel || channel.id !== "460800229667504148") return;
     if(data.emoji.id !== "466669201025925120") return;
     const msg = await channel.messages.fetch(data.message_id).catch(() => null);
-    if(!msg || !msg.embeds.size) return;
-    const user = this.client.users.get(msg.embeds.first().footer.text);
+    if(!msg || !msg.embeds.length) return;
+    const user = this.client.users.get(msg.embeds[0].footer.text);
     if(!user) return;
-    const me = this.client.users.get("292690616285134850");
     const embed = new MessageEmbed()
-      .setAuthor(me.tag, me.avatarURL())
+      .setAuthor(this.client.owner.tag, this.client.owner.displayAvatarURL())
       .setTitle("Invalid Report")
       .setColor(0xff0000)
-      .setDescription(`Your bug report ${codeBlock("", escapeMarkdown(msg.embeds.first().description, true))}has been marked invalid, please be more specific next time.`);
+      .setDescription(`Your bug report ${codeBlock("", escapeMarkdown(msg.embeds[0].description, true))}has been marked invalid, please be more specific next time.`);
     await user.send({ embed }).catch(() => null);
     await msg.delete();
   }

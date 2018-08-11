@@ -14,8 +14,8 @@ class News extends Command {
   }
   
   async run(msg) {
-    const news = this.client.configs.psa.message;
-    const date = new Date(this.client.configs.psa.date);
+    const news = this.client.settings.psa.message;
+    const date = new Date(this.client.settings.psa.date);
     if(!news || !date) throw "There is no any news at this time, check back later.";
     const embed = new MessageEmbed()
       .setTitle("Bot Announcements")

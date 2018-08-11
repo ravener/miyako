@@ -11,7 +11,7 @@ class Invite extends Monitor {
   }
   
   async run(message) {
-    if(!message.guild || !message.guild.configs.modlogs.invites) return;
+    if(!message.guild || !message.guild.settings.modlogs.invites) return;
     const match = message.content.match(this.regex);
     if(!match) return;
     let data = null;

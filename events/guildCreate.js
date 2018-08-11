@@ -14,7 +14,7 @@ class GuildCreate extends Event {
       .addField("Owner", guild.owner.user.tag)
       .addField("Member Count", guild.memberCount)
       .setFooter(guild.id);
-    if (this.client.configs.guildBlacklist.includes(guild.id)) {
+    if (this.client.settings.guildBlacklist.includes(guild.id)) {
       embed.setFooter(guild.id + " | Blacklisted");
       guild.leave();
       this.client.emit("warn", `Blacklisted guild detected: ${guild.name} [${guild.id}]`);

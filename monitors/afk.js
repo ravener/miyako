@@ -11,9 +11,9 @@ class AFK extends Monitor {
   run(message) {
     if(!message.guild) return;
     if(message.mentions.users.size) {
-      const afks = message.mentions.users.filter((x) => x.configs.afk.status && x.configs.afk.message && x.id !== message.author.id);
+      const afks = message.mentions.users.filter((x) => x.settings.afk.status && x.settings.afk.message && x.id !== message.author.id);
       if(!afks.size) return;
-      return message.send(afks.map((x) => `**${x.username}** is AFK, message: \`${escapeMarkdown(x.configs.afk.message, true)}\`\n`));
+      return message.send(afks.map((x) => `**${x.username}** is AFK, message: \`${escapeMarkdown(x.settings.afk.message, true)}\`\n`));
     } 
   }
   

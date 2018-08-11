@@ -11,7 +11,7 @@ class AntiLink extends Monitor {
   }
   
   async run(message) {
-    if(!message.guild || !message.guild.configs.automod.invites) return;
+    if(!message.guild || !message.guild.settings.automod.invites) return;
     if(await message.hasAtLeastPermissionLevel(5)) return;
     const match = message.content.match(this.regex);
     if(!match) return;

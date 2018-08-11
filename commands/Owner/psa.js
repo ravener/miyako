@@ -12,10 +12,10 @@ class PSA extends Command {
   
   async run(msg, [news]) {
     if(news === "clear") {
-      await this.client.configs.update(["psa.message", "psa.date"], [null, null]);
+      await this.client.settings.update(["psa.message", "psa.date"], [null, null]);
       return msg.send("Cleared psa.");
     }
-    await this.client.configs.update(["psa.message", "psa.date"], [news, Date.now()]);
+    await this.client.settings.update(["psa.message", "psa.date"], [news, Date.now()]);
     return msg.send("Successfully set announcement.");
   }
   

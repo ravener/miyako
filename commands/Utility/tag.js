@@ -25,26 +25,25 @@ class Tag extends Command {
   
   async remove(msg, key) {
     if(!key) throw "Tag name is required.";
-    const tag = msg.guild.configs.tags.find((x) => x.name === key);
+    const tag = msg.guild.settings.tags.find((x) => x.name === key);
     if(!tag) throw "That tag doesn't exist.";
-    if(tag.user !== msg.author.id && !await msg.hasAtLeastPermissionLevel(6)) throw "You cannot delete that tag.";
-    await msg.guild.configs.update("tags", tag, { action: "remove" });
+    if(tag.user !== msg.author.id && !await msg.hasAtleastPermissionLevel(6)) throw "You cannot delete that tag.";
+    await msg.guild.settings.update("tags", tag, { action: "remove" });
     return msg.send(`Successfully deleted the tag with the name **${tag.name}**`);
   }
   
   async create(msg, [name, ...content]) {
     if(!name) throw "Name is a required argument.";
-    if(["new", "list", "all", "create", "info", "remove", "delete"].includes(name)) throw "That is a reserved name!";
     if(!content.length) throw "Content is a required argument";
-    if(msg.guild.configs.tags.find((x) => x.name === name)) throw "A tag with that name already exists.";
+    if(msg.guild.settings.tags.find((x) => x.name === name)) throw "A tag with that name already exists.";
     const obj = { user: msg.author.id, date: Date.now(), content: content.join(" "), name, uses: 0 };
-    await msg.guild.configs.update("tags", obj, { action: "add" });
+    await msg.guild.settings.update("tags", obj, { action: "add" });
     return msg.send(`Created a new tag with the name **${name}**`);
   }
   
   async list(msg) {
     let counter = 1;
-    const tags = msg.guild.configs.tags.map((x) => `${counter++}. **${x.name}**`);
+    const tags = msg.guild.settings.tags.map((x) => `${counter++}. **${x.name}**`);
     if(!tags.length) throw "There is no tags yet.";
     const embed = new MessageEmbed()
       .setTitle("Tags List")
@@ -56,7 +55,7 @@ class Tag extends Command {
   
   async info(msg, key) {
     if(!key) throw "Tag name is required.";
-    const tag = msg.guild.configs.tags.find((x) => x.name === key);
+    const tag = msg.guild.settings.tags.find((x) => x.name === key);
     if(!tag) throw "That tag doesn't exist.";
     const user = msg.guild.members.get(tag.user);
     const embed = new MessageEmbed()
@@ -71,11 +70,11 @@ class Tag extends Command {
   }
   
   async get(msg, key) {
-    const tag = msg.guild.configs.tags.find((x) => x.name === key);
+    const tag = msg.guild.settings.tags.find((x) => x.name === key);
     if(!tag) throw "That tag doesn't exist.";
-    await msg.guild.configs.update("tags", tag, { action: "remove" });
+    await msg.guild.settings.update("tags", tag, { action: "remove" });
     tag.uses++;
-    await msg.guild.configs.update("tags", tag, { action: "add" });
+    await msg.guild.settings.update("tags", tag, { action: "add" });
     return msg.send(tag.content);
   }
   

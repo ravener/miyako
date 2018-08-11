@@ -16,30 +16,30 @@ class Modlogs extends Command {
   }
   
   async enableModlogs(msg, channel, reply = false, force = false) {
-    if(msg.guild.configs.modlogs.enabled && !force) throw "Modlogs is already enabled.";
+    if(msg.guild.settings.modlogs.enabled && !force) throw "Modlogs is already enabled.";
     
-    await msg.guild.configs.update(["modlogs.enabled", "modlogs.channel", ...this.actions.map((x) => `modlogs.${x}`)], [true, channel.id, ...this.actions.map((x) => msg.guild.configs.get(`modlogs.${x}`) || false)], msg.guild, { force: true });
-    if(reply) return msg.send(`Enabled modlogs in channel ${channel}, Note at beginning nothing will be logged, you have to enable which actions to log, to do that run \`${msg.guild.configs.prefix}modlogs enable <key>\` where key is one of \`${this.actions.join(", ")}\`, in addition you may use \`all\` to enable all actions, there is also a \`${msg.guild.configs.prefix}modlogs disable [key]\` to disable an action, if no action provided it disables modlogs, the same actions plus all is also available for disable, to change modlogs channel run \`${msg.guild.configs.prefix}modlogs channel #some-modlogs\`, lastly run \`${msg.guild.configs.prefix}conf show modlogs\` to see all actions that is enabled/disabled, you may change an action using conf command aswell but modlogs command is the recommended way.`);
+    await msg.guild.settings.update(["modlogs.enabled", "modlogs.channel", ...this.actions.map((x) => `modlogs.${x}`)], [true, channel.id, ...this.actions.map((x) => msg.guild.settings.get(`modlogs.${x}`) || false)], msg.guild, { force: true });
+    if(reply) return msg.send(`Enabled modlogs in channel ${channel}, Note at beginning nothing will be logged, you have to enable which actions to log, to do that run \`${msg.guild.settings.prefix}modlogs enable <key>\` where key is one of \`${this.actions.join(", ")}\`, in addition you may use \`all\` to enable all actions, there is also a \`${msg.guild.settings.prefix}modlogs disable [key]\` to disable an action, if no action provided it disables modlogs, the same actions plus all is also available for disable, to change modlogs channel run \`${msg.guild.settings.prefix}modlogs channel #some-modlogs\`, lastly run \`${msg.guild.settings.prefix}conf show modlogs\` to see all actions that is enabled/disabled, you may change an action using conf command aswell but modlogs command is the recommended way.`);
     return true;
   }
   
   async disableModlogs(msg, reply = false, force = false) {
-    if(!msg.guild.configs.modlogs.enabled && !force) throw "Modlogs is already disabled.";
-    await msg.guild.configs.update("modlogs.enabled", false, msg.guild);
-    if(reply) return msg.send(`Disabled modlogs, enable it again anytime with \`${msg.guild.configs.prefix}modlogs enable\``);
+    if(!msg.guild.settings.modlogs.enabled && !force) throw "Modlogs is already disabled.";
+    await msg.guild.settings.update("modlogs.enabled", false, msg.guild);
+    if(reply) return msg.send(`Disabled modlogs, enable it again anytime with \`${msg.guild.settings.prefix}modlogs enable\``);
     return true;
   }
   
   async enableKey(msg, key, reply = false, force = false) {
-    if(msg.guild.configs.get(`modlogs.${key}`) && !force) throw `The key \`modlogs.${key}\` logging is already enabled.`;
-    await msg.guild.configs.update(`modlogs.${key}`, true, msg.guild);
+    if(msg.guild.settings.get(`modlogs.${key}`) && !force) throw `The key \`modlogs.${key}\` logging is already enabled.`;
+    await msg.guild.settings.update(`modlogs.${key}`, true, msg.guild);
     if(reply) return msg.send(`Enabled \`modlogs.${key}\` logging.`);
     return true;
   }
   
   async disableKey(msg, key, reply = false, force = false) {
-    if(!msg.guild.configs.get(`modlogs.${key}`) && !force) throw `The key \`modlogs.${key}\` logging is already disabled.`;
-    await msg.guild.configs.update(`modlogs.${key}`, false, msg.guild);
+    if(!msg.guild.settings.get(`modlogs.${key}`) && !force) throw `The key \`modlogs.${key}\` logging is already disabled.`;
+    await msg.guild.settings.update(`modlogs.${key}`, false, msg.guild);
     if(reply) return msg.send(`Disabled \`modlogs.${key}\` logging.`);
     return true;
   }
@@ -57,9 +57,9 @@ class Modlogs extends Command {
     // enable key
     const key = args[0];
     if(key.toLowerCase() === "all") {
-      const toEnable = this.actions.filter((x) => !msg.guild.configs.get(`modlogs.${x}`));
+      const toEnable = this.actions.filter((x) => !msg.guild.settings.get(`modlogs.${x}`));
       if(!toEnable.length) return msg.send("All actions enabled already.");
-      await msg.guild.configs.update(["modlogs.enabled", "modlogs.channel", ...toEnable.map((x) => `modlogs.${x}`)], [msg.guild.configs.modlogs.enabled, msg.guild.configs.modlogs.channel, ...toEnable.map(() => true)], msg.guild, { force: true });
+      await msg.guild.settings.update(["modlogs.enabled", "modlogs.channel", ...toEnable.map((x) => `modlogs.${x}`)], [msg.guild.settings.modlogs.enabled, msg.guild.settings.modlogs.channel, ...toEnable.map(() => true)], msg.guild, { force: true });
       return msg.send("Enabled logging all actions.");
     }
     if(!this.actions.includes(key)) throw `Invalid option, modlog options can be one of \`${this.actions.join(", ")}, all\``;
@@ -73,9 +73,9 @@ class Modlogs extends Command {
     // disable a key
     const key = args[0];
     if(key.toLowerCase() === "all") {
-      const toDisable = this.actions.filter((x) => msg.guild.configs.get(`modlogs.${x}`));
+      const toDisable = this.actions.filter((x) => msg.guild.settings.get(`modlogs.${x}`));
       if(!toDisable.length) return msg.send("All actions disabled already.");
-      await msg.guild.configs.update(toDisable.map((x) => `modlogs.${x}`), toDisable.map(() => false), msg.guild);
+      await msg.guild.settings.update(toDisable.map((x) => `modlogs.${x}`), toDisable.map(() => false), msg.guild);
       return msg.send("Disabled logging all actions.");
     }
     if(!this.actions.includes(key)) throw `Invalid option, modlog options can be one of \`${this.actions.join(", ")}, all\``;

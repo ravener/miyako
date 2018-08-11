@@ -8,9 +8,9 @@ class Modlogs extends Event {
   }
   
   run(guild, type, data) {
-    if(!guild || !guild.configs.modlogs.enabled || !guild.configs.modlogs.channel || !guild.channels.get(guild.configs.modlogs.channel) || !guild.channels.get(guild.configs.modlogs.channel).postable || !guild.channels.get(guild.configs.modlogs.channel).embedable) return;
-    if(!guild.configs.get(`modlogs.${data.name}`)) return;
-    const channel = guild.channels.get(guild.configs.modlogs.channel);
+    if(!guild || !guild.settings.modlogs.enabled || !guild.settings.modlogs.channel || !guild.channels.get(guild.settings.modlogs.channel) || !guild.channels.get(guild.settings.modlogs.channel).postable || !guild.channels.get(guild.settings.modlogs.channel).embedable) return;
+    if(!guild.settings.get(`modlogs.${data.name}`)) return;
+    const channel = guild.channels.get(guild.settings.modlogs.channel);
     if(data.name === "messages" && data.message && data.message.author.id === this.client.user.id) return;
     
     switch(type) {

@@ -28,14 +28,14 @@ class Leave extends Command {
   }
   
   async enable(msg, channel, message, reply = false, force = false) {
-    if(msg.guild.configs.leave.enabled && !force) throw "Leave is already enabled!";
-    await msg.guild.configs.update(["leave.message", "leave.enabled", "leave.channel"], [message, true, channel.id], msg.guild);
+    if(msg.guild.settings.leave.enabled && !force) throw "Leave is already enabled!";
+    await msg.guild.settings.update(["leave.message", "leave.enabled", "leave.channel"], [message, true, channel.id], msg.guild);
     if(reply) return msg.send(`Enabled leave messages in ${channel}`);
   }
   
   async disable(msg, reply = false, force = false) {
-    if(!msg.guild.configs.leave.enabled && !force) throw "Leave is already disabled!";
-    await msg.guild.configs.update(["leave.message", "leave.enabled", "leave.channel"], [null, false, null], msg.guild);
+    if(!msg.guild.settings.leave.enabled && !force) throw "Leave is already disabled!";
+    await msg.guild.settings.update(["leave.message", "leave.enabled", "leave.channel"], [null, false, null], msg.guild);
     if(reply) return msg.send("Disabled leave messages.");
   }
 }
