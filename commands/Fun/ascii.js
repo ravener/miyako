@@ -4,7 +4,7 @@ const figlet = require("util").promisify(require("figlet"));
 class Ascii extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Creates an ascii art with text you provider",
+      description: "Creates an ascii art with text you provide",
       usage: "<text:string>",
       aliases: ["asciiart", "banner", "asciibanner"]
     });

@@ -6,8 +6,14 @@ class YearFact extends Command {
     super(...args, {
       description: "Get a fact about a year or random year",
       cooldown: 5,
-      usage: "(year:int)",
+      usage: "(year:year)",
       aliases: ["year", "year-fact"]
+    });
+
+    this.createCustomResolver("year", (arg, possible, msg) => {
+      if(!arg) return undefined;
+      if(year.toLowerCase() === "random") return "random";
+      return this.client.arguments.get("integer").run(arg, possible, msg);
     });
   }
   
