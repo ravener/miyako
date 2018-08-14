@@ -75,7 +75,7 @@ class Tag extends Command {
     await msg.guild.settings.update("tags", tag, { action: "remove" });
     tag.uses++;
     await msg.guild.settings.update("tags", tag, { action: "add" });
-    return msg.send(tag.content);
+    return msg.send(tag.content.replace(/@(everyone|here)/g, "@\u200b$1"));
   }
   
   async init() {

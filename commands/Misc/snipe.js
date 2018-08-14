@@ -11,7 +11,7 @@ class Snipe extends Command {
   }
   
   async run(msg, [channel = msg.channel]) {
-    if(!channel.snipe) throw "There is no any sniped message.";
+    if(!channel.snipe) throw `There isn't any sniped message in ${channel === msg.channel ? "this" : "that"} channel.`;
     const embed = new MessageEmbed()
       .setTitle("Message Sniped")
       .setDescription(channel.snipe.content)
