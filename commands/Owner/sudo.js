@@ -17,7 +17,7 @@ class Sudo extends Command {
     const msg = cloneObject(message);
     msg.author = member.user;
     Object.defineProperty(msg, "member", { value: member });
-    msg.content = `${message.guild.configs.prefix}${command.name} ${args.length ? args.join(" ") : ""}`;
+    msg.content = `${message.guild.settings.prefix}${command.name} ${args.length ? args.join(" ") : ""}`;
     this.client.emit("message", msg);
   }
 }
