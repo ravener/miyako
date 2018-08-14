@@ -26,7 +26,7 @@ class Help extends Command {
           `**${util.isFunction(command.description) ? command.description(msg.language) : command.description}**`, 
           msg.language.get("COMMAND_HELP_USAGE", command.usage.fullUsage(msg)),
           msg.language.get("COMMAND_HELP_EXTENDED"),
-          `\`${util.isFunction(command.extendedHelp) ? command.extendedHelp(msg.language) : command.extendedHelp}\``
+          `\`\`\`${util.isFunction(command.extendedHelp) ? command.extendedHelp(msg.language) : command.extendedHelp}\`\`\``
         ].join("\n"));
       return msg.send({ embed });
     }
