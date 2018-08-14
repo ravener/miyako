@@ -6,7 +6,7 @@ class Achievement extends Command {
     super(...args, {
       description: "Get an achievement!",
       cooldown: 5,
-      usage: "[user:username] <text:string>",
+      usage: "[user:username] <text:string> [...]",
       usageDelim: " "
     });
   }
