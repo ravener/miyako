@@ -12,7 +12,7 @@ class YearFact extends Command {
 
     this.createCustomResolver("year", (arg, possible, msg) => {
       if(!arg) return undefined;
-      if(year.toLowerCase() === "random") return "random";
+      if(arg.toLowerCase() === "random") return "random";
       return this.client.arguments.get("integer").run(arg, possible, msg);
     });
   }
