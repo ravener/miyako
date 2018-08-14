@@ -45,7 +45,7 @@ class Modlogs extends Event {
         channel.send(this.embed(`📩 **${data.messages.size}** messages purged in ${data.messages.first().channel}`, "#8089DE", { title: "Messages Purged" }));
         break;
       case "channelCreate":
-        channel.send(this.embed(`👌 **New channel created**\n\n:**Name:** ${data.channel.name} (${data.channel})\n**ID:** ${data.channel.id}`, "#8089DE", { title: "Channel Create" }));
+        channel.send(this.embed(`👌 **New channel created**\n\n**Name:** ${data.channel.name} (${data.channel})\n**ID:** ${data.channel.id}`, "#8089DE", { title: "Channel Create" }));
         break;
       case "channelDelete":
         channel.send(this.embed(`❌ **Channel Deleted**\n\n**Name:** ${data.channel.name}\n**ID:** ${data.channel.id}`, 0xff0000, { title: "Channel Delete" }));
