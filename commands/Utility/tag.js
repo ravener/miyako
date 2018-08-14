@@ -46,7 +46,7 @@ class Tag extends Command {
   async list(msg) {
     let counter = 1;
     const tags = msg.guild.settings.tags.map((x) => `${counter++}. **${x.name}**`);
-    if(!tags.length) throw "There is no tags yet.";
+    if(!tags.length) throw `There isn't any tags here yet, get started with \`${msg.guild.settings.prefix}tag create\``;
     const embed = new MessageEmbed()
       .setTitle("Tags List")
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
