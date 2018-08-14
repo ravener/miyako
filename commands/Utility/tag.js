@@ -36,6 +36,8 @@ class Tag extends Command {
     if(!name) throw "Name is a required argument.";
     if(!content.length) throw "Content is a required argument";
     if(msg.guild.settings.tags.find((x) => x.name === name)) throw "A tag with that name already exists.";
+    if(["delete", "create", "remove", "new", "list", "all", "info"].includes(name)) throw "That is a reserved name.";
+    if(this.client.commands.has(name) || this.client.commands.aliases.has(name)) throw "Tag names must not have a name of a command.";
     const obj = { user: msg.author.id, date: Date.now(), content: content.join(" "), name, uses: 0 };
     await msg.guild.settings.update("tags", obj, { action: "add" });
     return msg.send(`Created a new tag with the name **${name}**`);
