@@ -1,4 +1,4 @@
-const { Command, util: { exec, codeBlock } } = require("klasa");
+const { Command } = require("klasa");
 
 class Update extends Command {
   constructor(...args) {
@@ -10,12 +10,12 @@ class Update extends Command {
     });
   }
   
-  async run(message) {
-    const res = await exec("git pull", { cwd: process.cwd() });
-    const msg = [];
-    if(res.stdout) msg.push(`**Results**${codeBlock("prolog", res.stdout)}`);
-    if(res.stderr) msg.push(`**Error**${codeBlock("prolog", res.stderr)}`);
-    return message.send(msg.join("\n"));
+  async run(msg) {
+    this.client.commands.get("exec").run(msg, ["git pull"]).then(() => {
+      if("restart" in msg.flags || "reboot" in msg.flags) {
+        this.client.commands.get("reboot").run(msg);
+      }
+    });
   }
 }
 
