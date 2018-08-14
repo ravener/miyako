@@ -12,7 +12,9 @@ class Update extends Command {
   
   async run(msg) {
     this.client.commands.get("exec").run(msg, ["git pull"]).then(() => {
-      if("restart" in msg.flags || "reboot" in msg.flags) {
+      if("r" in  msg.flags || "reload" in msg.flags) {
+        this.client.commands.get("reload").run(msg, [msg.flags.r || msg.flags.reload]);
+      } else if("restart" in msg.flags || "reboot" in msg.flags) {
         this.client.commands.get("reboot").run(msg);
       }
     });
