@@ -20,9 +20,9 @@ class Lyrics extends Command {
       .then((res) => {
         if(!res.body.response.hits.length) throw "No results found with that query";
         return {
-          url: res.body.response.hits[0].results.url,
-          image: res.body.response.hits[0].results.song_art_image_thumbnail_url,
-          title: res.body.response.hits[0].results.full_title
+          url: res.body.response.hits[0].result.url,
+          image: res.body.response.hits[0].result.song_art_image_thumbnail_url,
+          title: res.body.response.hits[0].result.full_title
         };
       })
       .then(async(data) => {
