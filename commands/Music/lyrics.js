@@ -27,7 +27,7 @@ class Lyrics extends Command {
       })
       .then(async(data) => {
         const res = await superagent.get(data.url).then((res) => res.text);
-        const $ = cheerio.load(res.text);
+        const $ = cheerio.load(res);
         const text = $("div.lyrics").first().text();
         data.lyrics = text;
         return data;
