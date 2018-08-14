@@ -11,7 +11,7 @@ class Sniper extends Command {
   }
 
   async run(msg, [user = msg.author]) {
-    return msg.send(new Attachment(await this.client.idioticapi.sniper(user.displayAvatarURL({ format: "png", size: 2048 })), "sniper.png"));
+    return msg.send(new MessageAttachment(await this.client.idioticapi.sniper(user.displayAvatarURL({ format: "png", size: 2048 })), "sniper.png"));
   }
 }
 
