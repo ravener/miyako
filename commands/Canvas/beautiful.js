@@ -6,7 +6,7 @@ class Beautiful extends Command {
     super(...args, {
       description: "Oh this, this is beautiful",
       cooldown: 5,
-      usage: "[user:user]"
+      usage: "[user:username]"
     });
   }
 

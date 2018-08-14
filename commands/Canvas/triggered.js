@@ -6,7 +6,7 @@ class Triggered extends Command {
     super(...args, {
       description: "Makes your or someone triggered",
       cooldown: 5,
-      usage: "[user:user]"
+      usage: "[user:username]"
     });
   }
   
