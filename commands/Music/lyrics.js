@@ -18,7 +18,7 @@ class Lyrics extends Command {
       .query({ q })
       .set("Authorization", `Bearer ${this.client.config.genius}`)
       .then((res) => {
-        if(res.body.response.hits.length) throw "No results found with that query";
+        if(!res.body.response.hits.length) throw "No results found with that query";
         return {
           url: res.body.response.hits[0].url,
           image: res.body.response.hits[0].song_art_image_thumbnail_url,
