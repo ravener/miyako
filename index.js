@@ -29,7 +29,7 @@ class LadybugClient extends Client {
     this.lavalink = new AudioManager(this, {
       rest: { host: "localhost", port: 2333, password: this.config.lavalink },
       nodes: [
-        { host: "localhost", port: 80, password: this.config.lavalink }
+        { host: "localhost", port: 3000, password: this.config.lavalink }
       ]
     });
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
