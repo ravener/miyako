@@ -74,9 +74,9 @@ class AudioManager extends EventEmitter {
     this.nodes.delete(host);
   }
 
-  getTracks(type, identifier = "") {
+  getTracks(identifier) {
     return superagent.get(`http://${this.rest.host}:${this.rest.port}/loadtracks`)
-      .query({ identifier: type + identifier })
+      .query({ identifier })
       .set("Authorization", this.rest.password)
       .then((res) => {
         if(Array.isArray(res.body)) {

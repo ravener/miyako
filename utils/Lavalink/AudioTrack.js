@@ -2,14 +2,14 @@
 class AudioTrack {
   constructor(data = {}) {
     this.track = data.track;
-    this.uri = data.uri;
-    this.length = data.length;
-    this.isStream = data.isStream;
-    this.title = data.title;
-    this.position = data.position;
-    this.author = data.author;
-    this.isSeekable = data.isSeekable;
-    this.identifier = data.identifier;
+    this.uri = data.info.uri;
+    this.length = data.info.length;
+    this.isStream = data.info.isStream;
+    this.title = data.info.title;
+    this.position = data.info.position;
+    this.author = data.info.author;
+    this.isSeekable = data.info.isSeekable;
+    this.identifier = data.info.identifier;
   }
 
   get seekable() {
