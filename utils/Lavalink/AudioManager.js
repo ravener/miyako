@@ -62,7 +62,7 @@ class AudioManager extends EventEmitter {
     if(!n || !n.port || !n.password || !n.host) throw new Error("Invalid argument, must be an object with { port, host, password }");
     const node = new AudioNode(this, n);
     if(this.nodes.has(node.host)) throw new Error(`Node with host '${node.host}' already exists.`);
-    node.connect();
+    if(this.client.readyAt) node.connect();
     this.nodes.set(node.host, node);
     return node;
   }
