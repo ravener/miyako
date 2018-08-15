@@ -6,6 +6,7 @@ class AudioNode extends EventEmitter {
     super();
     this.manager = manager;
     this.ws = null;
+    this.client = manager.client;
     this.port = options.port;
     this.password = options.password;
     this.host = options.host;
