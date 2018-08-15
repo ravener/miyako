@@ -2,5 +2,6 @@
   "token": "https://discordapp.com/developers",
   "idioticapi": "https://api.anidiots.guide",
   "mongodb": "mongodb://localhost",
-  "genius": "https://genious.com"
+  "genius": "https://genious.com",
+  "lavalink": "youshallnotpass"
 }

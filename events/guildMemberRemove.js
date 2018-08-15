@@ -9,10 +9,10 @@ class GuildMemberRemove extends Event {
     const guild = member.guild;
     if(!guild.settings.leave.enabled || !guild.settings.leave.message || !guild.settings.leave.channel) return;
     
-    const channel = guild.channels.get(guild.settings.welcome.channel);
+    const channel = guild.channels.get(guild.settings.leave.channel);
     if(!channel || !channel.postable) return;
     
-    const msg = guild.settings.welcome.message
+    const msg = guild.settings.leave.message
       .replace(/{guild}/ig, guild.name)
       .replace(/{server}/ig, guild.name)
       .replace(/{name}/ig, member.displayName)
