@@ -1,5 +1,5 @@
 const EventEmitter = require("events");
-const AudioPlayer = require("./AudioPlayer.js");
+const AudioTrack = require("./AudioTrack.js");
 
 class AudioPlayer extends EventEmitter {
   constructor(channel, node) {
