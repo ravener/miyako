@@ -31,15 +31,17 @@ class AudioManager extends EventEmitter {
     /* eslint-disable camelcase */  
     await this.client.ws.send({
       op: OPCodes.VOICE_STATE_UPDATE,
-      channel_id: channel.id,
-      guild_id: channel.guild.id,
-      self_deaf: selfDeaf,
-      self_mute: selfMute
+      d: {
+        channel_id: channel.id,
+        guild_id: channel.guild.id,
+        self_deaf: selfDeaf,
+        self_mute: selfMute
+      }
     });
     /* eslint-enable camelcase */
   }
 
-  async join(channel, node, { selfDeaf = false, selfMute = false }) {
+  async join(channel, node, { selfDeaf = false, selfMute = false } = {}) {
     await this._join(channel, { selfDeaf, selfMute });
     const player = this.get(channel.guild.id);
     if(player) return player;
