@@ -1,18 +1,12 @@
 const { Event } = require("klasa");
+const { getAttachment } = require("../utils/utils.js");
 
 class MessageDelete extends Event {
   
   async run(message) {
     if(message.channel.type === "text") message.channel.snipe = message;
-    let image = null;
-    if(message.attachments.size) {
-      const attach = message.attachments.filter((x) => x.width && x.height && x.url);
-      if(attach.size) image = attach.first().url;
-    }
-    if(!image && message.embeds.length) {
-      const images = message.embeds.filter((em) => em.image && em.image.url);
-      if(images.size) image = images[0].image.url;
-    }
+
+    const image = getAttachment(message);
     
     const match = /(?:https?)?(discord\.gg|discord\.me|discord\.io|discordapp\.com\/invite)\/(\S+)/i.test(message.content);
     

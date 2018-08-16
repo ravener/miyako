@@ -37,6 +37,7 @@ class Lyrics extends Command {
       .setDescription(slice(lyrics.lyrics.trim(), 1990))
       .setURL(lyrics.url)
       .setThumbnail(lyrics.image)
+      .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setColor(0xff0000);
     return msg.send({ embed });
   }
