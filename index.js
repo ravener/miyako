@@ -24,6 +24,7 @@ class LadybugClient extends Client {
       readyMessage: (client) => `Successfully initialized. Logged in as ${client.user.tag} (${client.user.id}), Ready to serve ${client.users.size} users in ${client.guilds.size} guilds with ${client.channels.size} channels!`,
       prefixCaseInsensitive: true
     });
+    this.constants = Constants;
     this.config = config;
     this.commandsRan = 0;
     this.lavalink = new AudioManager(this, {
@@ -36,7 +37,6 @@ class LadybugClient extends Client {
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
     this.registerStore(this.rawEvents);
-    this.constants = Constants;
   }
   
   login() {
