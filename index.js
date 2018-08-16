@@ -30,7 +30,8 @@ class LadybugClient extends Client {
       rest: { host: "localhost", port: 2333, password: this.config.lavalink },
       nodes: [
         { host: "localhost", port: 3000, password: this.config.lavalink }
-      ]
+      ],
+      userID: this.constants.botID
     });
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);

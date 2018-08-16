@@ -7,10 +7,11 @@ const AudioPlayer = require("./AudioPlayer.js");
 const { Collection } = require("discord.js");
 
 class AudioManager extends EventEmitter {
-  constructor(client, { nodes = [], rest = {}, shards = 1 } = {}) {
+  constructor(client, { nodes = [], rest = {}, shards = 1, userID } = {}) {
     super();
     this.players = new Collection();
     this.client = client;
+    this.userID = userID;
     this.nodes = new Collection();
     this.shards = shards;
     this.rest = {
@@ -64,7 +65,7 @@ class AudioManager extends EventEmitter {
     if(!n || !n.port || !n.password || !n.host) throw new Error("Invalid argument, must be an object with { port, host, password }");
     const node = new AudioNode(this, n);
     if(this.nodes.has(node.host)) throw new Error(`Node with host '${node.host}' already exists.`);
-    if(this.client.readyAt) node.connect();
+    node.connect();
     this.nodes.set(node.host, node);
     return node;
   }

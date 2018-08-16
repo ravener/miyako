@@ -18,7 +18,7 @@ class AudioNode extends EventEmitter {
       headers: {
         Authorization: this.password,
         "Num-Shards": this.manager.shards,
-        "User-Id": this.client.user.id
+        "User-Id": this.manager.userID
       }
     });
     ws.onopen = this.open.bind(this);
@@ -72,16 +72,16 @@ class AudioNode extends EventEmitter {
     if(!player) return;
     switch(data.type) {
       case "TrackEndEvent":
-        this.manager.emit("trackEnd", data.track, data.reason);
+        player.emit("trackEnd", data.track, data.reason);
         break;
       case "TrackExceptionEvent":
-        this.manager.emit("trackException", data.track, data.error);
+        player.emit("trackException", data.track, data.error);
         break;
       case "TrackStuckEvent":
-        this.manager.emit("trackStuck", data.track, data.thresholdMs);
+        player.emit("trackStuck", data.track, data.thresholdMs);
         break;
       default:
-        this.manager.emit("warn", `Unhandled event ${data.type}`);
+        player.emit("warn", `Unhandled event ${data.type}`);
         break;
     }
   }

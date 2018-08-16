@@ -15,6 +15,14 @@ class Util {
     if(!(arr instanceof Array)) throw new Error("Expected an array as argument.");
     return arr[Math.floor(Math.random() * arr.length)];
   }
+
+  static getAttachment(msg) {
+    const attach = msg.attachments.filter((x) => x.url && x.width && x.height);
+    if(attach) return attach.first().url;
+    const embeds = msg.embeds.filter((x) => x.image && x.image.url);
+    if(embeds.length) return embeds[0];
+    return null;
+  }
 }
 
 module.exports = Util;

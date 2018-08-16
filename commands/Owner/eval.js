@@ -2,6 +2,11 @@ const { Command, Stopwatch, Type, util } = require("klasa");
 const { inspect } = require("util");
 const superagent = require("superagent");
 
+// This variable is more like for to be available in
+// eval's scope so i can reach it easier.
+// eslint-disable-next-line no-unused-vars
+const utils = require("../../utils/utils.js");
+
 class Eval extends Command {
 
   constructor(...args) {

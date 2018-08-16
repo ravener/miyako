@@ -33,7 +33,7 @@ class Modlogs extends Event {
         channel.send(this.embed(`👢 **Member ${data.member.user.tag} got kicked by ${data.kicker}**.\n\n**Reason:** ${data.reason ? data.reason : "None"}`, 0xff0000, { title: "Member Kicked", user: data.member.user, thumbnail: "user" }));
         break;
       case "ban":
-        channel.send(this.embed(`🔨 ${data.user.tag} got **banned**`, 0xff0000, { title: "Member Banned", user: data.user, thumbnail: "user" }));
+        channel.send(this.embed(`🔨 ${data.user.tag} got **banned**\n\n**User ID:** ${data.user.id}\n**Reason:** ${data.reason || "None"}`, 0xff0000, { title: "Member Banned", user: data.user, thumbnail: "user" }));
         break;
       case "unban":
         channel.send(this.embed(`✌ ${data.user.tag} got **unbanned**\n**User ID:** ${data.user.id}`, "#8089DE", { user: data.user, title: "Member Unbanned", thumbnail: "user" }));
