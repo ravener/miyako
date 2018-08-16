@@ -20,7 +20,7 @@ class Util {
     const attach = msg.attachments.filter((x) => x.url && x.width && x.height);
     if(attach.size) return attach.first().url;
     const embeds = msg.embeds.filter((x) => x.image && x.image.url);
-    if(embeds.length) return embeds[0];
+    if(embeds.length) return embeds[0].image.url;
     return null;
   }
 }
