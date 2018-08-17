@@ -11,6 +11,8 @@ module.exports.defaultGuildSchema = Client.defaultGuildSchema
     .add("channel", "channel")
     .add("message", "string")
     .add("enabled", "boolean"))
+  .add("automod", (folder) => folder
+    .add("invites", "boolean"))
   .add("tags", "any", { array: true })
   .add("modlogs", (folder) => folder
     .add("channel", "channel")

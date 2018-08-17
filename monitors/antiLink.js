@@ -22,16 +22,6 @@ class AntiLink extends Monitor {
     const msg = await message.reply("❌ No advertising.");
     await msg.delete({ timeout: 3000 });
   }
-  
-  async init() {
-    const { schema } = this.client.gateways.guilds;
-    if(!schema.has("automod")) {
-      await schema.add("automod", {});
-    }
-    if(!schema.automod.has("invites")) {
-      await schema.automod.add("invites", { type: "boolean" });
-    }
-  }
 }
 
 module.exports = AntiLink;
