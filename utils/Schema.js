@@ -39,5 +39,5 @@ module.exports.defaultClientSchema = Client.defaultClientSchema
     .add("date", "integer"));
 
 module.exports.defaultMemberSchema = Client.defaultMemberSchema
-  .add("points", "integer")
-  .add("level", "integer");
+  .add("points", "integer", { default: 0 })
+  .add("level", "integer", { default: 0 });

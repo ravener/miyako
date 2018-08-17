@@ -17,7 +17,7 @@ class Points extends Command {
 
   async run(msg, [member = msg.member]) {
     if(member === msg.member) {
-      msg.send(`You have **$${member.settings.points}** points.`);
+      return msg.send(`You have **$${member.settings.points}** points.`);
     }
     return msg.send(`**${member.displayName}**'s balance: **$${member.settings.points}**`);
   }
