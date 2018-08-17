@@ -12,19 +12,17 @@ class PSA extends Command {
   
   async run(msg, [news]) {
     if(news === "clear") {
-      await this.client.settings.update(["psa.message", "psa.date"], [null, null]);
+      await this.client.settings.update([
+        ["psa.message", null],
+        ["psa.date", null]
+      ]);
       return msg.send("Cleared psa.");
     }
-    await this.client.settings.update(["psa.message", "psa.date"], [news, Date.now()]);
+    await this.client.settings.update([
+      ["psa.message", news],
+      ["psa.date", Date.now()]
+    ]);
     return msg.send("Successfully set announcement.");
-  }
-  
-  async init() {
-    const { schema } = this.client.gateways.clientStorage;
-    if(!schema.has("psa")) await schema.add("psa", {
-      message: { type: "string" },
-      date: { type: "integer" }
-    });
   }
 }
 

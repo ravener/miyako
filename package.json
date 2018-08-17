@@ -35,7 +35,8 @@
     "cheerio": "^1.0.0-rc.2",
     "mongodb": "^3.1.1",
     "idiotic-api": "^0.2.11",
-    "figlet": "^1.2.0"
+    "figlet": "^1.2.0",
+    "klasa-member-gateway": "github:dirigeants/klasa-member-gateway"
   },
   "devDependencies": {
     "eslint": "^4.18.1"

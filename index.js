@@ -1,4 +1,5 @@
 const { Client } = require("klasa");
+require("./utils/Schema.js");
 const perms = require("./utils/permissionLevels.js");
 const Constants = require("./utils/Constants.js");
 const IdioticAPI = require("idiotic-api");

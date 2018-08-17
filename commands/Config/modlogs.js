@@ -12,13 +12,17 @@ class Modlogs extends Command {
       usageDelim: " ",
       subcommands: true
     });
-    this.actions = ["ban", "kick", "mute", "leave", "join", "messages", "channels", "roles", "invites"];
+    this.actions = ["ban", "kick", "mute", "leave", "join", "messages", "channels", "roles", "invites", "warn"];
   }
   
   async enableModlogs(msg, channel, reply = false, force = false) {
     if(msg.guild.settings.modlogs.enabled && !force) throw "Modlogs is already enabled.";
     
-    await msg.guild.settings.update(["modlogs.enabled", "modlogs.channel", ...this.actions.map((x) => `modlogs.${x}`)], [true, channel.id, ...this.actions.map((x) => msg.guild.settings.get(`modlogs.${x}`) || false)], msg.guild, { force: true });
+    // await msg.guild.settings.update(["modlogs.enabled", "modlogs.channel", ...this.actions.map((x) => `modlogs.${x}`)], [true, channel.id, ...this.actions.map((x) => msg.guild.settings.get(`modlogs.${x}`) || false)], msg.guild, { force: true });
+    await msg.guild.settings.update([
+      ["modlogs.enabled", true],
+      ["modlogs.channel", channel.id]
+    ], msg.guild);
     if(reply) return msg.send(`Enabled modlogs in channel ${channel}, Note at beginning nothing will be logged, you have to enable which actions to log, to do that run \`${msg.guild.settings.prefix}modlogs enable <key>\` where key is one of \`${this.actions.join(", ")}\`, in addition you may use \`all\` to enable all actions, there is also a \`${msg.guild.settings.prefix}modlogs disable [key]\` to disable an action, if no action provided it disables modlogs, the same actions plus all is also available for disable, to change modlogs channel run \`${msg.guild.settings.prefix}modlogs channel #some-modlogs\`, lastly run \`${msg.guild.settings.prefix}conf show modlogs\` to see all actions that is enabled/disabled, you may change an action using conf command aswell but modlogs command is the recommended way.`);
     return true;
   }
@@ -59,7 +63,8 @@ class Modlogs extends Command {
     if(key.toLowerCase() === "all") {
       const toEnable = this.actions.filter((x) => !msg.guild.settings.get(`modlogs.${x}`));
       if(!toEnable.length) return msg.send("All actions enabled already.");
-      await msg.guild.settings.update(["modlogs.enabled", "modlogs.channel", ...toEnable.map((x) => `modlogs.${x}`)], [msg.guild.settings.modlogs.enabled, msg.guild.settings.modlogs.channel, ...toEnable.map(() => true)], msg.guild, { force: true });
+      //await msg.guild.settings.update(["modlogs.enabled", "modlogs.channel", ...toEnable.map((x) => `modlogs.${x}`)], [msg.guild.settings.modlogs.enabled, msg.guild.settings.modlogs.channel, ...toEnable.map(() => true)], msg.guild, { force: true });
+      await msg.guild.settings.update(toEnable.map((x) => [x, true]));
       return msg.send("Enabled logging all actions.");
     }
     if(!this.actions.includes(key)) throw `Invalid option, modlog options can be one of \`${this.actions.join(", ")}, all\``;
@@ -75,7 +80,8 @@ class Modlogs extends Command {
     if(key.toLowerCase() === "all") {
       const toDisable = this.actions.filter((x) => msg.guild.settings.get(`modlogs.${x}`));
       if(!toDisable.length) return msg.send("All actions disabled already.");
-      await msg.guild.settings.update(toDisable.map((x) => `modlogs.${x}`), toDisable.map(() => false), msg.guild);
+      //await msg.guild.settings.update(toDisable.map((x) => `modlogs.${x}`), toDisable.map(() => false), msg.guild);
+      await msg.guild.settings.update(toDisable.map((x) => [x, false]));
       return msg.send("Disabled logging all actions.");
     }
     if(!this.actions.includes(key)) throw `Invalid option, modlog options can be one of \`${this.actions.join(", ")}, all\``;
@@ -91,25 +97,6 @@ class Modlogs extends Command {
     if(!message.mentions.channels.size) throw "Invalid channel mention, please try again.";
     await this.enableModlogs(msg, message.mentions.channels.first(), false, true);
     return msg.send(`Changed modlogs channel to ${message.mentions.channels.first()}`);
-  }
-  
-  async init() {
-    const { schema } = this.client.gateways.guilds;
-    if(!schema.has("modlogs")) {
-      await schema.add("modlogs", {
-        enabled: { type: "boolean" },
-        channel: { type: "channel" },
-        messages: { type: "boolean" },
-        channels: { type: "boolean" },
-        roles: { type: "boolean" },
-        join: { type: "boolean" },
-        leave: { type: "boolean" },
-        mute: { type: "boolean" },
-        kick: { type: "boolean" },
-        ban: { type: "boolean" },
-        invites: { type: "boolean" }
-      });
-    }
   }
 }
 

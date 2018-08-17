@@ -29,13 +29,21 @@ class Welcome extends Command {
   
   async enable(msg, channel, message, reply = false, force = false) {
     if(msg.guild.settings.welcome.enabled && !force) throw "Welcome is already enabled!";
-    await msg.guild.settings.update(["welcome.message", "welcome.enabled", "welcome.channel"], [message, true, channel.id], msg.guild);
+    await msg.guild.settings.update([
+      ["welcome.message", message],
+      ["welcome.enabled", true],
+      ["welcome.channnel", channel.id]
+    ], msg.guild);
     if(reply) return msg.send(`Enabled welcome messages in ${channel}`);
   }
   
   async disable(msg, reply = false, force = false) {
     if(!msg.guild.settings.welcome.enabled && !force) throw "Welcome is already disabled!";
-    await msg.guild.settings.update(["welcome.message", "welcome.enabled", "welcome.channel"], [null, false, null], msg.guild);
+    await msg.guild.settings.update([
+      ["welcome.message", null],
+      ["welcome.enabled", false],
+      ["welcome.channel", null]
+    ], msg.guild);
     if(reply) return msg.send("Disabled welcome messages.");
   }
 }
