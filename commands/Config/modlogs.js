@@ -64,7 +64,7 @@ class Modlogs extends Command {
       const toEnable = this.actions.filter((x) => !msg.guild.settings.get(`modlogs.${x}`));
       if(!toEnable.length) return msg.send("All actions enabled already.");
       //await msg.guild.settings.update(["modlogs.enabled", "modlogs.channel", ...toEnable.map((x) => `modlogs.${x}`)], [msg.guild.settings.modlogs.enabled, msg.guild.settings.modlogs.channel, ...toEnable.map(() => true)], msg.guild, { force: true });
-      await msg.guild.settings.update(toEnable.map((x) => [x, true]), msg.guild, { force: true });
+      await msg.guild.settings.update(toEnable.map((x) => [`modlogs.${x}`, true]), msg.guild, { force: true });
       return msg.send("Enabled logging all actions.");
     }
     if(!this.actions.includes(key)) throw `Invalid option, modlog options can be one of \`${this.actions.join(", ")}, all\``;
@@ -81,7 +81,7 @@ class Modlogs extends Command {
       const toDisable = this.actions.filter((x) => msg.guild.settings.get(`modlogs.${x}`));
       if(!toDisable.length) return msg.send("All actions disabled already.");
       //await msg.guild.settings.update(toDisable.map((x) => `modlogs.${x}`), toDisable.map(() => false), msg.guild);
-      await msg.guild.settings.update(toDisable.map((x) => [x, false]), msg.guild, { force: true });
+      await msg.guild.settings.update(toDisable.map((x) => [`modlogs.${x}`, false]), msg.guild, { force: true });
       return msg.send("Disabled logging all actions.");
     }
     if(!this.actions.includes(key)) throw `Invalid option, modlog options can be one of \`${this.actions.join(", ")}, all\``;
