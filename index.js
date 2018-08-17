@@ -1,5 +1,5 @@
 const { Client } = require("klasa");
-require("./utils/Schema.js");
+const { defaultGuildSchema, defaultClientSchema, defaultUserSchema, defaultMemberSchema } = require("./utils/Schema.js");
 const perms = require("./utils/permissionLevels.js");
 const Constants = require("./utils/Constants.js");
 const IdioticAPI = require("idiotic-api");
@@ -23,7 +23,11 @@ class LadybugClient extends Client {
       typing: true,
       ownerID: "292690616285134850",
       readyMessage: (client) => `Successfully initialized. Logged in as ${client.user.tag} (${client.user.id}), Ready to serve ${client.users.size} users in ${client.guilds.size} guilds with ${client.channels.size} channels!`,
-      prefixCaseInsensitive: true
+      prefixCaseInsensitive: true,
+      defaultClientSchema,
+      defaultUserSchema,
+      defaultGuildSchema,
+      defaultMemberSchema
     });
     this.constants = Constants;
     this.config = config;

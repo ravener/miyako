@@ -2,7 +2,7 @@ const { Client } = require("klasa");
 
 Client.use(require("klasa-member-gateway"));
 
-Client.defaultGuildSchema
+module.exports.defaultGuildSchema = Client.defaultGuildSchema
   .add("welcome", (folder) => folder
     .add("channel", "channel")
     .add("message", "string")
@@ -26,16 +26,16 @@ Client.defaultGuildSchema
     .add("join", "boolean")
     .add("warn", "boolean"));
 
-Client.defaultUserSchema
+module.exports.defaultUserSchema = Client.defaultUserSchema
   .add("afk", (folder) => folder
     .add("status", "boolean")
     .add("message", "string"));
 
-Client.defaultClientSchema
+module.exports.defaultClientSchema = Client.defaultClientSchema
   .add("psa", (folder) => folder
     .add("message", "string")
     .add("date", "integer"));
 
-Client.defaultMemberSchema
+module.exports.defaultMemberSchema = Client.defaultMemberSchema
   .add("points", "integer")
   .add("level", "integer");
