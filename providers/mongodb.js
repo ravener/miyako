@@ -75,8 +75,7 @@ class MongoDB extends Provider {
   replace(table, id, doc) {
     return this.db.collection(table).replaceOne(resolveQuery(id), this.parseUpdateInput(doc));
   }
-
-};
+}
 
 const resolveQuery = query => isObject(query) ? query : { id: query };
 
