@@ -37,14 +37,24 @@ class Modlogs extends Command {
   
   async enableKey(msg, key, reply = false, force = false) {
     if(msg.guild.settings.get(`modlogs.${key}`) && !force) throw `The key \`modlogs.${key}\` logging is already enabled.`;
-    await msg.guild.settings.update(`modlogs.${key}`, true, msg.guild, { force: true });
+    //await msg.guild.settings.update(`modlogs.${key}`, true, msg.guild, { force: true });
+    await msg.guild.settings.update([
+      ["modlogs.channel", msg.guild.settings.modlogs.channel],
+      ["modlogs.enabled", msg.guild.settings.modlogs.enabled],
+      [`modlogs.${key}`, true],
+      ...this.actions.filter((x) => x !== key).map((x) => [x, msg.guild.settings.get(`modlogs.${x}`)])
+    ], msg.guild, { force: true });
     if(reply) return msg.send(`Enabled \`modlogs.${key}\` logging.`);
     return true;
   }
   
   async disableKey(msg, key, reply = false, force = false) {
     if(!msg.guild.settings.get(`modlogs.${key}`) && !force) throw `The key \`modlogs.${key}\` logging is already disabled.`;
-    await msg.guild.settings.update(`modlogs.${key}`, false, msg.guild, { force: true });
+    //await msg.guild.settings.update(`modlogs.${key}`, false, msg.guild, { force: true });
+    await msg.guild.settings.update([                                                      ["modlogs.channel", msg.guild.settings.modlogs.channel],                             ["modlogs.enabled", msg.guild.settings.modlogs.enabled],
+      [`modlogs.${key}`, false],
+      ...this.actions.filter((x) => x !== key).map((x) => [x, msg.guild.settings.get(`modlogs.${x}`)])
+    ], msg.guild, { force: true });
     if(reply) return msg.send(`Disabled \`modlogs.${key}\` logging.`);
     return true;
   }
