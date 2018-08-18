@@ -23,6 +23,17 @@ class Util {
     if(embeds.length) return embeds[0].image.url;
     return null;
   }
+
+  static* range(start, stop, incr = 1) {
+    if(!stop) {
+      stop = start;
+      start = 0;
+    }
+
+    for(; start < stop; start += incr) {
+      yield start;
+    }
+  }
 }
 
 module.exports = Util;
