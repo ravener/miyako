@@ -1,5 +1,6 @@
 const { Command, util: { codeBlock } } = require("klasa");
 const math = require("mathjs");
+const mathEval = math.eval;
 
 math.import({
   import: () => { throw new Error("Function import is disabled") },
@@ -20,7 +21,7 @@ class MathCommand extends Command {
   }
 
   async run(msg, [expr]) {
-    const res = math.eval(expr);
+    const res = mathEval(expr);
     return msg.send(`**Expression**${codeBlock("", expr)}\n**Results**${codeBlock("", res)}`);
   }
 }
