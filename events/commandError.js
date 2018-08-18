@@ -14,7 +14,7 @@ class CommandError extends Event {
       const embed = new MessageEmbed()
         .setTitle("CommandError")
         .setColor(0xff0000)
-        .setDescription(`An Error occured in command: ${command.name}\n${codeBlock("js", error)}`)
+        .setDescription(`An Error occured in command: ${command.name}\n${codeBlock("js", error.stack || error)}`)
         .setFooter(`User: ${message.author.tag}, Guild: ${message.guild ? message.guild.name : "DM" }`);
       channel.send({ embed });
     }
