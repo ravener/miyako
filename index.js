@@ -13,7 +13,7 @@ class LadybugClient extends Client {
       fetchAllMembers: false,
       permissionLevels: perms,
       prefix: "lb.",
-      regexPrefix: /(hey\s*)?ladybug,?\s*/i,
+      regexPrefix: /^((hey\s*)?ladybug,?)\s*/i,
       providers: { default: "mongodb", mongodb: { url: config.mongodb, db: "ladybug", options: { useNewUrlParser: true } } },
       commandEditing: true,
       pieceDefaults: {
