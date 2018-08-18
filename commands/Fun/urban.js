@@ -8,6 +8,7 @@ class Urban extends Command {
       description: "Search a term in urban dictionary!",
       cooldown: 5,
       runIn: ["text"],
+      aliases: ["ud", "urbandictionary"],
       usage: "<term:string>",
       requiredPermissions: ["MANAGE_MESSAGES", "EMBED_LINKS", "ADD_REACTIONS"]
     });
