@@ -25,7 +25,7 @@ class Define extends Command {
         for(const x of res.body.results[0].lexicalEntries) {
           results.push({
             word: x.text,
-            definitions: x.senses[0].definitions,
+            definitions: x.entries[0].senses[0].definitions,
             examples: x.entries[0].senses[0].map((x) => x.text),
             shortDefinitions: x.entries[0].senses[0].short_definitions,
             category: x.lexicalCategory,
