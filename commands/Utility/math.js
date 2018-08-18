@@ -21,8 +21,12 @@ class MathCommand extends Command {
   }
 
   async run(msg, [expr]) {
-    const res = mathEval(expr);
-    return msg.send(`**Expression**${codeBlock("", expr)}\n**Results**${codeBlock("", res)}`);
+    try {
+      const res = mathEval(expr);
+      return msg.send(`**Expression**${codeBlock("", expr)}\n**Results**${codeBlock("", res)}`);
+    } catch(err) {
+      return msg.send(codeBlock("", err.message || err));
+    }
   }
 }
 
