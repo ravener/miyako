@@ -3,12 +3,12 @@ const math = require("mathjs");
 const mathEval = math.eval;
 
 math.import({
-  import: () => { throw new Error("Function import is disabled") },
-  createUnit: () => { throw new Error("Function createUnit is disabled") },
-  eval: () => { throw new Error("Function eval is disabled") },
-  parse: () => { throw new Error("Function parse is disabled") },
-  simplify: () => { throw new Error("Function simplify is disabled") },
-  derivative: () => { throw new Error("Function derivative is disabled") }
+  import: () => { throw "Function import is disabled"; },
+  createUnit: () => { throw "Function createUnit is disabled"; },
+  eval: () => { throw "Function eval is disabled"; },
+  parse: () => { throw "Function parse is disabled"; },
+  simplify: () => { throw "Function simplify is disabled"; },
+  derivative: () => { throw "Function derivative is disabled"; }
 }, { override: true });
 
 class MathCommand extends Command {
