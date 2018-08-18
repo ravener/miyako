@@ -20,6 +20,7 @@ class Define extends Command {
       .set("app_id", app_id)
       .set("app_key", app_key)
       .then((res) => {
+        if(!res.body.results || !res.body.results.length) throw "Couldn't find any results";
         const results = [];
         for(const x of res.body.results[0].lexicalEntries) {
           results.push({
@@ -33,6 +34,10 @@ class Define extends Command {
           });
         }
         return results;
+      })
+      .catch((err) => {
+        if(err.status === 404) throw "Couldn't find any results.";
+        throw err;
       });
 
     const display = new RichDisplay(
