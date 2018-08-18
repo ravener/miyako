@@ -3,30 +3,31 @@ const { Client } = require("klasa");
 Client.use(require("klasa-member-gateway"));
 
 module.exports.defaultGuildSchema = Client.defaultGuildSchema
+  .add("levelup", "boolean", { default: true })
   .add("welcome", (folder) => folder
     .add("channel", "channel")
     .add("message", "string")
-    .add("enabled", "boolean"))
+    .add("enabled", "boolean", { default: false }))
   .add("leave", (folder) => folder
     .add("channel", "channel")
     .add("message", "string")
-    .add("enabled", "boolean"))
+    .add("enabled", "boolean", { default: false }))
   .add("automod", (folder) => folder
-    .add("invites", "boolean"))
+    .add("invites", "boolean", { default: false }))
   .add("tags", "any", { array: true })
   .add("modlogs", (folder) => folder
     .add("channel", "channel")
-    .add("enabled", "boolean")
-    .add("ban", "boolean")
-    .add("kick", "boolean")
-    .add("invites", "boolean")
-    .add("messages", "boolean")
-    .add("roles", "boolean")
-    .add("channels", "boolean")
-    .add("mute", "boolean")
-    .add("leave", "boolean")
-    .add("join", "boolean")
-    .add("warn", "boolean"));
+    .add("enabled", "boolean", { default: false })
+    .add("ban", "boolean", { default: false })
+    .add("kick", "boolean", { default: false })
+    .add("invites", "boolean", { default: false })
+    .add("messages", "boolean", { default: false })
+    .add("roles", "boolean", { default: false })
+    .add("channels", "boolean", { default: false })
+    .add("mute", "boolean", { default: false })
+    .add("leave", "boolean", { default: false })
+    .add("join", "boolean", { default: false })
+    .add("warn", "boolean", { default: false }));
 
 module.exports.defaultUserSchema = Client.defaultUserSchema
   .add("afk", (folder) => folder
