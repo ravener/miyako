@@ -13,10 +13,16 @@ class AFK extends Command {
   async run(msg, [status]) {
     if(status === "reset") {
       if(!msg.author.settings.afk.status) throw "You are not afk.";
-      await msg.author.settings.update([ ["afk.status", false] ["afk.message", null] ]);
+      await msg.author.settings.update([
+        ["afk.status", false],
+        ["afk.message", null]
+      ]);
       return msg.send("Done, you are no longer afk now.");
     }
-    await msg.author.settings.update([ ["afk.status", true], ["afk.message", status] ]);
+    await msg.author.settings.update([
+      ["afk.status", true],
+      ["afk.message", status]
+    ]);
     return msg.send(`Done, you are now afk with message \`${escapeMarkdown(status, true)}\``);
   }
 }
