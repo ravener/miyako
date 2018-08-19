@@ -20,7 +20,7 @@ class Level extends Command {
     if(member === msg.member) {
       return msg.send(`You are level **${member.settings.level}**`);
     }
-    return msg.send(`**{member.displayName}**'s level: **${member.settings.level}**`);
+    return msg.send(`**${member.displayName}**'s level: **${member.settings.level}**`);
   }
 }
 
