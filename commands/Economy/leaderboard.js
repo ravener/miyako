@@ -17,9 +17,9 @@ class Leaderboard extends Command {
     const top10 = top.slice(0, 10);
     if(!top10.length) throw "Couldn't get top 10 members, maybe it's a dead place?";
     const leaderboard = [];
-    const pos = top.indexOf(msg.member).toString().padStart(2, "0");
+    const pos = (top.indexOf(msg.member) + 1).toString().padStart(2, "0");
     top10.map((x, i) => {
-      leaderboard.push(`${i.toString().padStart(2, "0")} ❯ ${x.user.tag}${" ".repeat(40 - x.user.tag.length)}::  ${x.settings.points.toLocaleString()}`);
+      leaderboard.push(`${(i + 1).toString().padStart(2, "0")} ❯ ${x.user.tag}${" ".repeat(35 - x.user.tag.length)}::  ${x.settings.points.toLocaleString()}`);
     });
     leaderboard.push("-".repeat(50));
     leaderboard.push("Your Position:");
