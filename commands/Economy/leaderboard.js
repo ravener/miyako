@@ -13,7 +13,7 @@ class Leaderboard extends Command {
     const top = msg.guild.members
       .filter((x) => x.settings.points > 0 && !x.user.bot)
       .array()
-      .sort((a, b) => a.settings.points < b.settings.points);
+      .sort((a, b) => a.settings.points < b.settings.points ? 1 : -1);
     const top10 = top.slice(0, 10);
     if(!top10.length) throw "Couldn't get top 10 members, maybe it's a dead place?";
     const leaderboard = [];
