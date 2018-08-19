@@ -9,7 +9,8 @@ class Define extends Command {
       extendedHelp: "Find a definition in the Oxford Dictionary",
       aliases: ["dict", "dictionary", "def"],
       cooldown: 5,
-      usage: "<term:string>"
+      usage: "<term:string>",
+      enabled: false
     });
   }
 

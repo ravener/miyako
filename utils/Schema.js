@@ -41,4 +41,5 @@ module.exports.defaultClientSchema = Client.defaultClientSchema
 
 module.exports.defaultMemberSchema = Client.defaultMemberSchema
   .add("points", "integer", { default: 0 })
+  .add("daily", "integer", { default: Date.now() - 86400000 })
   .add("level", "integer", { default: 0 });

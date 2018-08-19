@@ -24,6 +24,7 @@ class LadybugClient extends Client {
       ownerID: "292690616285134850",
       readyMessage: (client) => `Successfully initialized. Logged in as ${client.user.tag} (${client.user.id}), Ready to serve ${client.users.size} users in ${client.guilds.size} guilds with ${client.channels.size} channels!`,
       prefixCaseInsensitive: true,
+      preserveSettings: false,
       defaultClientSchema,
       defaultUserSchema,
       defaultGuildSchema,

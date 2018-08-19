@@ -5,7 +5,8 @@ class Level extends Command {
     super(...args, {
       description: "Returns your current level",
       runIn: ["text"],
-      usage: "(member:level)"
+      usage: "(member:level)",
+      aliases: ["lvl"]
     });
 
     this.createCustomResolver("level", (arg, possible, msg) => {
@@ -15,6 +16,7 @@ class Level extends Command {
   }
 
   async run(msg, [member = msg.member]) {
+    if(member.user.bot) throw "Bots can't level up, therefore you can't view their level.";
     if(member === msg.member) {
       return msg.send(`You are level **${member.settings.level}**`);
     }

@@ -11,9 +11,11 @@ class Util {
     return str.substring(0, limit - suffix.length) + suffix;
   }
   
-  static random(arr) {
-    if(!(arr instanceof Array)) throw new Error("Expected an array as argument.");
-    return arr[Math.floor(Math.random() * arr.length)];
+  static random(min, max) {
+    if(min instanceof Array) return min[Math.floor(Math.random() * min.length)];
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   static getAttachment(msg) {
