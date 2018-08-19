@@ -1,6 +1,6 @@
 const { Extendable } = require("klasa");
 
-class GivePoints extends Exfendable {
+class GivePoints extends Extendable {
   constructor(...args) {
     super(...args, {
       appliesTo: ["GuildMember"]
