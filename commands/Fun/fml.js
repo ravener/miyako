@@ -10,6 +10,7 @@ class FML extends Command {
       cooldown: 5,
       aliases: ["fuckmylife", "fmylife"]
     });
+    this.cost = 10;
   }
   
   async run(message) {

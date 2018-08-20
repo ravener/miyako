@@ -8,6 +8,7 @@ class CatFacts extends Command {
       cooldown: 3,
       description: "Let me tell you a misterious cat fact."
     });
+    this.cost = 10;
   }
   
   async run(msg) {

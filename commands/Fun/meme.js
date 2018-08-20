@@ -9,6 +9,7 @@ class Meme extends Command {
       description: "Get a random meme from r/dankmemes",
       cooldown: 5
     });
+    this.cost = 5;
   }
   
   async run(message) {

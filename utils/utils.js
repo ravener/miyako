@@ -18,6 +18,10 @@ class Util {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  static mix(str, str2) {
+    return str.slice(0, str.length / 2) + str2.slice(str2.length / 2);
+  }
+
   static getAttachment(msg) {
     const attach = msg.attachments.filter((x) => x.url && x.width && x.height);
     if(attach.size) return attach.first().url;

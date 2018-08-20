@@ -28,7 +28,7 @@ class Regex extends Command {
     for(const match of res) {
       results.push(`${counter++}. ${match}`);
     }
-    return msg.send(`**Input**${codeBlock("", escapeMarkdown(input, true))}**Index**: \`${res.index}\`\n**Matches**${codeBlock("", results.map((x) => escapeMarkdown(x, true)).join("\n"))}`);
+    return msg.send(`**Input**${codeBlock("", escapeMarkdown(input, true))}**Index**: \`${res.index}\`\n**Matches**${codeBlock("", results.map((x) => escapeMarkdown(x, true)).join("\n"))}${flags.length ? `\n**Flags**${codeBlock("", flags.join(", "))}` : ""}`);
   }
 }
 
