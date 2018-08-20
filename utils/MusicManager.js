@@ -9,7 +9,7 @@ const superagent = require("superagent");
 * Music coming soon and this class is still untested.
 * If you found a problem or have feedback open an issue
 * as its better to find bugs before production day.
-* NOTE: from 15/08/2018 this is now discontinued and starting to use Lavalink
+* NOTE: as of 15/08/2018 this is now discontinued and starting to use Lavalink
 * see Lavalink folder from this directory.
 */
 class MusicManager {

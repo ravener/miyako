@@ -8,12 +8,16 @@ class Quote extends Command {
       description: "Quote a message by id",
       runIn: ["text"],
       aliases: ["quotemsg", "msg", "message"],
-      usage: "<message:message>",
+      usage: "[channel:channelname] <message:string>",
       requiredPermissions: ["EMBED_LINKS"]
     });
   }
 
-  async run(msg, [message]) {
+  async run(msg, [channel = msg.channel, message]) {
+    message = await channel.messages.fetch(message)
+      .catch(() => {
+        throw "Message must be a valid message id.";
+      });
     const embed = new MessageEmbed()
       .setTitle("Message Quote")
       .setDescription(message.content)

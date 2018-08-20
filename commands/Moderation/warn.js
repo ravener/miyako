@@ -12,10 +12,13 @@ class Warn extends Command {
   }
   
   async run(msg, [user, ...reason]) {
-    return user.send(`You've been warned in ${msg.guild.name} by ${msg.author.tag} for: ${reason.join(" ")}`)
+    return user.send(`You've been warned in **${msg.guild.name}** by **${msg.author.tag}** for: ${reason.join(" ")}`)
       .then(() => {
-        this.client.emit("modlogs", "warn", { name: "warn", user, reason: reason.join(" ") });
-        return msg.send(`Warned **${user.tag}**`);
+        this.client.emit("modlogs", "warn", { name: "warn", user, mod: msg.member, reason: reason.join(" ") });
+        return msg.send(`Warned **${user.tag}**`)
+          .then((m) => m.delete({ timeout: 3000 }))
+          .then(() => msg.delete())
+          .catch(() => null);
       })
       .catch(() => msg.send("I couldn't dm the user, maybe they have DMs blocked."));
   }

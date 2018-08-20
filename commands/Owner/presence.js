@@ -15,12 +15,8 @@ class Presence extends Command {
       await this.client.user.setActivity(null);
       return msg.send("Cleared presence.");
     }
-    const typeMatch = /\[type:(\S+)\]/i.exec(presence);
-    const type = typeMatch ? this.resolveType(typeMatch[1]) : "PLAYING";
-    if(typeMatch) presence = presence.replace(typeMatch[0], "");
-    const statusMatch = /\[status:(\S+)\]/i.exec(presence);
-    const status = statusMatch ? this.resolveStatus(statusMatch[1]) : null;
-    if(statusMatch) presence = presence.replace(statusMatch[0], "");
+    const type = "type" in msg.flags ? this.resolveType(msg.flags.type) : "PLAYING";
+    const status = "status" in msg.flags ? this.resolveStatus(msg.flags.status) : null;
     presence = presence
       .replace(/{users}/g, this.client.users.size)
       .replace(/{guilds}/g, this.client.guilds.size)
@@ -28,10 +24,10 @@ class Presence extends Command {
       .replace(/{prefix}/g, this.client.options.prefix);
     const options = {};
     if(type) options.type = type;
-    if(type === "STREAMING") options.url = "https://twitch.tv/a";
+    if(type === "STREAMING") options.url = msg.flags.url || "https://twitch.tv/a";
     await this.client.user.setActivity(presence.trim(), options);
     if(status) await this.client.user.setStatus(status);
-    return msg.send(`Changed presence to: ${type.toLowerCase()} **${presence.trim()}**`);
+    return msg.send(`Changed presence to: ${type.toLowerCase()} **${presence.trim()}**${status ? `, Status: **${status}**` : ""}`);
   }
   
   resolveType(str) {

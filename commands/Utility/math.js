@@ -25,7 +25,7 @@ class MathCommand extends Command {
       const res = mathEval(expr);
       return msg.send(`**Expression**${codeBlock("", expr)}\n**Results**${codeBlock("", res)}`);
     } catch(err) {
-      return msg.send(codeBlock("", err.message || err));
+      return msg.send(codeBlock("", err.message));
     }
   }
 }

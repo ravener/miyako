@@ -33,7 +33,7 @@ class Highlight extends Command {
 
   async disable(msg) {
     if(!msg.member.settings.highlight.enabled) throw "Highlight is already disabled.";
-    await msg.memher.settings.update("highlight.enabled", false);
+    await msg.member.settings.update("highlight.enabled", false);
     return msg.send("Successfully disabled highlight.");
   }
 
@@ -48,7 +48,7 @@ class Highlight extends Command {
   async blacklist(msg) {
     if(!msg.mentions.channels.size) throw "You need to mention a channel to blacklist";
     const channel = msg.mentions.channels.first();
-    await msg.member.settings.update("highlight.blacklistedChannels", channel.id);
+    await msg.member.settings.update("highlight.blacklistedChannels", channel.id, msg.guild);
     if(msg.member.settings.highlight.blacklistedChannels.includes(channel.id)) {
       return msg.send(`Added ${channel.toString()} to channel blacklists, highlighted words from this channel won't notify you anymore, to unblacklist call this command again in same channel`);
     }

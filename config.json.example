@@ -4,6 +4,7 @@
   "mongodb": "mongodb://localhost",
   "genius": "https://genious.com",
   "lavalink": "youshallnotpass",
+  "fortnite": "https://fortnitetracker.com",
   "dictionary": {
     "app_key": "",
     "app_id": ""

@@ -1,10 +1,9 @@
-const { Event, Timestamp } = require("klasa");
+const { Event } = require("klasa");
 const { MessageEmbed } = require("discord.js");
 
 class Modlogs extends Event {
   constructor(...args) {
     super(...args);
-    this.timestamp = new Timestamp("d MMMM YYYY");
   }
   
   run(guild, type, data) {
@@ -59,6 +58,9 @@ class Modlogs extends Event {
       case "roleDelete":
         channel.send(this.embed(`**Role deleted**\n\n**Name:** ${data.role.name}\n**ID:** ${data.role.id}\n**Color:** ${data.role.hexColor}`, 0xff0000, { title: "Role Delete" }));
         break;
+      case "warn":
+        channel.send(this.embed(`**${data.user.user.tag}** got warned by **${data.mod.user.tag}**\n\n**Reason:** ${data.reason}\n**User ID:** ${data.user.id}`, 0xff0000), { title: "Member Warn", user: data.user, thumbnail: "user" });
+        break;
       default:
         this.client.emit("warn", `WARNING: unhandled modlog action: ${type}`);
         break;
@@ -72,7 +74,6 @@ class Modlogs extends Event {
       .setDescription(text)
       .setColor(color)
       .setTimestamp();
-      //.setFooter(this.timestamp.display(new Date()));
       
     if(data.user) embed.setAuthor(data.user.tag, data.user.displayAvatarURL());
     

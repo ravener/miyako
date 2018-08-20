@@ -14,7 +14,11 @@ class Hastebin extends Command {
   async run(msg, [code]) {
     const key = await superagent.post("https://hastebin.com/documents")
       .send(code.code ? code.code : code)
-      .then((res) => res.body.key);
+      .then((res) => res.body.key)
+      .catch((err) => {
+        if(err.status === 500 || err.status === 503) throw "Hastebin is unavailable at this time, try again later.";
+        throw err;
+      });
     return msg.sendMessage(`Hastebin-ified: https://hastebin.com/${key}${code.language ? `.${code.language}` : ""}`);
   }
 }

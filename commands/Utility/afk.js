@@ -6,7 +6,8 @@ class AFK extends Command {
     super(...args, {
       description: "Sets your afk status",
       cooldown: 5,
-      usage: "<reset|message:string>"
+      usage: "<reset|message:string>",
+      aliases: ["away"]
     });
   }
   

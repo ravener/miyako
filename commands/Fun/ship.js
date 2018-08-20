@@ -20,7 +20,7 @@ class Ship extends Command {
     const { shipname, percent } = this.getLove(one, two);
     const embed = new MessageEmbed()
       .setTitle("Love Calculator")
-      .setDescription(`**${one}** + **${two}**\n**${percent}%**!`)
+      .setDescription(`**${one}** + **${two}**\n:heart: **${percent}%**`)
       .addField("Ship Name", shipname)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setColor(0xff0000);

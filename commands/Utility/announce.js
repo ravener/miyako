@@ -9,14 +9,15 @@ class Announce extends Command {
       aliases: ["announcement"],
       usage: "[channel:channelname] <role:rolename> <message:string> [...]",
       usageDelim: " ",
-      runIn: ["text"]
+      runIn: ["text"],
+      quotedStringSupport: true
     });
   }
   
   async run(msg, [channel = msg.channel, role, ...message]) {
     if(!channel.postable) throw "I can't post in that channel.";
     if(!channel.permissionsFor(msg.member).has("SEND_MESSAGES") && !await msg.hasAtleastPermissionLevel(10)) throw "You can't post in that channel.";
-    if(role.position >= msg.guild.me.roles.hughest.position) throw "I can't edit that role, make sure my role order is above it.";
+    if(role.position >= msg.guild.me.roles.highest.position) throw "I can't edit that role, make sure my role order is above it.";
     await role.edit({ mentionable: true });
     await channel.send(message.join(" "));
     await role.edit({ mentionable: false });
