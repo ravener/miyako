@@ -1,4 +1,4 @@
-const { Monitor, util: { codeBlock } } = require("klasa");
+const { Monitor } = require("klasa");
 const { MessageEmbed, Util: { escapeMarkdown } } = require("discord.js");
 
 class Highlight extends Monitor {
