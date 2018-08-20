@@ -23,7 +23,7 @@ class Highlight extends Monitor {
       const embed = new MessageEmbed()
         .setTitle("Click Here to jump to the message")
         .setDescription(msgs.map((x) => `**${escapeMarkdown(x.author.tag)}** | ${escapeMarkdown(x.content)}`).join("\n"))
-        .setTimestamp(msg.createdTimestamp)
+        .setTimestamp(msg.createdAt)
         .setColor(0xff0000)
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
         .setURL(msg.url);
