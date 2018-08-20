@@ -12,7 +12,7 @@ class Achievement extends Command {
   }
 
   async run(msg, [user = msg.author, ...text]) {
-    if(text.join(" ").length > 22) throw "Text must be smaller than 22 characters.";
+    if(text.join(" ").length > 22) throw "Text must be shorter than 22 characters.";
     return msg.send(new MessageAttachment(await this.client.idioticapi.achievement(user.displayAvatarURL({ format: "png", size: 2048 }), text.join(" ")), "achievement.png"));
   }
 }
