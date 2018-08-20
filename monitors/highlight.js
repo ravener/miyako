@@ -18,11 +18,11 @@ class Highlight extends Monitor {
     members.forEach(async(x) => {
       const word = x.settings.highlight.words.find((x) => msg.content.toLowerCase().includes(x.toLowerCase()));
       if(!word) return;
-      const msgs = await msg.channel.messages.fetch({ limit: 7, around: msg.id }).catch(() => null);
+      const msgs = await msg.channel.messages.fetch({ limit: 10, around: msg.id }).catch(() => null);
       if(!msgs) return;
       const embed = new MessageEmbed()
         .setTitle("Click Here to jump to the message")
-        .setDescription(msgs.map((x) => `**${escapeMarkdown(x.author.tag)}** | ${escapeMarkdown(x.content)}`).join("\n"))
+        .setDescription(msgs.array().reverse().map((x) => `**${escapeMarkdown(x.author.tag)}** | ${x.content}`).join("\n"))
         .setTimestamp(msg.createdAt)
         .setColor(0xff0000)
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
