@@ -14,8 +14,8 @@ class Warn extends Command {
   async run(msg, [user, ...reason]) {
     return user.send(`You've been warned in **${msg.guild.name}** by **${msg.author.tag}** for: ${reason.join(" ")}`)
       .then(() => {
-        this.client.emit("modlogs", "warn", { name: "warn", user, mod: msg.member, reason: reason.join(" ") });
-        return msg.send(`Warned **${user.tag}**`)
+        this.client.emit("modlogs", msg.guild, "warn", { name: "warn", user, mod: msg.member, reason: reason.join(" ") });
+        return msg.send(`Warned **${user.user.tag}**`)
           .then((m) => m.delete({ timeout: 3000 }))
           .then(() => msg.delete())
           .catch(() => null);
