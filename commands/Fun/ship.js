@@ -16,6 +16,7 @@ class Ship extends Command {
 
   async run(msg, [one, two = msg.member.displayName]) {
     if(one.displayName) one = one.displayName;
+    if(two.displayName) two = two.displayName;
     const { shipname, percent } = this.getLove(one, two);
     const embed = new MessageEmbed()
       .setTitle("Love Calculator")
