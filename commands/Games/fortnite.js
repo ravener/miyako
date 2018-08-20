@@ -33,7 +33,7 @@ class Fortnite extends Command {
     if(resp.error === "Player Not Found") throw "Couldn't find that player.";
     const embed = new MessageEmbed()
       .setTitle(resp.epicUserHandle)
-      .setDescription(`Profile for ${resp.epicUserHandle} on {resp.platformNameLong}`)
+      .setDescription(`Profile for ${resp.epicUserHandle} on ${resp.platformNameLong}`)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setThumbnail("https://cdn.discordapp.com/attachments/460894620545449986/461579014394609665/IMG_20180627_200804.png")
       .setColor(0xff0000);
