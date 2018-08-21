@@ -19,7 +19,7 @@ class Points extends Monitor {
     const curLevel = Math.floor(0.1 * Math.sqrt(msg.member.settings.points));
     if(msg.member.settings.level < curLevel) {
       if(msg.guild.settings.levelup) {
-        await msg.channel.send(`**${msg.member.displayName}**, congratulations! You've leveled up to level **${curLevel}**.`);
+        await msg.channel.send(`**${msg.member.displayName}**, congratulations! You've leveled up to level **${curLevel}**.`).catch(() => null);
       }
       await msg.member.setLevel(curLevel);
     }
