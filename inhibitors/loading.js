@@ -19,3 +19,5 @@ class Loading extends Inhibitor {
     return true;
   }
 }
+
+module.exports = Loading;
