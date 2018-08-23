@@ -13,7 +13,7 @@ class Profile extends Command {
   async run(msg, [member = msg.member]) {
     if(member.user.bot) throw "You can't view a bot's profile";
     const embed = new MessageEmbed()
-      .setTitle(`**${member.displayName}**'s profile`)
+      .setTitle(`${member.displayName}'s profile`)
       .setColor(0xff0000)
       .setAuthor(member.user.tag, member.user.displayAvatarURL())
       .setThumbnail(member.user.displayAvatarURL())
