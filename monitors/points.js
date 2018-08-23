@@ -10,10 +10,12 @@ class Points extends Monitor {
       ignoreBlacklistedGuilds: true,
       ignoreBlacklistedUsers: true
     });
+    this.timeouts = new Set();
   }
 
   async run(msg) {
     if(!msg.guild || msg.command) return;
+    if(this.timeouts.has(msg.author.id)) return;
     const points = Math.floor(Math.random() * 5) + 1;
     await msg.member.givePoints(points);
     const curLevel = Math.floor(0.1 * Math.sqrt(msg.member.settings.points));
@@ -23,6 +25,8 @@ class Points extends Monitor {
       }
       await msg.member.setLevel(curLevel);
     }
+    this.timeouts.add(msg.author.id);
+    setTimeout(() => this.timeouts.delete(msg.author.id), 3000);
   }
 }
 

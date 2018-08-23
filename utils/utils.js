@@ -10,9 +10,12 @@ class Util {
     if(!suffix) return str.slice(0, limit);
     return str.substring(0, limit - suffix.length) + suffix;
   }
-  
-  static random(min, max) {
-    if(min instanceof Array) return min[Math.floor(Math.random() * min.length)];
+
+  static random(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  static randomNumber(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;

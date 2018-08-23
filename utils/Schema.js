@@ -32,7 +32,9 @@ module.exports.defaultGuildSchema = Client.defaultGuildSchema
 module.exports.defaultUserSchema = Client.defaultUserSchema
   .add("afk", (folder) => folder
     .add("status", "boolean")
-    .add("message", "string"));
+    .add("message", "string"))
+  .add("reps", "integer", { default: 0, configurable: false })
+  .add("repcooldown", "integer", { default: Date.now() - 86400000, configurable: false });
 
 module.exports.defaultClientSchema = Client.defaultClientSchema
   .add("psa", (folder) => folder
