@@ -14,7 +14,7 @@ math.import({
 class MathCommand extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Evalutes complex math expressions.",
+      description: "Evaluates complex math expressions.",
       usage: "<expression:string>",
       aliases: ["calc", "calculator"]
     });

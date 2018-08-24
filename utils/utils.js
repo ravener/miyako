@@ -11,6 +11,13 @@ class Util {
     return str.substring(0, limit - suffix.length) + suffix;
   }
 
+  static dir(obj = {}) {
+    const x = Object.getOwnPropertyNames(obj);
+    const p = Object.getOwnPropertyNames(obj.prototype || {});
+    const c = Object.getOwnPropertyNames(obj.constructor ? obj.constructor.prototype : {});
+    return Array.from(new Set([ ...x, ...p, ...c ]));
+  }
+
   static random(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
