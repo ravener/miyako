@@ -19,7 +19,8 @@ class Play extends Command {
     const track = await this.client.lavalink.getTracks(`ytsearch:${song}`);
     if(!track) throw "Track not found or an error occured, try again with another song";
     player.queue.push({ requester: msg.member, song: track[0] });
-    if(!this.playing) await this.play(msg, player);
+    if(this.playing) return msg.send(`Added **${track.title}** to the queue as requested by **${msg.member.displayName}**`);
+    await this.play(msg, player);
   }
 
   async play(msg, player) {
@@ -31,7 +32,7 @@ class Play extends Command {
       if(reason === "FINISHED") {
         if(!player.queue.length) {
           await msg.send("Queue is empty! leaving voice channel...");
-          await this.client.lavalink.leave(player.channel);
+          await this.client.lavalink.leave(player.channel.guild);
           this.playing = false;
           return;
         }

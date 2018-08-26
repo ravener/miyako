@@ -70,6 +70,11 @@ class AudioPlayer extends EventEmitter {
     });
   }
 
+  clearQueue() {
+    this.queue = [];
+    return this;
+  }
+
   _update(d) {
     if(!d || !d.state || !d.state.time || !d.state.position) return;
     this.state = {
