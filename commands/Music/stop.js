@@ -14,7 +14,7 @@ class Stop extends Command {
     await player.stop();
     player.queue = [];
     await player.destroy();
-    await this.client.lavalink.leave(player.channel);
+    await this.client.lavalink.leave(player.channel.guild);
     return msg.send("Stopped, cleared queue and left voice channel.");
   }
 }
