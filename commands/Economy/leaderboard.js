@@ -21,7 +21,7 @@ class Leaderboard extends Command {
     if(page + 1 > total) throw `There are only **${total || 1}** pages in the leaderboard`;
     const top = list.slice(page * 10, (page + 1) * 10);
     const leaderboard = [];
-    const numPos = top.indexOf(msg.member);
+    const numPos = list.indexOf(msg.member);
     const pos = numPos === -1 ? "??" : (list.indexOf(msg.member) + 1).toString().padStart(2, "0");
     top.map((x, i) => {
       leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${x.user.tag}${" ".repeat(35 - x.user.tag.length)}::  ${x.settings.points.toLocaleString()}`);
