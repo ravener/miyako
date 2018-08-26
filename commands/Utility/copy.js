@@ -8,6 +8,7 @@ class Copy extends Command {
       cooldown: 5,
       usage: "<link:url|id:string> <name:string>",
       runIn: ["text"],
+      usageDelim: " ",
       permissionLevel: 6,
       requiredPermissions: ["MANAGE_EMOJIS"]
     });

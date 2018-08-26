@@ -6,7 +6,9 @@ class AudioPlayer extends EventEmitter {
     super();
     this.guild = channel.guild;
     this.manager = node.manager;
+    this.queue = [];
     this.node = node;
+    this.paused = false;
     this.alive = true;
     this.state = { time: 0, position: 0 };
     this.channel = channel;
@@ -40,12 +42,13 @@ class AudioPlayer extends EventEmitter {
     });
   }
 
-  pause(pause = true) {
-    return this.node.send({
+  async pause(pause = true) {
+    await this.node.send({
       op: "pause",
       guildId: this.guild.id,
       pause
     });
+    this.paused = pause;
   }
 
   resume() {

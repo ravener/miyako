@@ -18,12 +18,14 @@ class Help extends Command {
   
   async run(msg, [command]) {
     if(command) {
+      const cost = command.category === "Canvas" ? "$10" : command.cost ? `$${command.cost}` : "None";
       const embed = new MessageEmbed()
         .setTitle(command.name)
         .setColor(0xff0000)
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
         .setDescription([
-          `**${util.isFunction(command.description) ? command.description(msg.language) : command.description}**`, 
+          `**${util.isFunction(command.description) ? command.description(msg.language) : command.description}**`,
+          `**Cost**: ${cost}`,
           msg.language.get("COMMAND_HELP_USAGE", command.usage.fullUsage(msg)),
           msg.language.get("COMMAND_HELP_EXTENDED"),
           `\`\`\`${util.isFunction(command.extendedHelp) ? command.extendedHelp(msg.language) : command.extendedHelp}\`\`\``

@@ -42,7 +42,7 @@ class AudioManager extends EventEmitter {
     /* eslint-enable camelcase */
   }
 
-  async join(channel, node, { selfDeaf = false, selfMute = false } = {}) {
+  async join(channel, { selfDeaf = false, selfMute = false, node = this.nodes.first() } = {}) {
     await this._join(channel, { selfDeaf, selfMute });
     const player = this.get(channel.guild.id);
     if(player) return player;

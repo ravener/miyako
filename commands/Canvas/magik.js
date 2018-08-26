@@ -17,7 +17,7 @@ class Magik extends Command {
     const embed = new MessageEmbed()
       .setAuthor(user.tag, user.displayAvatarURL())
       .setColor(0xff0000)
-      .setImage(res.message);
+      .setImage(res.body.message);
     return msg.send({ embed });
   }
 }
