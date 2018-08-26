@@ -16,7 +16,7 @@ class Leaderboard extends Command {
       .array()
       .sort((a, b) => a.settings.points < b.settings.points ? 1 : -1);
     page -= 1;
-    const total = Math.round(list.size / 10);
+    const total = Math.round(list.length / 10);
     if(total === 0) throw "Couldn't get top 10 members, maybe it's a dead place?";
     if(page + 1 > total) throw `There are only **${total || 1}** pages in the leaderboard`;
     const top = list.slice(page * 10, (page + 1) * 10);
