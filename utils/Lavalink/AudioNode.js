@@ -8,7 +8,7 @@ class AudioNode extends EventEmitter {
     this.ws = null;
     this.client = manager.client;
     this.port = options.port;
-    this.password = options.password;
+    Object.defineProperty(this, "password", { value: options.password, writable: false });
     this.host = options.host;
     this.stats = {};
   }

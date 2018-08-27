@@ -4,7 +4,8 @@ class Stop extends Command {
   constructor(...args) {
     super(...args, {
       description: "Stops Music",
-      runIn: ["text"]
+      runIn: ["text"],
+      aliases: ["disconnect"]
     });
   }
 

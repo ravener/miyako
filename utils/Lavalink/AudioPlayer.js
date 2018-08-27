@@ -7,23 +7,27 @@ class AudioPlayer extends EventEmitter {
     this.guild = channel.guild;
     this.manager = node.manager;
     this.queue = [];
+    this.looping = false;
+    this.playing = false;
     this.node = node;
     this.paused = false;
     this.alive = true;
     this.state = { time: 0, position: 0 };
     this.channel = channel;
+    this.volume = 100;
     this.client = node.manager.client;
   }
 
-  play(track, { startTime, endTime } = {}) {
+  async play(track, { startTime, endTime } = {}) {
     if(track instanceof AudioTrack) track = track.track;
-    return this.node.send({
+    await this.node.send({
       op: "play",
       guildId: this.guild.id,
       track: track,
       startTime,
       endTime
     });
+    this.playing = true;
   }
 
   async destroy() {
@@ -32,14 +36,16 @@ class AudioPlayer extends EventEmitter {
       guildId: this.guild.id
     });
     this.alive = false;
+    this.playing = false;
   }
 
-  setVolume(volume = 100) {
-    return this.node.send({
+  async setVolume(volume = 100) {
+    await this.node.send({
       op: "volume",
       guildId: this.guild.id,
       volume
     });
+    this.volume = volume;
   }
 
   async pause(pause = true) {
@@ -55,11 +61,12 @@ class AudioPlayer extends EventEmitter {
     return this.pause(false);
   }
 
-  stop() {
-    return this.node.send({
+  async stop() {
+    await this.node.send({
       op: "stop",
       guildId: this.guild.id
     });
+    this.playing = false;
   }
 
   seek(position = 0) {
