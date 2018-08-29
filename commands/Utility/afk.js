@@ -1,4 +1,4 @@
-const { Command } = require("klasa");
+const { Command, util: { codeBlock } } = require("klasa");
 const { Util: { escapeMarkdown } } = require("discord.js");
 
 class AFK extends Command {
@@ -6,12 +6,15 @@ class AFK extends Command {
     super(...args, {
       description: "Sets your afk status",
       cooldown: 5,
-      usage: "<reset|message:string>",
+      usage: "<reset|show|message:string>",
       aliases: ["away"]
     });
   }
   
   async run(msg, [status]) {
+    if(status === "show") {
+      return msg.send(`**AFK Status**${codeBlock("", msg.author.settings.afk.status ? "Enabled" : "Disabled")}\n**Message**${codeBlock("", msg.author.settings.afk.message || "None")}`);
+    }
     if(status === "reset") {
       if(!msg.author.settings.afk.status) throw "You are not afk.";
       await msg.author.settings.update([

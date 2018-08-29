@@ -1,7 +1,12 @@
+const { util: { toTitleCase } } = require("klasa");
 
 class Util {
   constructor() {
     throw new Error("Static class");
+  }
+
+  static capitalize(str) {
+    return str.split("_").map(toTitleCase).join(" ");
   }
   
   static slice(str, limit, suffix = "...") {
@@ -9,13 +14,6 @@ class Util {
     if(suffix && suffix.length > limit) throw new Error("Suffix shouldn't be longer than limit.");
     if(!suffix) return str.slice(0, limit);
     return str.substring(0, limit - suffix.length) + suffix;
-  }
-
-  static dir(obj = {}) {
-    const x = Object.getOwnPropertyNames(obj);
-    const p = Object.getOwnPropertyNames(obj.prototype || {});
-    const c = Object.getOwnPropertyNames(obj.constructor ? obj.constructor.prototype : {});
-    return Array.from(new Set([ ...x, ...p, ...c ]));
   }
 
   static random(arr) {
