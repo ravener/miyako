@@ -41,7 +41,7 @@ class Highlight extends Command {
     if(!word.length) throw "Mention the word to add.";
     if(msg.member.settings.highlight.words.length >= 10) throw "You can only have upto 10 highlights at a time, remove some and try again.";
     if(msg.member.settings.highlight.words.includes(word.join(" ").toLowerCase())) throw "That word is already in your list.";
-    await msg.member.settings.update("highlight.words", word.join(" ").toLowerCase(), { action: "add", force: true });
+    await msg.member.settings.update("highlight.words", word.join(" ").toLowerCase(), { action: "add" });
     return msg.send(`Added the word **${word.join(" ")}** in your highlight list.`);
   }
 
@@ -59,7 +59,7 @@ class Highlight extends Command {
     if(!word.length) throw "You must mention the word to remove.";
     const arr = msg.member.settings.highlight.words.find((x) => x === word.join(" ").toLowerCase());
     if(!arr) throw "That word isn't in your list";
-    await msg.member.settings.update("highlight.words", arr, { action: "remove", force: true });
+    await msg.member.settings.update("highlight.words", arr, { action: "remove" });
   }
 }
 
