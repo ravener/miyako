@@ -56,14 +56,14 @@ class MessageReactionAdd extends RawEvent {
       return stars.edit({ embed }); 
     }
 
-    if(data.emoji.count < msg.guild.settings.starboard.limit) return;
+    if(msg.reactions.get("⭐").count < msg.guild.settings.starboard.limit) return;
 
     const embed = new MessageEmbed()
       .setColor(15844367)
       .setDescription(msg.content) 
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setTimestamp()
-      .setFooter(`⭐ ${data.emoji.count} | ${msg.id}`)
+      .setFooter(`⭐ ${msg.guild.settings.starboard.limit} | ${msg.id}`)
       .setImage(getAttachment(msg));
     return starboard.send({ embed }).catch(() => null);
   }
