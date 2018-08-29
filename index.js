@@ -11,7 +11,7 @@ class LadybugClient extends Client {
   constructor() {
     super({
       fetchAllMembers: false,
-      disabledEvents: ["TYPING_START", "TYPING_STOP"],
+      disabledEvents: ["TYPING_START"],
       permissionLevels: perms,
       prefix: "lb.",
       regexPrefix: /^((hey\s*)?ladybug,?)\s*/i,

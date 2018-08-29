@@ -4,6 +4,10 @@ Client.use(require("klasa-member-gateway"));
 
 module.exports.defaultGuildSchema = Client.defaultGuildSchema
   .add("levelup", "boolean", { default: true })
+  .add("starboard", (folder) => folder
+    .add("channel", "channel")
+    .add("limit", "integer", { default: 2 })
+    .add("enabled", "boolean", { default: false }))
   .add("welcome", (folder) => folder
     .add("channel", "channel")
     .add("message", "string")
