@@ -6,7 +6,7 @@ class Starboard extends Command {
       description: "Manages starboard configuration for this server",
       runIn: ["text"],
       aliases: ["star"],
-      usage: "<enabled|disable|limit> [args:string]",
+      usage: "<enable|disable|limit> [args:string]",
       subcommands: true,
       usageDelim: " "
     });

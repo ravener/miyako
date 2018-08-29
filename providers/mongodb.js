@@ -93,6 +93,6 @@ const parseUpdateObject = (doc, pref = "", oldObj = {}) => {
     }
   }
   return obj;
-} 
+};
 
 module.exports = MongoDB;
