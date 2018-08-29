@@ -63,7 +63,7 @@ class MessageReactionAdd extends RawEvent {
       .setDescription(msg.content) 
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setTimestamp()
-      .setFooter(`⭐ ${msg.guild.settings.starboard.limit} | ${msg.id}`)
+      .setFooter(`⭐ ${data.emoji.count} | ${msg.id}`)
       .setImage(getAttachment(msg));
     return starboard.send({ embed }).catch(() => null);
   }
