@@ -19,7 +19,7 @@ class RoleInfo extends Command {
   }
   
   run(msg, [role]) {
-    const allPermissions = Object.entries(role.permissions.serialize()).filter(perm => perm[1]).map(([perm]) => this.perms[perm] ? this.perms[perm] : capitialize(perm)).join(", ");
+    const allPermissions = Object.entries(role.permissions.serialize()).filter(perm => perm[1]).map(([perm]) => this.perms[perm] ? this.perms[perm] : capitalize(perm)).join(", ");
     
     const embed = new MessageEmbed()
       .setColor(role.hexColor || 0xff0000)
