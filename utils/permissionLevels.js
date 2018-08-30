@@ -10,7 +10,7 @@ const perms = new PermissionLevels()
     if(!member) return false;
     if(member.roles.has(client.constants.premiumRole)) return true;
     return false;
-  })
+  }, { fetch: true })
   // Mini mods
   .add(4, (client, message) => message.guild && message.member.permissions.has("MANAGE_MESSAGES"), { fetch: true })
   // Moderators
