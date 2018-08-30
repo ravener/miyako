@@ -17,7 +17,7 @@ class YouTube extends Command {
       .then((res) => cheerio.load(res.text));
     const url = $(".yt-uix-tile-link").first().attr("href");
     if(!url) throw "No Results Found.";
-    return msg.send(url);
+    return msg.send(`https://youtube.com${url}`);
   }
 }
 
