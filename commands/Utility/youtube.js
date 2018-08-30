@@ -7,12 +7,13 @@ class YouTube extends Command {
     super(...args, {
       description: "Searches something on YouTube",
       usage: "<query:string>",
-      cooldown: 5
+      cooldown: 5,
+      aliases: ["yt"]
     });
   }
 
   async run(msg, [query]) {
-    const $ = superagent.get(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`)
+    const $ = await superagent.get(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`)
       .then((res) => cheerio.load(res.text));
     const url = $(".yt-uix-tile-link").first().attr("href");
     if(!url) throw "No Results Found.";
