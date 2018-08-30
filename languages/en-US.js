@@ -115,24 +115,16 @@ class English extends Language {
         ].join(" "))
       ],
       COMMAND_INVITE_DESCRIPTION: "Displays the join guild link of the bot.",
-      COMMAND_INFO: [
-        "Klasa is a 'plug-and-play' framework built on top of the Discord.js library.",
-        "Most of the code is modularized, which allows developers to edit Klasa to suit their needs.",
+      COMMAND_INFO: (guild) => [
+        "Hi, i'm Mari... i-i mean Ladybug i'm a multipurpose bot made by `Free TNT#5796`",
+        "My goal is to provide as many features as you will ever need for your servers, i do a lot of cool things and even more is planned",
         "",
-        "Some features of Klasa include:",
-        "• 🐇💨 Fast loading times with ES2017 support (`async`/`await`)",
-        "• 🎚🎛 Per-client/guild/user settings that can be extended with your own fields",
-        "• 💬 Customizable command system with automated parameter resolving and the ability to load/reload commands on-the-fly",
-        "• 👀 \"Monitors\", which can watch messages and edits (for swear filters, spam protection, etc.)",
-        "• ⛔ \"Inhibitors\", which can prevent commands from running based on any condition you wish to apply (for permissions, blacklists, etc.)",
-        "• 🗄 \"Providers\", which simplify usage of any database of your choosing",
-        "• ✅ \"Finalizers\", which run after successful commands (for logging, collecting stats, cleaning up responses, etc.)",
-        "• ➕ \"Extendables\", which passively add methods, getters/setters, or static properties to existing Discord.js or Klasa classes",
-        "• 🌐 \"Languages\", which allow you to localize your bot's responses",
-        "• ⏲ \"Tasks\", which can be scheduled to run in the future, optionally repeating",
+        `Type \`${guild.settings.prefix}help\` to see all commands list and \`${guild.settings.prefix} <command>\` to get detailed information about a command`,
+        `If you got any suggestions to improve this bot feel free to suggest it through \`${guild.settings.prefix}suggest <suggestion>\``,
         "",
-        "We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.",
-        "If you're interested in us, check us out at https://klasa.js.org"
+        "Btw the code for this bot is also all OpenSource on github, this means everyone is welcome to contribute and help if you can and want to: https://github.com/freetnt5852/LadyBug-Bot",
+        "",
+        "Lastly if you got any questions or just want to hangout join our server https://discord.gg/mDkMbEh"
       ],
       COMMAND_INFO_DESCRIPTION: "Provides some information about this bot.",
       COMMAND_HELP_DESCRIPTION: "Display help for a command.",
