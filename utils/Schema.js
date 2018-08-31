@@ -38,6 +38,7 @@ module.exports.defaultUserSchema = Client.defaultUserSchema
     .add("status", "boolean")
     .add("message", "string"))
   .add("reps", "integer", { default: 0, configurable: false })
+  .add("title", "string")
   .add("repcooldown", "integer", { default: Date.now() - 86400000, configurable: false });
 
 module.exports.defaultClientSchema = Client.defaultClientSchema
