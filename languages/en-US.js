@@ -119,7 +119,7 @@ class English extends Language {
         "Hi, i'm Mari... i-i mean Ladybug i'm a multipurpose bot made by `Free TNT#5796`",
         "My goal is to provide as many features as you will ever need for your servers, i do a lot of cool things and even more is planned",
         "",
-        `Type \`${guild.settings.prefix}help\` to see all commands list and \`${guild.settings.prefix} <command>\` to get detailed information about a command`,
+        `Type \`${guild.settings.prefix}help\` to see all commands list and \`${guild.settings.prefix}help <command>\` to get detailed information about a command`,
         `If you got any suggestions to improve this bot feel free to suggest it through \`${guild.settings.prefix}suggest <suggestion>\``,
         "",
         "Btw the code for this bot is also all OpenSource on github, this means everyone is welcome to contribute and help if you can and want to: https://github.com/freetnt5852/LadyBug-Bot",
