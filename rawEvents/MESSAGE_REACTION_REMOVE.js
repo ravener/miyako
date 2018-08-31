@@ -23,13 +23,15 @@ class MessageReactionRemove extends RawEvent {
       const foundStar = stars.embeds[0];
       const embed = new MessageEmbed()
         .setColor(foundStar.color)
+        .setTitle(foundStar.title)
+        .setURL(msg.url)
         .setDescription(foundStar.description)
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${msg.id}`)
         .setImage(getAttachment(msg));
       await stars.edit({ embed });
-      if(parseInt(star[1]) - 1 == 0) return stars.delete({ timeout: 1000 });
+      if(parseInt(star[1]) - 1 < msg.guild.settings.starboard.limit) return stars.delete({ timeout: 1000 });
     }
   }
 }

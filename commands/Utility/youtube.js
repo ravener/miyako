@@ -13,10 +13,22 @@ class YouTube extends Command {
   }
 
   async run(msg, [query]) {
-    const $ = await superagent.get(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`)
-      .then((res) => cheerio.load(res.text));
-    const url = $(".yt-uix-tile-link").first().attr("href");
-    if(!url) throw "No Results Found.";
+    const url = await superagent.get(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`)
+      .then((res) => cheerio.load(res.text))
+      .then(function find($) {
+        const u = $(".yt-uix-tile-link").first().attr("href");
+        
+        /*
+        Sometimes if video is an AD it sends garbage
+        so instead remove it from the DOM and search again
+        */
+        if(u && u.startsWith("http")) {
+          $(".yt-uix-tile-link").first().remove();
+          return find($);
+        }
+        return u;
+      });
+    if(!url) throw "No Results Found.";  
     return msg.send(`https://youtube.com${url}`);
   }
 }

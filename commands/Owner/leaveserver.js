@@ -20,7 +20,7 @@ class Leave extends Command {
     switch(res.content.toLowerCase()) {
       case "yes":
       case "y":
-        return guild.leave().then((g) => msg.send(`Left **${g.name}** (${g.id})`));
+        return guild.leave().then((g) => g.id === msg.guild.id ? msg.author.send(`Left **{g.name}** (${g.id})`) : msg.send(`Left **${g.name}** (${g.id})`));
       case "n":
       case "no":
         return msg.send("Cancelled.");

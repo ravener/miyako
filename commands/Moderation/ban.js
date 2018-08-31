@@ -15,6 +15,7 @@ class Ban extends Command {
   async run(msg, [member, ...reason]) {
     if (member.id === msg.author.id) throw "Why would you ban yourself?";
     if (member.id === this.client.user.id) throw "Have I done something wrong?";
+    if(member.id === msg.guild.owner.id) throw "You can't ban the owner.";
     
     if (member.roles.highest.position >= msg.member.roles.highest.position) throw "You cannot ban this user.";
     if (!member.bannable) throw "I cannot ban this user.";

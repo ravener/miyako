@@ -48,6 +48,8 @@ class MessageReactionAdd extends RawEvent {
       const foundStar = stars.embeds[0];
       const embed = new MessageEmbed()
         .setColor(foundStar.color)
+        .setTitle(foundStar.title)
+        .setURL(msg.url)
         .setDescription(foundStar.description)
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
         .setTimestamp()
@@ -60,6 +62,8 @@ class MessageReactionAdd extends RawEvent {
 
     const embed = new MessageEmbed()
       .setColor(15844367)
+      .setTitle("Click Here to jump to the message")
+      .setURL(msg.url)
       .setDescription(msg.content) 
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setTimestamp()

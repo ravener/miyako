@@ -15,6 +15,7 @@ class Kick extends Command {
   async run(msg, [member, ...reason]) {
     if (member.id === msg.author.id) throw "Why would you kick yourself?";
     if (member.id === this.client.user.id) throw "Have I done something wrong?";
+    if(member.id === msg.guild.owner.id) throw "You can't kick the owner.";
     
     if (member.roles.highest.position >= msg.member.roles.highest.position) throw "You cannot kick this user.";
     if (!member.kickable) throw "I cannot kick this user.";

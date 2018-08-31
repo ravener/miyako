@@ -27,8 +27,13 @@ class Highlight extends Command {
       if(!channel) return;
       return `#${channel.name} (${channel.id})`;
     }).filter((x) => x !== undefined);
+    const users = msg.member.settings.highlight.blacklistedUsers.map((x) => {
+      const user = msg.guild.members.get(x);
+      if(!user) return;
+      return `@${user.displayName} (${user.id})`;
+    }).filter((x) => x !== undefined);
     if(!words.length) throw "You have no highlights to show.";
-    return msg.send(`**Status**${codeBlock("", status)}\n${channels.length ? `**Blacklisted Channels**${codeBlock("", channels.join("\n"))}\n` : ""}**Highlighted Words**\n${codeBlock("", words.join("\n"))}`);
+    return msg.send(`**Status**${codeBlock("", status)}\n${channels.length ? `**Blacklisted Channels**${codeBlock("", channels.join("\n"))}\n` : ""}${users.length ? `**Blacklisted Users**${codeBlock("", users.join("\n"))}\n` : ""}**Highlighted Words**\n${codeBlock("", words.join("\n"))}`);
   }
 
   async disable(msg) {
@@ -46,7 +51,15 @@ class Highlight extends Command {
   }
 
   async blacklist(msg) {
-    if(!msg.mentions.channels.size) throw "You need to mention a channel to blacklist";
+    if(!msg.mentions.channels.size && !msg.mentions.members.size) throw "You need to mention a channel or user to blacklist";
+    if(msg.mentions.members.size) {
+      const user = msg.mentions.members.first();
+      await msg.member.settings.update("highlight.blacklistedUsers", user.id, msg.guild);
+      if(msg.member.settings.highlight.blacklistedUsers.includes(user.id)) {
+        return msg.send(`Added ${user.toString()} to your user blacklists, any highlighted mentions from this user won't notify you anymore`);
+      }
+      return msg.send(`Removed ${user.toString()} from your blacklists`);
+    }
     const channel = msg.mentions.channels.first();
     await msg.member.settings.update("highlight.blacklistedChannels", channel.id, msg.guild);
     if(msg.member.settings.highlight.blacklistedChannels.includes(channel.id)) {

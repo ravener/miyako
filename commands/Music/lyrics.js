@@ -47,7 +47,7 @@ class Lyrics extends Command {
       .setThumbnail(lyrics.image)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setColor(0xff0000);
-    if(msg.flags.text) return msg.send(`**${lyrics.title}**\n${slice(lyrics.lyrics.trim(), 1980)}`);
+    if(msg.flags.text) return msg.send(`**${lyrics.title}**\n${slice(lyrics.lyrics.trim(), 1990)}`);
     return msg.send({ embed });
   }
 }

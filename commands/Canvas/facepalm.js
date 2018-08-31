@@ -5,7 +5,7 @@ class Facepalm extends Command {
   constructor(...args) {
     super(...args, {
       description: "Facepalm someone",
-      usage: "[user:user]",
+      usage: "[user:username]",
       cooldown: 5
     });
   }

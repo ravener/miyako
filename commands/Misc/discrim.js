@@ -28,8 +28,8 @@ class Discrim extends Command {
         .setColor(0xff0000)
     );
     
-    for (let x = 0, t = ppl.length; x < t; x += 5) {
-      const curr = ppl.slice(x, x + 5);
+    for (let x = 0, t = ppl.length; x < t; x += 10) {
+      const curr = ppl.slice(x, x + 10);
       display.addPage((em) => em.setDescription(curr.map((x) => `• **${x.tag}**`)));
     } 
     

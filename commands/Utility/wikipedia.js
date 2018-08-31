@@ -17,7 +17,8 @@ class Wikipedia extends Command {
       .catch(() => {
         throw "I couldn't find a wikipedia article with that title!";
       });
-      
+    
+    if(!article.content_urls) throw "I couldn't find a wikipedia article with that title!";
     const embed = new MessageEmbed()
       .setColor(4886754)
       .setThumbnail((article.thumbnail && article.thumbnail.source) || "https://i.imgur.com/fnhlGh5.png")

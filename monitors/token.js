@@ -1,5 +1,6 @@
 const { Monitor } = require("klasa");
 const { MessageEmbed } = require("discord.js");
+const { embedContains } = require("../utils/utils.js");
 
 class Token extends Monitor {
   constructor(...args) {
@@ -15,7 +16,8 @@ class Token extends Monitor {
   
   async run(msg) {
     const token = msg.content.includes(this.client.token);
-    if(!token) return;
+    const maybeEmbed = msg.embeds.length ? embedContains(msg.embeds[0], this.client.token) : false;
+    if(!token && !maybeEmbed) return;
     const channel = this.client.channels.get(this.client.constants.logsChannel);
     let deleted = false;
     if(msg.deletable) {

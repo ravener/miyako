@@ -19,7 +19,7 @@ class Announce extends Command {
     if(!channel.permissionsFor(msg.member).has("SEND_MESSAGES") && !await msg.hasAtleastPermissionLevel(10)) throw "You can't post in that channel.";
     if(role.position >= msg.guild.me.roles.highest.position) throw "I can't edit that role, make sure my role order is above it.";
     await role.edit({ mentionable: true });
-    await channel.send(message.join(" "));
+    await channel.send(`${role.toString()}, ${message.join(" ")}`);
     await role.edit({ mentionable: false });
     if(channel !== msg.channel) return msg.send(`Done, sucessfully posted your announcement for the role **${role.name}**`);
   }

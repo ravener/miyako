@@ -52,4 +52,5 @@ module.exports.defaultMemberSchema = Client.defaultMemberSchema
   .add("highlight", (folder) => folder
     .add("words", "string", { array: true })
     .add("enabled", "boolean", { default: false })
-    .add("blacklistedChannels", "channel", { array: true }));
+    .add("blacklistedChannels", "channel", { array: true })
+    .add("blacklistedUsers", "user", { array: true }));
