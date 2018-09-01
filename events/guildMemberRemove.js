@@ -4,7 +4,7 @@ class GuildMemberRemove extends Event {
   
   async run(member) {
 
-    await member.settings.destry().catch(() => null);
+    await member.settings.destroy().catch(() => null);
 
     this.client.emit("modlogs", member.guild, "memberLeave", { member, name: "leave" });
     
