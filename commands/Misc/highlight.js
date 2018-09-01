@@ -42,7 +42,7 @@ class Highlight extends Command {
     return msg.send("Successfully disabled highlight.");
   }
 
-  async add(msg, [...word]) {
+  async add(msg, word) {
     if(!word.length) throw "Mention the word to add.";
     if(msg.member.settings.highlight.words.length >= 10) throw "You can only have upto 10 highlights at a time, remove some and try again.";
     if(msg.member.settings.highlight.words.includes(word.join(" ").toLowerCase())) throw "That word is already in your list.";
