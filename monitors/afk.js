@@ -15,6 +15,7 @@ class AFK extends Monitor {
     if(message.author.settings.afk.status) this.counter.set(message.author.id, (this.counter.get(message.author.id) || 0) + 1);
     if(message.author.settings.afk.status && this.counter.get(message.author.id) > 2) {
       await message.author.settings.update("afk.status", false);
+      this.counter.delete(message.author.id);
       return message.channel.send(`**${message.member.displayName}** welcome back, i've turned off your afk status`);
     }
     if(message.mentions.users.size) {
