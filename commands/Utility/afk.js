@@ -18,8 +18,7 @@ class AFK extends Command {
     if(status === "reset") {
       if(!msg.author.settings.afk.status) throw "You are not afk.";
       await msg.author.settings.update([
-        ["afk.status", false],
-        ["afk.message", null]
+        ["afk.status", false]
       ]);
       return msg.send("Done, you are no longer afk now.");
     }
