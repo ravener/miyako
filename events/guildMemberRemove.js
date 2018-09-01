@@ -2,8 +2,10 @@ const { Event } = require("klasa");
 
 class GuildMemberRemove extends Event {
   
-  run(member) {
-    
+  async run(member) {
+
+    await member.settings.destry().catch(() => null);
+
     this.client.emit("modlogs", member.guild, "memberLeave", { member, name: "leave" });
     
     const guild = member.guild;

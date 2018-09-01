@@ -7,6 +7,7 @@ class GuildDelete extends Event {
     if(!guild.available) return;
     
     if (!this.client.settings.preserveSettings) guild.settings.destroy().catch(() => null);
+    guild.members.forEach((x) => x.settings.destroy().catch(() => null));
     
     const channel = this.client.channels.get("454776806869041154");
     const embed = new MessageEmbed()
