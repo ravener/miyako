@@ -13,7 +13,7 @@ class Highlight extends Monitor {
 
   async run(msg) {
     if(!msg.guild) return;
-    const members = msg.guild.members.filter((x) => x.settings.highlight.enabled && x.settings.highlight.words.length && msg.channel.permissionsFor(x).has("VIEW_CHANNEL") && !x.settings.highlight.blacklistedChannels.includes(msg.channel.id) && !x.settings.highlight.blacklistedUsers.includes(msg.author.id));
+    const members = msg.guild.members.filter((x) => x.settings.highlight.enabled && x.settings.highlight.words.length && msg.channel.permissionsFor(x).has("VIEW_CHANNEL") && !x.settings.highlight.blacklistedChannels.includes(msg.channel.id) && !x.settings.highlight.blacklistedUsers.includes(msg.author.id) && x.id !== msg.author.id);
     if(!members.size) return;
     members.forEach(async(x) => {
       // const word = x.settings.highlight.words.find((x) => msg.content.toLowerCase().includes(x.toLowerCase()));
