@@ -8,5 +8,11 @@
   "dictionary": {
     "app_key": "",
     "app_id": ""
+  },
+  "postgresql": {
+    "user": "username",
+    "password": null,
+    "host": "localhost",
+    "database": ""
   }
 }
