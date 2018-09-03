@@ -19,7 +19,7 @@ class Profile extends Command {
       .setAuthor(member.user.tag, member.user.displayAvatarURL())
       .setThumbnail(member.user.displayAvatarURL())
       .addField("Level", member.settings.level)
-      .addField("Points", `$${member.settings.points}`)
+      .addField("Points", `$${member.settings.points.toLocaleString()}`)
       .addField("Reputation Points", member.user.settings.reps);
     return msg.send({ embed });
   }
