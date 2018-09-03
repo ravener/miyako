@@ -11,7 +11,7 @@ class MongoDB extends Provider {
 
   async init() {
     const connection = mergeDefault({
-      url: "mongodb://localhost",
+      url: "mongodb://localhost/ladybug",
       db: "ladybug",
       options: {}
     }, this.client.options.providers.mongodb);
@@ -69,30 +69,27 @@ class MongoDB extends Provider {
   }
 
   update(table, id, doc) {
-    return this.db.collection(table).updateOne(resolveQuery(id), { $set: parseUpdateObject(this.parseUpdateInput(doc)) });
+    return this.db.collection(table).updateOne(resolveQuery(id), { $set: isObject(doc) ? flatten(doc) : parseEngineInput(doc.updated) });
   }
 
   replace(table, id, doc) {
     return this.db.collection(table).replaceOne(resolveQuery(id), this.parseUpdateInput(doc));
   }
-
 }
 
 const resolveQuery = query => isObject(query) ? query : { id: query };
 
-const parseUpdateObject = (doc, pref = "", oldObj = {}) => {
-  const obj = oldObj;
-  const prefix = pref !== "" ? `${pref}.` : "";
-  for (const key in doc) {
-    if (Object.prototype.hasOwnProperty.call(doc, key)) {
-      if (typeof doc[key] !== "object" || Object.keys(doc[key]).length === 0) {
-        obj[`${prefix}${key}`] = doc[key];
-        continue;
-      }
-      parseUpdateObject(doc[key], `${prefix}${key}`, obj);
-    }
+function flatten(obj, path = "") {
+  let output = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (isObject(value)) output = Object.assign(output, flatten(value, path ? `${path}.${key}` : key));
+    else output[path ? `${path}.${key}` : key] = value;
   }
-  return obj;
-};
+  return output;
+}
+
+function parseEngineInput(updated) {
+  return Object.assign({}, ...updated.map(entry => ({ [entry.data[0]]: entry.data[1] })));
+}
 
 module.exports = MongoDB;
