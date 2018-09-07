@@ -41,7 +41,7 @@ class CommandUnknown extends Event {
         nick: name
       })
       .then((r) => {
-        if(!r.body.success) throw new Error(`API Error: ${r.status}`)
+        if(r.body.status === "Error: reference name already exists") return name;
         return r.body.nick;
       });
   }
