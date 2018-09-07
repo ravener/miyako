@@ -14,9 +14,5 @@
     "password": null,
     "host": "localhost",
     "database": ""
-  },
-  "cleverbot": {
-    "user": "https://cleverbot.io",
-    "key": "https://cleverbot.io"
   }
 }
