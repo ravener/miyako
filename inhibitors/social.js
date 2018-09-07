@@ -1,4 +1,4 @@
-const { Inhibitor } = require("klaaa");
+const { Inhibitor } = require("klasa");
 
 class Economy extends Inhibitor {
   constructor(...args) {
