@@ -19,6 +19,7 @@ class CommandUnknown extends Event {
     const text = msg.content.slice(prefix.length).trim();
     return this.bot.ask(text, (err, res) => {
       if(err) throw err;
+      msg.channel.stopTyping(true);
       return msg.send(res);
     });
   }
