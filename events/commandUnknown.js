@@ -12,7 +12,7 @@ class CommandUnknown extends Event {
     const res = await this.client.commands.get("tag").get(msg, cmd.toLowerCase()).catch(() => false);
     if(res) return;
     // CleverBot
-    if(msg.prefix !== this.client.options.regexPrefix || msg.prefix.toString() !== `/^<@!?${this.client.user.id}>/`) return; // Only work with mention and regex prefix
+    if(msg.prefix !== this.client.options.regexPrefix && msg.prefix.toString() !== `/^<@!?${this.client.user.id}>/`) return; // Only work with mention and regex prefix
     await msg.channel.startTyping();
     const text = msg.content.slice(msg.prefixLength).trim();
     return this.bot.ask(text, (err, res) => {
