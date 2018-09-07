@@ -13,10 +13,12 @@ class CommandUnknown extends Event {
     if(res) return;
     // CleverBot
     if(msg.prefix !== this.client.options.regexPrefix || msg.prefix.toString() !== `/^<@!?${this.client.user.id}>/`) return; // Only work with mention and regex prefix
+    await msg.channel.startTyping();
     const text = msg.content.slice(msg.prefixLength).trim();
     const session = this.sessions.get(msg.author.id) || await this.createAndSet(msg.author.id, msg.member ? msg.member.displayName : msg.author.username);
     this.ask(session, text)
       .then((r) => msg.send(r))
+      .then(() => msg.channel.stopTyping(true))
       .catch((err) => this.client.emit("error", err));
   }
 
