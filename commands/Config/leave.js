@@ -6,7 +6,7 @@ class Leave extends Command {
       description: "Manages leave/goodbye messages for this server.",
       permissionLevel: 6,
       aliases: ["goodbye", "leavemessage", "leavemsg"],
-      usage: "<disable|enable>",
+      usage: "<disable|enable> [args:string] [...]",
       runIn: ["text"]
     });
   }

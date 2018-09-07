@@ -6,7 +6,7 @@ class Welcome extends Command {
       description: "Manages welcome/greeting messages for this server.",
       permissionLevel: 6,
       aliases: ["welc", "welcomemessage", "welcomemsg"],
-      usage: "<disable|enable>",
+      usage: "<disable|enable> [args:string] [...]",
       runIn: ["text"]
     });
   }
