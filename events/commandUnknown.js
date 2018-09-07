@@ -40,7 +40,10 @@ class CommandUnknown extends Event {
         user: this.client.config.cleverbot.user,
         nick: name
       })
-      .then((r) => r.body.nick);
+      .then((r) => {
+        if(!r.body.success) throw new Error(`API Error: ${r.status}`)
+        return r.body.nick;
+      });
   }
 
   createAndSet(user, name) {
