@@ -32,7 +32,7 @@ class MessageReactionAdd extends RawEvent {
     const guild = channel.guild;
     if(!guild.settings.starboard.enabled) return;
     const starboard = guild.channels.get(guild.settings.starboard.channel);
-    if(!starboard) return;
+    if(!starboard || !starboard.postable || !starboard.embedable) return;
     const user = this.client.users.get(data.user_id);
     if(!user || user.bot) return;
     const msg = await channel.messages.fetch(data.message_id).catch(() => null);

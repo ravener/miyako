@@ -2,9 +2,6 @@ const { Event } = require("klasa");
 const { MessageEmbed } = require("discord.js");
 
 class Modlogs extends Event {
-  constructor(...args) {
-    super(...args);
-  }
   
   run(guild, type, data) {
     if(!guild || !guild.settings.modlogs.enabled || !guild.settings.modlogs.channel || !guild.channels.get(guild.settings.modlogs.channel) || !guild.channels.get(guild.settings.modlogs.channel).postable || !guild.channels.get(guild.settings.modlogs.channel).embedable) return;
@@ -60,6 +57,12 @@ class Modlogs extends Event {
         break;
       case "warn":
         channel.send(this.embed(`**${data.user.user.tag}** got warned by **${data.mod.user.tag}**\n\n**Reason:** ${data.reason}\n**User ID:** ${data.user.id}`, 0xff0000, { title: "Member Warn", user: data.user, thumbnail: "user" }));
+        break;
+      case "mute":
+        channel.send(this.embed(`**${data.user.tag}** got muted by **${data.muter.tag}**\n\n**Reason:** ${data.reason || "None"}\n**User ID:** ${data.user.id}`, 0xff0000, { title: "Member Muted", user: data.user, thumbnail: "user" }));
+        break;
+      case "unmute":
+        channel.send(this.embed(`**${data.user.tag}** got unmuted by **${data.unmuter.tag}**\n\n**User ID:** ${data.user.id}`, "#8089DE", { title: "Member Unmuted", user: data.user, thumbnail: "user" }));
         break;
       default:
         this.client.emit("warn", `WARNING: unhandled modlog action: ${type}`);

@@ -22,6 +22,7 @@ class UserInfo extends Command {
   async run(msg, [member = msg.member]) {
     const days = Math.floor((new Date() - member.user.createdAt) / (1000 * 60 * 60 * 24));
     const joinedDays = Math.floor((new Date() - member.joinedAt) / (1000 * 60 * 60 * 24));
+    const position = msg.guild.members.array().sort((x, y) => x.joinedAt > y.joinedAt ? 1 : -1).indexOf(msg.member) + 1;
     const embed = new MessageEmbed()
       .setColor(member.displayHexColor || 0xff0000)
       .setThumbnail(member.user.displayAvatarURL())
@@ -33,7 +34,8 @@ class UserInfo extends Command {
       .addField("❯ Playing", member.presence.activity ? member.presence.activity.name : "N/A", true)
       .addField("❯ Bot?", member.user.bot ? "Yes" : "No", true)
       .addField("❯ Highest Role", member.roles.size > 1 ? member.roles.highest.name : "None", true)
-      .addField("❯ Hoist Role", member.roles.hoist ? member.roles.hoist.name : "None", true);
+      .addField("❯ Hoist Role", member.roles.hoist ? member.roles.hoist.name : "None", true)
+      .addField("❯ Member Number", position, true);
     return msg.send({ embed });
   }
 }

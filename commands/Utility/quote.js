@@ -10,7 +10,8 @@ class Quote extends Command {
       aliases: ["quotemsg", "msg", "message"],
       usage: "[channel:channelname] <message:string>",
       requiredPermissions: ["EMBED_LINKS"],
-      usageDelim: " "
+      usageDelim: " ",
+      quotedStringSupport: true
     });
   }
 

@@ -8,7 +8,8 @@ class Coliru extends Command {
       description: "Compiles code through coliru API",
       cooldown: 5,
       usage: "<code:code>",
-      permissionLevel: 2
+      permissionLevel: 2,
+      quotedStringSupport: false
     });
     
     this.commands = {

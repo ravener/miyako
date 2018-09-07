@@ -61,9 +61,9 @@ class PostgreSQL extends SQLProvider {
 
     const schemaValues = [...gateway.schema.values(true)];
     return this.run(`
-      CREATE TABLE ${sanitizeKeyName(table)} (
-        ${["id VARCHAR(18) PRIMARY KEY NOT NULL UNIQUE", ...schemaValues.map(this.qb.parse.bind(this.qb))].join(", ")}
-      )`
+			CREATE TABLE ${sanitizeKeyName(table)} (
+				${[`id VARCHAR(${gateway.idLength || 18}) PRIMARY KEY NOT NULL UNIQUE`, ...schemaValues.map(this.qb.parse.bind(this.qb))].join(", ")}
+			)`
     );
   }
 
@@ -124,16 +124,16 @@ class PostgreSQL extends SQLProvider {
       values.push(id);
     }
     return this.run(`
-      INSERT INTO ${sanitizeKeyName(table)} (${keys.map(sanitizeKeyName).join(", ")})
-      VALUES (${Array.from({ length: keys.length }, (__, i) => `$${i + 1}`).join(", ")});`, values);
+			INSERT INTO ${sanitizeKeyName(table)} (${keys.map(sanitizeKeyName).join(", ")})
+			VALUES (${Array.from({ length: keys.length }, (__, i) => `$${i + 1}`).join(", ")});`, values);
   }
 
   update(table, id, data) {
     const [keys, values] = this.parseUpdateInput(data, false);
     return this.run(`
-      UPDATE ${sanitizeKeyName(table)}
-      SET ${keys.map((key, i) => `${sanitizeKeyName(key)} = $${i + 1}`)}
-      WHERE id = '${id.replace(/'/, "''")}';`, values);
+			UPDATE ${sanitizeKeyName(table)}
+			SET ${keys.map((key, i) => `${sanitizeKeyName(key)} = $${i + 1}`)}
+			WHERE id = '${id.replace(/'/, "''")}';`, values);
   }
 
   replace(...args) {
@@ -173,11 +173,11 @@ class PostgreSQL extends SQLProvider {
 
   getColumns(table, schema = "public") {
     return this.runAll(`
-      SELECT column_name
-      FROM information_schema.columns
-      WHERE table_schema = $1
-        AND table_name = $2;
-    `, [schema, table]).then(result => result.map(row => row.column_name));
+			SELECT column_name
+			FROM information_schema.columns
+			WHERE table_schema = $1
+				AND table_name = $2;
+		`, [schema, table]).then(result => result.map(row => row.column_name));
   }
 
   run(...sql) {
@@ -194,10 +194,7 @@ class PostgreSQL extends SQLProvider {
     return this.run(...sql)
       .then(result => result.rows[0]);
   }
-
 }
-
-module.exports = PostgreSQL;
 
 /**
  * @param {string} value The string to sanitize as a key
@@ -239,3 +236,5 @@ function parseRange(min, max) {
 
   return `LIMIT ${min}${typeof max === "number" ? `,${max}` : ""}`;
 }
+
+module.exports = PostgreSQL;

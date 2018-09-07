@@ -16,7 +16,8 @@ class Eval extends Command {
       extendedHelp: (language) => language.get("COMMAND_EVAL_EXTENDEDHELP"),
       guarded: true,
       permissionLevel: 10,
-      usage: "<expression:code|expression:str>"
+      usage: "<expression:code|expression:str>",
+      quotedStringSupport: false // Don't want quotes annoying us when using strings
     });
 
     this.timeout = 30000;

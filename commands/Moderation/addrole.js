@@ -14,9 +14,9 @@ class AddRole extends Command {
   }
   
   async run(msg, [user, role]) {
-    if(msg.member.roles.highest.position >= role.position) throw "You cannot add that role.";
+    if(msg.member.roles.highest.position <= role.position) throw "You cannot add that role.";
     if(role.position >= msg.guild.me.roles.higest.position) throw "I can't add that role.";
-    await user.addRole(role);
+    await user.roles.add(role);
     return msg.send(`Added **${role.name}** to **${user.user.tag}**`);
   }
 }

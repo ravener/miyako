@@ -15,10 +15,10 @@ class LadybugClient extends Client {
       permissionLevels: perms,
       prefix: "lb.",
       regexPrefix: /^((hey\s*)?ladybug,?)\s*/i,
-      providers: { default: "mongodb", mongodb: { url: config.mongodb, db: "ladybug", options: { useNewUrlParser: true } }, postgresql: config.postgresql },
+      providers: { default: "postgresql", mongodb: { url: config.mongodb, db: "ladybug", options: { useNewUrlParser: true } }, postgresql: config.postgresql },
       commandEditing: true,
       pieceDefaults: {
-        commands: { deletable: true },
+        commands: { deletable: true, quotedStringSupport: true },
         rawEvents: { enabled: true }
       },
       typing: true,

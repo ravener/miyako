@@ -7,7 +7,8 @@ class Exec extends Command {
       description: "Execute commands in the terminal, use with EXTREME CAUTION.",
       guarded: true,
       permissionLevel: 10,
-      usage: "<expression:code|expression:string>"
+      usage: "<expression:code|expression:string>",
+      quotedStringSupport: false
     });
   }
 
