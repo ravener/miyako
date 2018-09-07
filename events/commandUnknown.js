@@ -9,7 +9,7 @@ class CommandUnknown extends Event {
   }
 
   async run(msg, cmd) {
-    const res = this.client.commands.get("tag").get(msg, cmd.toLowerCase()).catch(() => false);
+    const res = await this.client.commands.get("tag").get(msg, cmd.toLowerCase()).catch(() => false);
     if(res) return;
     // CleverBot
     if(msg.prefix !== this.client.options.regexPrefix || msg.prefix.toString() !== `/^<@!?${this.client.user.id}>/`) return; // Only work with mention and regex prefix
