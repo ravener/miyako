@@ -1,11 +1,11 @@
 const { Event } = require("klasa");
-const { post } = require("superagent");
-const { Collection } = require("discord.js");
+const Cleverbot = require("cleverbot.io");
 
 class CommandUnknown extends Event {
   constructor(...args) {
     super(...args);
-    this.sessions = new Collection();
+    this.bot = new Cleverbot(this.client.config.cleverbot.user, this.client.config.cleverbot.key);
+    this.bot.setNick("Ladybug");
   }
 
   async run(msg, cmd) {
@@ -15,39 +15,10 @@ class CommandUnknown extends Event {
     if(msg.prefix !== this.client.options.regexPrefix || msg.prefix.toString() !== `/^<@!?${this.client.user.id}>/`) return; // Only work with mention and regex prefix
     await msg.channel.startTyping();
     const text = msg.content.slice(msg.prefixLength).trim();
-    const session = this.sessions.get(msg.author.id) || await this.createAndSet(msg.author.id, msg.member ? msg.member.displayName : msg.author.username);
-    this.ask(session, text)
-      .then((r) => msg.send(r))
-      .then(() => msg.channel.stopTyping(true))
-      .catch((err) => this.client.emit("error", err));
-  }
-
-  ask(session, text) {
-    return post("http://cleverbot.io/1.0/ask")
-      .send({
-        key: this.client.config.cleverbot.key,
-        user: this.client.config.cleverbot.user,
-        nick: session,
-        text: text
-      })
-      .then((r) => r.body.response);
-  }
-
-  createSession(name) {
-    return post("https://cleverbot.io/1.0/create")
-      .send({
-        key: this.client.config.cleverbot.key,
-        user: this.client.config.cleverbot.user,
-        nick: name
-      })
-      .then((r) => {
-        if(r.body.status === "Error: reference name already exists") return name;
-        return r.body.nick;
-      });
-  }
-
-  createAndSet(user, name) {
-    return this.createSession(name).then((n) => this.sessions.set(user, n)).then(() => this.sessions.get(user));
+    return this.bot.ask(text, (err, res) => {
+      if(err) throw err;
+      return msg.send(res);
+    });
   }
 }
 
