@@ -19,7 +19,7 @@ class Unmute extends Command {
     if(!member.roles.has(role.id)) throw "That user isn't muted.";
     if(role.position >= msg.guild.me.roles.highest.position) throw "I can't remove the muted role, make sure my role position is higher than the muted role";
     await member.roles.remove(role);
-    this.client.emit("modlogs", "unmute", { name: "mute", user: member.user, unmuter: msg.author });
+    this.client.emit("modlogs", msg.guild, "unmute", { name: "mute", user: member.user, unmuter: msg.author });
     return msg.send(`Unmuted **${member.displayName}**`);
   }
 }
