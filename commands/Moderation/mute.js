@@ -21,8 +21,7 @@ class Mute extends Command {
     if(!role) throw `Couldn't find the muted role to assign, set the muted role using \`${msg.guild.settings.prefix}conf set roles.muted <rolename>\``;
     if(member.roles.has(role.id)) throw "That user is already muted.";
     if(role.position >= msg.guild.me.roles.highest.position) throw "I can't add the muted role, make sure my role position is above it";
-    for(const channel of msg.guild.channels) {
-      if(channel.type === "category") continue;
+    for(const channel of msg.guild.channels.array()) {
       if(channel.permissionsFor(role).has(["SEND_MESSAGES", "ADD_REACTIONS"]) || (channel.type === "voice" && channel.permissionsFor(role).has("CONNECT"))) {
         await channel.updateOverwrite(role, { SEND_MESSAGES: false, ADD_REACTIONS: false, CONNECT: false }, "Mute Command");
       }
