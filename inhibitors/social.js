@@ -14,7 +14,6 @@ class Economy extends Inhibitor {
     const cost = command.category === "Canvas" ? 10 : command.cost;
     if(msg.member.settings.points < cost) throw `Insufficient balance, this command needs **$${cost}**. Your current balance: **$${msg.member.settings.points}**`;
     await msg.member.givePoints(command.category === "Canvas" ? -10 : -command.cost);
-    return true;
   }
 }
 
