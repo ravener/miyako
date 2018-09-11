@@ -26,11 +26,11 @@ class Play extends Command {
     await player.play(player.queue[0].song.track);
     await msg.channel.send(`Now playing **${player.queue[0].song.title}** as requested by **${player.queue[0].requester.displayName}**`);
     player.on("trackEnd", async(track, reason) => {
-      if(player.channel.members.size < 2) {
+      /* if(player.channel.members.size < 2) {
         await msg.channel.send("Uh guys? well i guess i'll stop the music since everyone left.");
         await this.client.lavalink.leave(player.channel.guild);
-        return;
-      }
+        return; 
+      } */
       if(reason === "FINISHED") {
         player.queue.shift();
         if(!player.queue.length) {
