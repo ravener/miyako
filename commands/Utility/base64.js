@@ -1,4 +1,5 @@
 const { Command, util: { codeBlock } } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Base64 extends Command {
   constructor(...args) {
@@ -16,7 +17,7 @@ class Base64 extends Command {
   }
   
   async decode(msg, [...text]) {
-    return msg.send(codeBlock("", Buffer.from(text.join(" "), "base64").toString("utf8")));
+    return msg.send(codeBlock("", clean(msg, Buffer.from(text.join(" "), "base64").toString("utf8"))));
   }
 }
 

@@ -1,10 +1,11 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Say extends Command {
   constructor(...args) {
     super(...args, {
       runIn: ["text"],
-      aliases: ["echo", "talk"],
+      aliases: ["echo", "talk", "repeat"],
       description: "Send a message to a channel through the bot.",
       usage: "[channel:channel] <message:string> [...]",
       usageDelim: " "
@@ -17,7 +18,7 @@ class Say extends Command {
     if(!channel.permissionsFor(msg.member).has("SEND_MESSAGES")) throw "You do not have permissions to send messages in that channel.";
     if(msg.deletable) await msg.delete();
     if(msg.flags.owo) return this.client.commands.get("owoify").run(msg, [message.join(" ")]);
-    return channel.send(message.join(" ").replace("@everyone", "@\u200beveryone").replace("@here", "@\u200bhere"));
+    return channel.send(clean(msg, message.join(" ")));
   }
 }
 
