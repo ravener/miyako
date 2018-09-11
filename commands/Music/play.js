@@ -32,6 +32,7 @@ class Play extends Command {
         return; 
       } */
       if(reason === "FINISHED") {
+        if(player.looping) return this.play(msg, player);
         player.queue.shift();
         if(!player.queue.length) {
           await msg.channel.send("Queue is empty! leaving voice channel...");
