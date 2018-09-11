@@ -4,7 +4,7 @@ class Say extends Command {
   constructor(...args) {
     super(...args, {
       runIn: ["text"],
-      aliases: ["echo", "talk", "repeat"],
+      aliases: ["echo", "talk"],
       description: "Send a message to a channel through the bot.",
       usage: "[channel:channel] <message:string> [...]",
       usageDelim: " "
