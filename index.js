@@ -14,7 +14,7 @@ class LadybugClient extends Client {
       disabledEvents: ["TYPING_START"],
       permissionLevels: perms,
       prefix: "lb.",
-      regexPrefix: /^((hey,\s*?|yo,?\s*)?ladybug,?)\s*/i,
+      regexPrefix: /^(((hey|yo),?\s*)?ladybug,?)\s*/i,
       providers: { default: "mongodb", mongodb: { url: config.mongodb, db: "ladybug", options: { useNewUrlParser: true } }, postgresql: config.postgresql },
       commandEditing: true,
       pieceDefaults: {
