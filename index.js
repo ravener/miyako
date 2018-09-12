@@ -1,4 +1,5 @@
 const { Client } = require("klasa");
+const { WebhookClient } = require("discord.js");
 const { defaultGuildSchema, defaultClientSchema, defaultUserSchema, defaultMemberSchema } = require("./utils/Schema.js");
 const perms = require("./utils/permissionLevels.js");
 const Constants = require("./utils/Constants.js");
@@ -44,6 +45,7 @@ class LadybugClient extends Client {
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
     this.registerStore(this.rawEvents);
+    this.webhook = new WebhookClient(...this.config.webhook);
   }
   
   login() {

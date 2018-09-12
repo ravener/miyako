@@ -9,6 +9,7 @@
     "app_key": "",
     "app_id": ""
   },
+  "webhook": ["Webhook ID", "Webhook Token"],
   "postgresql": {
     "user": "username",
     "password": null,
