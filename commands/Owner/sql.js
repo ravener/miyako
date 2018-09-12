@@ -41,7 +41,7 @@ class SQL extends Command {
       [...Object.keys(res.rows[0])]
     ];
     for(const row of res.rows) {
-      rows.push(...Object.values(row).map(String));
+      rows.push([...Object.values(row).map(String)]);
     }
     const output = table(rows, this.config);
     if(output.length >= 1980) return msg.channel.send(output, { code: true, split: "\n" });
