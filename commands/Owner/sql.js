@@ -21,7 +21,7 @@ class SQL extends Command {
     if(msg.flags.index) rows = rows[parseInt(msg.flags.index)];
     const output = JSON.stringify(rows, null, 2);
     if(output.length >= 1980) return msg.channel.send(output, { code: true, split: "\n" });
-    return msg.send(`⏱ {time} returned ${res.rows.length} rows\n${codeBlock("", output)}`);
+    return msg.send(`⏱ ${time} returned ${res.rows.length} rows ${msg.flags.index ? `(selected row ${msg.flags.index})` : ""}\n${codeBlock("", output)}`);
   }
 }
  
