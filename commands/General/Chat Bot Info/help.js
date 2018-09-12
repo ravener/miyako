@@ -7,7 +7,7 @@ class Help extends Command {
       description: (language) => language.get("COMMAND_HELP_DESCRIPTION"),
       usage: "(command:command)",
       guarded: true,
-      requiredPermissions: ["ADD_REACTIONS", "EMBED_LINKS"]
+      requiredPermissions: ["MANAGE_MESSAGES", "ADD_REACTIONS", "EMBED_LINKS"]
     });
     
     this.createCustomResolver("command", (arg, possible, message) => {
