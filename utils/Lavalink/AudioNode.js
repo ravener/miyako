@@ -43,7 +43,7 @@ class AudioNode extends EventEmitter {
   }
 
   error(err) {
-    //this.client.emit("error", err);
+    this.client.emit("error", err);
   }
 
   message(message) {
