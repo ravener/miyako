@@ -8,7 +8,7 @@ class Urban extends Command {
       description: "Search a term in urban dictionary!",
       cooldown: 5,
       runIn: ["text"],
-      aliases: ["ud", "urbandictionary"],
+      aliases: ["ud", "urbandictionary", "urbandict"],
       usage: "<term:string>",
       requiredPermissions: ["MANAGE_MESSAGES", "EMBED_LINKS", "ADD_REACTIONS"]
     });
@@ -27,7 +27,8 @@ class Urban extends Command {
     );
     
     for(const data of res.body.list) {
-      display.addPage((em) => em.setDescription(`${data.definition}\n\n*${data.example}*\n\n**Votes**\n:thumbsup: ${data.thumbs_up} :thumbsdown: ${data.thumbs_down}`));  
+      const definition = data.definition.replace(/(\[(\S+)\])/ig, "$1(https://www.urbandictionary.com/define.php?term=$2)");
+      display.addPage((em) => em.setDescription(`${definition}\n\n*${data.example}*\n\n**Votes**\n:thumbsup: ${data.thumbs_up} :thumbsdown: ${data.thumbs_down}\nDefinition written by **${data.author}**`));  
     }
     
     return display.run(await msg.send("Loading urban..."), { filter: (reaction, user) => user.id === msg.author.id });
