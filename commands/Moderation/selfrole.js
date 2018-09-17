@@ -54,6 +54,7 @@ class Selfrole extends Command {
 
   async give(msg, [role]) {
     if(!msg.guild.settings.selfroles.includes(role.id)) throw `That role does not exist in the selfroles list, type \`${msg.guild.settings.prefix}selfrole list\` to get a list`;
+    if(msg.member.roles.has(role.id)) throw "You already have that role!";
     if(role.position > msg.guild.me.roles.highest.position) throw "I can't add that role because my role position is lower than it, please ask an admin to move my role above the self role";
     await msg.member.roles.add(role);
     return msg.send(`Success, given the role **${role.name}** to you`);
