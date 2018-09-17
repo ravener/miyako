@@ -27,12 +27,14 @@ class Urban extends Command {
     );
     
     for(const data of res.body.list) {
-      const definition = data.definition.replace(/(\[(\S+)\])/ig, "$1(https://www.urbandictionary.com/define.php?term=$2)");
-      const example = data.example.replace(/(\[(\S+)\])/ig, "$1(https://www.urbandictionary.com/define.php?term=$2)");
-      display.addPage((em) => em.setDescription(`${definition}\n\n*${example}*\n\n**Votes**\n:thumbsup: ${data.thumbs_up} :thumbsdown: ${data.thumbs_down}\nDefinition written by **${data.author}**`));  
+      display.addPage((em) => em.setDescription(`${this.format(data.definition)}\n\n*${this.format(data.example)}*\n\n**Votes**\n:thumbsup: ${data.thumbs_up} :thumbsdown: ${data.thumbs_down}\nDefinition written by **${data.author}**`));  
     }
     
     return display.run(await msg.send("Loading urban..."), { filter: (reaction, user) => user.id === msg.author.id });
+  }
+
+  format(str) {
+    return str.replace(/\[([^\][]+)\]/g, (x, y) => `${x}(https://www.urbandictionary.com/define.php?term=${y.replace(/\s+/g, "+")})`);
   }
 }
 
