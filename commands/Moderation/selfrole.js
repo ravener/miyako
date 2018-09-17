@@ -24,6 +24,7 @@ class Selfrole extends Command {
   async add(msg, [role]) {
     if(!await msg.hasAtLeastPermissionLevel(6)) throw error;
     if(msg.guild.settings.selfroles.includes(role.id)) throw "That role is already in the selfrole list";
+    if(role.position >= msg.guild.me.roles.highest.position) throw "My role position must be higher than the role you are adding so i can be able to give it.";
     await msg.guild.settings.update("selfroles", role.id, msg.guild, { action: "add" });
     return msg.send(`Added the role **${role.name}** to selfrole list!`);
   }
