@@ -73,6 +73,7 @@ class Highlight extends Command {
     const arr = msg.member.settings.highlight.words.find((x) => x === word.join(" ").toLowerCase());
     if(!arr) throw "That word isn't in your list";
     await msg.member.settings.update("highlight.words", arr, { action: "remove" });
+    return msg.send("Removed that word from your highlight list");
   }
 }
 
