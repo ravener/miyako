@@ -12,6 +12,7 @@ class Snipe extends Command {
   }
   
   async run(msg, [channel = msg.channel]) {
+    if(channel.nsfw) throw "NSFW channel? don't even think about it";
     if(!channel.snipe) throw `There isn't any sniped message in ${channel === msg.channel ? "this" : "that"} channel.`;
     const embed = new MessageEmbed()
       .setTitle("Message Sniped")

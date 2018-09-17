@@ -4,7 +4,7 @@ const { getAttachment } = require("../utils/utils.js");
 class MessageDelete extends Event {
   
   async run(message) {
-    if(message.channel.type === "text") message.channel.snipe = message;
+    if(message.channel.type === "text" && message.author.id !== this.client.user.id) message.channel.snipe = message;
 
     const image = getAttachment(message);
     
