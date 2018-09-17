@@ -24,14 +24,14 @@ class Selfrole extends Command {
   async add(msg, [role]) {
     if(!await msg.hasAtLeastPermissionLevel(6)) throw error;
     if(msg.guild.settings.selfroles.includes(role.id)) throw "That role is already in the selfrole list";
-    await msg.guild.settings.update("selfroles", role.id, { action: "add" });
+    await msg.guild.settings.update("selfroles", role.id, msg.guild, { action: "add" });
     return msg.send(`Added the role **${role.name}** to selfrole list!`);
   }
 
   async remove(msg, [role]) {
     if(!await msg.hasAtLeastPermissionLevel(6)) throw error;
     if(!msg.guild.settings.selfroles.includes(role.id)) throw "That role doesn't exist in the selfrole list";
-    await msg.guild.settings.update("selfroles", role.id, { action: "remove" });
+    await msg.guild.settings.update("selfroles", role.id, msg.guild, { action: "remove" });
     return msg.send(`Removed the role **${role.name}** from selfrole list`);
   }
 
