@@ -44,7 +44,9 @@ class Highlight extends Command {
 
   async add(msg, word) {
     if(!word.length) throw "Mention the word to add.";
-    if(msg.member.settings.highlight.words.length >= 10) throw "You can only have upto 10 highlights at a time, remove some and try again.";
+    const premium = await msg.hasAtLeastPermissionLevel(2);
+    const limit = premium ? 20 : 10;
+    if(msg.member.settings.highlight.words.length >= limit) throw `You can only have up to ${limit} highlights at a time, remove some and try again. ${!premium ? `Premium users can have up to 20 highlights! to be a premium join our server and be active, use \`${msg.guild.settings.prefix}support\`` : ""}`;
     if(msg.member.settings.highlight.words.includes(word.join(" ").toLowerCase())) throw "That word is already in your list.";
     await msg.member.settings.update("highlight.words", word.join(" ").toLowerCase(), { action: "add" });
     return msg.send(`Added the word **${word.join(" ")}** in your highlight list.`);
