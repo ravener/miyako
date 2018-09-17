@@ -3,6 +3,7 @@ const { Client } = require("klasa");
 Client.use(require("klasa-member-gateway"));
 
 module.exports.defaultGuildSchema = Client.defaultGuildSchema
+  .add("selfroles", "role", { array: true })
   .add("levelup", "boolean", { default: true })
   .add("roles", (folder) => folder
     .add("muted", "role"))
