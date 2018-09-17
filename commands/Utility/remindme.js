@@ -14,9 +14,8 @@ class Reminder extends Command {
   async run(msg, [when, ...text]) {
     const reminder = await this.client.schedule.create("reminder", when, {
       data: {
-        channel: msg.channel.id,
         user: msg.author.id,
-        text: text.join(", ")
+        text: text.join(" ")
       }
     });
     return msg.sendMessage(`Ok, I created you a reminder with the id: \`${reminder.id}\``);
