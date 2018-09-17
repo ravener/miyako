@@ -34,6 +34,7 @@ class Urban extends Command {
   }
 
   format(str) {
+    // https://stackoverflow.com/questions/52374809/javascript-regular-expression-to-catch-boxes
     return str.replace(/\[([^\][]+)\]/g, (x, y) => `${x}(https://www.urbandictionary.com/define.php?term=${y.replace(/\s+/g, "+")})`);
   }
 }
