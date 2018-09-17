@@ -15,7 +15,7 @@ class GiveMe extends Command {
 
   async run(msg, [role]) {
     // Mostly a shorter alias to selfrole give
-    return this.store.get("selfrole").run(msg, [role]);
+    return this.store.get("selfrole").give(msg, [role]);
   }
 }
 
