@@ -9,6 +9,7 @@ class Selfrole extends Command {
       description: "Manage selfroles for this server",
       runIn: ["text"],
       usage: "<add|list|give|remove> (arg:arg) [...]",
+      usageDelim: " ",
       subcommands: true,
       requiredPermissions: ["MANAGE_ROLES"],
       aliases: ["selfroles"]
