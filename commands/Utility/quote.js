@@ -8,7 +8,7 @@ class Quote extends Command {
       description: "Quote a message by id",
       runIn: ["text"],
       aliases: ["quotemsg", "msg", "message"],
-      usage: "[channel:channelname] <message:string>",
+      usage: "[channel:channel] <messageID:string>",
       requiredPermissions: ["EMBED_LINKS"],
       usageDelim: " ",
       quotedStringSupport: true
