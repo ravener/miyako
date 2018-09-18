@@ -9,6 +9,7 @@ class TrapCard extends Command {
       description: "Create a Yugioh trap card",
       aliases: ["yugioh", "yugi", "trap"],
       usage: "[user:user] <text:string> [...]",
+      usageDelim: " ",
       cooldown: 5
     });
   }
