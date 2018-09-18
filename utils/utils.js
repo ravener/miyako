@@ -23,6 +23,13 @@ class Util {
     return false;
   }
   
+  // https://j11y.io/snippets/wordwrap-for-javascript/
+  static wordwrap(str, width = 75, brk = "n", cut = false) {
+    if (!str) { return str; } 
+    const regex = ".{1," + width + "}(\\s|$)" + (cut ? "|.{" + width + "}|.+$" : "|\\S+?(\\s|$)");
+    return str.match(RegExp(regex, "g")).join(brk);
+  }
+  
   static slice(str, limit, suffix = "...") {
     if(str.length < limit) return str;
     if(suffix && suffix.length > limit) throw new Error("Suffix shouldn't be longer than limit.");

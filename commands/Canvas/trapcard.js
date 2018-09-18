@@ -1,5 +1,6 @@
 const { Command } = require("klasa");
 const { Canvas } = require("canvas-constructor");
+const { wordwrap } = require("../../utils/utils.js");
 const { get } = require("superagent");
 const fsn = require("fs-nextra");
 
@@ -20,7 +21,7 @@ class TrapCard extends Command {
     const buff = await new Canvas(333, 493)
       .addImage(image, 0, 0, 333, 493)
       .addImage(av, 44, 106, 245, 250)
-      .addText(text.join(" "), 40, 395)
+      .addText(wordwrap(text.join(" "), 54, "\n"), 40, 395)
       .toBufferAsync();
     return msg.channel.sendFile(buff, "trapcard.png");
   }
