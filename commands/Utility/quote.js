@@ -22,6 +22,7 @@ class Quote extends Command {
       });
     const embed = new MessageEmbed()
       .setTitle("Message Quote")
+      .setURL(message.url)
       .setDescription(message.content)
       .setTimestamp(message.createdAt)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
