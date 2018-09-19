@@ -24,10 +24,19 @@ class Util {
   }
   
   // https://j11y.io/snippets/wordwrap-for-javascript/
-  static wordwrap(str, width = 75, brk = "n", cut = false) {
-    if (!str) { return str; } 
+  /* static wordwrap(str, width = 75, brk = "n", cut = false) {
+    if (!str) { return str; }
+    if(str.length < width) return str;
     const regex = ".{1," + width + "}(\\s|$)" + (cut ? "|.{" + width + "}|.+$" : "|\\S+?(\\s|$)");
     return str.match(RegExp(regex, "g")).join(brk);
+  } */
+  
+  // I think this one is better?
+  static wordwrap(str, maxLength) {
+    if(str.length <= maxLength) return str;
+    const reg = new RegExp(".{1," + maxLength + "}", "g");
+    const parts = str.match(reg); 
+    return parts.join("\n");
   }
   
   static slice(str, limit, suffix = "...") {
