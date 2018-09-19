@@ -36,7 +36,7 @@ class TVShow extends Command {
       .addField("Vote Count", show.vote_count, true)
       .addField("Vote Average", show.vote_average, true)
       .addField("Popularity", show.popularity, true)
-      .addField("First Air Date", show.first_air_date);
+      .addField("First Air Date", show.first_air_date || "Unknown");
 
     return msg.sendEmbed(embed);
   }
