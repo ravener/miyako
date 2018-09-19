@@ -27,7 +27,7 @@ class Urban extends Command {
     );
     
     for(const data of res.body.list) {
-      const format = `${this.formt(data.definition)}\n\n*${this.format(data.example)}*`.length > 1980 ? false : true;
+      const format = `${this.format(data.definition)}\n\n*${this.format(data.example)}*`.length > 1980 ? false : true;
       const definition = format ? this.format(data.definition) : data.definition;
       const example = format ? this.format(data.example) : data.example;
       display.addPage((em) => em.setDescription(`${definition}\n\n*${example}*\n\n**Votes**\n:thumbsup: ${data.thumbs_up} :thumbsdown: ${data.thumbs_down}\n\nDefinition written by **${data.author}**`));  
