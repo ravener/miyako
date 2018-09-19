@@ -17,7 +17,7 @@ class Tweet extends Command {
     const buff = await new Canvas(1200, 628)
       .addImage(image, 0,  0, 1200, 628)
       .setTextFont("50px Arial")
-      .addText(text, 50, 200)
+      .addText(wordwrap(text, 39), 50, 200)
       .toBufferAsync();
     return msg.channel.sendFile(buff, "tweet.png");
   }
