@@ -21,7 +21,7 @@ class TrapCard extends Command {
     const buff = await new Canvas(333, 493)
       .addImage(image, 0, 0, 333, 493)
       .addImage(av, 44, 106, 245, 250)
-      .addText(wordwrap(text.join(" "), 50), 40, 395)
+      .addText(wordwrap(text.join(" "), 40), 40, 395)
       .setTextFont("20px Arial")
       .setColor("#FFFFFF")
       .addText(user.username, 29, 50)
