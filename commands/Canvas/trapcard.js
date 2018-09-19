@@ -24,7 +24,7 @@ class TrapCard extends Command {
       .addText(wordwrap(text.join(" "), 54, "\n"), 40, 395)
       .setTextFont("20px Arial")
       .setColor("#FFFFFF")
-      .addText(user.username, 26, 50)
+      .addText(user.username, 27, 50)
       .toBufferAsync();
     return msg.channel.sendFile(buff, "trapcard.png");
   }
