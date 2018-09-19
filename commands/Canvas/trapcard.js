@@ -22,6 +22,9 @@ class TrapCard extends Command {
       .addImage(image, 0, 0, 333, 493)
       .addImage(av, 44, 106, 245, 250)
       .addText(wordwrap(text.join(" "), 54, "\n"), 40, 395)
+      .setTextFont("20px Arial")
+      .setColor("#FFFFFF")
+      .addText(user.username, 26, 50)
       .toBufferAsync();
     return msg.channel.sendFile(buff, "trapcard.png");
   }
