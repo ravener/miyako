@@ -37,7 +37,7 @@ class Movie extends Command {
       .addField("Vote Average", movie.vote_average, true)
       .addField("Popularity", movie.popularity, true)
       .addField("Adult Content", movie.adult ? "Yep" : "Nope", true)
-      .addField("Release Date", movie.release_date);
+      .addField("Release Date", movie.release_date || "Unknown");
 
     return msg.sendEmbed(embed);
   }
