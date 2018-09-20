@@ -6,15 +6,16 @@ class ServerIcon extends Command {
     super(...args, {
       description: "Returns the server icon.",
       aliases: ["serverlogo"],
-      runIn: ["text"]
+      runIn: ["text"],
+      usage: "[server:guildname]"
     });
   }
   
-  async run(msg) {
-    if(!msg.guild.iconURL()) throw "There is not server icon in this server.";
+  async run(msg, [guild = msg.guild]) {
+    if(!guild.iconURL()) throw `There is no server icon in ${guild === msg.guild ? "this" : "that"} server.`;
     const embed = new MessageEmbed()
-      .setTitle(`${msg.guild.name}'s icon`)
-      .setImage(msg.guild.iconURL({ size: 2048 }))
+      .setTitle(`${guild.name}'s icon`)
+      .setImage(guild.iconURL({ size: 2048 }))
       .setColor(0xff0000)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL());
     return msg.send({ embed });
