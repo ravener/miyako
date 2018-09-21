@@ -107,7 +107,7 @@ class English extends Language {
       COMMAND_INVITE_SELFBOT: "Why would you need an invite link for a selfbot...",
       COMMAND_INVITE: () => [
         `To add ${this.client.user.username} to your discord guild:`,
-        this.client.invite,
+        `<${this.client.invite}>`,
         util.codeBlock("", [
           "The above link is generated requesting the minimum permissions required to use every command currently.",
           "I know not all permissions are right for every guild, so don't be afraid to uncheck any of the boxes.",
