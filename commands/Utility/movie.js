@@ -8,7 +8,7 @@ class Movie extends Command {
     super(...args, {
       aliases: ["movies", "film", "films"],
       description: "Finds a movie on TMDB.org",
-      extendedHelp: "e.g. `s.movie infinity war, 2`",
+      extendedHelp: "e.g. `lb.movie infinity war, 2`",
       usage: "<Query:str> [Page:number]",
       usageDelim: ", "
     });
