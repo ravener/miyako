@@ -124,7 +124,7 @@ class English extends Language {
         "",
         "By the way, the code for this bot is all open source on GitHub. This means everyone is welcome to contribute and help if you can and want to: https://github.com/freetnt5852/LadyBug-Bot",
         "",
-        "Lastly, if you have any questions or just want to hang out, join our server: https://discord.gg/mDkMbEh."
+        "Lastly, if you have any questions or just want to hang out, join our server: https://discord.gg/mDkMbEh"
       ],
       COMMAND_INFO_DESCRIPTION: "Provides some information about this bot.",
       COMMAND_HELP_DESCRIPTION: "Display help for a command.",
