@@ -35,13 +35,13 @@ class LadybugClient extends Client {
     this.constants = Constants;
     this.config = config;
     this.commandsRan = 0;
-    this.lavalink = new AudioManager(this, {
+    /*this.lavalink = new AudioManager(this, {
       rest: { host: "localhost", port: 2333, password: this.config.lavalink },
       nodes: [
         { host: "localhost", port: 3000, password: this.config.lavalink }
       ],
       userID: this.constants.botID
-    });
+    }); */
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
     this.registerStore(this.rawEvents);
