@@ -6,7 +6,7 @@ const Constants = require("./utils/Constants.js");
 const IdioticAPI = require("idiotic-api");
 const RawEventStore = require("./stores/RawEventStore.js");
 const config = require("./config.json");
-const { AudioManager } = require("./utils/Lavalink");
+// const { AudioManager } = require("./utils/Lavalink");
 
 class LadybugClient extends Client {
   constructor() {
