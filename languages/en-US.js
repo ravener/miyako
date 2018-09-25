@@ -116,15 +116,15 @@ class English extends Language {
       ],
       COMMAND_INVITE_DESCRIPTION: "Displays the join guild link of the bot.",
       COMMAND_INFO: (guild) => [
-        "Hi, i'm Mari... i-i mean Ladybug i'm a multipurpose bot made by `Free TNT#5796`",
-        "My goal is to provide as many features as you will ever need for your servers, i do a lot of cool things and even more is planned",
+        "Hi, I'm Mari... I-I mean Ladybug. I'm a multipurpose bot made by `Free TNT#5796`.",
+        "My goal is to provide as many features as you will ever need for your servers. I do a lot of cool things and even more is planned!",
         "",
-        `Type \`${guild.settings.prefix}help\` to see all commands list and \`${guild.settings.prefix}help <command>\` to get detailed information about a command`,
-        `If you got any suggestions to improve this bot feel free to suggest it through \`${guild.settings.prefix}suggest <suggestion>\``,
+        `Type \`${guild.settings.prefix}help\` to see the list of commands and \`${guild.settings.prefix}help <command>\` to get detailed information about a command.`,
+        `If you have any suggestions to improve this bot, feel free to suggest it through \`${guild.settings.prefix}suggest <suggestion>\`.`,
         "",
-        "Btw the code for this bot is also all OpenSource on github, this means everyone is welcome to contribute and help if you can and want to: https://github.com/freetnt5852/LadyBug-Bot",
+        "By the way, the code for this bot is all open source on GitHub. This means everyone is welcome to contribute and help if you can and want to: https://github.com/freetnt5852/LadyBug-Bot",
         "",
-        "Lastly if you got any questions or just want to hangout join our server https://discord.gg/mDkMbEh"
+        "Lastly, if you have any questions or just want to hang out, join our server: https://discord.gg/mDkMbEh"
       ],
       COMMAND_INFO_DESCRIPTION: "Provides some information about this bot.",
       COMMAND_HELP_DESCRIPTION: "Display help for a command.",
