@@ -6,7 +6,8 @@ const Constants = require("./utils/Constants.js");
 const IdioticAPI = require("idiotic-api");
 const RawEventStore = require("./stores/RawEventStore.js");
 const config = require("./config.json");
-// const { AudioManager } = require("./utils/Lavalink");
+
+Client.use(require("klasa-dashboard-hooks"));
 
 class LadybugClient extends Client {
   constructor() {
@@ -30,7 +31,8 @@ class LadybugClient extends Client {
       defaultClientSchema,
       defaultUserSchema,
       defaultGuildSchema,
-      defaultMemberSchema
+      defaultMemberSchema,
+      dashboardHooks: { port: 3000 }
     });
     this.constants = Constants;
     this.config = config;
