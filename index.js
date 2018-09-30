@@ -32,7 +32,7 @@ class LadybugClient extends Client {
       defaultUserSchema,
       defaultGuildSchema,
       defaultMemberSchema,
-      dashboardHooks: { port: 3000 }
+      dashboardHooks: { port: 3000, apiPrefix: "/" }
     });
     this.constants = Constants;
     this.config = config;
