@@ -76,18 +76,25 @@ class AudioManager extends EventEmitter {
     node.destroy();
     this.nodes.delete(host);
   }
+  
+  _convert(tracks) {
+    for (const track of tracks) track = new AudioTrack(track);
+    return tracks;  
+  }
 
   getTracks(identifier) {
     return superagent.get(`http://${this.rest.host}:${this.rest.port}/loadtracks`)
       .query({ identifier })
       .set("Authorization", this.rest.password)
       .then((res) => {
-        if(Array.isArray(res.body)) {
-          if(!res.body.length) return null;
-          return res.body.map((x) => new AudioTrack(x));
-        }
-        // v3 soon.
-        return null;
+          if (Array.isArray(res.body)) {
+          if (res.body.length) return { tracks: this._convert(res.body) }
+            return null;
+          }
+          // Lavalink version 3.0
+          if (res.body.loadType === "NO_MATCHES" || res.body.loadType === "LOAD_ERROR") return null;
+          if (res.body.loadType === "SEARCH_RESULT" || res.body.loadType === "TRACK_LOADED") return { tracks: this._convert(res.body.tracks) };
+          if (res.body.loadType === "PLAYLIST_LOADED") return { name: res.body.playlistInfo.name, tracks: this._convert(res.body.tracks) };
       })
       .catch(() => null);
   }
