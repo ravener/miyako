@@ -78,8 +78,9 @@ class AudioManager extends EventEmitter {
   }
   
   _convert(tracks) {
-     for (const track of tracks)
-   }
+    for (const track of tracks) track = new AudioTrack(track);
+    return tracks;  
+  }
 
   getTracks(identifier) {
     return superagent.get(`http://${this.rest.host}:${this.rest.port}/loadtracks`)
