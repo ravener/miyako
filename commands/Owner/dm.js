@@ -5,15 +5,15 @@ class DM extends Command {
     super(...args, {
       description: "DMs someone",
       permissionLevel: 10,
-      usage: "<user:username> <message:string> [...]",
+      usage: "<user:username> <message:...string>",
       usageDelim: " ",
       quotedStringSupport: true,
       aliases: ["pm"]
     });
   }
 
-  async run(msg, [user, ...message]) {
-    return user.send(message.join(" "))
+  async run(msg, [user, message]) {
+    return user.send(message)
       .then(() => {
         return msg.send(`DMed your message to **${user.tag}**`);
       })
