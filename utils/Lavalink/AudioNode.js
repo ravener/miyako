@@ -49,9 +49,11 @@ class AudioNode extends EventEmitter {
   message(message) {
     const msg = JSON.parse(message.data);
     switch(msg.op) {
-      case "stats":
+      case "stats": {
+        delete msg.op; // Delete op code and just use the stats provided.
         this.stats = msg;
         break;
+      }
       case "event":
         this.event(msg);
         break;
