@@ -12,7 +12,7 @@ class Achievement extends Command {
   }
 
   async run(msg, [user = msg.author, text]) {
-    return msg.send(new MessageAttachment(await this.client.idioticapi.achievement(user.displayAvatarURL({ format: "png", size: 2048 }), text.join(" ")), "achievement.png"));
+    return msg.send(new MessageAttachment(await this.client.idioticapi.achievement(user.displayAvatarURL({ format: "png", size: 2048 }), text), "achievement.png"));
   }
 }
 

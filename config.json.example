@@ -15,5 +15,6 @@
     "password": null,
     "host": "localhost",
     "database": ""
-  }
+  },
+  "pastebin": "password"
 }
