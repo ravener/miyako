@@ -6,7 +6,7 @@ class LadybugPaste extends Command {
     super(...args, {
       description: "Paste code in ladybug pastebin",
       permissionLevel: 10,
-      usage: "<code:string|code:codeblock>",
+      usage: "<code:codeblock|code:string>",
       aliases: ["pastebin", "lbpaste"]
     });
   }
