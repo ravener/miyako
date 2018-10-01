@@ -16,7 +16,7 @@ class LadybugPaste extends Command {
       .set("Authorization", this.client.config.pastebin)
       .send({ content: code.code ? code.code : code })
       .then((res) => res.body.url);
-    return msg.send(`Pastebin-ified: ${url}${code.language || ""}`);
+    return msg.send(`Pastebin-ified: ${url}${code.language ? `.${code.language}` : ""}`);
   }
 }
 
