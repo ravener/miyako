@@ -5,7 +5,7 @@ const { MessageEmbed } = require("discord.js");
 class SubReddit extends Command {
   constructor(...args) {
     super(...args, {
-      aliases: ["sub"],
+      aliases: ["sub", "reddit"],
       description: "Returns information on a subreddit.",
       usage: "<subredditName:str>"
     });

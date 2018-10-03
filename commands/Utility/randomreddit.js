@@ -5,7 +5,8 @@ class RandomReddit extends Command {
   constructor(...args) {
     super(...args, {
       description: "Returns a random reddit post on a given subreddit.",
-      usage: "<subreddit:str>"
+      usage: "<subreddit:str>",
+      aliases: ["rreddit"]
     });
     this.errorMessage = "There was an error. Reddit may be down, or the subreddit doesnt exist.";
   }
@@ -23,7 +24,7 @@ class RandomReddit extends Command {
       throw "I cant post a NSFW image in this channel unless you mark it as NSFW!";
     }
 
-    return msg.sendMessage(data.url);
+    return msg.send(`${data.title} ${data.url}`);
   }
 }
 
