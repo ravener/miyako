@@ -4,10 +4,10 @@ const { GuildMember, User } = require("discord.js");
 const USER_REGEXP = Argument.regex.userOrMember;
 
 function resolveMember(query, guild) {
-  if (query instanceof GuildMember) return query.user;
+  if (query instanceof GuildMember) return query;
   if (query instanceof User) return guild.members.fetch(query);
   if (typeof query === "string") {
-    if (USER_REGEXP.test(query)) return guild.client.users.fetch(USER_REGEXP.exec(query)[1]).catch(() => null);
+    if (USER_REGEXP.test(query)) return guild.members.fetch(USER_REGEXP.exec(query)[1]).catch(() => null);
     if (/\w{1,32}#\d{4}/.test(query)) {
       const res = guild.members.find(member => member.user.tag.toLowerCase() === query.toLowerCase());
       return res || null;

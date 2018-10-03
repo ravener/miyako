@@ -2,7 +2,7 @@ const { Command } = require("klasa");
 const { MessageAttachment } = require("discord.js");
 const cloud = require("d3-cloud");
 const Canvas = require("canvas");
-const messageLimitHundreds = 1;
+const messageLimitHundreds = 2;
 
 // Blame node-canvas for this dirty workaround. Canvas.createCanvas for 2.x, new canvas.Canvas for 1.x
 const createCanvas = typeof Canvas.createCanvas === "function" ?
@@ -14,16 +14,17 @@ class WorldCloud extends Command {
     super(...args, {
       description: "Generate a wordcloud from the messages in a chat.",
       requiredPermissions: ["ATTACH_FILES", "READ_MESSAGE_HISTORY"],
-      cooldown: 10
+      cooldown: 10,
+      usage: "[channel:channelname]"
     });
   }
 
-  async run(msg) {
+  async run(msg, [channel = msg.channel]) {
     const finalImage = createCanvas(2000, 2000);
     const ctx = finalImage.getContext("2d");
     const wordBank = {};
 
-    let messageBank = await msg.channel.messages.fetch({ limit: 100 });
+    let messageBank = await channel.messages.fetch({ limit: 100 });
     for (let i = 1; i < messageLimitHundreds; i++) {
       messageBank = messageBank.concat(await msg.channel.messages.fetch({ limit: 100, before: messageBank.last().id }));
     }
