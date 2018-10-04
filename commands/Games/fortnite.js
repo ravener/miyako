@@ -8,7 +8,7 @@ class Fortnite extends Command {
       description: "Get your fortnite stats.",
       usage: "<platform:platform> <username:...string>",
       usageDelim: " ",
-      aliases: ["fn", "fnprofile"]
+      aliases: ["fn", "fnprofile", "forkknife"]
     });
     
     this.createCustomResolver("platform", (arg) => {
