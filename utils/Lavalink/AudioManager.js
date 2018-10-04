@@ -78,7 +78,7 @@ class AudioManager extends EventEmitter {
   }
   
   _convert(tracks) {
-    return tracks.map((track) => new AudioTrack(track)); 
+    return tracks.map(track => new AudioTrack(track)); 
   }
 
   getTracks(identifier) {
