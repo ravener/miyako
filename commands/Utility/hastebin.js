@@ -1,5 +1,5 @@
 const { Command } = require("klasa");
-const superagent = require("superagent");
+const ladybug = require("ladybug-fetch");
 
 class Hastebin extends Command {
   constructor(...args) {
@@ -12,7 +12,7 @@ class Hastebin extends Command {
   }
 
   async run(msg, [code]) {
-    const key = await superagent.post("https://hastebin.com/documents")
+    const key = await ladybug.post("https://hastebin.com/documents")
       .send(code.code ? code.code : code)
       .then((res) => res.body.key)
       .catch((err) => {

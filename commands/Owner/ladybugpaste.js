@@ -1,5 +1,5 @@
 const { Command } = require("klasa");
-const { post } = require("superagent");
+const { post } = require("ladybug-fetch");
 
 class LadybugPaste extends Command {
   constructor(...args) {
