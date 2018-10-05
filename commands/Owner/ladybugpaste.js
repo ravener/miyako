@@ -1,5 +1,5 @@
 const { Command } = require("klasa");
-const { post } = require("ladybug-fetch");
+const ladybug = require("ladybug-fetch");
 
 class LadybugPaste extends Command {
   constructor(...args) {
@@ -12,7 +12,7 @@ class LadybugPaste extends Command {
   }
 
   async run(msg, [code]) {
-    const url = await post("https://itsladybug.ml/pastebin/json")
+    const url = await ladybug.post("https://itsladybug.ml/pastebin/json")
       .set("Authorization", this.client.config.pastebin)
       .send({ content: code.code ? code.code : code })
       .then((res) => res.body.url);
