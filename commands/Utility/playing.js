@@ -19,13 +19,13 @@ class Playing extends Command {
       .setColor(0xff0000)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL());
     if(members.length <= 10) { // If 10 or less send in a single embed
-      embed.setDescription(members.map((x) => `• **${x.user.tag}** Playing **${x.presence.name}**`).join("\n"));
+      embed.setDescription(members.map((x) => `• **${x.user.tag}** Playing **${x.presence.activity.name}**`).join("\n"));
       return msg.send({ embed });
     }
     const display = new RichDisplay(embed);
     for(let x = 0, t = members.length; x < t; x += 10) {
       const curr = members.slice(x, x + 10);
-      display.addPage((em) => em.setDescription(curr.map((x) => `• **${x.user.tag}** Playing **${x.presence.name}**`)));
+      display.addPage((em) => em.setDescription(curr.map((x) => `• **${x.user.tag}** Playing **${x.presence.activity.name}**`)));
     }
 
     return display.run(await msg.send("Loading..."), {
