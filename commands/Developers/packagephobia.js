@@ -24,6 +24,7 @@ class PackagePhobia extends Command {
     const [version, publish, install] = match[1].split("|");
     const embed = new MessageEmbed()
       .setTitle(pkg)
+      .setURL(`https://npmjs.com/package/${pkg}`)
       .setColor(0xff0000)
       .setDescription([
         `• Version: ${version.trim()}`,
