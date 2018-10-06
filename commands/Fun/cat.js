@@ -1,6 +1,6 @@
 const { Command } = require("klasa");
+const { MessageEmbed } = require("discord.js");
 const ladybug = require("ladybug-fetch");
-const path = require("path");
 
 class Cat extends Command {
   constructor(...args) {
@@ -14,8 +14,12 @@ class Cat extends Command {
   async run(msg) {
     const file = await ladybug("https://aws.random.cat/meow")
       .then((res) => res.body.file);
-    return msg.channel.sendFile(file, `cat${path.extname(file)}`);
-  }
+    const embed = new MessageEmbed()
+      .setTitle("Random Cat")
+      .setColor(0xff0000)
+      .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
+      .setImage(file);
+    return msg.send({ embed });
 }
 
 module.exports = Cat;
