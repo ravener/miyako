@@ -6,12 +6,13 @@ class Playing extends Command {
     super(...args, {
       description: "Shows list of people playing a game you say",
       usage: "<game:string>",
-      runIn: ["text"]
+      runIn: ["text"],
+      aliases: ["whoisplaying"]
     });
   }
 
   async run(msg, [game]) {
-    const members = msg.guild.members.filter((member) => member.presence.name && member.presence.name.toLowerCase() === game.toLowerCase()).array();
+    const members = msg.guild.members.filter((member) => member.presence.activity && member.presence.activity.name && member.presence.activity.name.toLowerCase() === game.toLowerCase()).array();
     if(!members.length) throw "No one found playing that game";
     const embed = new MessageEmbed()
       .setTitle(`Members playing '${game}'`)

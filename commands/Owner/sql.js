@@ -5,7 +5,8 @@ class SQL extends Command {
     super(...args, {
       description: "Run some SQL",
       permissionLevel: 10,
-      usage: "<query:string>"
+      usage: "<query:string>",
+      quotedStringSupport: false
     });
   }
 
@@ -16,12 +17,12 @@ class SQL extends Command {
       throw codeBlock("", err.toString());
     });
     time.stop();
-    if(!res.rows || !res.rows.length) return msg.send(`⏱ ${time} \`${res.command}\`*No rows returned*`);
+    if(!res.rows || !res.rows.length) return msg.send(`⏱ ${time} \`${res.command}\` *No rows returned*`);
     let rows = res.rows;
     if(msg.flags.index) rows = rows[parseInt(msg.flags.index)];
     const output = JSON.stringify(rows, null, 2);
     if(output.length >= 1980) return msg.channel.send(output, { code: true, split: "\n" });
-    return msg.send(`⏱ ${time} returned ${res.rows.length} rows ${msg.flags.index ? `(selected row ${msg.flags.index})` : ""}\n${codeBlock("", output)}`);
+    return msg.send(`⏱ ${time} returned ${res.rows.length} row${res.rows.length > 1 ? "s" : ""} ${msg.flags.index ? `(selected row ${parseInt(msg.flags.index) + 1})` : ""}\n${codeBlock("", output)}`);
   }
 }
  
