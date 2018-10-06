@@ -6,8 +6,7 @@ class Insult extends Command {
   constructor(...args) {
     super(...args, {
       description: "Insults who you mention.",
-      usage: "<user:mention>",
-      nsfw: true
+      usage: "<user:mention>"
     });
   }
 
