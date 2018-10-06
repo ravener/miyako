@@ -35,3 +35,5 @@ class PackagePhobia extends Command {
     return msg.send({ embed });
   }
 }
+
+module.exports = PackagePhobia;
