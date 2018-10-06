@@ -20,6 +20,7 @@ class Cat extends Command {
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setImage(file);
     return msg.send({ embed });
+  }
 }
 
 module.exports = Cat;
