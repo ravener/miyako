@@ -24,7 +24,7 @@ class Eslint extends Command {
       .addField("Recommended", info.recommended.toString())
       .setFooter(`eslint v${this.linter.version}`)
       .setColor(0xff0000)
-      .setAuthor("ESLint", "https://i.imgur.com/TlurpFC.png");
+      .setAuthor(msg.author.tag, msg.author.displayAvatarURL());
     return msg.send({ embed });
   }
 }

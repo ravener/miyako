@@ -16,7 +16,7 @@ class EditSnipe extends Command {
     const embed = new MessageEmbed()
       .setColor(0xff0000)
       .setTitle("Edit Sniped")
-      .setAuthor(message.author.tag, msg.author.displayAvatarURL())
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTimestamp(message.createdAt)
       .setDescription(`**Before** ${old.content}\n\n**New** ${message.content}`);
     return msg.send({ embed });
