@@ -20,7 +20,8 @@ module.exports.defaultGuildSchema = Client.defaultGuildSchema
     .add("message", "string")
     .add("enabled", "boolean", { default: false }))
   .add("automod", (folder) => folder
-    .add("invites", "boolean", { default: false }))
+    .add("invites", "boolean", { default: false })
+    .add("banInviteUsernames", "boolean", { default: false }))
   .add("tags", "any", { array: true })
   .add("modlogs", (folder) => folder
     .add("channel", "channel")

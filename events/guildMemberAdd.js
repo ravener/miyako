@@ -2,8 +2,16 @@ const { Event } = require("klasa");
 
 class GuildMemberAdd extends Event {
   
-  run(member) {
+  async run(member) {
     this.client.emit("modlogs", member.guild, "memberJoin", { member, name: "join" });
+    if(member.guild.settings.automod.banInviteUsernames) {
+      if(/(https?)?discord\.gg\/.+/.test(member.displayName)) {
+        await member.ban({
+          days: 7,
+          reason: "Invite Userbot"
+        }).catch(() => null);
+      }
+    }
     const guild = member.guild;
     if(!guild.settings.welcome.enabled || !guild.settings.welcome.message || !guild.settings.welcome.channel || !guild.channels.get(guild.settings.welcome.channel) || !guild.channels.get(guild.settings.welcome.channel).postable) return;
     
