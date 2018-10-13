@@ -18,15 +18,16 @@ class Daily extends Command {
 
   async run(msg, [member]) {
     if(Date.now() < msg.member.settings.daily) throw `You can claim your daily in **${Duration.toNow(msg.member.settings.daily)}**`;
+    const { currency } = this.client.constants;
     if(member) {
       if(member.user.bot) throw "You can't give your daily points to a bot!";
       await this.setCooldown(msg);
       await member.givePoints(750);
-      return msg.send(`You have given your daily to **${member.displayName}**, as a bonus they get **$750** points.`);
+      return msg.send(`You have given your daily to **${member.displayName}**, as a bonus they get **750** ${currency}`);
     }
     await this.setCooldown(msg);
     await msg.member.givePoints(500);
-    return msg.send("You've collected your daily **$500**! Come back tomorrow for more.");
+    return msg.send(`You've collected your daily **500** ${currency}! Come back tomorrow for more.`);
   }
 
   setCooldown(msg) {
