@@ -5,7 +5,7 @@ class GuildMemberAdd extends Event {
   async run(member) {
     this.client.emit("modlogs", member.guild, "memberJoin", { member, name: "join" });
     if(member.guild.settings.automod.banInviteUsernames) {
-      if(/(https?)?discord\.gg\/.+/.test(member.displayName)) {
+      if(/(https?)?discord\.gg\/.+/g.test(member.displayName)) {
         await member.ban({
           days: 7,
           reason: "Invite Userbot"
