@@ -54,7 +54,7 @@ class Help extends Command {
           return em;
         });
       }
-      const handler = display.run(await msg.send("Loading commands..."), {
+      const handler = await display.run(await msg.send("Loading commands..."), {
         filter: (reaction, user) => user.id === msg.author.id,
         time: 1000 * 60 * 3
       });
