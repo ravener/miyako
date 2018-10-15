@@ -10,7 +10,7 @@ class Enable extends Command {
   }
 
   async run(msg, [command]) {
-    if(command.disabled) throw "That command may not be enabled as it has been disabled globally by owner for other reasons.";
+    if(!command.enabled) throw "That command may not be enabled as it has been disabled globally by owner for other reasons.";
     if(!msg.guild.settings.disabledCommands.includes(command.name)) throw "That command is not disabled.";
     await msg.guild.settings.update("disabledCommands", command.name, { action: "remove" });
     return msg.send(`Successfully enabled back the command **${command.name}** for this server.`);

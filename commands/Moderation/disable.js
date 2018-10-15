@@ -11,7 +11,7 @@ class Disable extends Command {
 
   async run(msg, [command]) {
     if(command.guarded) throw msg.language.get("COMMAND_CONF_GUARDED", command.name);
-    if(msg.guild.settings.disabledCommands.includes(command.name) || command.disabled) throw "That command is already disabled";
+    if(msg.guild.settings.disabledCommands.includes(command.name) || !command.enabled) throw "That command is already disabled";
     await msg.guild.settings.update("disabledCommands", command.name, { action: "add" });
     return msg.send(`Successfully disabled command **${command.name}** for this server.`);
   }
