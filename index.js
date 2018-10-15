@@ -18,7 +18,7 @@ class LadybugClient extends Client {
       permissionLevels: perms,
       prefix: "lb.",
       regexPrefix: /^(((hey|yo),?\s*)?ladybug,?)\s*/i,
-      providers: { default: "postgresql", postgresql: config.postgresql, rethinkdb: config.rethinkdb },
+      providers: { default: "rethinkdb", postgresql: config.postgresql, rethinkdb: config.rethinkdb },
       commandEditing: true,
       pieceDefaults: {
         commands: { deletable: true, quotedStringSupport: true },
