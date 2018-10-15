@@ -13,6 +13,8 @@ class Help extends Command {
       if (!arg || arg === "") return undefined;
       return this.client.arguments.get("command").run(arg, possible, message);
     });
+
+    this.handlers = new Map();
   }
   
   async run(msg, [command]) {
