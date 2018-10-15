@@ -6,6 +6,7 @@ const Constants = require("./utils/Constants.js");
 const IdioticAPI = require("idiotic-api");
 const RawEventStore = require("./stores/RawEventStore.js");
 const config = require("./config.json");
+const BananAPI = require("bananapi");
 
 Client.use(require("klasa-dashboard-hooks"));
 
@@ -37,6 +38,7 @@ class LadybugClient extends Client {
     this.constants = Constants;
     this.config = config;
     this.commandsRan = 0;
+    this.bananapi = new BananAPI.Client({ token: this.config.bananapi });
     /*this.lavalink = new AudioManager(this, {
       rest: { host: "localhost", port: 2333, password: this.config.lavalink },
       nodes: [
