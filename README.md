@@ -8,5 +8,7 @@ A Fun multipurpose [Discord](https://discordapp.com) Bot written using the [Klas
 
 This repository contains the always upto date code for the bot so you can contribute if you want, if you just want to use the bot [invite it from here](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=1345350758&scope=bot)
 
+For more detailed bot description see [DESCRIPTION.md](DESCRIPTION.md)
+
 ## License
 Released under [MIT License](LICENSE)
