@@ -16,5 +16,10 @@
     "host": "localhost",
     "database": ""
   },
+  "rethinkdb": {
+    "user": "ladybug",
+    "password": "",
+    "db": "ladybug"
+  },
   "pastebin": "password"
 }
