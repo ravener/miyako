@@ -49,7 +49,7 @@ class LadybugClient extends Client {
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
     this.registerStore(this.rawEvents);
-    this.upvoters = [];
+    this.upvoters = new Set();
     this.webhook = new WebhookClient(...this.config.webhook);
   }
   
