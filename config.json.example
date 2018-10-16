@@ -21,5 +21,7 @@
     "password": "",
     "db": "ladybug"
   },
-  "pastebin": "password"
+  "pastebin": "password",
+  "upvoteWebhook": ["id", "token"],
+  "dbl": "https://discordbots.org"
 }
