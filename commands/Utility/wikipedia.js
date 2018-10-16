@@ -21,7 +21,7 @@ class Wikipedia extends Command {
     if(!article.content_urls) throw "I couldn't find a wikipedia article with that title!";
     const embed = new MessageEmbed()
       .setColor(4886754)
-      .setThumbnail((article.thumbnail && article.thumbnail.source) || "https://i.imgur.com/fnhlGh5.png")
+      .setThumbnail("https://i.imgur.com/fnhlGh5.png")
       .setURL(article.content_urls.desktop.page)
       .setTitle(article.title)
       .setDescription(article.extract);
