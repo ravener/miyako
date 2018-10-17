@@ -26,7 +26,7 @@ class Points extends Monitor {
       await msg.member.setLevel(curLevel);
     }
     this.timeouts.add(msg.author.id);
-    setTimeout(() => this.timeouts.delete(msg.author.id), 3000);
+    setTimeout(() => this.timeouts.delete(msg.author.id), 5000);
   }
 }
 

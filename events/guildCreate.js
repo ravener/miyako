@@ -3,9 +3,10 @@ const { MessageEmbed } = require("discord.js");
 
 class GuildCreate extends Event {
 
-  run(guild) {
+  async run(guild) {
     if (!guild.available) return;
     const channel = this.client.channels.get("454776806869041154");
+    if(!guild.owner && guild.ownerID) await guild.members.fetch(guild.ownerID);
     const embed = new MessageEmbed()
       .setTitle("Ladybug joined a new server!")
       .setDescription(guild.name)
@@ -22,6 +23,15 @@ class GuildCreate extends Event {
     
     channel.send({ embed });
     this.client.user.setActivity(`@Ladybug help | ${this.client.guilds.size} servers!`);
+    const join = guild.channels.find((c) => c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    if(!join) return;
+    return join.send([
+      "Hey there, thanks for inviting me in to this wonderful server",
+      `Start by typing \`${guild.settings.prefix}help\` to get a list of commands`,
+      `If you found any bugs please report them using \`${guild.settings.prefix}bug\``,
+      `If you still have any questions ask them in our server, use \`${guild.settings.prefix}support\``,
+      "Have a great day!"
+    ].join("\n"));
   }
 }
 
