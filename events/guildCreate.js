@@ -29,7 +29,9 @@ class GuildCreate extends Event {
       "Hey there, thanks for inviting me in to this wonderful server",
       `Start by typing \`${guild.settings.prefix}help\` to get a list of commands`,
       `If you found any bugs please report them using \`${guild.settings.prefix}bug\``,
+      `If you have any ideas that you would like to see in this bot feel free to suggest them using \`${guild.settings.prefix}suggest\``,
       `If you still have any questions ask them in our server, use \`${guild.settings.prefix}support\``,
+      "",
       "Have a great day!"
     ].join("\n"));
   }
