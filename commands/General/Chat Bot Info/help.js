@@ -10,7 +10,7 @@ class Help extends Command {
     });
     
     this.createCustomResolver("command", (arg, possible, message) => {
-      if (!arg || arg === "") return undefined;
+      if (!arg) return undefined;
       return this.client.arguments.get("command").run(arg, possible, message);
     });
 
@@ -33,7 +33,7 @@ class Help extends Command {
         ].join("\n"));
       return msg.send({ embed });
     }
-    if(msg.guild && msg.guild.me.permissions.has(["MANAGE_MESSAGES", "ADD_REACTIONS", "EMBED_LINKS"])) {
+    if(msg.guild && msg.guild.me.permissions.has(["MANAGE_MESSAGES", "ADD_REACTIONS", "EMBED_LINKS", "READ_MESSAGE_HISTORY"])) {
       const previous = this.handlers.get(msg.author.id);
       if(previous) previous.stop();
       const display = new RichDisplay(
