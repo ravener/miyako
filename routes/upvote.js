@@ -17,9 +17,10 @@ class Upvote extends Route {
     this.client.upvoters.add(req.body.user);
     const user = await this.client.users.fetch(req.body.user).catch(() => null);
     if(!user) return;
+    const guild = this.client.guilds.get(this.client.constants.mainGuild);
     const embed = new MessageEmbed()
       .setTitle("Upvote")
-      .setDescription(`${user.tag} has upvoted Ladybug, thanks for the support.`)
+      .setDescription(`${guild.members.has(user.id) ? user.toString() : user.tag} has upvoted Ladybug. :heart: Thanks for the support.`)
       .setColor(0xff0000)
       .setAuthor(user.tag, user.displayAvatarURL());
     return this.webhook.send(embed);
