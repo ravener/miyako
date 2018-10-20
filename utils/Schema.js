@@ -11,6 +11,7 @@ module.exports.defaultGuildSchema = Client.defaultGuildSchema
     .add("channel", "channel")
     .add("limit", "integer", { default: 2 })
     .add("enabled", "boolean", { default: false }))
+  .add("triggers", "any", { array: true })
   .add("welcome", (folder) => folder
     .add("channel", "channel")
     .add("message", "string")
