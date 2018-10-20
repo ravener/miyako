@@ -42,7 +42,7 @@ class LadybugClient extends Client {
     this.bananapi = new BananAPI.Client({ token: this.config.bananapi });
     const { password, host, port } = this.config.lavalink;
     this.lavalink = new AudioManager(this, {
-      rest: { host, port, password },
+      rest: { host, port: 2333, password },
       nodes: [
         { host, port, password }
       ],
