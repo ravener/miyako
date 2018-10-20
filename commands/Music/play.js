@@ -17,8 +17,8 @@ class Play extends Command {
     // URL support soon
     const track = await this.client.lavalink.getTracks(`ytsearch:${song}`);
     if(!track) throw "Track not found or an error occured, try again with another song";
-    player.queue.push({ requester: msg.member, song: track[0] });
-    if(player.playing) return msg.send(`Added **${track[0].title}** to the queue as requested by **${msg.member.displayName}**`);
+    player.queue.push({ requester: msg.member, song: track.tracks[0] });
+    if(player.playing) return msg.send(`Added **${track.tracks[0].title}** to the queue as requested by **${msg.member.displayName}**`);
     await this.play(msg, player);
   }
 
