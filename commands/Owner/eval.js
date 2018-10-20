@@ -114,6 +114,8 @@ class Eval extends Command {
     let type;
     try {
       if (msg.flags.async) code = `(async () => {\n${code}\n})();`;
+      // eslint-disable-next-line no-unused-vars
+      const r = this.client.providers.get("rethinkdb").db;
       result = eval(code);
       syncTime = stopwatch.toString();
       type = new Type(result);
