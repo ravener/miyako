@@ -2,7 +2,11 @@
   "token": "https://discordapp.com/developers",
   "idioticapi": "https://api.anidiots.guide",
   "genius": "https://genious.com",
-  "lavalink": "youshallnotpass",
+  "lavalink": {
+    "host": "localhost",
+    "port": 3000,
+    "password": "youshallnotpass"
+  },
   "fortnite": "https://fortnitetracker.com",
   "tmdb": "https://themoviedb.org",
   "dictionary": {
