@@ -13,6 +13,7 @@ class Trigger extends Command {
 
     this.createCustomResolver("trigger", (arg, possible, msg, [action]) => {
       if(action === "view") return undefined;
+      if(action === "remove" && possible.name === "value") return undefined;
       return this.client.arguments.get("string").run(arg, possible, msg);
     });
   }
