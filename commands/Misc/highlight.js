@@ -8,7 +8,8 @@ class Highlight extends Command {
       usage: "<show|enable|disable|add|blacklist|remove> [args:string] [...]",
       usageDelim: " ",
       subcommands: true,
-      runIn: ["text"]
+      runIn: ["text"],
+      aliases: ["hl"]
     });
   }
 
