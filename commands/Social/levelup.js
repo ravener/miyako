@@ -14,7 +14,7 @@ class Levelup extends Command {
   async enable(msg) {
     if(msg.guild.settings.levelup) throw "Levelups already enabled.";
     await msg.guild.settings.update("levelup", true);
-    return msg.send("Enable levelup messages!");
+    return msg.send("Enabled levelup messages!");
   }
 
   async disable(msg) {
