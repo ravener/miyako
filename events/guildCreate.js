@@ -23,7 +23,7 @@ class GuildCreate extends Event {
     
     channel.send({ embed });
     this.client.user.setActivity(`@Ladybug help | ${this.client.guilds.size} servers!`);
-    const join = guild.channels.find((c) => c.type === "text" && c.permissionsFor(guild.me).has("SEND_MESSAGES"));
+    const join = guild.channels.find((c) => c.type === "text" && c.postable);
     if(!join) return;
     return join.send([
       "Hey there, thanks for inviting me in to this wonderful server",
@@ -33,7 +33,7 @@ class GuildCreate extends Event {
       `If you still have any questions ask them in our server, use \`${guild.settings.prefix}support\``,
       "",
       "Have a great day!"
-    ].join("\n"));
+    ].join("\n")).catch(() => null);
   }
 }
 
