@@ -1,6 +1,7 @@
 const { Command, Timestamp } = require("klasa");
 const { MessageEmbed } = require("discord.js");
 const { clean } = require("../../utils/utils.js");
+const { Parser } = require("breadtags");
 
 class Tag extends Command {
   constructor(...args) {
@@ -14,6 +15,7 @@ class Tag extends Command {
       cooldown: 5
     });
     this.timestamp = new Timestamp("d MMMM YYYY");
+    this.parser = new Parser();
   }
   
   async run(msg, [action, ...args]) {
@@ -72,13 +74,21 @@ class Tag extends Command {
     return msg.send({ embed });
   }
   
-  async get(msg, key) {
+  async get(msg, key, args) {
     const tag = msg.guild.settings.tags.find((x) => x.name === key.toLowerCase());
     if(!tag) throw "That tag doesn't exist.";
     await msg.guild.settings.update("tags", tag, { action: "remove" });
     tag.uses++;
     await msg.guild.settings.update("tags", tag, { action: "add" });
-    return msg.send(clean(msg, tag.content));
+    const parsed = await this.parser.parse(tag.content, {
+      guild: msg.guild,
+      member: msg.member,
+      user: msg.author,
+      channel: msg.channel,
+      args
+    }).catch(() => null);
+    if(!parsed) return;
+    return msg.send(clean(msg, parsed));
   }
 }
 
