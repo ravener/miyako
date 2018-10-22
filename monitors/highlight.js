@@ -16,12 +16,12 @@ class Highlight extends Monitor {
     if(!msg.guild) return;
     if(!msg.member) await msg.guild.members.fetch(msg.author.id).catch(() => null);
 
-    if(msg.member.settings.highlight.enabled && !this.recentlyTalked.has(msg.author.id)) {
+    if(msg.member.settings.highlight.enabled && !this.recentlyTalked.has(msg.author.id)) {  
       this.recentlyTalked.add(msg.author.id);
       setTimeout(() => this.recentlyTalked.delete(msg.author.id), 1000 * 60 * 5);
     }
 
-    const members = msg.guild.members.filter((x) => x && x.settings.highlight.enabled && x.settings.highlight.words.length && msg.channel.permissionsFor(x).has("VIEW_CHANNEL") && !x.settings.highlight.blacklistedChannels.includes(msg.channel.id) && !x.settings.highlight.blacklistedUsers.includes(msg.author.id) && x.id !== msg.author.id && !this.recentlyTalked.has(x.id));
+    const members = msg.guild.members.filter((x) => x.settings.highlight.enabled && x.settings.highlight.words.length && msg.channel.permissionsFor(x).has("VIEW_CHANNEL") && !x.settings.highlight.blacklistedChannels.includes(msg.channel.id) && !x.settings.highlight.blacklistedUsers.includes(msg.author.id) && x.id !== msg.author.id && !this.recentlyTalked.has(x.id));
     if(!members.size) return;
     members.forEach(async(x) => {
       const word = x.settings.highlight.words.find((x) => {
