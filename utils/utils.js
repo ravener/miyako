@@ -95,8 +95,10 @@ class Util {
   static getAttachment(msg) {
     const attach = msg.attachments.filter((x) => x.url && x.width && x.height);
     if(attach.size) return attach.first().url;
-    const embeds = msg.embeds.filter((x) => x.image && x.image.url);
+    const imageEmbeds = msg.embeds.filter((x) => x.image && x.image.url);
     if(embeds.length) return embeds[0].image.url;
+    const urlEmbeds = msg.embeds.filter((x) => x.type === "image" && x.url);
+    if(urlEmbeds.length) return urlEmbeds[0].url;
     return null;
   }
 
