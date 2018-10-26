@@ -27,15 +27,6 @@ class GuildMemberAdd extends Event {
       
     channel.send(msg).catch(() => null);
   }
-  
-  async init() {
-    const { schema } = this.client.gateways.guilds;
-    if(!schema.has("welcome")) await schema.add("welcome", {
-      message: { type: "string" },
-      channel: { type: "channel" },
-      enabled: { type: "boolean" }
-    });
-  }
 }
 
 module.exports = GuildMemberAdd;
