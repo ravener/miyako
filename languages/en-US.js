@@ -107,7 +107,7 @@ class English extends Language {
       COMMAND_INVITE_SELFBOT: "Why would you need an invite link for a selfbot...",
       COMMAND_INVITE: () => [
         `To add ${this.client.user.username} to your discord guild:`,
-        this.client.invite,
+        `<${this.client.invite}>`,
         util.codeBlock("", [
           "The above link is generated requesting the minimum permissions required to use every command currently.",
           "I know not all permissions are right for every guild, so don't be afraid to uncheck any of the boxes.",
@@ -116,20 +116,20 @@ class English extends Language {
       ],
       COMMAND_INVITE_DESCRIPTION: "Displays the join guild link of the bot.",
       COMMAND_INFO: (guild) => [
-        "Hi, i'm Mari... i-i mean Ladybug i'm a multipurpose bot made by `Free TNT#5796`",
-        "My goal is to provide as many features as you will ever need for your servers, i do a lot of cool things and even more is planned",
+        "Hi, I'm Mari... I-I mean Ladybug. I'm a multipurpose bot made by `Free TNT#5796`.",
+        "My goal is to provide as many features as you will ever need for your servers. I do a lot of cool things and even more is planned!",
         "",
-        `Type \`${guild.settings.prefix}help\` to see all commands list and \`${guild.settings.prefix}help <command>\` to get detailed information about a command`,
-        `If you got any suggestions to improve this bot feel free to suggest it through \`${guild.settings.prefix}suggest <suggestion>\``,
+        `Type \`${guild.settings.prefix}help\` to see the list of commands and \`${guild.settings.prefix}help <command>\` to get detailed information about a command.`,
+        `If you have any suggestions to improve this bot, feel free to suggest it through \`${guild.settings.prefix}suggest <suggestion>\`.`,
         "",
-        "Btw the code for this bot is also all OpenSource on github, this means everyone is welcome to contribute and help if you can and want to: https://github.com/freetnt5852/LadyBug-Bot",
+        "By the way, the code for this bot is all open source on GitHub. This means everyone is welcome to contribute and help if you can and want to: https://github.com/freetnt5852/LadyBug-Bot",
         "",
-        "Lastly if you got any questions or just want to hangout join our server https://discord.gg/mDkMbEh"
+        "Lastly, if you have any questions or just want to hang out, join our server: https://discord.gg/mDkMbEh"
       ],
       COMMAND_INFO_DESCRIPTION: "Provides some information about this bot.",
       COMMAND_HELP_DESCRIPTION: "Display help for a command.",
       COMMAND_HELP_NO_EXTENDED: "No extended help available.",
-      COMMAND_HELP_DM: "📥 | The list of commands you have access to has been sent to your DMs.",
+      COMMAND_HELP_DM: "📥 | Missing one or more of `Manage Messages, Add Reactions, Embed Links, Read Message History` permissions, The list of commands you have access to has been sent to your DMs.",
       COMMAND_HELP_NODM: "❌ | You have DMs disabled, I couldn't send you the commands in DMs.",
       COMMAND_HELP_USAGE: (usage) => `usage: \`${usage}\``,
       COMMAND_HELP_EXTENDED: "Extended Help: ",

@@ -30,6 +30,7 @@ class ServerInfo extends Command {
     const bans = await msg.guild.fetchBans()
       .then((bans) => bans.size)
       .catch(() =>  "Couldn't fetch bans.");
+    if(msg.guild.large) await msg.guild.members.fetch().catch(() => null);
     const embed = new MessageEmbed()
       .setColor(0xff0000)
       .setThumbnail(msg.guild.iconURL())

@@ -16,6 +16,7 @@ class Points extends Monitor {
   async run(msg) {
     if(!msg.guild || msg.command) return;
     if(this.timeouts.has(msg.author.id)) return;
+    if(!msg.member) await msg.guild.members.fetch(msg.author.id).catch(() => null);
     const points = Math.floor(Math.random() * 5) + 1;
     await msg.member.givePoints(points);
     const curLevel = Math.floor(0.1 * Math.sqrt(msg.member.settings.points));
@@ -26,7 +27,7 @@ class Points extends Monitor {
       await msg.member.setLevel(curLevel);
     }
     this.timeouts.add(msg.author.id);
-    setTimeout(() => this.timeouts.delete(msg.author.id), 3000);
+    setTimeout(() => this.timeouts.delete(msg.author.id), 5000);
   }
 }
 

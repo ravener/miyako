@@ -1,6 +1,6 @@
 const { Command, Stopwatch, Type, util } = require("klasa");
 const { inspect } = require("util");
-const superagent = require("superagent");
+const ladybug = require("ladybug-fetch");
 
 // This variable is more like for to be available in
 // eval's scope so i can reach it easier.
@@ -8,7 +8,6 @@ const superagent = require("superagent");
 const utils = require("../../utils/utils.js");
 
 class Eval extends Command {
-
   constructor(...args) {
     super(...args, {
       aliases: ["ev"],
@@ -48,6 +47,14 @@ class Eval extends Command {
         await this.getTypeOutput(msg, options);
         return this.handleMessage(msg, options, { success, result, time, footer, language });
       }
+      case "ladybug":
+      case "pastebin": {
+        if(!options.url) options.url = await this.getPaste(result, language).catch(() => null);
+        if(options.url) return msg.send(`Sent the result to ladybug pastebin: ${options.url}\n**Type**:${footer}\n${time}\n`);
+        options.ladybugUnavailable = true;
+        await this.getTypeOutput(msg, options);
+        return this.handleMessage(msg, options, { success, result, time, footer, language });
+      }
       case "haste":
       case "hastebin": {
         if (!options.url) options.url = await this.getHaste(result, language).catch(() => null);
@@ -78,10 +85,11 @@ class Eval extends Command {
     const _options = ["log"];
     if (msg.channel.attachable) _options.push("file");
     if (!options.hastebinUnavailable) _options.push("hastebin");
+    if(!options.ladybugUnavailable) _options.push("pastebin");
     let _choice;
     do {
       _choice = await msg.prompt(`Choose one of the following options: ${_options.join(", ")}`).catch(() => ({ content: "none" }));
-    } while (!["file", "haste", "hastebin", "console", "log", "default", "none", null].includes(_choice.content));
+    } while (!["file", "haste", "hastebin", "console", "log", "default", "none", "pastebin", "ladybug", null].includes(_choice.content));
     options.sendAs = _choice.content;
   }
 
@@ -106,6 +114,8 @@ class Eval extends Command {
     let type;
     try {
       if (msg.flags.async) code = `(async () => {\n${code}\n})();`;
+      // eslint-disable-next-line no-unused-vars
+      const r = this.client.providers.get("rethinkdb").db;
       result = eval(code);
       syncTime = stopwatch.toString();
       type = new Type(result);
@@ -139,10 +149,17 @@ class Eval extends Command {
   }
 
   async getHaste(evalResult, language) {
-    const key = await superagent.post("https://hastebin.com/documents")
+    const key = await ladybug.post("https://hastebin.com/documents")
       .send(evalResult)
       .then((res) => res.body.key);
     return `https://hastebin.com/${key}.${language}`;
+  }
+
+  async getPaste(evalResult, language) {
+    const { body: { url } } = await ladybug.post("https://itsladybug.ml/pastebin/json")
+      .send({ content: evalResult })
+      .set("Authorization", this.client.config.pastebin);
+    return `${url}.${language}`;
   }
 }
 

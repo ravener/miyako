@@ -17,10 +17,11 @@ class Points extends Command {
 
   async run(msg, [member = msg.member]) {
     if(member.user.bot) throw "Bots can't earn points, so therefore you can't view there balance.";
+    const { currency } = this.client.constants;
     if(member === msg.member) {
-      return msg.send(`You have **$${member.settings.points.toLocaleString()}** points.`);
+      return msg.send(`You have **${member.settings.points.toLocaleString()}** ${currency}`);
     }
-    return msg.send(`**${member.displayName}**'s balance: **$${member.settings.points.toLocaleString()}**`);
+    return msg.send(`**${member.displayName}**'s balance: **${member.settings.points.toLocaleString()}** ${currency}`);
   }
 }
 

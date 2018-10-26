@@ -1,5 +1,7 @@
 const { Command, Timestamp } = require("klasa");
 const { MessageEmbed } = require("discord.js");
+const { clean } = require("../../utils/utils.js");
+const { Parser } = require("breadtags");
 
 class Tag extends Command {
   constructor(...args) {
@@ -13,6 +15,7 @@ class Tag extends Command {
       cooldown: 5
     });
     this.timestamp = new Timestamp("d MMMM YYYY");
+    this.parser = new Parser();
   }
   
   async run(msg, [action, ...args]) {
@@ -35,10 +38,10 @@ class Tag extends Command {
   async create(msg, [name, ...content]) {
     if(!name) throw "Name is a required argument.";
     if(!content.length) throw "Content is a required argument";
-    if(msg.guild.settings.tags.find((x) => x.name === name)) throw "A tag with that name already exists.";
-    if(["delete", "create", "remove", "new", "list", "all", "info"].includes(name)) throw "That is a reserved name.";
-    if(this.client.commands.has(name) || this.client.commands.aliases.has(name)) throw "Tag names must not have a name of a command.";
-    const obj = { user: msg.author.id, date: Date.now(), content: content.join(" "), name, uses: 0 };
+    if(msg.guild.settings.tags.find((x) => x.name === name.toLowerCase())) throw "A tag with that name already exists.";
+    if(["delete", "create", "remove", "new", "list", "all", "info"].includes(name.toLowerCase())) throw "That is a reserved name.";
+    if(this.client.commands.has(name.toLowerCase()) || this.client.commands.aliases.has(name.toLowerCase())) throw "Tag names must not have a name of a command.";
+    const obj = { user: msg.author.id, date: Date.now(), content: content.join(" "), name: name.toLowerCase(), uses: 0 };
     await msg.guild.settings.update("tags", obj, { action: "add" });
     return msg.send(`Created a new tag with the name **${name}**`);
   }
@@ -71,13 +74,21 @@ class Tag extends Command {
     return msg.send({ embed });
   }
   
-  async get(msg, key) {
-    const tag = msg.guild.settings.tags.find((x) => x.name === key);
+  async get(msg, key, args) {
+    const tag = msg.guild.settings.tags.find((x) => x.name === key.toLowerCase());
     if(!tag) throw "That tag doesn't exist.";
     await msg.guild.settings.update("tags", tag, { action: "remove" });
     tag.uses++;
     await msg.guild.settings.update("tags", tag, { action: "add" });
-    return msg.send(tag.content.replace(/@(everyone|here)/g, "@\u200b$1"));
+    const parsed = await this.parser.parse(tag.content, {
+      guild: msg.guild,
+      member: msg.member,
+      user: msg.author,
+      channel: msg.channel,
+      args
+    }).catch(() => null);
+    if(!parsed) return;
+    return msg.send(clean(msg, parsed));
   }
 }
 

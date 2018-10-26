@@ -8,15 +8,15 @@ class Translate extends Command {
     super(...args, {
       description: "Translate any text to any language!",
       extendedHelp: "Note that the languages should be an abbreviation, i.e french -> fr",
-      usage: "<language:string> <message:string> [...]",
+      usage: "<language:string> <message:...string>",
       usageDelim: " ",
       cooldown: 5,
       aliases: ["tr"]
     });
   }
   
-  async run(message, [language, ...text]) {
-    const $ = await superagent.get(`http://translate.google.com/m?hl=${language}&sl=auto&q=${encodeURIComponent(text.join(" "))}`)
+  async run(message, [language, text]) {
+    const $ = await superagent.get(`http://translate.google.com/m?hl=${language}&sl=auto&q=${encodeURIComponent(text)}`)
       .set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36")
       .then((res) => cheerio.load(res.text))
       .catch(() => null);
@@ -26,7 +26,7 @@ class Translate extends Command {
     const embed = new MessageEmbed()
       .setTitle("Translated.")
       .setColor(0xff0000)
-      .addField("Original Text", codeBlock("", escapeMarkdown(text.join(" "), true)))
+      .addField("Original Text", codeBlock("", escapeMarkdown(text, true)))
       .addField("Translated Text", `Language: ${lang}\n${codeBlock("", escapeMarkdown(results, true))}`);
     return message.send({ embed });
   }

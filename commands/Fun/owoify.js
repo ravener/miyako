@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class OwOify extends Command {
   constructor(...args) {
@@ -11,7 +12,7 @@ class OwOify extends Command {
   }
   
   async run(msg, [text]) {
-    return msg.send(await this.client.idioticapi.owoify(text.replace(/@(everyone|here)/g, "@\u200b$1")));
+    return msg.send(clean(msg, await this.client.idioticapi.owoify(text)));
   }
 }
 

@@ -8,7 +8,7 @@ class Urban extends Command {
       description: "Search a term in urban dictionary!",
       cooldown: 5,
       runIn: ["text"],
-      aliases: ["ud", "urbandictionary"],
+      aliases: ["ud", "urbandictionary", "urbandict"],
       usage: "<term:string>",
       requiredPermissions: ["MANAGE_MESSAGES", "EMBED_LINKS", "ADD_REACTIONS"]
     });
@@ -27,10 +27,18 @@ class Urban extends Command {
     );
     
     for(const data of res.body.list) {
-      display.addPage((em) => em.setDescription(`${data.definition}\n\n*${data.example}*\n\n**Votes**\n:thumbsup: ${data.thumbs_up} :thumbsdown: ${data.thumbs_down}`));  
+      const format = `${this.format(data.definition)}\n\n*${this.format(data.example)}*`.length > 1980 ? false : true;
+      const definition = format ? this.format(data.definition) : data.definition;
+      const example = format ? this.format(data.example) : data.example;
+      display.addPage((em) => em.setDescription(`${definition}\n\n*${example}*\n\n**Votes**\n:thumbsup: ${data.thumbs_up} :thumbsdown: ${data.thumbs_down}\n\nDefinition written by **${data.author}**`));  
     }
     
     return display.run(await msg.send("Loading urban..."), { filter: (reaction, user) => user.id === msg.author.id });
+  }
+
+  format(str) {
+    // https://stackoverflow.com/questions/52374809/javascript-regular-expression-to-catch-boxes
+    return str.replace(/\[([^\][]+)\]/g, (x, y) => `${x}(https://www.urbandictionary.com/define.php?term=${y.replace(/\s+/g, "+")})`);
   }
 }
 

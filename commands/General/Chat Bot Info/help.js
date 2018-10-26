@@ -6,14 +6,15 @@ class Help extends Command {
     super(...args, {
       description: (language) => language.get("COMMAND_HELP_DESCRIPTION"),
       usage: "(command:command)",
-      guarded: true,
-      requiredPermissions: ["MANAGE_MESSAGES", "ADD_REACTIONS", "EMBED_LINKS"]
+      guarded: true
     });
     
     this.createCustomResolver("command", (arg, possible, message) => {
-      if (!arg || arg === "") return undefined;
+      if (!arg) return undefined;
       return this.client.arguments.get("command").run(arg, possible, message);
     });
+
+    this.handlers = new Map();
   }
   
   async run(msg, [command]) {
@@ -32,25 +33,47 @@ class Help extends Command {
         ].join("\n"));
       return msg.send({ embed });
     }
-    const display = new RichDisplay(
-      new MessageEmbed()
-        .setColor(0xff0000)
-        .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
-    );
+    if(msg.guild && msg.guild.me.permissions.has(["MANAGE_MESSAGES", "ADD_REACTIONS", "EMBED_LINKS", "READ_MESSAGE_HISTORY"])) {
+      const previous = this.handlers.get(msg.author.id);
+      if(previous) previous.stop();
+      const display = new RichDisplay(
+        new MessageEmbed()
+          .setColor(0xff0000)
+          .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
+      );
+      const help = await this.buildHelp(msg);
+      const categories = Object.keys(help);
+      for(let cat = 0; cat < categories.length; cat++) {
+        const message = ["`"];
+        display.addPage((em) => {
+          em.setTitle(`${categories[cat]} Commands`);
+          const subCategories = Object.keys(help[categories[cat]]);
+          for (let subCat = 0; subCat < subCategories.length; subCat++) message.push(`${help[categories[cat]][subCategories[subCat]].join("\n")}`);
+          message.push("`");
+          em.setDescription(message.join("\n"));
+          return em;
+        });
+      }
+      const handler = await display.run(await msg.send("Loading commands..."), {
+        filter: (reaction, user) => user.id === msg.author.id,
+        time: 1000 * 60 * 3
+      });
+      handler.on("end", () => this.handlers.delete(msg.author.id));
+      this.handlers.set(msg.author.id, handler);
+      return handler;
+    }
     const help = await this.buildHelp(msg);
     const categories = Object.keys(help);
+    const helpMessage = [];
     for(let cat = 0; cat < categories.length; cat++) {
-      const message = ["`"];
-      display.addPage((em) => {
-        em.setTitle(`${categories[cat]} Commands`);
-        const subCategories = Object.keys(help[categories[cat]]);
-        for (let subCat = 0; subCat < subCategories.length; subCat++) message.push(`${help[categories[cat]][subCategories[subCat]].join("\n")}`);
-        message.push("`");
-        em.setDescription(message.join("\n"));
-        return em;
-      });
+      helpMessage.push(`**${categories[cat]} Commands:**`, "```asciidoc");
+      const subCategories = Object.keys(help[categories[cat]]);
+      for(let subCat = 0; subCat < subCategories.length; subCat++) helpMessage.push(`= ${subCategories[subCat]} =`, `${help[categories[cat]][subCategories[subCat]].join("\n")}\n`);
+      helpMessage.push("```", "\u200b");
     }
-    return display.run(await msg.send("Loading commands..."), { filter: (reaction, user) => user.id === msg.author.id });
+    return msg.author.send(helpMessage, { split: { char: "\u200b" } })
+      .then(() => { if(msg.channel.type !== "dm") msg.sendLocale("COMMAND_HELP_DM"); })
+      .catch(() => { if(msg.channel.type !== "dm") msg.sendLocale("COMMAND_HELP_NODM"); });
   }
   
   async buildHelp(message) {

@@ -12,6 +12,7 @@ class Music extends Inhibitor {
 
     // Lyrics doesn't need voice channel.
     if(command.name === "lyrics") return;
+    //throw msg.language.get("INHIBITOR_DISABLED");
     if(!msg.member.voice.channel) throw "You need to be in a voice channel to run this command.";
     // Play is the command that's supposed to join a voice channel.
     if(command.name === "play") return;

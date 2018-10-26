@@ -1,11 +1,15 @@
 const { Client } = require("klasa");
+const { WebhookClient } = require("discord.js");
 const { defaultGuildSchema, defaultClientSchema, defaultUserSchema, defaultMemberSchema } = require("./utils/Schema.js");
 const perms = require("./utils/permissionLevels.js");
 const Constants = require("./utils/Constants.js");
 const IdioticAPI = require("idiotic-api");
 const RawEventStore = require("./stores/RawEventStore.js");
 const config = require("./config.json");
+const BananAPI = require("bananapi");
 const { AudioManager } = require("./utils/Lavalink");
+
+Client.use(require("klasa-dashboard-hooks"));
 
 class LadybugClient extends Client {
   constructor() {
@@ -14,8 +18,8 @@ class LadybugClient extends Client {
       disabledEvents: ["TYPING_START"],
       permissionLevels: perms,
       prefix: "lb.",
-      regexPrefix: /^((hey\s*)?ladybug,?)\s*/i,
-      providers: { default: "mongodb", mongodb: { url: config.mongodb, db: "ladybug", options: { useNewUrlParser: true } }, postgresql: config.postgresql },
+      regexPrefix: /^(((hey|yo),?\s*)?ladybug,?)\s*/i,
+      providers: { default: "rethinkdb", rethinkdb: config.rethinkdb },
       commandEditing: true,
       pieceDefaults: {
         commands: { deletable: true, quotedStringSupport: true },
@@ -29,21 +33,26 @@ class LadybugClient extends Client {
       defaultClientSchema,
       defaultUserSchema,
       defaultGuildSchema,
-      defaultMemberSchema
+      defaultMemberSchema,
+      dashboardHooks: { port: 3000, apiPrefix: "/" }
     });
     this.constants = Constants;
     this.config = config;
     this.commandsRan = 0;
+    this.bananapi = new BananAPI.Client({ token: this.config.bananapi });
+    const { password, host, port } = this.config.lavalink;
     this.lavalink = new AudioManager(this, {
-      rest: { host: "localhost", port: 2333, password: this.config.lavalink },
+      rest: { host, port: 2333, password },
       nodes: [
-        { host: "localhost", port: 3000, password: this.config.lavalink }
+        { host, port, password }
       ],
       userID: this.constants.botID
     });
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
     this.registerStore(this.rawEvents);
+    this.upvoters = new Set();
+    this.webhook = new WebhookClient(...this.config.webhook);
   }
   
   login() {

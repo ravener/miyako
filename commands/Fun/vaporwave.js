@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class VaporWave extends Command {
   constructor(...args) {
@@ -11,7 +12,7 @@ class VaporWave extends Command {
   }
   
   async run(msg, [text]) {
-    return msg.send(await this.client.idioticapi.vapor(text));
+    return msg.send(clean(msg, await this.client.idioticapi.vapor(text)));
   }
 }
 

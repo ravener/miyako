@@ -1,6 +1,6 @@
 const { Command } = require("klasa");
 const { MessageEmbed } = require("discord.js");
-const superagent = require("superagent");
+const ladybug = require("ladybug-fetch");
 const cheerio = require("cheerio");
 
 class FML extends Command {
@@ -14,7 +14,7 @@ class FML extends Command {
   }
   
   async run(message) {
-    const $ = await superagent.get("http://fmylife.com/random")
+    const $ = await ladybug("http://www.fmylife.com/random")
       .then((res) => cheerio.load(res.text))
       .catch(() => null);
     if(!$) throw "Something went wrong, please try again later.";

@@ -3,6 +3,7 @@ const { Client } = require("klasa");
 Client.use(require("klasa-member-gateway"));
 
 module.exports.defaultGuildSchema = Client.defaultGuildSchema
+  .add("selfroles", "role", { array: true })
   .add("levelup", "boolean", { default: true })
   .add("roles", (folder) => folder
     .add("muted", "role"))
@@ -10,6 +11,7 @@ module.exports.defaultGuildSchema = Client.defaultGuildSchema
     .add("channel", "channel")
     .add("limit", "integer", { default: 2 })
     .add("enabled", "boolean", { default: false }))
+  .add("triggers", "any", { array: true })
   .add("welcome", (folder) => folder
     .add("channel", "channel")
     .add("message", "string")
@@ -19,7 +21,8 @@ module.exports.defaultGuildSchema = Client.defaultGuildSchema
     .add("message", "string")
     .add("enabled", "boolean", { default: false }))
   .add("automod", (folder) => folder
-    .add("invites", "boolean", { default: false }))
+    .add("invites", "boolean", { default: false })
+    .add("banInviteUsernames", "boolean", { default: false }))
   .add("tags", "any", { array: true })
   .add("modlogs", (folder) => folder
     .add("channel", "channel")

@@ -1,18 +1,31 @@
 {
   "token": "https://discordapp.com/developers",
   "idioticapi": "https://api.anidiots.guide",
-  "mongodb": "mongodb://localhost",
   "genius": "https://genious.com",
-  "lavalink": "youshallnotpass",
+  "lavalink": {
+    "host": "localhost",
+    "port": 3000,
+    "password": "youshallnotpass"
+  },
   "fortnite": "https://fortnitetracker.com",
+  "tmdb": "https://themoviedb.org",
   "dictionary": {
     "app_key": "",
     "app_id": ""
   },
+  "webhook": ["Webhook ID", "Webhook Token"],
   "postgresql": {
     "user": "username",
     "password": null,
     "host": "localhost",
     "database": ""
-  }
+  },
+  "rethinkdb": {
+    "user": "ladybug",
+    "password": "",
+    "db": "ladybug"
+  },
+  "pastebin": "password",
+  "upvoteWebhook": ["id", "token"],
+  "dbl": "https://discordbots.org"
 }

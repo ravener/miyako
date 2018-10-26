@@ -18,7 +18,7 @@ class Reward extends Command {
     if(member.user.bot) throw "You can't reward a bot!";
     if(amount > Number.MAX_SAFE_INTEGER) throw "That amount is too high!";
     await member.givePoints(amount);
-    return msg.send(`Rewarded **$${amount.toLocaleString()}** to **${member.displayName}**`);
+    return msg.send(`Rewarded **${amount.toLocaleString()}** ${this.client.constants.currency} to **${member.displayName}**`);
   }
 }
 

@@ -8,7 +8,8 @@ class Starboard extends Command {
       aliases: ["star"],
       usage: "<enable|disable|limit> [args:string]",
       subcommands: true,
-      usageDelim: " "
+      usageDelim: " ",
+      permissionLevel: 6
     });
   }
 

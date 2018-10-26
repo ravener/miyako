@@ -1,10 +1,11 @@
 const { Task } = require("klasa");
 
 class Reminder extends Task {
-  async run({ channel, user, text }) {
-    const _channel = this.client.channels.get(channel);
-    if(!_channel) return;
-    return _channel.send(`<@${user}> You wanted me to remind you: ${text}`);
+
+  async run({ user, text }) {
+    const _user = await this.client.users.fetch(user);
+    if(!_user) return;
+    return _user.send(`You wanted me to remind you: **${text}**`);
   }
 }
 

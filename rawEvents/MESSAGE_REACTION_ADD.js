@@ -50,7 +50,7 @@ class MessageReactionAdd extends RawEvent {
         .setColor(foundStar.color)
         .setTitle(foundStar.title)
         .setURL(msg.url)
-        .setDescription(foundStar.description)
+        .setDescription(foundStar.description || "")
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])+1} | ${msg.id}`)
@@ -59,12 +59,12 @@ class MessageReactionAdd extends RawEvent {
     }
 
     if(msg.reactions.get("⭐").count < msg.guild.settings.starboard.limit) return;
-
+    const content = msg.content ? msg.content : (msg.embeds.length && msg.embeds[0].description) ? msg.embeds[0].description : "";
     const embed = new MessageEmbed()
       .setColor(15844367)
       .setTitle("Click Here to jump to the message")
       .setURL(msg.url)
-      .setDescription(msg.content) 
+      .setDescription(content || "")
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setTimestamp()
       .setFooter(`⭐ ${msg.guild.settings.starboard.limit} | ${msg.id}`)

@@ -6,7 +6,7 @@ class Fortnite extends Command {
   constructor(...args) {
     super(...args, {
       description: "Get your fortnite stats.",
-      usage: "<platform:platform> <username:string> [...]",
+      usage: "<platform:platform> <username:...string>",
       usageDelim: " ",
       aliases: ["fn", "fnprofile"]
     });
@@ -26,8 +26,8 @@ class Fortnite extends Command {
     });
   }
   
-  async run(msg, [platform, ...username]) {
-    const resp = await superagent.get(`https://api.fortnitetracker.com/v1/profile/${platform}/${encodeURIComponent(username.join(" "))}`)
+  async run(msg, [platform, username]) {
+    const resp = await superagent.get(`https://api.fortnitetracker.com/v1/profile/${platform}/${encodeURIComponent(username)}`)
       .set("TRN-Api-Key", this.client.config.fortnite)
       .then((r) => r.body);
     if(resp.error === "Player Not Found") throw "Couldn't find that player.";

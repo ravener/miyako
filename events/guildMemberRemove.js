@@ -22,15 +22,6 @@ class GuildMemberRemove extends Event {
       
     channel.send(msg).catch(() => null);
   }
-  
-  async init() {
-    const { schema } = this.client.gateways.guilds;
-    if(!schema.has("leave")) await schema.add("leave", {
-      message: { type: "string" },
-      channel: { type: "channel" },
-      enabled: { type: "boolean" }
-    });
-  }
 }
 
 module.exports = GuildMemberRemove;

@@ -17,11 +17,13 @@
             }
         ],
         "no-var": "warn",
+        "prefer-const": ["error", {
+          "destructuring": "all"
+        }],
         "object-curly-spacing": ["error", "always", {
           "arraysInObjects": true,
           "objectsInObjects": true
         }],
-        "no-var": "error",
         "camelcase": "error",
         "linebreak-style": [
             "error",

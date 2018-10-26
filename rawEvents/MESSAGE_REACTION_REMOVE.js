@@ -25,7 +25,7 @@ class MessageReactionRemove extends RawEvent {
         .setColor(foundStar.color)
         .setTitle(foundStar.title)
         .setURL(msg.url)
-        .setDescription(foundStar.description)
+        .setDescription(foundStar.description || "")
         .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
         .setTimestamp()
         .setFooter(`⭐ ${parseInt(star[1])-1} | ${msg.id}`)
