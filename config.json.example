@@ -2,6 +2,7 @@
   "token": "https://discordapp.com/developers",
   "idioticapi": "https://api.anidiots.guide",
   "genius": "https://genious.com",
+  "mongodb": "mongodb://localhost",
   "lavalink": {
     "host": "localhost",
     "port": 3000,
