@@ -8,7 +8,7 @@ class Trigger extends Monitor {
   }
 
   async run(msg) {
-    if(!msg.guild || !msg.guild.settings.triggers.length) return;
+    if(!msg.guild || !msg.guild.settings.triggers.length || msg.command) return;
     for(const obj of msg.guild.settings.triggers) {
       if(new RegExp(`\\b${regExpEsc(obj.word)}\\b`, "ig").test(msg.content)) {
         await msg.send(obj.response);

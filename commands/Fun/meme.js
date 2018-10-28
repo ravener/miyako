@@ -19,7 +19,7 @@ class Meme extends Command {
         const data = random(res.body.data.children).data;
         return {
           title: data.title,
-          url: data.preview.images[0].source.url,
+          url: data.url,
           votes: data.ups,
           downvotes: data.downs
         };
