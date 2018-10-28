@@ -7,13 +7,14 @@ class Meme extends Command {
   constructor(...args) {
     super(...args, {
       description: "Get a random meme from r/dankmemes",
-      cooldown: 5
+      cooldown: 5,
+      aliases: ["memes", "dankmemes"]
     });
     this.cost = 5;
   }
   
   async run(message) {
-    const meme = await superagent.get("https://api.reddit.com/u/kerdaloo/m/dankmemer/top/.json?sort=top&t=day&limit=500")
+    const meme = await superagent.get("https://www.reddit.com/r/dankmemes/top.json?sort=top&t=day&limit=500")
       .then((res) => {
         const data = random(res.body.data.children).data;
         return {
