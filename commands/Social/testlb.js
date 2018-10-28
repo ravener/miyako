@@ -29,10 +29,10 @@ class Leaderboard extends Command {
     const top = list.slice(page * 10, (page + 1) * 10);
     const leaderboard = [];
     const numPos = list.indexOf(msg.member);
-    const pos = numPos === -1 ? "??" : (list.indexOf(msg.member) + 1).toString().padStart(2, "0");
+    const pos = numPos === -1 ? "??" : (list.indexOf(msg.member) + 1).toString();
     top.map((x, i) => {
       // leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${x.user.tag}${" ".repeat(35 - x.user.tag.length)}::  ${x.settings.points.toLocaleString()}`);
-      leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${x.user.tag} => ${x.settings.points.toLocaleString()} ${currency}`);
+      leaderboard.push(`${(page * 10 + (i + 1)).toString()} ${x.user.username}: ${x.settings.points.toLocaleString()} ${currency}`);
     });
     embed.setDescription(leaderboard.join("\n"));
     embed.setFooter(`❯ Your Position: ${pos}`);
