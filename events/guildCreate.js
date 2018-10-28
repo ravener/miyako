@@ -30,6 +30,9 @@ class GuildCreate extends Event {
       `Start by typing \`${guild.settings.prefix}help\` to get a list of commands`,
       `If you found any bugs please report them using \`${guild.settings.prefix}bug\``,
       `If you have any ideas that you would like to see in this bot feel free to suggest them using \`${guild.settings.prefix}suggest\``,
+      "",
+      `Note: levelup messages are enabled by default if you found them annoying feel free to disable it using \`${guild.settings.prefix}levelup disable\``,
+      "",
       `If you still have any questions ask them in our server, use \`${guild.settings.prefix}support\``,
       "",
       "Have a great day!"
