@@ -19,7 +19,7 @@ class AntiLink extends Monitor {
       await message.delete();
       this.client.emit("modlogs", message.guild, "inviteDelete", { name: "invites", message, link: { base: match[1], code: match[2] } });
     }
-    const msg = await message.reply("❌ No advertising.");
+    const msg = await message.send(`${message.author} <:crossmark:466669201025925120> Sorry but posting invite links of other servers is not allowed here.`);
     await msg.delete({ timeout: 3000 });
   }
 }

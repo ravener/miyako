@@ -22,7 +22,7 @@ class Purge extends Command {
     }
     messages = messages.array().slice(0, limit);
     await msg.channel.bulkDelete(messages);
-    return msg.sendMessage(`Successfully deleted ${messages.length} messages from ${limit}.`);
+    return msg.sendMessage(`Successfully deleted ${messages.length} messages from ${limit}.`).then((m) => m.delete({ timeout: 3000 }));
   }
 
   getFilter(msg, filter, user) {
