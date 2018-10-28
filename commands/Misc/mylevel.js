@@ -10,7 +10,8 @@ class MyLevel extends Command {
 
     this.levels = {
       0: "User",
-      2: "Premium",
+      2: "Beta Tester",
+      3: "Premium",
       4: "Mini Server Moderator",
       5: "Server Moderator",
       6: "Server Manager",
@@ -28,7 +29,7 @@ class MyLevel extends Command {
       perm = level;
       break;
     }
-    return msg.send(`You permission level is **${perm}: ${this.levels[perm]}**`);
+    return msg.send(`You permission level is **${perm} ${this.levels[perm]}**`);
   }
 }
 

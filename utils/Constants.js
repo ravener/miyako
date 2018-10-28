@@ -6,5 +6,6 @@ module.exports = {
   mainGuild: "397479560876261377",
   suggestionsChannel: "460801007769616394",
   premiumRole: "476467857543266316",
-  currency: "<:ladybug_coin:500680311097524234>"
+  currency: "<:ladybug_coin:500680311097524234>",
+  betaRole: "506119917024575509"
 };

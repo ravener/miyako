@@ -8,8 +8,14 @@ const perms = new PermissionLevels()
     if(!guild) return false;
     const member = guild.members.get(msg.author.id);
     if(!member) return false;
-    if(member.roles.has(client.constants.premiumRole)) return true;
-    return false;
+    return member.roles.has(client.constants.betaRole);
+  }, { fetch: true })
+  .add(3, (client, msg) => {
+    const guild = client.guilds.get(client.constants.mainGuild);
+    if(!guild) return false;
+    const member = guild.members.get(msg.author.id);
+    if(!member) return false;
+    return member.roles.has(client.constants.premiumRole);
   }, { fetch: true })
   // Mini mods
   .add(4, (client, message) => message.guild && message.member.permissions.has("MANAGE_MESSAGES"), { fetch: true })

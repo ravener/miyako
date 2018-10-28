@@ -52,7 +52,7 @@ class English extends Language {
       MONITOR_COMMAND_HANDLER_ABORTED: "Aborted",
       INHIBITOR_COOLDOWN: (remaining) => `You have just used this command. You can use this command again in ${remaining} second${remaining === 1 ? "" : "s"}.`,
       INHIBITOR_DISABLED: "This command is currently disabled",
-      INHIBITOR_MISSING_BOT_PERMS: (missing) => `Insufficient permissions, missing: **${missing}**`,
+      INHIBITOR_MISSING_BOT_PERMS: (missing) => `Insufficient permissions, i'm missing: **${missing}**`,
       INHIBITOR_NSFW: "You may not use NSFW commands in this channel.",
       INHIBITOR_PERMISSIONS: "You do not have permission to use this command",
       INHIBITOR_REQUIRED_SETTINGS: (configs) => `The guild is missing the **${configs.join(", ")}** guild setting${configs.length !== 1 ? "s" : ""} and thus the command cannot run.`,
