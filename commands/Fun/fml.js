@@ -14,7 +14,7 @@ class FML extends Command {
   }
   
   async run(message) {
-    const $ = await ladybug("http://www.fmylife.com/random")
+    const $ = await ladybug("https://www.fmylife.com/random")
       .then((res) => cheerio.load(res.text))
       .catch(() => null);
     if(!$) throw "Something went wrong, please try again later.";
