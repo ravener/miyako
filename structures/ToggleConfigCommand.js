@@ -9,7 +9,7 @@ const { MessageEmbed } = require("discord.js");
 // this should make it less repeating and keep them consistent.
 class ToggleConfigCommand extends Command {
   constructor(client, store, file, directory, { key, friendlyName, ...options } = {}) {
-    options.usage = "[action:resolver]";
+    options.usage = "(action:resolver)";
     options.runIn = ["text"];
     if(!options.description) options.description = `Enable or disable ${friendlyName || key} for this server.`;
     if(!options.permissionLevel) options.permissionLevel = 6;
