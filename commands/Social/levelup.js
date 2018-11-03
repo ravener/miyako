@@ -4,7 +4,7 @@ class Levelup extends ToggleConfigCommand {
   constructor(...args) {
     super(...args, {
       key: "levelup",
-      friendlyName: "Levelup messages",
+      friendlyName: "levelup messages",
       aliases: ["levelups", "lvlup", "lvlups"]
     });
   }
