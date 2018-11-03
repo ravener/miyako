@@ -23,7 +23,8 @@ class LadybugClient extends Client {
       commandEditing: true,
       pieceDefaults: {
         commands: { deletable: true, quotedStringSupport: true },
-        rawEvents: { enabled: true }
+        rawEvents: { enabled: true },
+        functions: { enabled: true }
       },
       typing: true,
       ownerID: "292690616285134850",
@@ -59,7 +60,7 @@ class LadybugClient extends Client {
 
   // Alias
   get funcs() {
-    return this.client.functions;
+    return this.functions;
   }
   
   login() {
