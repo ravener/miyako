@@ -5,7 +5,7 @@ class UserInfo extends Command {
   constructor(...args) {
     super(...args, {
       description: "Get information on a mentioned user.",
-      usage: "[Member:member]",
+      usage: "[Member:membername]",
       runIn: ["text"],
       aliases: ["ui", "user"]
     });

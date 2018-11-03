@@ -8,7 +8,7 @@ class Deduct extends Command {
       permissionLevel: 7,
       usage: "<user:member> <amount:int>",
       usageDelim: " ",
-      aliases: ["take", "punish"],
+      aliases: ["takepoints", "punish"],
       runIn: ["text"]
     });
   }

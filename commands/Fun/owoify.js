@@ -9,6 +9,7 @@ class OwOify extends Command {
       aliases: ["owo"],
       cooldown: 3
     });
+    this.cost = 5;
   }
   
   async run(msg, [text]) {

@@ -1,5 +1,6 @@
 const { Argument, util: { regExpEsc } } = require("klasa");
 const { GuildMember, User } = require("discord.js");
+const { promptArgument } = require("../utils/utils.js");
 
 const USER_REGEXP = Argument.regex.userOrMember;
 
@@ -41,7 +42,7 @@ class MemberName extends Argument {
     switch (querySearch.length) {
       case 0: throw `${possible.name} Must be a valid name, id or user mention`;
       case 1: return querySearch[0];
-      default: throw `Found multiple matches: \`${querySearch.map(user => user.tag).join("`, `")}\``;
+      default: return promptArgument(msg, querySearch.slice(0, 10), (m) => m.user.tag);
     }
   }
 }

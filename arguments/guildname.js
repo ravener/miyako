@@ -1,4 +1,5 @@
 const { Argument, util: { regExpEsc } } = require("klasa");
+const { promptArgument } = require("../utils/utils.js");
 
 class GuildName extends Argument {
   
@@ -25,7 +26,7 @@ class GuildName extends Argument {
     switch(querySearch.length) {
       case 0: throw `${possible.name} Must be a valid guild name or id.`;
       case 1: return querySearch[0];
-      default: throw `Found multiple matches: \`${querySearch.map(guild => guild.name).join("`, `")}\``;
+      default: return promptArgument(msg, querySearch.slice(0, 10));
     }
   }
 }

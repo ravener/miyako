@@ -1,5 +1,6 @@
 const { Argument, util: { regExpEsc } } = require("klasa");
 const { Role } = require("discord.js");
+const { promptArgument } = require("../utils/utils.js");
 
 const ROLE_REGEXP = Argument.regex.role;
 
@@ -32,7 +33,7 @@ class Rolename extends Argument {
     switch (querySearch.length) {
       case 0: throw `${possible.name} Must be a valid name, id or role mention`;
       case 1: return querySearch[0];
-      default: throw `Found multiple matches: \`${querySearch.map(role => role.name).join("`, `")}\``;
+      default: return promptArgument(msg, querySearch.slice(0, 10));
     }
   }
 }

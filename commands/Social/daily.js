@@ -27,7 +27,7 @@ class Daily extends Command {
       return msg.send(`You have given your daily to **${member.displayName}**, as a bonus they get **750** ${currency}`);
     }
     let amount = 500;
-    const voted = await this.isUpvoted(msg.author.id);
+    const voted = await this.client.functions.isUpvoted(msg.author.id);
     if(voted) amount += amount;
     await this.setCooldown(msg);
     await msg.member.givePoints(amount);
@@ -36,14 +36,6 @@ class Daily extends Command {
 
   setCooldown(msg) {
     return msg.member.settings.update("daily", msg.createdTimestamp + 86400000);
-  }
-
-  isUpvoted(userId) {
-    return ladybug(`https://discordbots.org/api/bots/${this.client.user.id}/check`)
-      .set("Authorization", this.client.config.dbl)
-      .query({ userId })
-      .then((res) => Boolean(res.body.voted))
-      .catch(() => false);
   }
 }
 

@@ -1,5 +1,6 @@
 const { Argument, util: { regExpEsc } } = require("klasa");
 const { Channel, Message } = require("discord.js");
+const { promptArgument } = require("../utils/utils.js");
 
 const CHANNEL_REGEXP = Argument.regex.channel;
 
@@ -35,7 +36,7 @@ class ChannelName extends Argument {
     switch (querySearch.length) {
       case 0: throw `${possible.name} Must be a valid name, id or channel mention`;
       case 1: return querySearch[0];
-      default: throw `Found multiple matches: \`${querySearch.map(channel => channel.name).join("`, `")}\``;
+      default: return promptArgument(msg, querySearch.slice(0, 10));
     }
   }
 }

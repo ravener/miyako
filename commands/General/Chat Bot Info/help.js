@@ -1,5 +1,6 @@
 const { Command, RichDisplay, util } = require("klasa");
 const { MessageEmbed } = require("discord.js");
+const { formatUsage } = require("../../../utils/utils.js");
 
 class Help extends Command {
   constructor(...args) {
@@ -18,8 +19,9 @@ class Help extends Command {
   }
   
   async run(msg, [command]) {
+    const { currency } = this.client.constants;
     if(command) {
-      const cost = command.category === "Canvas" ? "$10" : command.cost ? `$${command.cost}` : null;
+      const cost = command.category === "Canvas" ? `10 ${currency}` : command.cost ? `${command.cost} ${currency}` : null;
       const embed = new MessageEmbed()
         .setTitle(command.name)
         .setColor(0xff0000)
@@ -27,7 +29,7 @@ class Help extends Command {
         .setDescription([
           `**${util.isFunction(command.description) ? command.description(msg.language) : command.description}**`,
           cost ? `**Cost**: ${cost}` : "",
-          msg.language.get("COMMAND_HELP_USAGE", command.usage.fullUsage(msg)),
+          msg.language.get("COMMAND_HELP_USAGE", formatUsage(command.usage.fullUsage(msg))),
           msg.language.get("COMMAND_HELP_EXTENDED"),
           `\`\`\`${util.isFunction(command.extendedHelp) ? command.extendedHelp(msg.language) : command.extendedHelp}\`\`\``
         ].join("\n"));

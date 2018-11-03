@@ -1,10 +1,11 @@
-const { util: { toTitleCase } } = require("klasa");
+const { util: { toTitleCase, codeBlock } } = require("klasa");
 
 class Util {
   constructor() {
-    throw new Error("Static class");
+    throw new Error("Utils is a static class and may not be constructed.");
   }
 
+  // some_text => Some Text
   static capitalize(str) {
     return str.split("_").map(toTitleCase).join(" ");
   }
@@ -24,19 +25,11 @@ class Util {
   }
   
   // https://j11y.io/snippets/wordwrap-for-javascript/
-  /* static wordwrap(str, width = 75, brk = "n", cut = false) {
+  static wordwrap(str, width = 75, brk = "\n", cut = false) {
     if (!str) { return str; }
-    if(str.length < width) return str;
+    if(str.length <= width) return str;
     const regex = ".{1," + width + "}(\\s|$)" + (cut ? "|.{" + width + "}|.+$" : "|\\S+?(\\s|$)");
     return str.match(RegExp(regex, "g")).join(brk);
-  } */
-  
-  // I think this one is better?
-  static wordwrap(str, maxLength) {
-    if(str.length <= maxLength) return str;
-    const reg = new RegExp(".{1," + maxLength + "}", "g");
-    const parts = str.match(reg); 
-    return parts.join("\n");
   }
   
   static slice(str, limit, suffix = "...") {
@@ -56,6 +49,9 @@ class Util {
     return Math.floor(Math.random() * (max - min)) + min;
   }
   
+  // Taken from discord.js's Message#cleanContent
+  // Since not every input we wanna clean is a message object
+  // this makes it easier to clean any piece of string.
   static clean(msg, content) {
     return content
       .replace(/@(everyone|here)/g, "@\u200b$1")
@@ -92,6 +88,28 @@ class Util {
     return str.slice(0, str.length / 2) + str2.slice(str2.length / 2);
   }
 
+  async promptArgument(msg, args, propOrFn = "name") {
+    let counter = 1;
+    const m = await msg.prompt(`Found multiple matches:${codeBlock("", args.map((x) => `${counter++}: ${typeof propOrFn === "function" ? propOrFn(x) : x[propOrFn]}`).join("\n"))}\nType the number to choose an option or **CANCEL** to stop.`);
+    // Throw here because we wanna stop the execution
+    // as if this returned a result it ends up being the result of the argument
+    // we wanna throw to point out that it failed to resolve the arg.
+    if(m.content.toLowerCase() === "cancel") throw "Cancelled.";
+    const num = parseInt(m.content);
+    if(isNaN(num)) throw "Invalid input, Not a Number, cancelled";
+    // Since arrays are 0 indexed but we wanna be user friendly here.
+    const res = args[num - 1];
+    if(!res) throw "Invalid number range.";
+    return res;
+  }
+
+  // The usage string types are kind of not really user friendly
+  // this turns them to just the name
+  // <name:string> [reason:string] => <name> [reason]
+  static formatUsage(usageString) {
+    return usageString.replace(/(<|\[)(\w+):.+?(>|\])/gi, "$1$2$3");
+  }
+
   static getAttachment(msg) {
     const attach = msg.attachments.filter((x) => x.url && x.width && x.height);
     if(attach.size) return attach.first().url;
@@ -102,6 +120,7 @@ class Util {
     return null;
   }
 
+  // Something based on python's range()
   static* range(start, stop, incr = 1) {
     if(!stop) {
       stop = start;
