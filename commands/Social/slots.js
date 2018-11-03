@@ -6,7 +6,6 @@ class Slots extends Command {
   constructor(...args) {
     super(...args, {
       description: "Try your luck in the slot machine!",
-      permissionLevel: 2,
       aliases: ["slot", "slotmachine", "slot-machine"]
     });
   }
