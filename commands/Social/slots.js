@@ -1,7 +1,6 @@
 const { Command } = require("klasa");
 const { MessageEmbed } = require("discord.js");
 const slots = require("../../utils/slots.js");
-const ladybug = require("ladybug-fetch");
 
 class Slots extends Command {
   constructor(...args) {

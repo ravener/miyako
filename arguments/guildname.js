@@ -3,7 +3,7 @@ const { promptArgument } = require("../utils/utils.js");
 
 class GuildName extends Argument {
   
-  run(arg, possible) {
+  run(arg, possible, msg) {
     const guild = this.constructor.regex.snowflake.test(arg) ? this.client.guilds.get(arg) : null;
     if (guild) return guild;
     

@@ -1,5 +1,4 @@
 const { Command, Duration } = require("klasa");
-const ladybug = require("ladybug-fetch");
 
 class Daily extends Command {
   constructor(...args) {
