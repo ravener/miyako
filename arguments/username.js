@@ -23,7 +23,7 @@ class Username extends Argument {
     if (!msg.guild) return this.user(arg, possible, msg);
     const resUser = await resolveUser(arg, msg.guild);
     if (resUser) return resUser;
-    if(!arg.length) throw `${possible.name} Must be a valid name, id or user mention.`;
+    if(!arg || !arg.length) throw `${possible.name} Must be a valid name, id or user mention.`;
     const results = [];
     const reg = new RegExp(regExpEsc(arg), "i");
     for (const member of msg.guild.members.values()) {
