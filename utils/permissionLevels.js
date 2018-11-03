@@ -3,20 +3,22 @@ const { PermissionLevels } = require("klasa");
 const perms = new PermissionLevels()
   // User
   .add(0, () => true)
+  // Beta testers
   .add(2, (client, msg) => {
     const guild = client.guilds.get(client.constants.mainGuild);
     if(!guild) return false;
     const member = guild.members.get(msg.author.id);
     if(!member) return false;
     return member.roles.has(client.constants.betaRole);
-  }, { fetch: true })
+  }, { fetch: true, break: true })
+  // Premium users
   .add(3, (client, msg) => {
     const guild = client.guilds.get(client.constants.mainGuild);
     if(!guild) return false;
     const member = guild.members.get(msg.author.id);
     if(!member) return false;
     return member.roles.has(client.constants.premiumRole);
-  }, { fetch: true })
+  }, { fetch: true, break: true })
   // Mini mods
   .add(4, (client, message) => message.guild && message.member.permissions.has("MANAGE_MESSAGES"), { fetch: true })
   // Moderators
