@@ -88,7 +88,7 @@ class Util {
     return str.slice(0, str.length / 2) + str2.slice(str2.length / 2);
   }
 
-  async promptArgument(msg, args, propOrFn = "name") {
+  static async promptArgument(msg, args, propOrFn = "name") {
     let counter = 1;
     const m = await msg.prompt(`Found multiple matches:${codeBlock("", args.map((x) => `${counter++}: ${typeof propOrFn === "function" ? propOrFn(x) : x[propOrFn]}`).join("\n"))}\nType the number to choose an option or **CANCEL** to stop.`);
     // Throw here because we wanna stop the execution
