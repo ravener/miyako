@@ -11,4 +11,7 @@ This repository contains the always up to date code for the bot so you can contr
 For more detailed bot description see [DESCRIPTION.md](DESCRIPTION.md)
 
 ## License
-Released under [MIT License](LICENSE)
+The repository is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+Everyone interacting in the Ladybug project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/freetnt5852/LadyBug-Bot/blob/master/CODE_OF_CONDUCT.md).
