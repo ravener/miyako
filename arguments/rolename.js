@@ -16,7 +16,7 @@ class Rolename extends Argument {
     if (!msg.guild) return this.role(arg, possible, msg);
     const resRole = resolveRole(arg, msg.guild);
     if (resRole) return resRole;
-
+    if(!arg || !arg.length) throw `${possible.name} Must be a valid name, id or role mention`;
     const results = [];
     const reg = new RegExp(regExpEsc(arg), "i");
     for (const role of msg.guild.roles.values()) { if (reg.test(role.name)) results.push(role); }

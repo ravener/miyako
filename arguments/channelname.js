@@ -17,7 +17,7 @@ class ChannelName extends Argument {
     if (!msg.guild) return this.channel(arg, possible, msg);
     const resChannel = resolveChannel(arg, msg.guild);
     if (resChannel) return resChannel;
-
+    if(!arg || !arg.length) throw `${possible.name} Must be a valid name, id or channel mention`;
     const results = [];
     const reg = new RegExp(regExpEsc(arg), "i");
     for (const channel of msg.guild.channels.values()) {

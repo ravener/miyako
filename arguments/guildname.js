@@ -6,7 +6,7 @@ class GuildName extends Argument {
   run(arg, possible, msg) {
     const guild = this.constructor.regex.snowflake.test(arg) ? this.client.guilds.get(arg) : null;
     if (guild) return guild;
-    
+    if(!arg || !arg.length) throw `${possible.name} must be a valid guild name or id.`;
     const results = [];   
     const reg = new RegExp(regExpEsc(arg, "i"));
     

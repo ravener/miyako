@@ -23,7 +23,7 @@ class MemberName extends Argument {
     if (!msg.guild) throw "This command can only be used inside a guild.";
     const resUser = await resolveMember(arg, msg.guild);
     if (resUser) return resUser;
-
+    if(!arg || !arg.length) throw `${possible.name} Must be a valid name, id or user mention`;
     const results = [];
     const reg = new RegExp(regExpEsc(arg), "i");
     for (const member of msg.guild.members.values()) {
