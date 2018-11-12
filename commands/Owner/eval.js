@@ -115,7 +115,7 @@ class Eval extends Command {
     try {
       if (msg.flags.async) code = `(async () => {\n${code}\n})();`;
       // eslint-disable-next-line no-unused-vars
-      const r = this.client.providers.get("rethinkdb").db;
+      const db = this.client.providers.get("mongodb").db;
       result = eval(code);
       syncTime = stopwatch.toString();
       type = new Type(result);

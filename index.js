@@ -19,7 +19,7 @@ class LadybugClient extends Client {
       permissionLevels: perms,
       prefix: "lb.",
       regexPrefix: /^(((hey|yo),?\s*)?ladybug,?)\s*/i,
-      providers: { default: "mongodb", rethinkdb: config.rethinkdb, mongodb: { url: config.mongodb } },
+      providers: { default: "mongodb", mongodb: { url: config.mongodb } },
       commandEditing: true,
       pieceDefaults: {
         commands: { deletable: true, quotedStringSupport: true },
