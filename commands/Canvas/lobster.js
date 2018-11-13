@@ -21,7 +21,7 @@ class Lobster extends Command {
     const buff = await new Canvas(700, 300)
       .setTextFont("70px Lobster")
       .setColor("#FFFFFF")
-      .addText(utils.wordwrap(str, 20), 70, 100)
+      .addText(wordwrap(str, 20), 70, 100)
       .toBufferAsync();
     return msg.channel.sendFile(buff, "lobster.png");
   }
