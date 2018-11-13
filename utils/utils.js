@@ -25,11 +25,17 @@ class Util {
   }
   
   // https://j11y.io/snippets/wordwrap-for-javascript/
-  static wordwrap(str, width = 75, brk = "\n", cut = false) {
+  /* static wordwrap(str, width = 75, brk = "\n", cut = false) {
     if (!str) { return str; }
     if(str.length <= width) return str;
     const regex = ".{1," + width + "}(\\s|$)" + (cut ? "|.{" + width + "}|.+$" : "|\\S+?(\\s|$)");
     return str.match(RegExp(regex, "g")).join(brk);
+  }*/
+  
+  wrap(str, limit, brk = "\n") {
+    if(str.length <= limit) return str;
+    const regex = new RegExp(`(.{1,${limit}})`, "g");
+    return str.match(regex).join(brk);
   }
   
   static slice(str, limit, suffix = "...") {
