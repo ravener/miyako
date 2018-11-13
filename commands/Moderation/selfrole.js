@@ -67,6 +67,7 @@ class Selfrole extends Command {
     if(!msg.member.roles.has(role.id)) throw "You don't have that role!";
     if(role.position > msg.guild.me.roles.highest.position) throw `I can't remove that role because my role position is lower than it${await msg.hasAtLeastPermissionLevel(6) ? "." : ", please ask an admin to move my role above the self role"}`;
     await msg.member.roles.remove(role);
+    return msg.send(`Success, removed the role **${role.name}** from you`);
   }
 }
 
