@@ -2,7 +2,7 @@ const { Command } = require("klasa");
 const { wordwrap } = require("../../utils/utils.js");
 const { Canvas } = require("canvas-constructor");
 
-Canvas.registerFont(`${process.cwd()}/assets/lobster.ttf`);
+Canvas.registerFont(`${process.cwd()}/assets/lobster.ttf`, "Lobster");
 
 class Lobster extends Command {
   constructor(...args) {
