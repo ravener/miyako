@@ -32,7 +32,7 @@ class Welcome extends Command {
     await msg.guild.settings.update([
       ["welcome.message", message],
       ["welcome.enabled", true],
-      ["welcome.channnel", channel.id]
+      ["welcome.channel", channel.id]
     ], msg.guild);
     if(reply) return msg.send(`Enabled welcome messages in ${channel}`);
   }
