@@ -32,7 +32,7 @@ class Util {
     return str.match(RegExp(regex, "g")).join(brk);
   }*/
   
-  wrap(str, limit, brk = "\n") {
+  wordwrap(str, limit, brk = "\n") {
     if(str.length <= limit) return str;
     const regex = new RegExp(`(.{1,${limit}})`, "g");
     return str.match(regex).join(brk);
