@@ -14,6 +14,7 @@ class Upvote extends Route {
       res.writeHead(403);
       return res.end("Forbidden");
     }
+    res.end();
     this.client.upvoters.add(req.body.user);
     const user = await this.client.users.fetch(req.body.user).catch(() => null);
     if(!user) return;
