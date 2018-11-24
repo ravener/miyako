@@ -7,7 +7,7 @@ import ladybug from "ladybug-fetch";
 // eslint-disable-next-line no-unused-vars
 import utils from "../../utils/utils.js";
 
-class Eval extends Command {
+export default class Eval extends Command {
   constructor(...args) {
     super(...args, {
       aliases: ["ev"],
@@ -162,5 +162,3 @@ class Eval extends Command {
     return `${url}.${language}`;
   }
 }
-
-module.exports = Eval;
