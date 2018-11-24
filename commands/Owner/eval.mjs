@@ -1,11 +1,11 @@
-const { Command, Stopwatch, Type, util } = require("klasa");
-const { inspect } = require("util");
-const ladybug = require("ladybug-fetch");
+import { Command, Stopwatch, Type, util } from "klasa";
+import { inspect } from "util";
+import ladybug from "ladybug-fetch";
 
 // This variable is more like for to be available in
 // eval's scope so i can reach it easier.
 // eslint-disable-next-line no-unused-vars
-const utils = require("../../utils/utils.js");
+import utils from "../../utils/utils.js";
 
 class Eval extends Command {
   constructor(...args) {
