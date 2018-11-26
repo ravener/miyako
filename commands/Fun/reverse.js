@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Reverse extends Command {
   constructor(...args) {
@@ -10,7 +11,7 @@ class Reverse extends Command {
   }
   
   async run(msg, [text]) {
-    return msg.send(text.split("").reverse().join(""));
+    return msg.send(clean(msg, text.split("").reverse().join("")));
   }
 }
 

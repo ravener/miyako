@@ -1,5 +1,6 @@
 const { Command } = require("klasa");
 const { Util: { escapeMarkdown } } = require("discord.js");
+const { clean } = require("../../utils/utils.js");
 
 class Choose extends Command {
   constructor(...args) {
@@ -15,7 +16,7 @@ class Choose extends Command {
   async run(msg, choices) {
     if(choices.length < 2) throw "Not enough choices to pick from, seperate your choices with a comma.";
     const choice = choices[Math.floor(Math.random() * choices.length)];
-    return msg.send(`I think \`${escapeMarkdown(choice.trim(), true)}\``);
+    return msg.send(`I think \`${escapeMarkdown(clean(msg, choice.trim()), true)}\``);
   }
 }
 
