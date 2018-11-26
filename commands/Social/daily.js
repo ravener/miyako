@@ -26,7 +26,7 @@ class Daily extends Command {
       return msg.send(`You have given your daily to **${member.displayName}**, as a bonus they get **750** ${currency}`);
     }
     let amount = 500;
-    const voted = await this.client.functions.isUpvoted(msg.author.id);
+    const voted = await this.client.utils.isUpvoted(msg.author.id);
     if(voted) amount += amount;
     await this.setCooldown(msg);
     await msg.member.givePoints(amount);

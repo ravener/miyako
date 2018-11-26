@@ -1,8 +1,20 @@
 const { util: { toTitleCase, codeBlock } } = require("klasa");
+const ladybug = require("ladybug-fetch");
 
 class Util {
-  constructor() {
-    throw new Error("Utils is a static class and may not be constructed.");
+  constructor(client) {
+    this.client = client;
+  }
+
+  isUpvoted(userId) {
+    // Allow passing a User or Message
+    if(userId.id) userId = userId.id;
+    if(userId.author) userId = userId.author.id;
+    return ladybug(`https://discordbots.org/api/bots/${this.client.user.id}/check`)
+      .set("Authorization", this.client.config.dbl)
+      .query({ userId })
+      .then((res) => Boolean(res.body.voted))
+      .catch(() => false);
   }
 
   // some_text => Some Text

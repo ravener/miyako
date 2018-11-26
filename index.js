@@ -4,8 +4,9 @@ const { defaultGuildSchema, defaultClientSchema, defaultUserSchema, defaultMembe
 const perms = require("./utils/permissionLevels.js");
 const Constants = require("./utils/Constants.js");
 const IdioticAPI = require("idiotic-api");
-const { RawEventStore, FunctionStore } = require("./stores");
+const { RawEventStore } = require("./stores");
 const config = require("./config.json");
+const Utils = require("./utils/utils.js");
 const BananAPI = require("bananapi");
 const { AudioManager } = require("./utils/Lavalink");
 
@@ -51,16 +52,10 @@ class LadybugClient extends Client {
     });
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
-    this.functions = new FunctionStore(this);
     this.registerStore(this.rawEvents);
-    this.registerStore(this.functions);
     this.upvoters = new Set();
     this.webhook = new WebhookClient(...this.config.webhook);
-  }
-
-  // Alias
-  get funcs() {
-    return this.functions;
+    this.utils = new Utils(this);
   }
   
   login() {

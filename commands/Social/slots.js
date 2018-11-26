@@ -20,7 +20,7 @@ class Slots extends Command {
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL());
     let message;
     if(win) {
-      const voted = await this.client.functions.isUpvoted(msg.author.id);
+      const voted = await this.client.utils.isUpvoted(msg.author.id);
       const points = voted ? reward * 2 : reward;
       message = `Congratulation! You won **${points}** ${currency}`;
       if(!voted) message += `\nYou can get double the points by upvoting me here: <${this.store.get("upvote").url}>`;
