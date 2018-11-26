@@ -15,17 +15,6 @@
     "app_id": ""
   },
   "webhook": ["Webhook ID", "Webhook Token"],
-  "postgresql": {
-    "user": "username",
-    "password": null,
-    "host": "localhost",
-    "database": ""
-  },
-  "rethinkdb": {
-    "user": "ladybug",
-    "password": "",
-    "db": "ladybug"
-  },
   "pastebin": "password",
   "upvoteWebhook": ["id", "token"],
   "dbl": "https://discordbots.org"
