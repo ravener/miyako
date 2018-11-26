@@ -62,7 +62,7 @@ class Snippets extends Command {
     const sn = this.client.settings.snippets.find((x) => x.name === name.toLowerCase());
     if(!sn) throw "Snippet not found.";
     const cmd = this.store.get(sn.command);
-    return cmd.run(msg, cmd.args.split("|").map((x) => x.trim()));
+    return cmd.run(msg, sn.args.split("|").map((x) => x.trim()));
   }
 }
 
