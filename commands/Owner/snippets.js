@@ -33,11 +33,13 @@ class Snippets extends Command {
     return this.exec(msg, [action, ...args]);
   }
 
-  async add(msg, [name, command, ...args]) {
+  async add(msg, [name, ...args]) {
+    const command = this.store.get(args[0]);
+    if(!command) throw "Invalid command.";
     if(this.client.settings.snippets.find((x) => x.name === name)) throw "A snippet with that name already exists!";
     await this.client.settings.update("snippets", {
       command: command.name,
-      args: args.join(" "),
+      args: args.slice(1).join(" "),
       name: name
     });
     return msg.send(`Added a snippet for command \`${command.name}\` with name \`${name}\``);
