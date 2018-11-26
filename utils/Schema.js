@@ -48,6 +48,7 @@ module.exports.defaultUserSchema = Client.defaultUserSchema
   .add("repcooldown", "integer", { default: Date.now() - 86400000, configurable: false });
 
 module.exports.defaultClientSchema = Client.defaultClientSchema
+  .add("snippets", "any", { array: true })
   .add("psa", (folder) => folder
     .add("message", "string")
     .add("date", "integer"));
