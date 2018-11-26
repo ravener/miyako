@@ -1,13 +1,13 @@
-import { Command, Stopwatch, Type, util } from "klasa";
-import { inspect } from "util";
-import ladybug from "ladybug-fetch";
+const { Command, Stopwatch, Type, util } = require("klasa");
+const { inspect } = require("util");
+const ladybug = require("ladybug-fetch");
 
 // This variable is more like for to be available in
 // eval's scope so i can reach it easier.
 // eslint-disable-next-line no-unused-vars
-import utils from "../../utils/utils.js";
+const utils = require("../../utils/utils.js");
 
-export default class Eval extends Command {
+class Eval extends Command {
   constructor(...args) {
     super(...args, {
       aliases: ["ev"],
@@ -162,3 +162,5 @@ export default class Eval extends Command {
     return `${url}.${language}`;
   }
 }
+
+module.exports = Eval;
