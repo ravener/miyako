@@ -30,7 +30,7 @@ class AudioManager extends EventEmitter {
 
   async _join(channel, { selfDeaf = false, selfMute = false } = {}) {
     /* eslint-disable camelcase */  
-    await this.client.ws.send({
+    await this.client.ws.shards.get(0).send({
       op: OPCodes.VOICE_STATE_UPDATE,
       d: {
         channel_id: channel.id,
