@@ -63,6 +63,7 @@ class Snippets extends Command {
     if(!sn) throw "Snippet not found.";
     const cmd = this.store.get(sn.command);
     return cmd.run(msg, cmd.args.split("|").map((x) => x.trim()));
+  }
 }
 
 module.exports = Snippets;
