@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Deduct extends Command {
   constructor(...args) {
@@ -18,7 +19,7 @@ class Deduct extends Command {
     if(member.id === msg.author.id) throw "Why are you deducting yourself?";
     if(amount > member.settings.points) throw "You can't deduct more than what they have.";
     await member.givePoints(-amount);
-    return msg.send(`Deducted **${amount.toLocaleString()}** ${this.client.constants.currency} from **${member.displayName}**`);
+    return msg.send(`Deducted **${amount.toLocaleString()}** ${this.client.constants.currency} from **${clean(msg, member.displayName)}**`);
   }
 }
 

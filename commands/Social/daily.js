@@ -1,4 +1,5 @@
 const { Command, Duration } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Daily extends Command {
   constructor(...args) {
@@ -19,11 +20,11 @@ class Daily extends Command {
   async run(msg, [member]) {
     if(Date.now() < msg.member.settings.daily) throw `You can claim your daily in **${Duration.toNow(msg.member.settings.daily)}**`;
     const { currency } = this.client.constants;
-    if(member) {
+    if(member && member.id !== msg.member.id) {
       if(member.user.bot) throw "You can't give your daily points to a bot!";
       await this.setCooldown(msg);
       await member.givePoints(750);
-      return msg.send(`You have given your daily to **${member.displayName}**, as a bonus they get **750** ${currency}`);
+      return msg.send(`You have given your daily to **${clean(msg, member.displayName)}**, as a bonus they get **750** ${currency}`);
     }
     let amount = 500;
     const voted = await this.client.utils.isUpvoted(msg.author.id);
