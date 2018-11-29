@@ -116,7 +116,7 @@ class English extends Language {
       ],
       COMMAND_INVITE_DESCRIPTION: "Displays the join guild link of the bot.",
       COMMAND_INFO: (guild) => [
-        "Hi, I'm Mari... I-I mean Ladybug. I'm a multipurpose bot made by `Free TNT#5796`.",
+        "Hi, I'm Mari... I-I mean Ladybug. I'm a multipurpose bot made by `PoLLeN#5796`.",
         "My goal is to provide as many features as you will ever need for your servers. I do a lot of cool things and even more is planned!",
         "",
         `Type \`${guild.settings.prefix}help\` to see the list of commands and \`${guild.settings.prefix}help <command>\` to get detailed information about a command.`,
