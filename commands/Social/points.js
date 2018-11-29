@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Points extends Command {
   constructor(...args) {
@@ -21,7 +22,7 @@ class Points extends Command {
     if(member === msg.member) {
       return msg.send(`You have **${member.settings.points.toLocaleString()}** ${currency}`);
     }
-    return msg.send(`**${member.displayName}**'s balance: **${member.settings.points.toLocaleString()}** ${currency}`);
+    return msg.send(`**${clean(msg, member.displayName)}**'s balance: **${member.settings.points.toLocaleString()}** ${currency}`);
   }
 }
 

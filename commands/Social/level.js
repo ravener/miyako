@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Level extends Command {
   constructor(...args) {
@@ -20,7 +21,7 @@ class Level extends Command {
     if(member === msg.member) {
       return msg.send(`You are level **${member.settings.level}**`);
     }
-    return msg.send(`**${member.displayName}**'s level: **${member.settings.level}**`);
+    return msg.send(`**${clean(msg, member.displayName)}**'s level: **${member.settings.level}**`);
   }
 }
 

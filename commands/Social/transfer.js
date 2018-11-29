@@ -1,4 +1,5 @@
 const { Command } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Transfer extends Command {
   constructor(...args) {
@@ -19,7 +20,7 @@ class Transfer extends Command {
     if(amount > Number.MAX_SAFE_INTEGER) throw "That amount is too high!";
     await msg.member.givePoints(-amount);
     await member.givePoints(amount);
-    return msg.send(`Transferred **${amount.toLocaleString()}** ${this.client.constants.currency} to **${member.displayName}**`);
+    return msg.send(`Transferred **${amount.toLocaleString()}** ${this.client.constants.currency} to **${clean(msg, member.displayName)}**`);
   }
 }
 

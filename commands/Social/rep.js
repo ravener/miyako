@@ -1,4 +1,5 @@
 const { Command, Duration } = require("klasa");
+const { clean } = require("../../utils/utils.js");
 
 class Rep extends Command {
   constructor(...args) {
@@ -16,7 +17,7 @@ class Rep extends Command {
     if(member.user.bot) throw "You can't give a reputation point to bots";
     await this.setCooldown(msg);
     await member.user.settings.update("reps", member.user.settings.reps + 1);
-    return msg.send(`You have given **${member.displayName}** a reputation point!`);
+    return msg.send(`You have given **${clean(msg, member.displayName)}** a reputation point!`);
   }
 
   setCooldown(msg) {
