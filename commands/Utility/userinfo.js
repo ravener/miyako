@@ -22,7 +22,7 @@ class UserInfo extends Command {
   async run(msg, [member = msg.member]) {
     const days = Math.floor((new Date() - member.user.createdAt) / (1000 * 60 * 60 * 24));
     const joinedDays = Math.floor((new Date() - member.joinedAt) / (1000 * 60 * 60 * 24));
-    const position = msg.guild.members.array().sort((x, y) => x.joinedAt > y.joinedAt ? 1 : -1).indexOf(member) + 1;
+    const position = msg.guild.members.array().filter((x) => Boolean(x.joinedAt)).sort((x, y) => x.joinedAt > y.joinedAt ? 1 : -1).indexOf(member) + 1;
     const embed = new MessageEmbed()
       .setColor(member.displayHexColor || 0xff0000)
       .setThumbnail(member.user.displayAvatarURL())
