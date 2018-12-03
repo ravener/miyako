@@ -7,5 +7,7 @@ module.exports = {
   suggestionsChannel: "460801007769616394",
   premiumRole: "476467857543266316",
   currency: "<:ladybug_coin:500680311097524234>",
-  betaRole: "506119917024575509"
+  betaRole: "506119917024575509",
+  crossmark: "<a:animatedcrossmark:519166256214048769>",
+  checkmark: "<a:animatedcheckmark:519166152488910850>"
 };
