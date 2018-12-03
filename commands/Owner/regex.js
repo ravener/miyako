@@ -12,15 +12,9 @@ class Regex extends Command {
   }
   
   async run(msg, [regex, input]) {
-    const flags = [];
-    if(regex.startsWith("/")) {
-      const flagArr = regex.split("/")[2];
-      if(flagArr.length) {
-        flags.push(...flagArr.split(""));
-      }
-      regex = regex.split("/")[1];
-    }
-    const reg = new RegExp(regex, ...flags);
+    const flags = msg.flags.flags;
+    if(regex.startsWith("/") && regex.endsWith("/")) regex = regex.slice(1, -1);
+    const reg = new RegExp(regex, flags);
     const res = reg.exec(input);
     if(!res) throw "Regex did not match anything.";
     const results = [];

@@ -34,6 +34,7 @@ class Eval extends Command {
     }
     
     if(msg.flags.delete && msg.deletable) await msg.delete();
+    if(result === undefined) return;
 
     const footer = util.codeBlock("ts", type);
     const sendAs = msg.flags.output || msg.flags["output-to"] || (msg.flags.log ? "log" : null);
@@ -126,22 +127,24 @@ class Eval extends Command {
         asyncTime = stopwatch.toString();
       }
       success = true;
+      await msg.success();
     } catch (error) {
       if (!syncTime) syncTime = stopwatch.toString();
       if (thenable && !asyncTime) asyncTime = stopwatch.toString();
       if (!type) type = new Type(error);
       result = error;
       success = false;
+      await msg.failure();
     }
 
     stopwatch.stop();
-    if (typeof result !== "string") {
+    if (typeof result !== "string" && result !== undefined) {
       result = result instanceof Error ? String(result) : msg.flags.json ? JSON.stringify(result, null, 4) : inspect(result, {
         depth: msg.flags.depth ? parseInt(msg.flags.depth) || 0 : 0,
         showHidden: Boolean(msg.flags.showHidden)
       });
     }
-    return { success, type, time: this.formatTime(syncTime, asyncTime), result: util.clean(result) };
+    return { success, type, time: this.formatTime(syncTime, asyncTime), result: result === undefined ? undefined : util.clean(result) };
   }
 
   formatTime(syncTime, asyncTime) {
