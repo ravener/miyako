@@ -15,7 +15,7 @@ class GIF extends Command {
     /* eslint-disable camelcase */
     const api_key = this.client.config.giphy;
     const res = await ladybug("https://api.giphy.com/v1/gifs/search")
-      .query({ q, api_key });
+      .query({ q, api_key, limit: 1 });
     return msg.send(res.body.data[0].embed_url);
     /* eslint-enable camelcase */
   }
