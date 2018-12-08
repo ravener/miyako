@@ -125,7 +125,7 @@ class Util {
   // this turns them to just the name
   // <name:string> [reason:string] => <name> [reason]
   static formatUsage(usageString) {
-    return usageString.replace(/(<|\[)(\w+):.+?(>|\])/gi, "$1$2$3");
+    return usageString.replace(/(<|\[|\()(\w+):.+?(>|\]|\))/gi, "$1$2$3");
   }
 
   static getAttachment(msg) {
