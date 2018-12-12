@@ -1,58 +1,39 @@
-const { Command, RichDisplay } = require("klasa");
+const { Command } = require("klasa");
 const { MessageEmbed } = require("discord.js");
-const superagent = require("superagent");
+const ladybug = require("ladybug-fetch");
 
 class Define extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Search the dictionary",
-      extendedHelp: "Find a definition in the Oxford Dictionary",
-      aliases: ["dict", "dictionary", "def"],
-      cooldown: 5,
-      usage: "<term:string>",
-      enabled: false
+      description: "Defines a word in the Oxford Dictionary.",
+      aliases: ["def", "dict", "dictionary", "whatis"],
+      usage: "<word:string>"
     });
   }
+  
+  async run(msg, [word]) {
+    /* eslint-disable camelcase */
+    const { app_key, app_id } = this.client.config.dictionary;
+    const get = await ladybug(`https://od-api.oxforddictionaries.com/api/v1/entries/en/${encodeURIComponent(word)}`)
+      .set({ app_key, app_id })
+      .catch(() => null);
+    /* eslint-enable camelcase */
+    if(!get || !get.body || !get.body.results) throw "Unknown word";
+    const res = get.body.results[0];
+    const definitions = res.lexicalEntries
+      .map(obj => [
+        `\`[${obj.lexicalCategory}]\` **${obj.text}** (${obj.pronunciations[0].phoneticSpelling})`,
+        `${obj.entries[0].senses[0].definitions
+          ? obj.entries[0].senses[0].definitions[0]
+          : obj.entries[0].senses[0].short_definitions[0]}`,
+        obj.entries[0].senses[0].examples.map(ex => `_- ${ex.text}_`).join("\n")
+      ].join("\n"));
 
-  async run(msg, [term]) {
-    // eslint-disable-next-line camelcase
-    const { app_id, app_key } = this.client.config.dictionary;
-    const data = await superagent.get(`https://od-api.oxforddictionaries.com/api/v1/entries/en/${encodeURIComponent(term)}`)
-      .set("app_id", app_id)
-      .set("app_key", app_key)
-      .then((res) => {
-        if(!res.body.results || !res.body.results.length) throw "Couldn't find any results";
-        const results = [];
-        for(const x of res.body.results[0].lexicalEntries) {
-          results.push({
-            word: x.text,
-            definitions: x.entries[0].senses[0].definitions,
-            examples: x.entries[0].senses[0].examples.map((x) => x.text),
-            shortDefinitions: x.entries[0].senses[0].short_definitions,
-            category: x.lexicalCategory,
-            derivatives: x.derivatives.map((x) => x.text),
-            pronunciations: x.pronunciations[0]
-          });
-        }
-        return results;
-      })
-      .catch((err) => {
-        if(err.status === 404) throw "Couldn't find any results.";
-        throw err;
-      });
-
-    const display = new RichDisplay(
-      new MessageEmbed()
-        .setColor(0xff0000)
-    );
-    for(const x of data) {
-      display.addPage((em) => {
-        em.setTitle(x.word);
-        em.setDescription(`\`${x.category}\` ${x.word} ${x.pronunciations.phoneticSpelling} (${x.pronunciations.phoneticNotation})\n${x.definitions.join("\n\n")}\n\n**Examples**\n${x.examples.join("\n")}\n\n**Short Definitions**\n${x.short_definitions.join("\n")}`);
-        return em;
-      });
-    }
-    return display.run(await msg.send("Loading..."));
+    const embed = new MessageEmbed()
+      .setTitle(`${res.lexicalEntries.length} result${res.lexicalEntries.length !== 1 ? "s" : ""} for ${res.id}:`)
+      .setDescription(definitions.join("\n\n"))
+      .setColor(0xFF0000);
+    return msg.send({ embed });
   }
 }
 
