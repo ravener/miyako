@@ -2,7 +2,7 @@ const { Command, RichDisplay } = require("klasa");
 const { MessageEmbed } = require("discord.js");
 const Wikia = require("wikia");
 
-class Wikia extends Command {
+class WikiaCommand extends Command {
   constructor(...args) {
     super(...args, {
       description: "Search a wiki from wikia.com",
@@ -28,4 +28,4 @@ class Wikia extends Command {
   }
 }
 
-module.exports = Wikia;
+module.exports = WikiaCommand;
