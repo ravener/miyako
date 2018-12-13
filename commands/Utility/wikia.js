@@ -13,7 +13,8 @@ class WikiaCommand extends Command {
   }
 
   async run(msg, [term]) {
-    const res = await this.wikia.searchWikis(term).catch(() => null);
+    const res = await this.wikia.searchWikis(term, { expand: true })
+      .catch(() => null);
     if(!res || !res.items || !res.items.length) throw "No results found.";
     const display = new RichDisplay(new MessageEmbed().setColor(0xFF0000));
     for(const wiki of res.items) display.addPage((em) => em
