@@ -18,23 +18,25 @@ class BSProfile extends Command {
     const res = await this.bs.getPlayer(t)
       .catch(() => null);
     if(!res) throw "Failed to fetch profile, are you sure that tag exists?";
-    const { body } = res;
     const embed = new MessageEmbed()
       .setColor(0xFF0000)
-      .setTitle(`Profile for: ${body.name}`)
-      .setDescription(`#${body.tag}`)
-      .addField("Brawlers Unlocked", `${body.brawlersUnlocked}`, true)
-      .addField("Brawlers", `Name - Level\n${body.brawlers.map((b) => `• ${b.name} -> ${b.level}`).join("\n")}`, true)
-      .addField("3v3 Victories", `${body.victories}`, true)
-      .addField("Solo Showdown Victories", `${body.soloShowdownVictories}`, true)
-      .addField("Duo Showdown Victories", `${body.duoShowdownVictories}`, true)
-      .addField("Exp", body.expFmt, true)
-      .addField("Exp Level", `${body.expLevel}`, true)
-      .addField("Trophies", `Current: ${body.trophies}\nHighest: ${body.highestTrophies}`, true)
-      .setThumbnail(body.avatarUrl)
-      .addField("Best Time as Boss", body.bestTimeAsBoss, true)
-      .addField("Best Robo Rumble Time", body.bestRoboRumbleTime, true);
-    if(body.club) embed.addField("Club", `Name: ${body.club.name}\nTag: #${body.club.tag}`);
+      .setTitle(`Profile for: ${res.name}`)
+      .setDescription(`#${res.tag}`)
+      .addField("Brawlers Unlocked", `${res.brawlersUnlocked}`, true)
+      .addField("Brawlers", `Name - Level\n${res.brawlers.map((b) => `• ${b.name} -> ${b.level}`).join("\n")}`, true)
+      .addField("3v3 Victories", `${res.victories}`, true)
+      .addField("Solo Showdown Victories", `${res.soloShowdownVictories}`, true)
+      .addField("Duo Showdown Victories", `${res.duoShowdownVictories}`, true)
+      .addField("Exp", res.expFmt, true)
+      .addField("Exp Level", `${res.expLevel}`, true)
+      .addField("Trophies", `Current: ${res.trophies}\nHighest: ${res.highestTrophies}`, true)
+      .setThumbnail(res.avatarUrl)
+      .addField("Best Time as Boss", res.bestTimeAsBoss, true)
+      .addField("Best Robo Rumble Time", res.bestRoboRumbleTime, true);
+    if(res.club)
+      embed.addField("Club", `Name: ${res.club.name}\nTag: #${res.club.tag}`);
+    else
+      embed.addField("Club", "N/A");
     return msg.send({ embed });
   }
 }
