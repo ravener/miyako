@@ -16,7 +16,7 @@ class WikiaCommand extends Command {
     const res = await this.wikia.searchWikis(term).catch(() => null);
     if(!res || !res.items || !res.items.length) throw "No results found.";
     const display = new RichDisplay(new MessageEmbed().setColor(0xFF0000));
-    for(const wiki of res) display.addPage((em) => em
+    for(const wiki of res.items) display.addPage((em) => em
       .setTitle(wiki.name)
       .setURL(wiki.url)
       .setDescription(`**${wiki.headline || ""}**\n\n${wiki.desc}\n\n${wiki.url}`)
