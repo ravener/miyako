@@ -40,6 +40,7 @@ module.exports.defaultGuildSchema = Client.defaultGuildSchema
     .add("warn", "boolean", { default: false }));
 
 module.exports.defaultUserSchema = Client.defaultUserSchema
+  .add("bstag", "string", { configurable: false })
   .add("afk", (folder) => folder
     .add("status", "boolean")
     .add("message", "string"))
