@@ -6,7 +6,7 @@ class SupercellTag extends Argument {
     super(...args, { aliases: ["sctag"] });
   }
 
-  async run(arg, possible, msg) {
+  async run(arg, possible) {
     if(!validate(arg)) throw `Tag must be a valid tag, allowed characters: \`${validChars}\``;
     return arg;
   }
