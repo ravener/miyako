@@ -24,7 +24,7 @@ class WikiaCommand extends Command {
       .setImage(wiki.image));
     return display.run(await msg.send("Loading..."), {
       filter: (reaction, user) => user.id === msg.author.id,
-      time: 30 * 1000
+      time: 3 * 1000 * 60
     });
   }
 }
