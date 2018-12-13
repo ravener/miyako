@@ -20,7 +20,7 @@ class WikiaCommand extends Command {
     for(const wiki of res.items) display.addPage((em) => em
       .setTitle(wiki.name)
       .setURL(wiki.url)
-      .setDescription(`${wiki.headline ? `**${wiki.headline}**\n\n`}${wiki.desc || "No Description"}\n\nURL: ${wiki.url}`)
+      .setDescription(`${wiki.headline ? `**${wiki.headline}**\n\n` : ""}${wiki.desc || "No Description"}\n\nURL: ${wiki.url}`)
       .setImage(wiki.image));
     return display.run(await msg.send("Loading..."), {
       filter: (reaction, user) => user.id === msg.author.id,
