@@ -15,7 +15,7 @@ class BSProfile extends Command {
     if(!tag && !msg.author.settings.bstag) throw "You must provide a valid tag.";
     const t = tag.tag ? tag.settings.bstag : tag || msg.author.settings.bstag;
     if(!t) throw `Couldn't find any saved tags, save your tag with \`${msg.guild ? msg.guild.settings.prefix : "lb."}bssave <tag>\``;
-    const res = await this.bs.getProfile(t)
+    const res = await this.bs.getPlayer(t)
       .catch(() => null);
     if(!res) throw "Failed to fetch profile, are you sure that tag exists?";
     const { body } = res;
