@@ -31,7 +31,7 @@ class GitHub extends Command {
       .setAuthor("GitHub", "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
       .setURL(body.html_url)
       .setThumbnail(body.owner.avatar_url)
-      .setDescription(`${body.description}\n\n**Is Fork:** ${body.fork}\n**Language:** ${body.language}\n**Forks:** ${body.forks_count}\n**License:** [${body.license.name}](${body.license.url})\n**Open Issues:** ${body.open_issues}\n**Watchers:** ${body.watchers_count}\n**Stars:** ${body.stargazers_count}\n**Clone Size:** ${size}`);
+      .setDescription(`${body.description}\n\n❯ **Is Fork:** ${body.fork}\n❯ **Language:** ${body.language}\n❯ **Forks:** ${body.forks_count}\n❯ **License:** [${body.license.name}](${body.license.url})\n❯ **Open Issues:** ${body.open_issues}\n❯ **Watchers:** ${body.watchers_count}\n❯ **Stars:** ${body.stargazers_count}\n❯ **Clone Size:** ${size}`);
     return msg.send({ embed });
   }
 }
