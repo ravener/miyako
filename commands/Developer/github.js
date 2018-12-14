@@ -7,7 +7,7 @@ class GitHub extends Command {
     super(...args, {
       description: "View a GitHub repository details.",
       aliases: ["gh"],
-      usage: "<username/repository:repo>",
+      usage: "<repo:repo>",
       cooldown: 3
     });
 
