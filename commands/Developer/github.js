@@ -25,13 +25,14 @@ class GitHub extends Command {
     if(!res) throw "Could not fetch that repo, are you sure it exists?";
     const { body } = res;
     const size = body.size < 1000 ? `${body.size} KB` : Math.floor(body.size / 1000) > 1000 ? `${(body.size / 1000 / 1000).toFixed(2)} GB` : `${(body.size / 1000).toFixed(2)} MB`;
+    const license = body.license.name && body.license.url ? `[${body.license.name}](${body.license.url})` : body.license.name || "None";
     const embed = new MessageEmbed()
       .setTitle(body.full_name)
       .setColor(0xFF0000)
       .setAuthor("GitHub", "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png")
       .setURL(body.html_url)
       .setThumbnail(body.owner.avatar_url)
-      .setDescription(`${body.description}\n\n❯ **Is Fork:** ${body.fork}\n❯ **Language:** ${body.language}\n❯ **Forks:** ${body.forks_count}\n❯ **License:** [${body.license.name || "None"}](${body.license.url})\n❯ **Open Issues:** ${body.open_issues}\n❯ **Watchers:** ${body.watchers_count}\n❯ **Stars:** ${body.stargazers_count}\n❯ **Clone Size:** ${size}`);
+      .setDescription(`${body.description}\n\n❯ **Is Fork:** ${body.fork}\n❯ **Language:** ${body.language}\n❯ **Forks:** ${body.forks_count}\n❯ **License:** ${license}\n❯ **Open Issues:** ${body.open_issues}\n❯ **Watchers:** ${body.watchers_count}\n❯ **Stars:** ${body.stargazers_count}\n❯ **Clone Size:** ${size}`);
     return msg.send({ embed });
   }
 }
