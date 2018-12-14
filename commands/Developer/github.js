@@ -24,7 +24,7 @@ class GitHub extends Command {
       .catch(() => null);
     if(!res) throw "Could not fetch that repo, are you sure it exists?";
     const { body } = res;
-    const size = body.size < 1000 ? `${body.size} KB` : Math.floor(body.size / 1000) > 1000 ? `${(body.size / 1000 / 1000).toFixed(2)} GB` : `${(body.size / 1000).toFixed(2)} MB`;
+    const size = body.size <= 1024 ? `${body.size} KB` : Math.floor(body.size / 1024) > 1024 ? `${(body.size / 1024 / 1024).toFixed(2)} GB` : `${(body.size / 1024).toFixed(2)} MB`;
     const license = body.license.name && body.license.url ? `[${body.license.name}](${body.license.url})` : body.license.name || "None";
     const footer = [];
     if(body.fork) footer.push(`❯ **Forked** from [${body.parent.full_name}](${body.parent.html_url})`);
