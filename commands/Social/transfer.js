@@ -8,6 +8,7 @@ class Transfer extends Command {
       cooldown: 3,
       usage: "<member:member> <amount:int>",
       runIn: ["text"],
+      usageDelim: " ",
       aliases: ["pay", "donate"]
     });
   }
