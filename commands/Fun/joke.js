@@ -1,6 +1,6 @@
 const { Command, util: { toTitleCase } } = require("klasa");
 const { MessageEmbed } = require("discord.js");
-const ladybug = require("ladybug");
+const ladybug = require("ladybug-fetch");
 
 class Joke extends Command {
   constructor(...args) {
