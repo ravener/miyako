@@ -1,6 +1,6 @@
 const { Command, util: { toTitleCase } } = require("klasa");
 const { MessageEmbed } = require("discord.js");
-const superagent = require("superagent");
+const ladybug = require("ladybug");
 
 class Joke extends Command {
   constructor(...args) {
@@ -11,7 +11,7 @@ class Joke extends Command {
   }
   
   async run(msg) {
-    const { body } = await superagent.get("https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_joke");
+    const { body } = await ladybug("https://official-joke-api.herokuapp.com/random_joke");
     const embed = new MessageEmbed()
       .setTitle(`${toTitleCase(body.type)} #${body.id}`)
       .setDescription(`**${body.setup}**\n*${body.punchline}*`)
