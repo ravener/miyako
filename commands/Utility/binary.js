@@ -6,7 +6,8 @@ class Binary extends Command {
       description: "Encode/Decode Binary",
       usage: "<encode|decode|encodeascii|decodeascii> <binary:...string>",
       aliases: ["bin"],
-      subcommands: true
+      subcommands: true,
+      usageDelim: " "
     });
   }
 
