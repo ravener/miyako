@@ -28,7 +28,7 @@ class Binary extends Command {
     const bin = text
       .split("")
       .map((char) => char.charCodeAt(0).toString(2))
-      .join("");
+      .join(" ");
     if(bin.length >= 2000) throw "Output too long.";
     return msg.send(bin);
   }
