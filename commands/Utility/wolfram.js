@@ -17,7 +17,7 @@ class Wolfram extends Command {
         appid: this.client.config.wolfram,
         output: "json"
       })
-      .then((res) => res.body.queryresult.pods)
+      .then((res) => JSON.parse(res.text).queryresult.pods)
       .catch(() => {
         throw "There was an error. Please try again.";
       });
