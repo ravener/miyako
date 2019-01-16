@@ -16,7 +16,7 @@ class Say extends Command {
     if (channel.guild !== msg.guild) throw "You can't echo in other servers!";
     if (!channel.postable) throw "The selected channel is not postable.";
     if(!channel.permissionsFor(msg.member).has("SEND_MESSAGES")) throw "You do not have permissions to send messages in that channel.";
-    if(msg.deletable) await msg.delete();
+    if(msg.deletable) await msg.delete().catch(() => null);
     if(msg.flags.owo) return this.client.commands.get("owoify").run(msg, [message]);
     return channel.send(clean(msg, message));
   }
