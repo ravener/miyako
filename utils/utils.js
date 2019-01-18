@@ -17,6 +17,15 @@ class Util {
       .catch(() => false);
   }
 
+  postStats() {
+    if(!this.client.ready) return Promise.resolve();
+    const { client: { user: { id } } } = this;
+    return ladybug.post(`https://discordbots.org/api/bots/${id}/stats`)
+      .set("Authorization", this.client.config.dbl)
+      // eslint-disable-next-line camelcase
+      .send({ server_count: this.client.guilds.size });
+  }
+
   // some_text => Some Text
   static capitalize(str) {
     return str.split("_").map(toTitleCase).join(" ");
