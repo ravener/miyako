@@ -1,5 +1,6 @@
 const { Command, util: { codeBlock } } = require("klasa");
 const { MessageEmbed, Util: { escapeMarkdown } } = require("discord.js");
+const { clean } = require("../../utils/utils.js");
 const superagent = require("superagent");
 const cheerio = require("cheerio");
 
@@ -7,7 +8,7 @@ class Translate extends Command {
   constructor(...args) {
     super(...args, {
       description: "Translate any text to any language!",
-      extendedHelp: "Note that the languages should be an abbreviation, i.e french -> fr",
+      extendedHelp: "Note that the languages should be an abbreviation, i.e french -> fr\nYou can also append --text flag in your message to send results as a text, useful for copying on mobile, etc.",
       usage: "<language:string> <message:...string>",
       usageDelim: " ",
       cooldown: 5,
@@ -23,6 +24,7 @@ class Translate extends Command {
     if(!$) throw "Something went wrong with google, please try again later.";
     const results = $("div.t0").first().text();
     const lang = $("div a.s1").next().next().first().text();
+    if(msg.flags.text) return msg.send(clean(msg, results));
     const embed = new MessageEmbed()
       .setTitle("Translated.")
       .setColor(0xff0000)
