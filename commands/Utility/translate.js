@@ -24,7 +24,7 @@ class Translate extends Command {
     if(!$) throw "Something went wrong with google, please try again later.";
     const results = $("div.t0").first().text();
     const lang = $("div a.s1").next().next().first().text();
-    if(msg.flags.text) return msg.send(clean(msg, results));
+    if(msg.flags.text) return msg.send(clean(message, results));
     const embed = new MessageEmbed()
       .setTitle("Translated.")
       .setColor(0xff0000)
