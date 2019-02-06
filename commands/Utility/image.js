@@ -13,7 +13,6 @@ class Image extends Command {
       cooldown: 3,
       extendedHelp: "Use --index=<n> to retrieve nth image, by default it picks a random one everytime."
     });
-    this.userAgent = { "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36" };
     this.url = (query, nsfw) => `https://www.bing.com/images/search?q=${query}&view=detailv2&safeSearch=${nsfw ? "off" : "strict"}`;
   }
 
@@ -21,8 +20,7 @@ class Image extends Command {
     // Quick validation before we go straight to requesting.
     if(msg.flags.index && isNaN(parseInt(msg.flags.index)))
       throw "--index Provided but not a number.";
-    const { text, status } = await ladybug(this.url(query, msg.channel.nsfw))
-      .set(this.userAgent);
+    const { text, status } = await ladybug(this.url(query, msg.channel.nsfw));
     if(status !== 200) throw "Something went wrong with Bing.";
     const $ = cheerio.load(text);
     const results = [];
