@@ -36,6 +36,7 @@ class Image extends Command {
         size: details[4]
       });
     });
+    if(!results.length) throw "No Results Found.";
     const index = msg.flags.index ? parseInt(msg.flags.index) : undefined;
     if(index && index > results.length)
       throw `--index provided as \`${index}\` but there is only \`${results.length}\` results.`;
