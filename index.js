@@ -8,7 +8,7 @@ const { RawEventStore } = require("./stores");
 const config = require("./config.json");
 const Utils = require("./utils/utils.js");
 const BananAPI = require("bananapi");
-const { AudioManager } = require("./utils/Lavalink");
+// const { AudioManager } = require("./utils/Lavalink");
 
 Client.use(require("klasa-dashboard-hooks"));
 
@@ -42,14 +42,14 @@ class LadybugClient extends Client {
     this.config = config;
     this.commandsRan = 0;
     this.bananapi = new BananAPI.Client({ token: this.config.bananapi });
-    const { password, host, port } = this.config.lavalink;
-    this.lavalink = new AudioManager(this, {
+    // const { password, host, port } = this.config.lavalink;
+    /* this.lavalink = new AudioManager(this, {
       rest: { host, port: 2333, password },
       nodes: [
         { host, port, password }
       ],
       userID: this.constants.botID
-    });
+    }); */
     this.idioticapi = new IdioticAPI.Client(this.config.idioticapi, { dev: true });
     this.rawEvents = new RawEventStore(this);
     this.registerStore(this.rawEvents);
@@ -63,5 +63,4 @@ class LadybugClient extends Client {
   }
 }
 
-const client = new LadybugClient();
-client.login();
+new LadybugClient().login();
