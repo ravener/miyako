@@ -8,20 +8,20 @@ class Lyrics extends Command {
   constructor(...args) {
     super(...args, {
       description: "Get a song's lyrics.",
-      usage: "[query:string]",
-      cooldown: 5,
-      extendedHelp: "Add --text in your message to send it as plain text, i.e for easier copy pasting on phone."
+      usage: "<query:string>",
+      cooldown: 5
     });
   }
 
   async run(msg, [q]) {
-    if(!q && msg.guild) {
+    /* if(!q && msg.guild) {
       const player = this.client.lavalink.get(msg.guild.id);
       if(!player) throw "Enter the song name to search.";
       if(!player.queue.length) throw "Nothing is in queue to bring lyrics for, so you must enter the song name!";
       q = player.queue[0].title;
     }
     if(!q) throw "Enter the song name to search."; // for DMs
+    */
     const lyrics = await superagent.get("https://api.genius.com/search")
       .query({ q })
       .set("Authorization", `Bearer ${this.client.config.genius}`)
@@ -47,7 +47,6 @@ class Lyrics extends Command {
       .setThumbnail(lyrics.image)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setColor(0xff0000);
-    if(msg.flags.text) return msg.send(`**${lyrics.title}**\n${slice(lyrics.lyrics.trim(), 1990)}`);
     return msg.send({ embed });
   }
 }
