@@ -12,10 +12,10 @@ class Magik extends Command {
   }
 
   async run(msg, [user = msg.author]) {
-    const url = typeof user === "string" ? user : user.displayAvatarURL({
+    const url = user.displayAvatarURL ? user.displayAvatarURL({
       format: "png",
       size: 2048
-    });
+    }) : user;
     const res = await get("https://nekobot.xyz/api/imagegen")
       .query({ type: "magik", image: url });
     const embed = new MessageEmbed()
