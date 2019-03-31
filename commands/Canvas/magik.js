@@ -6,7 +6,7 @@ class Magik extends Command {
   constructor(...args) {
     super(...args, {
       description: "Magik someone",
-      usage: "[user:username|url:url]",
+      usage: "[url:url|user:username]",
       cooldown: 5
     });
   }
