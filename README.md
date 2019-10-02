@@ -6,11 +6,11 @@
 
 A fun multipurpose [Discord](https://discordapp.com) Bot written using the [Klasa](https://klasa.js.org) framework for [discord.js](https://discord.js.org)
 
-This repository contains the always up to date code for the bot so you can contribute if you want. If you just want to use the bot [invite link](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=1345350758&scope=bot)
+This repository contains the always up to date code for the bot so you can contribute if you want. If you want to use the bot for your server invite it with the [invite link](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=1345350758&scope=bot)
 
 [![Discord Bots](https://discordbots.org/api/widget/397796982120382464.svg)](https://discordbots.org/bot/397796982120382464)
 
-For more detailed bot description see [DESCRIPTION.md](DESCRIPTION.md)
+For a more detailed bot description see [DESCRIPTION.md](DESCRIPTION.md)
 
 ## License
 The repository is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
