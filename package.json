@@ -1,0 +1,27 @@
+{
+  "name": "miyako",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pollen5/miyako.git"
+  },
+  "author": "PoLLeN <pollen@itsladybug.ml> (https://itsladybug.ml/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pollen5/miyako/issues"
+  },
+  "homepage": "https://github.com/pollen5/miyako#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "discord.js": "^12.2.0",
+    "fast-levenshtein": "^2.0.6",
+    "klaw": "^3.0.0",
+    "pg": "^8.0.3"
+  }
+}
