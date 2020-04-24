@@ -36,7 +36,7 @@ class MiyakoClient extends Client {
 
   async login() {
     await this.init();
-    return super.login(this.config.devtoken)
+    return super.login(this.config.token)
   }
   
   async init() {
