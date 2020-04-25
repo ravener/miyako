@@ -5,7 +5,7 @@ class Help extends Command {
   constructor(...args) {
     super(...args, {
       description: "View help for commands.",
-      usage: "m!help [command]"
+      usage: "help [command]"
     });
   }
 
@@ -36,12 +36,14 @@ class Help extends Command {
     const embed = new MessageEmbed()
       .setTitle("Help - Commands")
       .setColor(0x9590EE)
-      .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ format: "png", size: 256 }))
+      .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 256 }))
       .setFooter("For more information about a command run m!help <command>");
 
-    for(const [cat, cmds] of Object.entries(map)) {
-      if(cat === "Owner" && ctx.author.id !== this.client.constants.ownerID) continue;
-      embed.addField(cat, cmds.join(", "));
+    const keys = Object.keys(map).sort();
+
+    for(const category of keys) {
+      if(category === "Owner" && ctx.author.id !== this.client.constants.ownerID) continue;
+      embed.addField(category, map[category].join(", "));
     }
 
     return ctx.reply(embed);
