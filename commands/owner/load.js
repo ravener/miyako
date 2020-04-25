@@ -18,7 +18,7 @@ class Load extends Command {
       const before = store.size;
       await store.loadFiles();
       const after = store.size - before;
-      return ctx.reply(`Successfully reloaded/loaded ${store.size} ${store.name}. ${after === 0 ? "There was nothing new right?" : `${after} new pieces were loaded.`}`);
+      return ctx.reply(`Successfully reloaded/loaded ${store.size} ${store.name}. ${after === 0 ? "There was nothing new right?" : `${after} new ${store.name} were loaded.`}`);
     } catch(err) {
       return ctx.reply(`There was an error loading all files: \`${err.message}\``);
     }

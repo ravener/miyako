@@ -14,7 +14,7 @@ class Exec extends Command {
       .catch(error => ({ stdout: null, stderr: error }));
 
     const output = result.stdout ? `**\`OUTPUT\`**${"```prolog\n" + result.stdout + "```"}` : "";
-    const outerr = result.stderr ? `**\`ERROR\`**${"```prolog\n" + result.stdrr + "```"}` : "";
+    const outerr = result.stderr ? `**\`ERROR\`**${"```prolog\n" + result.stderr + "```"}` : "";
     if(output === "" && outerr === "") return ctx.reply("No output returned.");
     return ctx.reply([output, outerr].join("\n"));
   }
