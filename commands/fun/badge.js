@@ -19,7 +19,7 @@ class Badge extends Command {
 
     return ctx.reply(new MessageEmbed()
       .setImage(`https://robohash.org/${user.id}?set=set${set}`)
-      .setTitle(`${ctx.author.tag}'s unique RoboHash.org Set ${set} Avatar.`)
+      .setTitle(`${user.tag}'s unique RoboHash.org Set ${set} Avatar.`)
       .setColor(0x9590EE)
       .setFooter(`Requested by ${ctx.author.tag}`, ctx.author.displayAvatarURL({ size: 256 }))
       .setTimestamp());
