@@ -12,7 +12,7 @@ class RandomGIF extends Command {
   }
 
   async run(ctx, args) {
-    const url = `https://api.giphy.com/v1/gifs/random?api_key=${this.client.config.giphy}`;
+    let url = `https://api.giphy.com/v1/gifs/random?api_key=${this.client.config.giphy}`;
     if(args.length) url += `&tag=${encodeURIComponent(args.join(" "))}`;
 
     const body = await fetch(url)
