@@ -38,13 +38,20 @@ class Urban extends Command {
       .setThumbnail("http://i.imgur.com/CcIZZsa.png")
       .setDescription([
         `→ \`Definition\` :: ${ind}/${list.length}\n${definition}`,
-        `→ \`Example\` :: ${this.cutText(result.example, 750)}`,
+        `→ \`Example\` :: ${this.example(result.example)}`,
         `→ \`Author\` :: ${result.author}`
       ])
       .addField(ZWS, `\\👍 ${result.thumbs_up}`, true)
       .addField(ZWS, `\\👎 ${result.thumbs_down}`, true)
       .setFooter("© Urban Dictionary"));
 	}
+
+  example(example) {
+    const format = this.format(example)
+    if(format.length < 750) return format;
+    if(example.length < 750) return example;
+    return this.cutText(example, 750);
+  }
   
   content(definition, permalink) {
     const format = this.format(definition);
