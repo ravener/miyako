@@ -17,7 +17,7 @@ class Permissions extends Command {
       .setTitle(`${member.displayName}'s Permissions in ${ctx.guild.name}`)
       .setColor(0x9590EE)
       .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
-      .setDescription(Object.entries(member.permissions.serialize())
+      .setDescription(Object.entries(ctx.channel.permissionsFor(member).serialize())
         .map((perms) => `${perms[1] ? ":white_check_mark:" : ":x:"} ${this.client.events.get("message").friendlyPerms[perms[0]]}`)
         .join("\n")));
   }
