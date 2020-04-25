@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 
 class EventError extends Event {
   async run(event, err) {
-    const channel = this.client.channels.get("454776836929617921");
+    const channel = this.client.channels.cache.get("454776836929617921");
     if(!channel) return;
     const embed = new MessageEmbed()
       .setTitle("Event Error")

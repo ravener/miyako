@@ -13,7 +13,7 @@ class Bug extends Command {
   
   async run(ctx, args) {
     if(!args.length) return ctx.reply("Baka! What is the bug report?");
-    const channel = this.client.channels.get("460800229667504148");
+    const channel = this.client.channels.cache.get("460800229667504148");
     const embed = new MessageEmbed()
       .setTitle("Bug Report")
       .setDescription(args.join(" "))

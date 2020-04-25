@@ -6,6 +6,8 @@ class EventStore extends Store {
   }
 
   set(event) {
+    const exists = super.get(event);
+    if(exists) this.client.removeAllListeners(exists.name);
     super.set(event);
     this.client.on(event.name, event._run.bind(event));
     return event;

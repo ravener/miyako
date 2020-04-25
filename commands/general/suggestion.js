@@ -14,7 +14,7 @@ class Suggestion extends Command {
   async run(ctx, args) {
     if(!args.length) return ctx.reply("Baka! What's your idea?");
 
-    const channel = this.client.channels.get("460801007769616394");
+    const channel = this.client.channels.cache.get("460801007769616394");
 
     const embed = new MessageEmbed()
       .setTitle("New Suggestion")

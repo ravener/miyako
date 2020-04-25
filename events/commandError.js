@@ -7,7 +7,7 @@ class CommandError extends Event {
     if(typeof err === "string") return ctx.reply(err);
     console.log(`[COMMAND] ${ctx.command.name}: ${err.stack || err}`);
     await ctx.reply(`Uh! Something went wrong unexpectedly!${ctx.author.id !== this.client.constants.ownerID ? " Don't worry my master will keep track of the problem and fix it soon." : ""}`);
-    const channel = this.client.channels.get("454776836929617921");
+    const channel = this.client.channels.cache.get("454776836929617921");
     if(!channel) return;
     const embed = new MessageEmbed()
       .setTitle("Command Error")
