@@ -17,7 +17,7 @@ class YoMomma extends Command {
     const { joke } = await fetch("http://api.yomomma.info")
       .then((res) => res.json());
 
-    return msg.send(`${user}, ${joke}`);
+    return ctx.reply(`${user}, ${joke}`);
   }
 }
 
