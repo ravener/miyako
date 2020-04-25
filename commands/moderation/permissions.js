@@ -18,7 +18,8 @@ class Permissions extends Command {
       .setColor(0x9590EE)
       .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
       .setDescription(Object.entries(ctx.channel.permissionsFor(member).serialize())
-        .map((perms) => `${perms[1] ? ":white_check_mark:" : ":x:"} ${this.client.events.get("message").friendlyPerms[perms[0]]}`)
+        .map((perms) => `${perms[1] ? "<:checkmark:703661431484317836>" : "<:crossmark:703661490686656522>"} ${
+          this.client.events.get("message").friendlyPerms[perms[0]]}`)
         .join("\n")));
   }
 }
