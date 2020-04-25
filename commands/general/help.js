@@ -22,7 +22,8 @@ class Help extends Command {
           `**Category:** ${cmd.category}`,
           `**Aliases:** ${cmd.aliases.join("\n")}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"}`,
-          `**Usage:** ${cmd.usage}`
+          `**Usage:** ${ctx.guildPrefix}${cmd.usage}`,
+          `**Extended Help:** ${cmd.extendedHelp}`
         ].join("\n")));
     }
 

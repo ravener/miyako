@@ -7,6 +7,7 @@ class Command {
     this.client = client;
     this.file = file;
     this.description = options.description || "No Description Provided.";
+    this.extendedHelp = options.extendedHelp || "No extended help provided.";
     this.ownerOnly = options.ownerOnly || false;
     this.aliases = options.aliases || [];
     this.cooldown = options.cooldown || 0;
