@@ -15,7 +15,7 @@ class RandomGIF extends Command {
     const url = `https://api.giphy.com/v1/gifs/random?api_key=${this.client.config.giphy}`;
     if(args.length) url += `&tag=${encodeURIComponent(args.join(" "))}`;
 
-    const body = fetch(url)
+    const body = await fetch(url)
       .then((res) => res.json())
 
     return ctx.reply(body.data.embed_url);
