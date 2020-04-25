@@ -35,8 +35,10 @@ class MemorySweeper {
       }
       
       // Clear emojis
-      emojis += guild.emojis.cache.size;
-      guild.emojis.cache.clear();
+      if(guild.id !== this.client.constants.mainGuildID) { // don't clear support guild's emojis.
+        emojis += guild.emojis.cache.size;
+        guild.emojis.cache.clear();
+      }
     }
     
     // Per-Channel sweeper

@@ -38,14 +38,12 @@ class CommandContext {
   }
 
   success() {
-    return this.client.guilds.get(this.client.constants.mainGuildID).emojis.fetch("519166152488910850")
-      .then((emoji) => this.message.react(emoji))
+    return this.message.react("519166152488910850")
       .catch(() => null);
   }
 
   failure() {
-    return this.client.guilds.get(this.client.constants.mainGuildID).emojis.fetch("519166256214048769")
-      .then((emoji) => this.message.react(emoji))
+    return this.message.react("519166256214048769")
       .catch(() => null);
   }
 }
