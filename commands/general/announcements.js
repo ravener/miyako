@@ -13,7 +13,7 @@ class Announcements extends Command {
 
   async run(ctx) {
     const guild = this.client.guilds.cache.get(this.client.constants.mainGuildID);
-    const channel = guild.channels.get("460796274686558209");
+    const channel = guild.channels.cache.get("460796274686558209");
     const messages = await channel.messages.fetch({ limit: 1 });
     const announcement = messages.first();
     
