@@ -14,7 +14,7 @@ class Permissions extends Command {
   async run(ctx, [member]) {
     member = await this.verifyMember(ctx, member, true);
     return ctx.reply(new MessageEmbed()
-      .setTitle(`${member.displayName}'s Permissions in ${ctx.guild.name}`)
+      .setTitle(`${member.displayName}'s Permissions in #${ctx.channel.name} in ${ctx.guild.name}`)
       .setColor(0x9590EE)
       .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
       .setDescription(Object.entries(ctx.channel.permissionsFor(member).serialize())
