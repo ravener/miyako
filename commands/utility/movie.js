@@ -1,4 +1,4 @@
-const { Command } = require("../../structures/Command.js");
+const Command = require("../../structures/Command.js");
 const { MessageEmbed } = require("discord.js");
 const fetch = require("node-fetch");
 
