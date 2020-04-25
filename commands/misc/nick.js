@@ -21,7 +21,7 @@ class Nick extends Command {
     nick = nick.join(" ");
 
     if(nick.length >= 32) return ctx.reply("Nickname must be less than 32 characters.");
-    if(member.roles.highest.position >= ctx.guild.me.roles.highest.position)
+    if(member.roles.highest.position > ctx.guild.me.roles.highest.position)
       return ctx.reply("I can't edit nicknames of people with higher role than mine.");
 
     await member.edit({ nick });
