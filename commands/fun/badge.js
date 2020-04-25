@@ -14,8 +14,8 @@ class Badge extends Command {
   async run(ctx, [user, set = 1]) {
     user = await this.verifyUser(ctx, user, true);
 
-    if(isNaN(parseInt(set)) || (parseInt(set) < 0 || parseInt(set) > 4))
-      return ctx.reply("Set must be a number between 1 to 4");
+    if(isNaN(parseInt(set)) || (parseInt(set) < 0 || parseInt(set) > 5))
+      return ctx.reply("Set must be a number between 1 to 5");
 
     return ctx.reply(new MessageEmbed()
       .setImage(`https://robohash.org/${user.id}?set=set${set}`)
