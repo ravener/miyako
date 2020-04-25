@@ -38,6 +38,7 @@ class Wolfram extends Command {
 
     return ctx.reply(new MessageEmbed()
       .setTitle(pods[0].subpods[0].plaintext)
+      .setImage((pods[0].subpods[0].img && pods[0].subpods[0].img.src) || undefined)
       .setDescription(pods[1].subpods[0].plaintext.substring(0, 1950))
       .setColor(0x9590EE));
   }
