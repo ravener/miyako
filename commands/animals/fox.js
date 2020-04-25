@@ -12,7 +12,7 @@ class Fox extends Command {
     });
   }
 
-  async run(msg) {
+  async run(ctx) {
     const { image } = await fetch("https://randomfox.ca/floof/")
       .then((res) => res.json());
 
