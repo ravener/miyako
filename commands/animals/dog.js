@@ -18,7 +18,7 @@ class Dog extends Command {
 
     return ctx.reply(new MessageEmbed()
       .setTitle("Random Dog")
-      .setImage(url)
+      .setImage(message)
       .setColor(0x9590EE)
       .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 })));
   }
