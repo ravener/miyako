@@ -12,7 +12,7 @@ class Permissions extends Command {
   }
 
   async run(ctx, [member]) {
-    member = await this.verifyMember(ctx, user, true);
+    member = await this.verifyMember(ctx, member, true);
     return ctx.reply(new MessageEmbed()
       .setTitle(`${member.displayName}'s Permissions in ${ctx.guild.name}`)
       .setColor(0x9590EE)
