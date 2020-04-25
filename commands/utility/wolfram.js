@@ -7,7 +7,7 @@ class Wolfram extends Command {
     super(...args, {
       description: "Query Wolfram Alpha with any mathematical question.",
       usage: "wolfram <query>",
-      aliases: ["what", "when", "where", "who", "why"],
+      aliases: ["what", "when", "where", "who", "why", "how"],
       cooldown: 5
     });
   }
@@ -18,7 +18,7 @@ class Wolfram extends Command {
     // Allow users to trigger this in a fancy way using @Miyako What time is it?
     // If they invoke it with the "what"/"where"/"when"/"who"/"why" alias, we must also treat it as an argument.
     // A trick to make it look like some advanced A.I bot i guess.
-    const query = ctx.invokedName === "what" || ctx.invokedName === "when" ||
+    const query = ctx.invokedName === "what" || ctx.invokedName === "when" || ctx.invokedName === "how" ||
       ctx.invokedName === "where" || ctx.invokedName === "who" || ctx.invokedName === "why" ?
       `${this.client.utils.toProperCase(ctx.invokedName)} ${args.join(" ")}` : args.join(" ");
 
