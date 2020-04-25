@@ -21,7 +21,6 @@ class Bug extends Command {
       .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
       .setFooter(ctx.author.id);
     const m = await channel.send({ embed });
-    // await m.react(channel.guild.emojis.get("466669201025925120")); TODO
     return ctx.reply(`Your bug report has been sent${ctx.guild && ctx.guild.id === this.client.constants.mainGuildID ? "" : " to the support server."} You will hear back from my owner in DMs if there is anything wrong with your report. Have a nice day!`);
   }
 }

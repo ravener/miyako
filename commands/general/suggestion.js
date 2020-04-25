@@ -25,8 +25,8 @@ class Suggestion extends Command {
       .setFooter(`User ID: ${ctx.author.id}`);
 
     const message = await channel.send({ embed });
-    await message.react("466669198463074305");
-    await message.react("466669201025925120");
+    await message.react(await channel.guild.emojis.fetch("466669198463074305"));
+    await message.react(await channel.guild.emojis.fetch("466669201025925120"));
     return ctx.reply(`Your idea has been successfully submitted${ctx.guild && ctx.guild.id !== this.client.constants.mainGuildID ? " to the support server" : ""}.`);
   }
 }
