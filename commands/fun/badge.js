@@ -20,7 +20,7 @@ class Badge extends Command {
     return ctx.reply(new MessageEmbed()
       .setImage(`https://robohash.org/${user.id}?set=set${set}`)
       .setColor(0x9590EE)
-      .setFooter(`Requested by ${ctx.author.tag}`, message.author.displayAvatarURL({ size: 256 }))
+      .setFooter(`Requested by ${ctx.author.tag}`, ctx.author.displayAvatarURL({ size: 256 }))
       .setTimestamp());
   }
 }
