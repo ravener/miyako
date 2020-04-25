@@ -47,6 +47,8 @@ class Urban extends Command {
 	}
   
   content(definition, permalink) {
+    const format = this.format(definition);
+    if(format.length < 750) return format;
     if(definition.length < 750) return definition;
     return `${this.cutText(definition, 750)}... [continue reading](${permalink})`;
   }
@@ -62,6 +64,11 @@ class Urban extends Command {
     const x = str.substring(0, length).lastIndexOf(char);
     const pos = x === -1 ? length : x;
     return str.substring(0, pos);
+  }
+
+  format(str) {
+    // https://stackoverflow.com/questions/52374809/javascript-regular-expression-to-catch-boxes
+    return str.replace(/\[([^\][]+)\]/g, (x, y) => `${x}(https://www.urbandictionary.com/define.php?term=${y.replace(/\s+/g, "+")})`);
   }
 }
 
