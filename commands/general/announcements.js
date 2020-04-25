@@ -22,7 +22,8 @@ class Announcements extends Command {
       .setAuthor(announcement.author.username, announcement.author.displayAvatarURL({ size: 256 }))
       .setDescription(announcement.cleanContent)
       .setThumbnail(announcement.author.displayAvatarURL({ size: 512 }))
-      .setTimestamp(new Date(announcement.createdTimestamp));
+      .setTimestamp(new Date(announcement.createdTimestamp))
+      .setColor(0x9590EE);
     return ctx.reply({ embed });
   }
 }
