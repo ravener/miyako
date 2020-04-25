@@ -12,7 +12,7 @@ class CommandError extends Event {
     const embed = new MessageEmbed()
       .setTitle("Command Error")
       .setColor(0x9590EE)
-      .setDescription(`An Error occured in command: ${command.name}\n\`\`\`js\n${err.stack || err}\`\`\``)
+      .setDescription(`An Error occured in command: ${ctx.command.name}\n\`\`\`js\n${err.stack || err}\`\`\``)
       .setFooter(`User: ${ctx.author.tag}, Guild: ${ctx.guild ? ctx.guild.name : "DM" }`);
     return channel.send({ embed });
   }
