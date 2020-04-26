@@ -18,7 +18,7 @@ class Translate extends Command {
     if(!language) return ctx.reply("Baka! What language am I supposed to translate to?");
     if(!text.length) return ctx.reply("Baka! What am I supposed to translate?");
 
-    const $ = await fetch(`http://translate.google.com/m?hl=${language}&sl=auto&q=${encodeURIComponent(text.join(" "))}` {
+    const $ = await fetch(`http://translate.google.com/m?hl=${language}&sl=auto&q=${encodeURIComponent(text.join(" "))}`, {
       headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36" }
     })
       .then((res) => res.text())
