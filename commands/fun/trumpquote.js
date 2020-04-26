@@ -11,7 +11,7 @@ class TrumpQuote extends Command {
   
   async run(ctx) {
     const { value } = await fetch("https://api.tronalddump.io/random/quote")
-      .then((res) => res.json())
+      .then((res) => res.json());
     return ctx.reply(value);
   }
 }
