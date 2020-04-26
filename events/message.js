@@ -4,7 +4,7 @@ const { Collection, Permissions } = require("discord.js");
 
 // Taken from klasa https://github.com/dirigeants/klasa
 const quotes = ['"', "'", '“”', '‘’'];
-const flagRegex = new RegExp(`(?:--|—)(\\w[\\w-]+)(?:=(?:${quotes.map((qu) => `[${qu}]((?:[^${qu}\\\\]|\\\\.)*)[${qu}]`).join('|')}|([\\w<>@#&!-]+)))?`, 'g');
+const flagRegex = new RegExp(`(?:--|—)(\\w[\\w-]+)(?:=(?:${quotes.map((qu) => `[${qu}]((?:[^${qu}\\\\]|\\\\.)*)[${qu}]`).join('|')}|([\\w<>@#&!-]+)))?`, "g");
 const delim = new RegExp("(\\s)(?:\\s)+");
 
 
@@ -22,7 +22,7 @@ class MessageEvent extends Event {
   getFlags(content) {
     const flags = {};
     content = content.replace(flagRegex, (match, fl, ...quote) => {
-      flags[fl] = (quote.slice(0, -2).find(el => el) || fl).replace(/\\/g, "");
+      flags[fl] = (quote.slice(0, -2).find((el) => el) || fl).replace(/\\/g, "");
       return "";
     }).replace(delim, "$1");
 

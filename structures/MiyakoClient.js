@@ -36,7 +36,7 @@ class MiyakoClient extends Client {
 
   async login() {
     await this.init();
-    return super.login(this.config.token)
+    return super.login(this.config.token);
   }
   
   async init() {
@@ -47,7 +47,7 @@ class MiyakoClient extends Client {
 
     // Connect database.
     this.dbconn = await this.db.connect();
-    this.console.log(`Connected to PostgreSQL`);
+    this.console.log("Connected to PostgreSQL");
     return require("../utils/schema.js")(this.db);
   }
 }

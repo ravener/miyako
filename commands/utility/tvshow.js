@@ -26,7 +26,7 @@ class TVShow extends Command {
       .then((res) => res.json())
       .catch(() => {
         throw `I couldn't find a TV show with title **${query}** in page ${page}.`;
-      })
+      });
 
     const show = body.results[parseInt(page) - 1];
     if (!show) throw `I couldn't find a TV show with title **${query}** in page ${page}.`;
