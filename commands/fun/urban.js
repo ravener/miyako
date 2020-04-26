@@ -47,7 +47,7 @@ class Urban extends Command {
 	}
 
   example(example) {
-    const format = this.format(example)
+    const format = this.format(example);
     if(format.length < 750) return format;
     if(example.length < 750) return example;
     return this.cutText(example, 750);

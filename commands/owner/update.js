@@ -14,7 +14,7 @@ class Update extends Command {
 
     if(ctx.flags.reload) {
       if(ctx.flags.reload === "commands" || ctx.flags.reload === "events")
-        await this.store.get("load").run(ctx, [ctx.flags.reload])
+        await this.store.get("load").run(ctx, [ctx.flags.reload]);
       else
         await this.client.commands.get("reload").run(ctx, [ctx.flags.reload]);
     }

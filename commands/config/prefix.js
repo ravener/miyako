@@ -28,7 +28,7 @@ class Prefix extends Command {
   async reset(ctx) {
     if(ctx.guildPrefix === "m!") return ctx.reply("The prefix is already the default.");
     await this.client.db.query("UPDATE guilds SET prefix = $1 WHERE id = $2", ["m!", ctx.guild.id]);
-    return ctx.reply(`Reset the prefix for this server to \`m!\``);
+    return ctx.reply("Reset the prefix for this server to `m!`");
   }
 }
 
