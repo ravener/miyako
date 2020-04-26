@@ -11,7 +11,7 @@ class GuildDelete extends Event {
     guild.members.forEach((x) => x.settings.destroy().catch(() => null));
     */
     
-    const channel = this.client.channels.get("454776806869041154");
+    const channel = this.client.channels.cache.get("454776806869041154");
     const embed = new MessageEmbed()
       .setTitle("Miyako left a server.")
       .setDescription(guild.name)

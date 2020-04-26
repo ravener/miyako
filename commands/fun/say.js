@@ -10,6 +10,7 @@ class Say extends Command {
   }
 
   async run(ctx, args) {
+    if(!args.length) return ctx.reply("Baka! What do you want me to say?");
     if(ctx.message.deletable) await ctx.message.delete();
     return ctx.reply(args.join(" "), { disableMentions: "all" });
   }

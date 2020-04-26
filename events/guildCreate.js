@@ -4,7 +4,7 @@ const { MessageEmbed } = require("discord.js");
 class GuildCreate extends Event {
   async run(guild) {
     if(!guild.available) return;
-    const channel = this.client.channels.get("454776806869041154");
+    const channel = this.client.channels.cache.get("454776806869041154");
     if(!guild.owner && guild.ownerID) await guild.members.fetch(guild.ownerID);
     const embed = new MessageEmbed()
       .setTitle("Miyako joined a new server!")
