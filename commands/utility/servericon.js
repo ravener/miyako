@@ -11,7 +11,7 @@ class ServerIcon extends Command {
   }
   
   async run(ctx) {
-    if(!ctx.guild.iconURL()) throw `There is no server icon in this server. What do you expect me to show you?`;
+    if(!ctx.guild.iconURL()) throw "There is no server icon in this server. What do you expect me to show you?";
     const embed = new MessageEmbed()
       .setTitle(`${ctx.guild.name}'s icon`)
       .setImage(ctx.guild.iconURL({ size: 2048 }))

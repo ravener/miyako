@@ -11,7 +11,7 @@ class Exec extends Command {
 
   async run(ctx, args) {
     const result = await exec(args.join(" "), { timeout: 60000 })
-      .catch(error => ({ stdout: null, stderr: error }));
+      .catch((error) => ({ stdout: null, stderr: error }));
 
     const output = result.stdout ? `**\`OUTPUT\`**${"```prolog\n" + result.stdout + "```"}` : "";
     const outerr = result.stderr ? `**\`ERROR\`**${"```prolog\n" + result.stderr + "```"}` : "";

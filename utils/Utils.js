@@ -11,7 +11,7 @@ class Utils {
   }
   
   static toProperCase(str) {
-    return str.replace(/([^\W_]+[^\s-]*) */g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    return str.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
   }
 
   static random(arr) {
