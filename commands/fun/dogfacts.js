@@ -12,7 +12,7 @@ class DogFacts extends Command {
   async run(ctx) {
     const fact = await fetch("http://dog-api.kinduff.com/api/facts?number=1")
       .then((res) => res.json())
-      .then(body => body.facts[0]);
+      .then((body) => body.facts[0]);
     return ctx.reply(`📢 **Dogfact:** *${fact}*`);
   }
 }
