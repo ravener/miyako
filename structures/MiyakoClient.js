@@ -21,6 +21,7 @@ class MiyakoClient extends Client {
     this.utils = require("../utils/Utils.js"); // Easier to access everywhere.
     this.events = new EventStore(this);
     this.sweeper = new MemorySweeper(this);
+    this.responses = require("../utils/responses.js");
     this.on("ready", this.onReady.bind(this));
 
     const { user, password, database } = this.config.postgresql;
