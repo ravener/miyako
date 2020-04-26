@@ -54,6 +54,13 @@ class Command {
     return ctx.guild.members.fetch(user);
   }
 
+  verifyInt(num, def) {
+    if(typeof def === "number" && !num) return def;
+    const parsed = parseInt(num);
+    if(isNaN(parsed)) throw "Baka! You must provide a valid number.";
+    return parsed;
+  }
+
   /**
    * Executed before the command is ran.
    * The return value can be either true/false or a string.
