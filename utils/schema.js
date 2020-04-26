@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS members (
 
 CREATE TABLE IF NOT EXISTS bot (
   id TEXT PRIMARY KEY NOT NULL UNIQUE,
-  "psa.text" TEXT,
-  "psa.date" INTEGER,
   "guildBlacklist" TEXT[],
   "userBlacklist" TEXT[]
 );

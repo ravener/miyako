@@ -1,0 +1,13 @@
+{
+  "devtoken": "Development token. Currently unused you have to swap the code manually to use this.",
+  "token": "Production bot token.",
+  "postgresql": {
+    "user": "pgsql username",
+    "password": "pgsql password",
+    "database": "miyako"
+  },
+  "genius": "Genius API for lyrics.",
+  "wolfram": "wolfram alpha",
+  "tmdb": "TMDB key",
+  "giphy": "giphy app id"
+}
