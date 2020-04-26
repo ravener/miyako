@@ -14,7 +14,7 @@ class SQL extends Command {
 
     const db = this.client.db;
     try {
-      const res = await db.query(query);
+      const res = await db.query(args.join(" "));
       if(!res.rows || !res.rows.length) return ctx.reply(`\`${res.command}\` *No rows returned*`);
       let rows = res.rows;
       if(ctx.flags.index) rows = rows[parseInt(ctx.flags.index)];
