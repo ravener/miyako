@@ -16,7 +16,7 @@ class RandomGIF extends Command {
     if(args.length) url += `&tag=${encodeURIComponent(args.join(" "))}`;
 
     const body = await fetch(url)
-      .then((res) => res.json())
+      .then((res) => res.json());
 
     return ctx.reply(body.data.embed_url);
   }

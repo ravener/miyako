@@ -13,11 +13,11 @@ class LMGTFY extends Command {
       "Oh come on how hard is it to google that! But here you go: {{link}}",
       "Jeez! how lazy are you? Here you go anyway {{link}}",
       "Um, Why do you want me to google that? Here you go {{link}}"
-    ]
+    ];
   }
 
   async run(ctx, query) {
-    const url = `https://lmgtfy.com/?q=${query.join(" ").replace(/ /g, "+")}`
+    const url = `https://lmgtfy.com/?q=${query.join(" ").replace(/ /g, "+")}`;
     return ctx.reply(this.client.utils.random(this.responses).replace(/{{link}}/g, url));
   }
 }
