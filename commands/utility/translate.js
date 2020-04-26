@@ -30,7 +30,7 @@ class Translate extends Command {
     const embed = new MessageEmbed()
       .setTitle("Translated.")
       .setColor(0x9590EE)
-      .addField("Original Text", "```\n" + text.join(" ")" + ```")
+      .addField("Original Text", "```\n" + text.join(" ") + "```")
       .addField("Translated Text", `Language: ${lang}\n` + "```\n" + results + "```");
 
     return ctx.reply({ embed });
