@@ -11,8 +11,16 @@ class Store extends Collection {
   }
 
   set(piece) {
+    const exists = this.get(piece.name);
+    if(exists) this.delete(piece.name);
     super.set(piece.name, piece);
     return piece;
+  }
+
+  delete(key) {
+    const exists = this.get(key);
+    if(!exists) return false;
+    return super.delete(key);
   }
 
   /**
