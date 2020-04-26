@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 
 class GuildDelete extends Event {
 
-  run(guild) {
+  async run(guild) {
     if(!guild.available) return;
     
     // Delete guild settings.
@@ -19,7 +19,7 @@ class GuildDelete extends Event {
       .addField("Owner", guild.owner.user.tag)
       .addField("Member Count", guild.memberCount)
       .setFooter(guild.id);
-    channel.send({ embed }).catch(() => null);
+    await channel.send({ embed }).catch(() => null);
     this.client.user.setActivity(`@${this.client.user.username} help | ${this.client.guilds.cache.size} Servers!`);
   }
 }
