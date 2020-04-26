@@ -69,7 +69,7 @@ class Command {
    * The actual command implementation, must be implemented in a subclass.
    */
   async run(ctx, args) {
-    return ctx.reply(`${this.constructor.name} does not provide a \`run()\` implementation.${msg.author.id !== this.client.constants.ownerID ? " This is a bug, please report this in our server at https://discord.gg/mDkMbEh" : ""}`);
+    return ctx.reply(`${this.constructor.name} does not provide a \`run()\` implementation.${ctx.author.id !== this.client.constants.ownerID ? " This is a bug, please report this in our server at https://discord.gg/mDkMbEh" : ""}`);
   }
 
   reload() {
