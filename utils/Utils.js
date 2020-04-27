@@ -26,6 +26,15 @@ class Utils {
   static escapeRegex(str) {
     return str.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
   }
+
+  static getDuration(time) {
+    const seconds = Math.floor(time / 1000) % 60 ;
+    const minutes = Math.floor((time / (1000 * 60)) % 60);
+    const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+    const days = Math.floor((time / (1000 * 60 * 60 * 24)) % 7);
+    return [`${days} Days`, `${hours} Hours`, `${minutes} Minutes`,
+      `${seconds} Seconds`].filter((time) => !time.startsWith("0")).join(", ");
+  }
 }
 
 Utils.sleep = promisify(setTimeout);

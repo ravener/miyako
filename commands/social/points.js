@@ -13,8 +13,8 @@ class Points extends Command {
   async run(ctx, [user]) {
     const member = await this.verifyMember(ctx, user, true);
     if(member.user.bot) return ctx.reply("Baka! Bots don't have points.");
-    const { rows } = await this.client.db.query("SELECT * FROM members WHERE id = $1 AND guild = $2", [member.id, ctx.guild.id]);
-    const points = rows.length ? rows[0].points : 0;
+    const points = await member.getBalance();
+
     return ctx.reply(this.client.utils.random(member.id === ctx.author.id ?
       this.client.responses.balanceMessages : this.client.responses.otherBalanceMessages)
         .replace(/{{user}}/g, member.displayName)
