@@ -1,4 +1,4 @@
-const { Command } = require("klasa");
+const Command = require("../../structures/Command.js");
 
 class Daily extends Command {
   constructor(...args) {
