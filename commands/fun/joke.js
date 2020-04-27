@@ -16,9 +16,10 @@ class Joke extends Command {
       .then((r) => r.json());
 
     if(body.error) return ctx.reply("Something went wrong with the API. Try again later.");
+    const flags = Object.entries(body.flags).filter((x) => x[1]).map((x) => x[0]).join(", ");
     
     const embed = new MessageEmbed()
-      .setTitle(body.category)
+      .setTitle(`${body.category}${flags ? ` (${flags})` : ""}`)
       .setDescription(body.type === "single" ? `${body.joke}` : `**${body.setup}**\n*${body.delivery}*`)
       .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
       .setColor(0x9590EE);
