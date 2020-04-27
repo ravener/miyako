@@ -1,7 +1,7 @@
 const Command = require("../../structures/Command.js");
 
 class Leaderboard extends Command {
-  constructor(..args) {
+  constructor(...args) {
     super(...args, {
       description: "View the server leaderboard.",
       usage: "leaderboard [page]",
