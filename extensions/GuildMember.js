@@ -9,6 +9,12 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
     return parseInt(rows[0].points);
   }
 
+  setLevel(level) {
+    if(isNaN(level)) throw new Error("Level cannot be NaN");
+    const id = `${this.guild.id}.${this.id}`;
+    return this.client.db.query("UPDATE members SET level = $1 WHERE id = $2", [level, id]);
+  }
+
   async givePoints(points) {
     const id = `${this.guild.id}.${this.id}`;
     const balance = await this.getBalance();

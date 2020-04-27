@@ -2,6 +2,7 @@ const { Client } = require("discord.js");
 const CommandStore = require("./CommandStore.js");
 const EventStore = require("./EventStore.js");
 const MemorySweeper = require("../utils/cleanup.js");
+const Points = require("../monitors/points.js"); // Implement better way when we have more monitors.
 const { Pool } = require("pg");
 const DBL = require("dblapi.js");
 
@@ -24,6 +25,7 @@ class MiyakoClient extends Client {
     this.sweeper = new MemorySweeper(this);
     this.responses = require("../utils/responses.js");
     this.dbl = new DBL(this.config.dbl, this);
+    this.points = new Points(this);
     this.on("ready", this.onReady.bind(this));
 
     const { user, password, database } = this.config.postgresql;

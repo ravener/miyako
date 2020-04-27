@@ -55,6 +55,8 @@ class MessageEvent extends Event {
     if(msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
       return msg.channel.send("Hi! Run `m!help` to get a list of commands you can use.");
 
+    this.client.points.run(msg).catch(() => null);
+
     let prefix;
     if(msg.channel.type === "dm") {
       prefix = this.prefix;
