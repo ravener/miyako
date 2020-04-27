@@ -59,8 +59,8 @@ class Daily extends Command {
     amount *= 2;
     if(weekend) amount *= 2;
 
-    await this.setCooldown(ctx);
     await ctx.member.givePoints(amount);
+    await this.setCooldown(ctx);
 
     return ctx.reply(this.client.utils.random(this.client.responses.dailySuccessMessages)
       .replace(/{{user}}/g, ctx.member.displayName)
