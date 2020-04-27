@@ -5,7 +5,8 @@ class Leaderboard extends Command {
     super(...args, {
       description: "View the server leaderboard.",
       usage: "leaderboard [page]",
-      guildOnly: true
+      guildOnly: true,
+      aliases: ["lb", "top"]
     });
   }
 
