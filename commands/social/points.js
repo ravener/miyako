@@ -16,7 +16,7 @@ class Points extends Command {
     const { rows } = await this.client.db.query("SELECT * FROM members WHERE id = $1 AND guild = $2", [member.id, ctx.guild.id]);
     const points = rows.length ? rows[0].points : 0;
     return ctx.reply(this.client.utils.random(member.id === ctx.author.id ?
-      this.client.resposes.balanceMessages : this.client.responses.otherBalanceMessages)
+      this.client.responses.balanceMessages : this.client.responses.otherBalanceMessages)
         .replace(/{{user}}/g, member.displayName)
         .replace(/{{amount}}/g, `¥${balance}`));
   }
