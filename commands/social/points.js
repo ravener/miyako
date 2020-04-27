@@ -1,4 +1,4 @@
-const Command = require("../../stuctures/Command.js");
+const Command = require("../../structures/Command.js");
 
 class Points extends Command {
   constructor(...args) {
