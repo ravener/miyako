@@ -8,8 +8,11 @@ class Ping extends Command {
   }
 
   async run(ctx, args) {
-    const msg = await ctx.reply("Pong i guess?");
-    return msg.edit(`Pong! Latency: **${msg.createdTimestamp - ctx.message.createdTimestamp} ms** API Latency: **${this.client.ws.ping} ms**`);
+    const msg = await ctx.reply("Ping?");
+
+    return msg.edit(this.client.utils.random(this.client.responses.pingMessages)
+      .replace(/{{user}}/g, ctx.guild ? ctx.member.displayName : ctx.author.username)
+      .replace(/{{ms}}/g, `${msg.createdTimestamp - ctx.message.createdTimestamp}`));
   }
 }
 
