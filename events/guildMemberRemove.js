@@ -3,6 +3,8 @@ const Event = require("../structures/Event.js");
 class GuildMemberRemove extends Event {
   async run(member) {
     if(!member.guild.available) return;
+
+    await this.client.db.query("DELETE FROM members WHERE id = $1", [`${member.guild.id}.${member.id}`]).catch(() => null);
     
     const { rows } = await this.client.db.query("SELECT \"weebGreetings\" FROM guilds WHERE id = $1", [member.guild.id]);
 
