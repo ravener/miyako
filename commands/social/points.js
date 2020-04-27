@@ -18,7 +18,7 @@ class Points extends Command {
     return ctx.reply(this.client.utils.random(member.id === ctx.author.id ?
       this.client.responses.balanceMessages : this.client.responses.otherBalanceMessages)
         .replace(/{{user}}/g, member.displayName)
-        .replace(/{{amount}}/g, `¥${balance}`));
+        .replace(/{{amount}}/g, `¥${points}`));
   }
 }
 
