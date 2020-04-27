@@ -9,5 +9,6 @@
   "genius": "Genius API for lyrics.",
   "wolfram": "wolfram alpha",
   "tmdb": "TMDB key",
-  "giphy": "giphy app id"
+  "giphy": "giphy app id",
+  "dbl": "https://top.gg/api/docs"
 }
