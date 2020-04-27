@@ -12,8 +12,8 @@ class Points {
     if(!msg.member) await msg.guild.members.fetch(msg.author);
     const { rows } = await this.client.db.query("SELECT prefix, levelup, social FROM guilds WHERE id = $1", [msg.guild.id]);
 
-    const social = rows.length ? rows.length[0].social : true;
-    const prefix = rows.length ? rows.length[0].prefix : "m!";
+    const social = rows.length ? rows[0].social : true;
+    const prefix = rows.length ? rows[0].prefix : "m!";
     const levelup = rows.length ? rows[0].levelup : true;
 
     if(!social) return;
