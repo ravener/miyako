@@ -6,7 +6,8 @@ class Joke extends Command {
   constructor(...args) {
     super(...args, {
       description: "Get a random joke.",
-      cooldown: 3
+      cooldown: 3,
+      aliases: ["jk"]
     });
   }
   
@@ -18,7 +19,7 @@ class Joke extends Command {
     
     const embed = new MessageEmbed()
       .setTitle(body.category)
-      .setDescription(body.type === "single" ? `**${body.joke}` : `**${body.setup}**\n*${body.delivery}*`)
+      .setDescription(body.type === "single" ? `${body.joke}` : `**${body.setup}**\n*${body.delivery}*`)
       .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
       .setColor(0x9590EE);
 
