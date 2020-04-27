@@ -6,7 +6,7 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
     const id = `${this.guild.id}.${this.id}`;
     const { rows } = await this.client.db.query("SELECT points FROM members WHERE id = $1", [id]);
     if(!rows.length) return 0;
-    return rows[0].points;
+    return parseInt(rows[0].points);
   }
 
   async givePoints(points) {

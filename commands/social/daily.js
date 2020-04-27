@@ -18,7 +18,7 @@ class Daily extends Command {
     const balance = rows.length ? rows[0].points : 0;
     const daily = rows.length ? rows[0].daily : 0;
 
-    if(Date.now() < daily) return ctx.reply(this.client.utils.random(this.client.responses.dailyFailureMessages)
+    if(daily && (Date.now() < daily)) return ctx.reply(this.client.utils.random(this.client.responses.dailyFailureMessages)
       .replace(/{{user}}/g, ctx.member.displayName)
       .replace(/{{time}}/g, this.client.utils.getDuration(daily - Date.now())));
 
