@@ -30,7 +30,7 @@ class Daily extends Command {
     }
 
     let amount = 500;
-    const voted = await this.client.dbl.hasUpvoted(ctx.author.id);
+    const voted = await this.client.dbl.hasVoted(ctx.author.id);
     const weekend = await this.client.dbl.isWeekend();
     if(!voted) {
       const embed = new MessageEmbed()
