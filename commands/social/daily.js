@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command.js");
+const { MessageEmbed } = require("discord.js");
 
 class Daily extends Command {
   constructor(...args) {
