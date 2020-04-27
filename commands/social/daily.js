@@ -69,7 +69,7 @@ class Daily extends Command {
 
   setCooldown(ctx) {
     const id = `${ctx.guild.id}.${ctx.author.id}`;
-    return this.client.db.query("UPDATE members SET daily = $1 WHERE id = $2", [ctx.message.createdTimestamp + 86400000, id]);
+    return this.client.db.query("UPDATE members SET daily = $1 WHERE id = $2", [new Date(ctx.message.createdTimestamp + 86400000), id]);
   }
 }
 
