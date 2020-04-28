@@ -19,7 +19,7 @@ class GitHub extends Command {
     if(!username || !repo) return ctx.reply("Repository must be in the form `username/repository`");
 
     const body = await fetch(`https://api.github.com/repos/${username}/${repository}`)
-      .then((res) => res.json())
+      .then((res) => res.ok && res.json())
       .catch(() => null);
 
     if(!body) return ctx.reply("Could not fetch that repo, are you sure it exists?");
