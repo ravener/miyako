@@ -28,3 +28,6 @@ This way we will only call database at startup and when writing settings, never 
 I'm not sure if `guild.settings` should be a reference object or a getter to calling `this.client.settings.get()` everytime.
 
 The former might be faster but we have to make sure we don't lose the reference. The latter is more safe, I don't think the performance is a problem at all. I'll start coding and see for myself which situation will work better.
+
+## Members
+It's all done except for members, i think members will have a syncSettings method that must be called when we fetch a new member as members get swept we also sweep the settings cache.
