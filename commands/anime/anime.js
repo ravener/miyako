@@ -26,7 +26,7 @@ class Anime extends Command {
     
     const embed = new MessageEmbed()
       .setColor(0x9590EE)
-      .setTitle(`${res.attributes.titles.en} (Japanese: ${res.attributes.titles.en_jp})`)
+      .setTitle(res.attributes.titles.en ? `${res.attributes.titles.en} (Japanese: ${res.attributes.titles.en_jp})` : res.attributes.titles.en_jp)
       .setDescription(res.attributes.synopsis)
       .addField("Age Rating", `${res.attributes.ageRating}${res.attributes.ageRatingGuide ? ` (${res.attributes.ageRatingGuide})` : ""}`)
       .addField("Episodes", `${res.attributes.episodeCount} (${res.attributes.episodeLength} Min Per Episode)`)
