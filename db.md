@@ -1,6 +1,8 @@
 # Database Concept
 Current way database is managed is very ugly and I question myself about it everyday.
 
+> **NOTE:** This is done. A getter in guilds for cache. Settings instance managing updates to a table. All done.
+
 The main issues are:
 - No cache (Lot of database requests everywhere)
 - SQL Queries all around. Less abstraction over the database provider, will make it extremely difficult to migrate to another database if we ever have to.
