@@ -14,7 +14,7 @@ class Leaderboard extends Command {
     page = this.verifyInt(page, 1);
 
     // SQL injection risk, can't use $1 params here so we have to do this. However guild.id is always safe.
-    const { rows } = await this.client.db.query(`SELECT * FROM members WHERE id LIKE '${ctx.guild.id}.%'`);
+    const { rows } = await this.client.db.query(`SELECT * FROM members WHERE id LIKE '${ctx.guild.id}.%' ORDER BY points DESC`);
 
     const totalPages = Math.round(rows.length / 10);
 
@@ -25,14 +25,11 @@ class Leaderboard extends Command {
     if(page > totalPages && !totalPages) return ctx.reply(`There are only **${totalPages || 1}** pages in the leaderboard.`);
     if(totalPages && page + 1 > totalPages) return ctx.reply(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 
-    const top = rows.map((p) => ({ points: p.points, user: p.id.split(".")[1] }))
-      .sort((a, b) => b.points > a.points ? 1 : -1)
-
-    const positions = top.map((user) => user.user);
+    const positions = rows.map((row) => row.id.split(".")[1]);
     const leaderboard = [];
 
-    top.slice(page * 10, (page + 1) * 10).map(async(u, i) => {
-      const user = await this.client.users.fetch(u.user);
+    rows.slice(page * 10, (page + 1) * 10).map(async(u, i) => {
+      const user = await this.client.users.fetch(u.id.split(".")[1]);
       leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${user.tag}${" ".repeat(40 - user.tag.length)}::  ¥${u.points.toLocaleString()}`);
     });
     
