@@ -10,6 +10,7 @@ class Reverse extends Command {
   }
   
   async run(ctx, args) {
+    if(!args.length) return ctx.reply("Baka! What am I supposed to reverse?");
     return ctx.reply(args.join(" ").split("").reverse().join(""));
   }
 }
