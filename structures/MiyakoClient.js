@@ -5,6 +5,8 @@ const MemorySweeper = require("../utils/cleanup.js");
 const Points = require("../monitors/points.js"); // Implement better way when we have more monitors.
 const { Pool } = require("pg");
 const DBL = require("dblapi.js");
+const loadSchema = require("../utils/schema.js");
+const Settings = require("./Settings.js");
 
 class MiyakoClient extends Client {
   constructor() {
@@ -24,6 +26,7 @@ class MiyakoClient extends Client {
     this.events = new EventStore(this);
     this.sweeper = new MemorySweeper(this);
     this.responses = require("../utils/responses.js");
+    this.settings = new Settings(this, "guilds");
     this.dbl = new DBL(this.config.dbl, this);
     this.points = new Points(this);
     this.on("ready", this.onReady.bind(this));
@@ -53,7 +56,8 @@ class MiyakoClient extends Client {
     // Connect database.
     this.dbconn = await this.db.connect();
     this.console.log("Connected to PostgreSQL");
-    return require("../utils/schema.js")(this.db);
+    await loadSchema(this.db);
+    await this.settings.init();
   }
 }
 
