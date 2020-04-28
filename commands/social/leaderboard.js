@@ -31,7 +31,7 @@ class Leaderboard extends Command {
     const positions = top.map((user) => user.user);
     const leaderboard = [];
 
-    top.slice(page * 10, (page + 1) * 10).forEach(async(u, i) => {
+    top.slice(page * 10, (page + 1) * 10).map(async(u, i) => {
       const user = await this.client.users.fetch(u.user);
       leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${user.tag}${" ".repeat(40 - user.tag.length)}::  ¥${u.points.toLocaleString()}`);
     });
