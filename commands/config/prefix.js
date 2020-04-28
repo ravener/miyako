@@ -13,21 +13,21 @@ class Prefix extends Command {
   
   async run(ctx, [prefix]) {
     if(!prefix) {
-      const { rows } = await this.client.db.query("SELECT * FROM guilds WHERE id = $1", [ctx.guild.id]);
-      if(!rows.length) return ctx.reply("The prefix for this server is `m!`");
-      return ctx.reply(`The prefix for this server is \`${rows[0].prefix}\``);
+      if(!ctx.guild.settings) return ctx.reply("The prefix for this server is `m!`");
+      return ctx.reply(`The prefix for this server is \`${ctx.guild.settings.prefix}\``);
     }
 
     if(prefix === "reset") return this.reset(ctx);
-    if(prefix.length > 10) throw "Prefix can't be longer than 10 characters.";
-    if(prefix === ctx.guildPrefix) throw "Baka! That is already the current prefix.";
-    await this.client.db.query("INSERT INTO guilds (id, prefix) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET prefix = $2", [ctx.guild.id, prefix]);
+    if(prefix.length > 10) return ctx.reply("Prefix can't be longer than 10 characters.");
+    if(prefix === (ctx.guild.settings ? ctx.guild.settings.prefix : "m!")) throw "Baka! That is already the current prefix.";
+
+    await this.client.settings.update(ctx.guild.id, { prefix });
     return ctx.reply(`Successfully updated prefix to: \`${prefix}\``);
   }
   
   async reset(ctx) {
-    if(ctx.guildPrefix === "m!") return ctx.reply("The prefix is already the default.");
-    await this.client.db.query("UPDATE guilds SET prefix = $1 WHERE id = $2", ["m!", ctx.guild.id]);
+    if(!ctx.guild.settings || ctx.guild.settings.prefix === "m!") return ctx.reply("The prefix is already the default.");
+    await this.client.settings.update(ctx.guild.id, { prefix: "m!" })
     return ctx.reply("Reset the prefix for this server to `m!`");
   }
 }

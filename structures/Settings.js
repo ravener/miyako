@@ -19,7 +19,7 @@ class Settings {
   }
 
   /**
-   * Alias to cache.get
+   * Get a guild by ID from cache.
    */
   get(id) {
     return this.cache.get(id);
