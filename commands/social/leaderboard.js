@@ -30,19 +30,16 @@ class Leaderboard extends Command {
 
     const top = rows.slice(page * 10, (page + 1) * 10);
 
-    await ctx.reply(`Debug: Length: ${top.length}`);
-
     for(let i = 0; i < top.length; i++) {
       const u = top[i];
-      await ctx.reply(`Debug: Fetching ${u.id.split(".")[1]} (points: ${u.points.toLocaleString()})`);
       const user = await this.client.users.fetch(u.id.split(".")[1]);
-      leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${user.tag}${" ".repeat(40 - user.tag.length)}::  ¥${u.points.toLocaleString()}`);
+      leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${user.tag}${" ".repeat(30 - user.tag.length)}::  ¥${u.points.toLocaleString()}`);
     }
     
     leaderboard.push("-------------------------------------------------------------");
     const pos = positions.indexOf(ctx.author.id).toString().padStart(2, "0");
     const posTxt = pos == -1 ? "??" : (positions.indexOf(ctx.author.id) + 1).toString().padStart(2, "0");
-    leaderboard.push(`${posTxt} ❯ ${ctx.author.tag}${" ".repeat(40 - ctx.author.tag.length)}::  ¥${(await ctx.member.getBalance()).toLocaleString()}`);
+    leaderboard.push(`${posTxt} ❯ ${ctx.author.tag}${" ".repeat(30 - ctx.author.tag.length)}::  ¥${(await ctx.member.getBalance()).toLocaleString()}`);
     return ctx.reply(`**__${ctx.guild.name}__**'s Leaderboard (Page **${page + 1}** out of **${totalPages || 1}**)\n\`\`\`${leaderboard.join("\n")}\`\`\``);
   }
 }
