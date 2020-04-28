@@ -28,7 +28,7 @@ class Anime extends Command {
       .setColor(0x9590EE)
       .setTitle(`${res.attributes.titles.en} (Japanese: ${res.attributes.titles.en_jp})`)
       .setDescription(res.attributes.synopsis)
-      .addField("Age Rating", `${res.attributes.ageRating} (${res.attributes.ageRatingGuide})`)
+      .addField("Age Rating", `${res.attributes.ageRating}${res.attributes.ageRatingGuide ? ` (${res.attributes.ageRatingGuide})` : ""}`)
       .addField("Episodes", `${res.attributes.episodeCount} (${res.attributes.episodeLength} Min Per Episode)`)
       .setImage(res.attributes.coverImage.original)
       .setThumbnail(res.attributes.posterImage.original)
