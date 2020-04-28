@@ -38,4 +38,4 @@ class Anime extends Command {
   }
 }
 
-module.exports = Command;
+module.exports = Anime;
