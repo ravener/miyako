@@ -16,10 +16,10 @@ class Anime extends Command {
     let [title, page = 1] = args.join(" ").split(", ");
     page = this.verifyInt(page, 1);
 
-    const { data } = fetch("https://kitsu.io/api/edge/anime?filter[text]=toradora")
+    const { data } = fetch(`https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(title)}`)
       .then((r) => r.json());
 
-    if(!data.length) return ctx.reply("No results found.");
+    if(!data || !data.length) return ctx.reply("No results found.");
 
     const res = data[page - 1];
     if(!res) return ctx.reply(`Invalid page ${page} there is only ${data.length} pages.`);
