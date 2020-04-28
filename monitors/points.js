@@ -23,7 +23,7 @@ class Points {
     const points = Math.floor(Math.random() * 5) + 1;
     await msg.member.givePoints(points);
 
-    const { userRows } = await this.client.db.query(`SELECT * FROM members WHERE id = $1`, [`${msg.guild.id}.${msg.author.id}`]);
+    const { rows: userRows } = await this.client.db.query(`SELECT * FROM members WHERE id = $1`, [`${msg.guild.id}.${msg.author.id}`]);
 
     const balance = userRows.length ? userRows[0].points : 0;
     const level = userRows.length ? userRows[0].level : 0;
