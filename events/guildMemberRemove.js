@@ -5,13 +5,10 @@ class GuildMemberRemove extends Event {
     if(!member.guild.available) return;
 
     await this.client.db.query("DELETE FROM members WHERE id = $1", [`${member.guild.id}.${member.id}`]).catch(() => null);
-    
-    const { rows } = await this.client.db.query("SELECT \"weebGreetings\" FROM guilds WHERE id = $1", [member.guild.id]);
 
-    if(!rows.length) return;
-    if(!rows[0].weebGreetings) return;
+    if(!member.guild.settings || !member.guild.settings.weebGreetings) return;
 
-    const channel = member.guild.channels.cache.get(rows[0].weebGreetings);
+    const channel = member.guild.channels.cache.get(member.guild.settings.weebGreetings);
     if(!channel) return;
 
     return channel.send(this.client.utils.random(this.client.responses.goodbyeMessages)
