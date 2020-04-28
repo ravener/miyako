@@ -28,10 +28,13 @@ class Leaderboard extends Command {
     const positions = rows.map((row) => row.id.split(".")[1]);
     const leaderboard = [];
 
-    rows.slice(page * 10, (page + 1) * 10).map(async(u, i) => {
+    const top = rows.slice(page * 10, (page + 1) * 10);
+
+    for(let i = 0; i < top.length; i++) {
+      const u = top[i];
       const user = await this.client.users.fetch(u.id.split(".")[1]);
       leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${user.tag}${" ".repeat(40 - user.tag.length)}::  ¥${u.points.toLocaleString()}`);
-    });
+    }
     
     leaderboard.push("-------------------------------------------------------------");
     const pos = positions.indexOf(ctx.author.id).toString().padStart(2, "0");
