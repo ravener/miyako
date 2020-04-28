@@ -25,7 +25,7 @@ class Leaderboard extends Command {
     if(page > totalPages && !totalPages) return ctx.reply(`There are only **${totalPages || 1}** pages in the leaderboard.`);
     if(totalPages && page + 1 > totalPages) return ctx.reply(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 
-    const top = rows.map((p) => ({ points: p.points, user: p.id.split(".")[0] }))
+    const top = rows.map((p) => ({ points: p.points, user: p.id.split(".")[1] }))
       .sort((a, b) => b.points > a.points ? 1 : -1)
 
     const positions = top.map((user) => user.user);
