@@ -37,8 +37,8 @@ class Leaderboard extends Command {
     });
     
     leaderboard.push("-------------------------------------------------------------");
-    const pos = lbServer.indexOf(ctx.author.id).toString().padStart(2, "0");
-    const posTxt = pos == -1 ? "??" : (lbServer.indexOf(ctx.author.id) + 1).toString().padStart(2, "0");
+    const pos = positions.indexOf(ctx.author.id).toString().padStart(2, "0");
+    const posTxt = pos == -1 ? "??" : (positions.indexOf(ctx.author.id) + 1).toString().padStart(2, "0");
     leaderboard.push(`${posTxt} ❯ ${ctx.author.tag}${" ".repeat(40 - ctx.author.tag.length)}::  ¥${(await ctx.member.getBalance()).toLocaleString()}`);
     return ctx.reply(`**__${ctx.guild.name}__**'s Leaderboard (Page **${page + 1}** out of **${totalPages || 1}**)\n\`\`\`${leaderboard.join("\n")}\`\`\``);
   }
