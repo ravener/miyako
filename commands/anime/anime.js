@@ -32,7 +32,9 @@ class Anime extends Command {
       .addField("Episodes", `${res.attributes.episodeCount} (${res.attributes.episodeLength} Min Per Episode)`)
       .setImage(res.attributes.coverImage && res.attributes.coverImage.original)
       .setThumbnail(res.attributes.posterImage && res.attributes.posterImage.original)
-      .setURL(`https://kitsu.io/anime/${res.id}`);
+      .setURL(`https://kitsu.io/anime/${res.id}`)
+      .setFooter(`Page ${page}/${data.length}`)
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
 
     return ctx.reply({ embed });
   }
