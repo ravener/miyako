@@ -30,8 +30,8 @@ class Anime extends Command {
       .setDescription(res.attributes.synopsis)
       .addField("Age Rating", `${res.attributes.ageRating}${res.attributes.ageRatingGuide ? ` (${res.attributes.ageRatingGuide})` : ""}`)
       .addField("Episodes", `${res.attributes.episodeCount} (${res.attributes.episodeLength} Min Per Episode)`)
-      .setImage(res.attributes.coverImage.original)
-      .setThumbnail(res.attributes.posterImage.original)
+      .setImage(res.attributes.coverImage && res.attributes.coverImage.original)
+      .setThumbnail(res.attributes.posterImage && res.attributes.posterImage.original)
       .setURL(`https://kitsu.io/anime/${res.id}`);
 
     return ctx.reply({ embed });
