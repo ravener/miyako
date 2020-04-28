@@ -16,7 +16,7 @@ class Anime extends Command {
     let [title, page = 1] = args.join(" ").split(", ");
     page = this.verifyInt(page, 1);
 
-    const { data } = fetch(`https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(title)}`)
+    const { data } = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(title)}`)
       .then((r) => r.json());
 
     if(!data || !data.length) return ctx.reply("No results found.");
