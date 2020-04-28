@@ -30,8 +30,11 @@ class Leaderboard extends Command {
 
     const top = rows.slice(page * 10, (page + 1) * 10);
 
+    await ctx.reply(`Debug: Length: ${top.length}`);
+
     for(let i = 0; i < top.length; i++) {
       const u = top[i];
+      await ctx.reply(`Debug: Fetching ${u.id.split(".")[1]} (points: ${u.points.toLocaleString()})`);
       const user = await this.client.users.fetch(u.id.split(".")[1]);
       leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${user.tag}${" ".repeat(40 - user.tag.length)}::  ¥${u.points.toLocaleString()}`);
     }
