@@ -36,7 +36,7 @@ class Leaderboard extends Command {
       leaderboard.push(`${(page * 10 + (i + 1)).toString().padStart(2, "0")} ❯ ${user.tag}${" ".repeat(20 - user.tag.length)}::  ¥${parseInt(u.points).toLocaleString()}`);
     }
     
-    leaderboard.push("-----------------------------------------------");
+    leaderboard.push("----------------------------------------");
     const pos = positions.indexOf(ctx.author.id).toString().padStart(2, "0");
     const posTxt = pos == -1 ? "??" : (positions.indexOf(ctx.author.id) + 1).toString().padStart(2, "0");
     leaderboard.push(`${posTxt} ❯ ${ctx.author.tag}${" ".repeat(20 - ctx.author.tag.length)}::  ¥${(await ctx.member.getBalance()).toLocaleString()}`);
