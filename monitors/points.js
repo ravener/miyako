@@ -11,14 +11,8 @@ class Points {
     if(msg.content.startsWith(msg.guild.settings.prefix)) return;
     if(this.timeouts.has(msg.author.id)) return;
 
-    if(!msg.member) {
-      await msg.guild.members.fetch(msg.author);
-      await msg.member.syncSettings();
-    }
-
-    const id = `${msg.guild.id}.${msg.member.id}`;
-    if(!this.client.members.cache.has(id))
-      await this.client.members.sync(id);
+    if(!msg.member) await msg.guild.members.fetch(msg.author);
+    await msg.member.syncSettingsCache();
 
     // Random point between 1-5
     const points = Math.floor(Math.random() * 5) + 1;

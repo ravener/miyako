@@ -11,6 +11,10 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
     return this.client.members.sync(`${this.guild.id}.${this.id}`);
   }
 
+  syncSettingsCache() {
+    if(!this.client.members.has(`${this.guild.id}.${this.id}`)) return this.syncSettings();
+  }
+
   setLevel(level) {
     if(isNaN(level)) throw new Error("Level cannot be NaN");
     const id = `${this.guild.id}.${this.id}`;
