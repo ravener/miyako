@@ -1,6 +1,6 @@
-const Social = require("../../structures/Social.js");
+const Command = require("../../structures/Command.js");
 
-class Level extends Social {
+class Level extends Command {
   constructor(...args) {
     super(...args, {
       description: "Displays your current level.",
