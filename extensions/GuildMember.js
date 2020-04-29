@@ -2,6 +2,15 @@ const { Structures } = require("discord.js");
 
 module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoGuildMember extends GuildMember {
 
+  get settings() {
+    const id = `${this.guild.id}.${this.id}`
+    return this.client.members.get(`${this.guild.id}.${this.id}`) || { id, level: 0, points: 0, daily: 0 };
+  }
+
+  syncSettings() {
+    return this.client.members.sync(`${this.guild.id}.${this.id}`);
+  }
+
   async getBalance() {
     const id = `${this.guild.id}.${this.id}`;
     const { rows } = await this.client.db.query("SELECT points FROM members WHERE id = $1", [id]);

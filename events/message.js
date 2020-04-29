@@ -86,7 +86,10 @@ class MessageEvent extends Event {
     if(command.category === "Social" && !msg.guild.settings.social)
       return msg.channel.send("The social economy system has been disabled in this server by an Admin so I cannot let you use that command.");
 
-    if(command.guildOnly && !msg.member) await msg.guild.members.fetch(msg.author);
+    if(command.guildOnly && !msg.member) {
+      await msg.guild.members.fetch(msg.author);
+      await msg.member.syncSettings();
+    }
 
     if(!(await this.checkPerms(msg, command))) return;
 

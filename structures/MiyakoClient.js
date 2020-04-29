@@ -27,6 +27,7 @@ class MiyakoClient extends Client {
     this.sweeper = new MemorySweeper(this);
     this.responses = require("../utils/responses.js");
     this.settings = new Settings(this, "guilds");
+    this.members = new Settings(this, "members");
     this.dbl = new DBL(this.config.dbl, this);
     this.points = new Points(this);
     this.on("ready", this.onReady.bind(this));
@@ -58,6 +59,7 @@ class MiyakoClient extends Client {
     this.console.log("Connected to PostgreSQL");
     await loadSchema(this.db);
     await this.settings.init();
+    await this.members.init();
   }
 }
 

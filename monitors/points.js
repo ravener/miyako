@@ -9,7 +9,11 @@ class Points {
   async run(msg) {
     if(!msg.guild) return;
     if(this.timeouts.has(msg.author.id)) return;
-    if(!msg.member) await msg.guild.members.fetch(msg.author);
+
+    if(!msg.member) {
+      await msg.guild.members.fetch(msg.author);
+      await msg.member.syncSettings();
+    }
 
     if(!msg.guild.settings.social) return;
     if(msg.content.startsWith(ctx.guild.settings.prefix)) return;
