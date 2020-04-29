@@ -7,7 +7,8 @@ class Points {
   }
 
   async run(msg) {
-    if(!msg.guild) return;
+    if(!msg.guild || !msg.guild.settings.social) return;
+    if(msg.content.startsWith(msg.guild.settings.prefix)) return;
     if(this.timeouts.has(msg.author.id)) return;
 
     if(!msg.member) {
@@ -15,21 +16,13 @@ class Points {
       await msg.member.syncSettings();
     }
 
-    if(!msg.guild.settings.social) return;
-    if(msg.content.startsWith(ctx.guild.settings.prefix)) return;
-
     // Random point between 1-5
     const points = Math.floor(Math.random() * 5) + 1;
     await msg.member.givePoints(points);
 
-    const { rows } = await this.client.db.query(`SELECT * FROM members WHERE id = $1`, [`${msg.guild.id}.${msg.author.id}`]);
+    const curLevel = Math.floor(0.1 * Math.sqrt(msg.member.settings.points));
 
-    const balance = rows.length ? rows[0].points : 0;
-    const level = rows.length ? rows[0].level : 0;
-
-    const curLevel = Math.floor(0.1 * Math.sqrt(balance));
-
-    if(level < curLevel) {
+    if(msg.member.settings.level < curLevel) {
       if(msg.guild.settings.levelup) {
         await msg.channel.send(this.client.utils.random(this.client.responses.levelUpMessages)
           .replace(/{{user}}/g, msg.member.displayName)

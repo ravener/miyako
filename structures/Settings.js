@@ -77,6 +77,7 @@ class Settings {
    */
   async delete(id) {
     await this.client.db.query(`DELETE FROM "${this.table}" WHERE id = $1`, [id]);
+    this.cache.delete(id);
   }
 
   /**

@@ -14,18 +14,16 @@ class Daily extends Command {
 
   async run(ctx, [member]) {
     member = await this.verifyMember(ctx, member, true);
-    const id = `${ctx.guild.id}.${ctx.author.id}`;
-    const { rows } = await this.client.db.query("SELECT * FROM members WHERE id = $1", [id]);
-    const balance = rows.length ? rows[0].points : 0;
-    const daily = rows.length ? rows[0].daily : 0;
 
-    if(daily && (Date.now() < daily)) return ctx.reply(this.client.utils.random(this.client.responses.dailyFailureMessages)
-      .replace(/{{user}}/g, ctx.member.displayName)
-      .replace(/{{time}}/g, this.client.utils.getDuration(daily - Date.now())));
+    if(ctx.member.settings.daily && (Date.now() < ctx.member.settings.daily))
+      return ctx.reply(this.client.utils.random(this.client.responses.dailyFailureMessages)
+        .replace(/{{user}}/g, ctx.member.displayName)
+        .replace(/{{time}}/g, this.client.utils.getDuration(ctx.member.settings.daily - Date.now())));
 
     if(member.id !== ctx.member.id) {
       if(member.user.bot) throw "Baka! You can't give your daily points to a bot!";
       await this.setCooldown(ctx);
+      await member.syncSettings();
       await member.givePoints(750);
       return ctx.reply(`You have given your daily to **${member.displayName}**. As a bonus they get **¥750**`);
     }
@@ -70,7 +68,7 @@ class Daily extends Command {
 
   setCooldown(ctx) {
     const id = `${ctx.guild.id}.${ctx.author.id}`;
-    return this.client.db.query("UPDATE members SET daily = $1 WHERE id = $2", [new Date(ctx.message.createdTimestamp + 86400000), id]);
+    return this.client.members.update(id, { daily: new Date(ctx.message.createdTimestamp + 86400000) })
   }
 }
 
