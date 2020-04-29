@@ -12,7 +12,7 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
   }
 
   syncSettingsCache() {
-    if(!this.client.members.has(`${this.guild.id}.${this.id}`)) return this.syncSettings();
+    if(!this.client.members.cache.has(`${this.guild.id}.${this.id}`)) return this.syncSettings();
   }
 
   setLevel(level) {
