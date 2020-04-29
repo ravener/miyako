@@ -13,8 +13,7 @@ class CommandContext {
     this.parsedContent = "";
     this.command = null;
     this.invokedName = ""; // The exact alias the user used to refer to this command.
-    this.prefix = "m!"; // Prefix used to invoke the command, could be a prefix of the @mention string.
-    this.guildPrefix = "m!"; // The per-guild prefix setting cache.
+    this.prefix = "m!"; // Prefix used to invoke the command.
   }
 
   get member() {

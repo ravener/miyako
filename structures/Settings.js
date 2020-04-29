@@ -20,6 +20,8 @@ class Settings {
 
   /**
    * Get a guild by ID from cache.
+   * @param {String} id - The ID to lookup the cache.
+   * @returns {?Object} The document from the cache if available.
    */
   get(id) {
     return this.cache.get(id);
@@ -27,11 +29,12 @@ class Settings {
 
   /**
    * Updates settings for the table this settings instance manages.
-   * Example:
-   * update(id, { levelup: false, social: true })
-   * Internally maps to an SQL query of the form:
-   * INSERT INTO Settings#table (id, ...Object.keys) VALUES (...Object.values) ON CONFLICT (id) DO UPDATE SET ...;
-   * Which is safe for upserts, Tries to insert and if already exists then updates it.
+   * The input is safe for upserts. If the document does not exist it inserts it.
+   * @example
+   * update(id, { levelup: false, social: true });
+   * @param {String} id - The ID of the document to update.
+   * @param {Object} obj - An object with key-value changes to apply.
+   * @returns {Object} The updated object from the database.
    */
   async update(id, obj) {
     // Safety Check.
@@ -51,7 +54,29 @@ class Settings {
 
     // Execute the query and update the cache.
     const { rows } = await this.client.db.query(query, [id, ...values]);
-    return this.cache.set(id, rows[0]);
+    this.cache.set(id, rows[0]);
+    return rows[0];
+  }
+
+  /**
+   * Syncs the cache with the database.
+   * Use this incase the cache becomes outdated.
+   * @param {String} id - ID of the document to sync.
+   * @returns {Object} The newly fetched data from the database.
+   */
+  async sync(id) {
+    const { rows } = await ths.client.db.query(`SELECT * FROM "${this.table}" WHERE id = $1`, [id]);
+    if(!rows) return;
+    this.cache.set(id, rows[0]);
+    return rows[0];
+  }
+
+  /**
+   * Deletes a document with the given ID.
+   * @param {String} id - ID of the document to delete.
+   */
+  async delete(id) {
+    await this.client.db.query(`DELETE FROM "${this.table}" WHERE id = $1`, [id]);
   }
 
   /**

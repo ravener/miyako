@@ -43,6 +43,7 @@ class Help extends Command {
 
     for(const category of keys) {
       if(category === "Owner" && ctx.author.id !== this.client.constants.ownerID) continue;
+      if(category === "Social" && !ctx.guild.settings.social) continue;
       embed.addField(category, map[category].join(", "));
     }
 

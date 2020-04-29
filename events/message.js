@@ -57,15 +57,7 @@ class MessageEvent extends Event {
 
     this.client.points.run(msg).catch(() => null);
 
-    let prefix;
-    if(msg.channel.type === "dm") {
-      prefix = this.prefix;
-    } else {
-      prefix = await this.client.db.query("SELECT * FROM guilds WHERE id = $1", [msg.guild.id]).then(({ rows }) => {
-        if(!rows.length) return this.prefix;
-        return rows[0].prefix;
-      });
-    }
+    const prefix = msg.guild ? msg.guild.settings.prefix : this.prefix;
 
     const prefixMatch = new RegExp(`^<@!?${this.client.user.id}> |^${this.client.utils.escapeRegex(prefix)}`).exec(msg.content);
     if (!prefixMatch) return;
@@ -91,6 +83,9 @@ class MessageEvent extends Event {
     if(!command.enabled && msg.author.id !== this.client.constants.ownerID)
       return msg.channel.send("My master has ordered me to disable that command so I cannot let you use it!");
 
+    if(command.category === "Social" && !msg.guild.settings.social)
+      return msg.channel.send("The social economy system has been disabled in this server by an Admin so I cannot let you use that command.");
+
     if(command.guildOnly && !msg.member) await msg.guild.members.fetch(msg.author);
 
     if(!(await this.checkPerms(msg, command))) return;
@@ -104,7 +99,6 @@ class MessageEvent extends Event {
     ctx.command = command;
     ctx.invokedName = cmd;
     ctx.prefix = prefixMatch[0];
-    ctx.guildPrefix = prefix;
     
     this.client.commands.ran++;
     msg.channel.startTyping();

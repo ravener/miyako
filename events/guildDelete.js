@@ -7,20 +7,19 @@ class GuildDelete extends Event {
     if(!guild.available) return;
     
     // Delete guild settings.
-    await this.client.db.query("DELETE FROM guilds WHERE id = $1", [guild.id])
-      .catch(() => null);
+    await this.client.settings.delete(guild.id).catch(() => null);
     
     const channel = this.client.channels.cache.get("454776806869041154");
     const embed = new MessageEmbed()
       .setTitle("Miyako left a server.")
       .setDescription(guild.name)
       .setThumbnail(guild.iconURL())
-      .setColor(0xff0000)
+      .setColor(0xFF0000)
       .addField("Owner", guild.owner.user.tag)
       .addField("Member Count", guild.memberCount)
       .setFooter(guild.id);
     await channel.send({ embed }).catch(() => null);
-    this.client.user.setActivity(`@${this.client.user.username} help | ${this.client.guilds.cache.size} Servers!`);
+    return this.client.user.setActivity(`@${this.client.user.username} help | ${this.client.guilds.cache.size} Servers!`);
   }
 }
 

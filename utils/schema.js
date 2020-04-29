@@ -3,7 +3,9 @@ module.exports = (pool) => pool.query(`
 CREATE TABLE IF NOT EXISTS "guilds" (
   id TEXT PRIMARY KEY NOT NULL UNIQUE,
   prefix VARCHAR(10) NOT NULL DEFAULT 'm!',
-  "weebGreetings" TEXT
+  "weebGreetings" TEXT,
+  levelup BOOLEAN DEFAULT true,
+  social BOOLEAN DEFAULT true
 );
 
 CREATE TABLE IF NOT EXISTS members (
