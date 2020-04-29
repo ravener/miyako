@@ -65,7 +65,7 @@ class Settings {
    * @returns {Object} The newly fetched data from the database.
    */
   async sync(id) {
-    const { rows } = await ths.client.db.query(`SELECT * FROM "${this.table}" WHERE id = $1`, [id]);
+    const { rows } = await this.client.db.query(`SELECT * FROM "${this.table}" WHERE id = $1`, [id]);
     if(!rows) return;
     this.cache.set(id, rows[0]);
     return rows[0];
