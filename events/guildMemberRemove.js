@@ -4,7 +4,7 @@ class GuildMemberRemove extends Event {
   async run(member) {
     if(!member.guild.available) return;
 
-    await this.client.members.delete(`${member.guild.id}.${memer.id}`).catch(() => null);
+    await this.client.members.delete(`${member.guild.id}.${member.id}`).catch(() => null);
 
     if(!member.guild.settings || !member.guild.settings.weebGreetings) return;
 
