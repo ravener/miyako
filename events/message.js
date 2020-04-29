@@ -91,6 +91,12 @@ class MessageEvent extends Event {
       await msg.member.syncSettings();
     }
 
+    if(command.guildOnly) {
+      const id = `${msg.guild.id}.${msg.member.id}`;
+      if(!this.client.members.cache.has(id))
+        await this.client.members.sync(id);
+    }
+
     if(!(await this.checkPerms(msg, command))) return;
 
     const ctx = new CommandContext(this.client, msg);

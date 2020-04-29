@@ -32,6 +32,8 @@ class MemorySweeper {
         voiceStates++;
         guild.voiceStates.cache.delete(id);
         guild.members.cache.delete(id);
+        // Clear the settings, will be synced when member is back.
+        this.client.members.cache.delete(`${guild.id}.${id}`);
       }
       
       // Clear emojis

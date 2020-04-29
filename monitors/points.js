@@ -16,6 +16,10 @@ class Points {
       await msg.member.syncSettings();
     }
 
+    const id = `${msg.guild.id}.${msg.member.id}`;
+    if(!this.client.members.cache.has(id))
+      await this.client.members.sync(id);
+
     // Random point between 1-5
     const points = Math.floor(Math.random() * 5) + 1;
     await msg.member.givePoints(points);
