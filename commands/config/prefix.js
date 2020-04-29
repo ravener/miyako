@@ -18,7 +18,7 @@ class Prefix extends Command {
 
     if(prefix === "reset") return this.reset(ctx);
     if(prefix.length > 10) return ctx.reply("Prefix can't be longer than 10 characters.");
-    if(prefix === ctx.guild.settings.prefix : "m!") throw "Baka! That is already the current prefix.";
+    if(prefix === ctx.guild.settings.prefix) throw "Baka! That is already the current prefix.";
 
     await this.client.settings.update(ctx.guild.id, { prefix });
     return ctx.reply(`Successfully updated prefix to: \`${prefix}\``);
