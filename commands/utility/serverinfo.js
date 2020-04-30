@@ -29,6 +29,9 @@ class ServerInfo extends Command {
     const bans = await ctx.guild.fetchBans()
       .then((bans) => bans.size)
       .catch(() =>  "Couldn't fetch bans.");
+
+    if(!ctx.guild.owner) await ctx.guild.members.fetch(ctx.guild.ownerID).catch(() => null);
+
     const embed = new MessageEmbed()
       .setColor(0x9590EE)
       .setThumbnail(ctx.guild.iconURL())

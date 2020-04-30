@@ -1,6 +1,7 @@
 // Note: These are taken from https://github.com/NotAWeebDev/Misaki
 // The bot has died but I really liked those responses and my own creativity is trash.
 // TODO: Currently it's directly pasted from Misaki, modify a few things and remove ones we don't need.
+// - Removed a few responses we don't need but still have to add a few more responses to feel a bit unique.
 
 // Member Join
 exports.welcomeMessages = [
@@ -68,19 +69,6 @@ exports.pingMessages = [
   "B-baka! My ping is **{{ms}}ms**! Are you happy now?"
 ];
 
-exports.myLevelMessages = [
-  "You're only level **{{level}}**, that makes you a **{{friendly}}**.",
-  "Pfft, level **{{level}}**? I've seen people with a better role than **{{friendly}}**.",
-  "**{{user}}** your level? It's **{{level}}** silly, oh the name? **{{friendly}}**, sorry...",
-  "**{{user}}**, again with this? Whatever, it's level **{{level}}**, **{{friendly}}**.",
-  "**{{user}}-san** here you go, it's **{{friendly}}**, level **{{level}}**.",
-  "You're a **{{level}}**, maybe if you were a wee bit higher than a **{{friendly}}** you'd stop forgetting.",
-  "Only a level **{{level}}**? Even I'm better than a **{{friendly}}**.",
-  "Level **{{level}}**? What, where you hoping to be higher than **{{friendly}}**?",
-  "smh, a level **{{level}}**? I thought you weren't gonna be a **{{friendly}}**!",
-  "Only level **{{level}}**? Pfft! I've seen much better than a **{{friendly}}**."
-];
-
 exports.dailySuccessMessages = [
   "Yatta! You've got **{{amount}}**.",
   "Well done, you've redeemed your daily **{{amount}}**!",
@@ -132,20 +120,6 @@ exports.levelMessages = [
 exports.otherLevelMessages = [
   "Look just ask **{{user}}** next time, but I will forgive you. Here, this is their level: **{{level}}**.",
   "Why do you want to view **{{user}}**'s level? Anyway they are level **{{level}}**."
-];
-
-exports.aboutMessages = [
-  "You want to know about me? What don't you already know b-baka. I get my beautiful looks from `@VixtoriaGoober` (Follow her on Twitter) and I'm the entertainer for An Idiot's Guide, owned by my father York#2400... I can tell you anything about any anime or manga that I have, not that it m-matters to me. Look, I'm also asked to give you a daily allowance and keep a record of what everyone else has. Will you just go with it?",
-
-  "I'm Misaki! Your entertainment assistant for An Idiot's Guide, a fantastic place owned by my father. I have a wide range of manga and anime; if you ever have a question or just want to look at it, all you need to do is ask. I also help out with keeping the community up by providing allowances for everyone! I've even kept track of everyone's balance so you can see where you are, even though you're always at the top for me!\n\nP.S. I get my beautiful looks from `@VixtoriaGoober` (follow her on Twitter)"
-];
-
-// Go Messages
-exports.goMessages = [
-  "Ehhhhh! **{{user}}-san** invites everyone to play **{{game}}**!",
-  "Play **{{game}}** with **{{user}}-san** because **{{user}}-san** is so lonely!",
-  "**{{user}}** is too scared to ask people to play **{{game}}** with them",
-  "Goooooo! Play **{{game}}** with **{{user}}-san** please"
 ];
 
 // System

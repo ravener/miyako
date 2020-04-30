@@ -13,6 +13,7 @@ class Level extends Command {
   async run(ctx, [user]) {
     const member = await this.verifyMember(ctx, user, true);
     await member.syncSettings();
+
     return ctx.reply(this.client.utils.random(member.id === ctx.author.id ? this.client.responses.levelMessages :
       this.client.responses.otherLevelMessages)
       .replace(/{{user}}/g, member.displayName)

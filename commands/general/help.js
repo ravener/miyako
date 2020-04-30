@@ -20,9 +20,9 @@ class Help extends Command {
         .setDescription([
           `**Description:** ${cmd.description}`,
           `**Category:** ${cmd.category}`,
-          `**Aliases:** ${cmd.aliases.join("\n")}`,
+          `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join("\n") : "None"}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"}`,
-          `**Usage:** ${ctx.guildPrefix}${cmd.usage}`,
+          `**Usage:** ${ctx.guild.settings.prefix}${cmd.usage}`,
           `**Extended Help:** ${cmd.extendedHelp}`
         ].join("\n")));
     }
