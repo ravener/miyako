@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 
 class OwOify extends Command {
   constructor(...args) {
-    super(..args, {
+    super(...args, {
       description: "OwO What is this?",
       cooldown: 3,
       aliases: ["owo"],
