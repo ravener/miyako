@@ -28,7 +28,7 @@ class Stats extends Command {
       .setColor(0x9590EE)
       .addField("Bot Stats", [
         `**Guilds:** ${client.guilds.cache.size}`,
-        `**Users:** ${this.client.guilds.cache.reduce((sum, guild) => sum + guild.memberCount, 0)}`,
+        `**Users:** ${this.client.guilds.cache.reduce((sum, guild) => sum + (guild.available ? guild.memberCount : 0), 0)}`,
         `**Channels:** ${client.channels.cache.size}`,
         `**Uptime:** ${uptime}`,
         `**Total Memory Usage:** ${(process.memoryUsage().heapTotal / 1024 / 1024).toFixed(2)} MB`,
