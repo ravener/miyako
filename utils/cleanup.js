@@ -18,6 +18,8 @@ class MemorySweeper {
     
     // Per-Guild sweeper
     for(const guild of this.client.guilds.cache.values()) {
+      if(!guild.available) continue;
+
       // Clear presences
       presences += guild.presences.cache.size;
       guild.presences.cache.clear();
