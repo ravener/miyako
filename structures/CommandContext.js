@@ -46,7 +46,7 @@ class CommandContext {
       .catch(() => null);
   }
 
-  response(arr, replace = {}) {
+  random(arr, replace = {}) {
     let res = this.client.utils.random(arr);
 
     for(const [k, v] of Object.entries(replace))
