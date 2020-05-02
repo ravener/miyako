@@ -19,7 +19,9 @@ class Command {
     this.usage = options.usage || "No Usage Provided.";
     this.botPermissions = new Permissions(options.botPermissions || []).freeze();
     this.userPermissions = new Permissions(options.userPermissions || []).freeze();
+    // Helper aliases.
     this.store = this.client.commands;
+    this.responses = this.client.responses;
   }
 
   async _run(ctx, args) {

@@ -11,15 +11,18 @@ class Reload extends Command {
   }
 
   async run(ctx, [pieceName]) {
-    if(!pieceName) return ctx.reply("What am I supposed to reload?");
+    if(!pieceName) return ctx.reply(this.client.utils.random(this.client.responses.reloadMissingArg));
     const piece = this.client.commands.get(pieceName) || this.client.events.get(pieceName);
-    if(!piece) return ctx.reply("I couldn't find that piece! It wasn't a command nor an event.");
+    if(!piece) return ctx.reply(this.client.utils.random(this.client.responses.reloadNotFound));
     try {
       const reloaded = await piece.reload();
-      return ctx.reply(`Successfully reloaded the ${piece.store.name.slice(0, -1)}: **${reloaded.name}**`);
+      return ctx.reply(this.client.utils.random(this.client.responses.reloadSuccess)
+        .replace(/{{command}}/g, reloaded.name));
     } catch(err) {
       piece.store.set(piece);
-      return ctx.reply(`Failed to reload **${piece.name}:** \`${err.message || err.toString()}\``);
+      return ctx.reply(this.client.utils.random(this.client.responses.reloadErrUnload)
+        .replace(/{{command}}/g, piece.name)
+        .replace(/{{response}}/g, err.message || err.toString()));
     }
   }
 }

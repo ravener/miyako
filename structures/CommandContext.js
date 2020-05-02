@@ -45,6 +45,15 @@ class CommandContext {
     return this.message.react("519166256214048769")
       .catch(() => null);
   }
+
+  response(arr, replace = {}) {
+    let res = this.client.utils.random(arr);
+
+    for(const [k, v] of Object.entries(replace))
+      res = res.replace(new RegExp(`{{${k}}}`, "g"), v);
+
+    return this.reply(res);
+  }
 }
 
 module.exports = CommandContext;
