@@ -38,7 +38,7 @@ class Leaderboard extends Command {
     
     const pos = positions.indexOf(ctx.author.id).toString().padStart(2, "0");
     const posTxt = pos == -1 ? "??" : (positions.indexOf(ctx.author.id) + 1).toString().padStart(2, "0");
-    leaderboard.push(`\n+ [${posTxt}] ❯ ${ctx.author.tag}\n    => ¥${ctx.member.settings.points.toLocaleString()}`);
+    leaderboard.push(`\n+ [${posTxt}] ❯ ${ctx.author.tag}\n    => ¥${parseInt(ctx.member.settings.points).toLocaleString()}`);
     return ctx.reply(`**__${ctx.guild.name}__**'s Leaderboard (Page **${page + 1}** out of **${totalPages || 1}**)\n\`\`\`${leaderboard.join("\n")}\`\`\``);
   }
 }
