@@ -17,7 +17,7 @@ class Avatar extends Command {
       .setTitle(`${user.username}'s avatar`)
       .setAuthor(user.tag, user.displayAvatarURL({ size: 256 }))
       .setColor(0x9590EE)
-      .setImage(user.displayAvatarURL({ size: 2048 })));
+      .setImage(user.displayAvatarURL({ size: 2048, format: "png", dynamic: true })));
   }
 }
 
