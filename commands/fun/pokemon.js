@@ -7,7 +7,8 @@ class Pokemon extends Command {
     super(...args, {
       description: "Guess That Pokemon",
       category: "Fun",
-      aliases: ["guessthatpokemon"]
+      aliases: ["guessthatpokemon"],
+      guildOnly: true
     });
   }
 
@@ -33,7 +34,14 @@ class Pokemon extends Command {
       
     if(answer === pokemon.name) {
       await msg.delete();
-      return ctx.reply(`Yatta! Well done, **${this.client.utils.toProperCase(pokemon.name)}** was correct.`);
+      let points = "";
+
+      if(ctx.guild.settings.social) {
+        await ctx.member.givePoints(200);
+        points = ` You got **¥200**`;
+      }
+
+      return ctx.reply(`Yatta! Well done, **${this.client.utils.toProperCase(pokemon.name)}** was correct.${points}`);
     }
 
     await msg.delete();
