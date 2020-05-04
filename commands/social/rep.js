@@ -20,6 +20,7 @@ class Reputation extends Command {
     const reputation = user.settings.reputation + 1;
     await user.update({ reputation });
     await ctx.author.update({ repcooldown: new Date(ctx.message.createdTimestamp + 43200000) });
+    return ctx.reply(`Successfully gave a reputation point to ${user}`);
   }
 }
 
