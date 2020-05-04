@@ -55,12 +55,10 @@ class MessageEvent extends Event {
     if(msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
       return msg.channel.send("Hi! Run `m!help` to get a list of commands you can use.");
 
-    this.client.points.run(msg).catch(() => null);
-
     const prefix = msg.guild ? msg.guild.settings.prefix : this.prefix;
 
     const prefixMatch = new RegExp(`^<@!?${this.client.user.id}> |^${this.client.utils.escapeRegex(prefix)}`).exec(msg.content);
-    if (!prefixMatch) return;
+    if(!prefixMatch) return this.client.points.run(msg);
 
     const { content, flags } = this.getFlags(msg.content);
 
@@ -90,6 +88,8 @@ class MessageEvent extends Event {
       if(!msg.member) await msg.guild.members.fetch(msg.author);
       await msg.member.syncSettingsCache();
     }
+
+    await msg.author.syncSettingsCache();
 
     if(!(await this.checkPerms(msg, command))) return;
 

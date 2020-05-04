@@ -14,14 +14,14 @@ class WeebGreetings extends Command {
     if(!action) return ctx.reply("Baka! Specify either `enable #channel` or `disable`");
 
     if(action === "disable") {
-      await this.client.settings.update(ctx.guild.id, { weebGreetings: null });
+      await ctx.guild.update({ weebGreetings: null });
       return ctx.reply("Successfully disabled weeb greetings.");
     }
 
     if(action === "enable") {
       if(!ctx.message.mentions.channels.size) return ctx.reply("Baka! Specify the channel you want to enable it on.");
       const channel = ctx.message.mentions.channels.first();
-      await this.client.settings.update(ctx.guild.id, { weebGreetings: channel.id });
+      await ctx.guild.update({ weebGreetings: channel.id });
       return ctx.reply(`Successfully enabled weeb greetings for the channel ${channel}`);
     }
 

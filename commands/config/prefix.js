@@ -20,13 +20,13 @@ class Prefix extends Command {
     if(prefix.length > 10) return ctx.reply("Prefix can't be longer than 10 characters.");
     if(prefix === ctx.guild.settings.prefix) throw "Baka! That is already the current prefix.";
 
-    await this.client.settings.update(ctx.guild.id, { prefix });
+    await ctx.guild.update({ prefix });
     return ctx.reply(`Successfully updated prefix to: \`${prefix}\``);
   }
   
   async reset(ctx) {
     if(ctx.guild.settings.prefix === "m!") return ctx.reply("The prefix is already the default.");
-    await this.client.settings.update(ctx.guild.id, { prefix: "m!" })
+    await ctx.guild.update({ prefix: "m!" })
     return ctx.reply("Reset the prefix for this server to `m!`");
   }
 }

@@ -8,7 +8,6 @@ class Points {
 
   async run(msg) {
     if(!msg.guild || !msg.guild.settings.social) return;
-    if(msg.content.startsWith(msg.guild.settings.prefix)) return;
     if(this.timeouts.has(msg.author.id)) return;
 
     if(!msg.member) await msg.guild.members.fetch(msg.author);

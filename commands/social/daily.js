@@ -67,8 +67,7 @@ class Daily extends Command {
   }
 
   setCooldown(ctx) {
-    const id = `${ctx.guild.id}.${ctx.author.id}`;
-    return this.client.members.update(id, { daily: new Date(ctx.message.createdTimestamp + 86400000) })
+    return ctx.member.update({ daily: new Date(ctx.message.createdTimestamp + 86400000) })
   }
 }
 

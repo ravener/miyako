@@ -1,7 +1,10 @@
+// Load discord.js extensions.
 require("./extensions/GuildMember.js");
 require("./extensions/Message.js");
 require("./extensions/Guild.js");
+require("./extensions/User.js");
+
 const MiyakoClient = require("./structures/MiyakoClient.js");
 
-new MiyakoClient()
-  .login();
+// Login.
+new MiyakoClient().login();

@@ -26,8 +26,14 @@ class MiyakoClient extends Client {
     this.events = new EventStore(this);
     this.sweeper = new MemorySweeper(this);
     this.responses = require("../utils/responses.js");
-    this.settings = new Settings(this, "guilds");
-    this.members = new Settings(this, "members");
+
+    // Settings.
+    this.settings = {
+      guilds: new Settings(this, "guilds"),
+      members: new Settings(this, "members"),
+      users: new Settings(this, "users")
+    };
+
     this.dbl = new DBL(this.config.dbl, this);
     this.points = new Points(this);
     this.on("ready", this.onReady.bind(this));
@@ -57,9 +63,15 @@ class MiyakoClient extends Client {
     // Connect database.
     this.dbconn = await this.db.connect();
     this.console.log("Connected to PostgreSQL");
+
+    // Initialize schema.
     await loadSchema(this.db);
-    await this.settings.init();
-    await this.members.init();
+
+    // Initialize settings.
+    for(const [name, settings] of Object.entries(this.settings)) {
+      await settings.init();
+      this.console.log(`Loaded ${settings.cache.size} ${name}`);
+    }
   }
 }
 

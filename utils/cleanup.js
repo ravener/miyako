@@ -35,7 +35,7 @@ class MemorySweeper {
         guild.voiceStates.cache.delete(id);
         guild.members.cache.delete(id);
         // Clear the settings, will be synced when member is back.
-        this.client.members.cache.delete(`${guild.id}.${id}`);
+        this.client.settings.members.cache.delete(`${guild.id}.${id}`);
       }
       
       // Clear emojis
@@ -56,6 +56,7 @@ class MemorySweeper {
     for(const user of this.client.users.cache.values()) {
       if(user.lastMessageID && user.lastMessageID > OLD_SNOWFLAKE) continue;
       this.client.users.cache.delete(user.id);
+      this.client.settings.users.cache.delete(user.id);
       users++;
     }
     

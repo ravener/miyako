@@ -15,12 +15,12 @@ class LevelUp extends Command {
     if(!action || !["enable", "disable"].includes(action)) return ctx.reply("Baka! Do you want me to disable or enable it?");
 
     if(action === "enable") {
-      await this.client.settings.update(ctx.guild.id, { levelup: true });
+      await ctx.guild.update({ levelup: true });
       return ctx.reply("Successfully enabled level up messages.");
     }
 
     if(action === "disable") {
-      await this.client.settings.update(ctx.guild.id, { levelup: false });
+      await ctx.guild.update({ levelup: false });
       return ctx.reply("Successfully disabled level up messages.");
     }
   }

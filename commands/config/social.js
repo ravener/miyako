@@ -15,12 +15,12 @@ class Social extends Command {
     if(!action || !["enable", "disable"].includes(action)) return ctx.reply("Baka! Do you want me to disable or enable it?");
 
     if(action === "enable") {
-      await this.client.settings.update(ctx.guild.id, { social: true });
+      await ctx.guild.update({ social: true });
       return ctx.reply("Successfully enabled the social economy system.");
     }
 
     if(action === "disable") {
-      await this.client.settings.update(ctx.guild.id, { social: false });
+      await ctx.guild.update({ social: false });
       return ctx.reply("Successfully disabled the social economy system.");
     }
   }
