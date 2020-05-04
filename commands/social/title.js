@@ -8,7 +8,7 @@ class Title extends Command {
     });
   }
 
-  async run(ctx, [title]) {
+  async run(ctx, args) {
     if(!args.length) return ctx.reply("Baka! You must provide a title.");
     const title = args.join(" ");
     await ctx.author.update({ title });
