@@ -12,7 +12,7 @@ class Title extends Command {
     if(!args.length) return ctx.reply("Baka! You must provide a title.");
     const title = args.join(" ");
     await ctx.author.update({ title });
-    return ctx.reply(`Success! changed your title view it with \`${msg.guild.settings.prefix}profile\``);
+    return ctx.reply(`Success! changed your title view it with \`${ctx.guild.settings.prefix}profile\``);
   }
 }
 
