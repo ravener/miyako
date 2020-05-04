@@ -4,6 +4,8 @@ This is a list of a personal TODO for stuff that needs to be done. Feel free to 
 ## Database
 I'm more satisfied than before with the database management system I've implemented but could still be better. Mimic [klasa](https://github.com/dirigeants/klasa)'s settings gateway a little bit more in terms of efficiency while keeping it suitable for Miyako alone and keeping the syntax convenient. The database system is very important to scale in the long term and should be future proof for sharding so some serious work should be done on it.
 
+Edit: thinking again I'm more satisfied with the current structure, i will consider this done for now.
+
 ## Monitors
 I currently hacked a temporary workaround for the points monitor until we needed more monitors. All we need to implement them is here, it's easy to extend and add more stores so add a new monitors store.
 
