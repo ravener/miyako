@@ -37,7 +37,7 @@ class Pokemon extends Command {
     }
 
     await msg.delete();
-    return ctx.reply(`Ba-Baka! You answered incorrectly, It was **${pokemon.name}.**`);
+    return ctx.reply(`Ba-Baka! You answered incorrectly, It was **${this.client.utils.toProperCase(pokemon.name)}.**`);
   } 
 }
 
