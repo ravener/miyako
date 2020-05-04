@@ -42,7 +42,7 @@ class NPM extends Command {
       .setColor(0xff0000)
       .setTitle(`NPM - ${pkg}`)
       .setURL(`https://npmjs.com/package/${pkg}`)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
       .setDescription([
         body.description || "No Description.",
         `**Version:** ${body["dist-tags"].latest}`,

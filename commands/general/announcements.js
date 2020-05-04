@@ -19,7 +19,7 @@ class Announcements extends Command {
     
     const embed = new MessageEmbed()
       .setTitle("Bot announcement!")
-      .setAuthor(announcement.author.username, announcement.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(announcement.author.username, announcement.author.displayAvatarURL({ size: 64 }))
       .setDescription(announcement.cleanContent)
       .setThumbnail(announcement.author.displayAvatarURL({ size: 512 }))
       .setTimestamp(new Date(announcement.createdTimestamp))

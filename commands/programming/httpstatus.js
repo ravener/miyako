@@ -19,7 +19,7 @@ class HttpStatus extends Command {
       .setTitle("HTTP Cat")
       .setImage(`https://http.cat/${status}.jpg`)
       .setDescription(status === "599" ? "Network Connect Timeout Error" : STATUS_CODES[status])
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 })));
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 })));
   }
 }
 

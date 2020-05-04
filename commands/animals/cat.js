@@ -19,7 +19,7 @@ class Cat extends Command {
     const embed = new MessageEmbed()
       .setTitle("Random Cat")
       .setColor(0x9590EE)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
       .setImage(file);
     return ctx.reply({ embed });
   }

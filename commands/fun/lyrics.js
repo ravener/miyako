@@ -36,7 +36,7 @@ class Lyrics extends Command {
       .setDescription(lyrics.trim().substring(0, 1990))
       .setURL(url)
       .setThumbnail(image)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
       .setColor(0x9590EE);
 
     return ctx.reply({ embed });

@@ -25,7 +25,7 @@ class NPMPkgSize extends Command {
       .setColor(0x9590EE)
       .setDescription(`**Publish Size:** ${this.client.utils.getBytes(publishSize)}\n**Install Size:** ${this.client.utils.getBytes(installSize)}`)
       .setFooter("Powered by packagephobia.now.sh")
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }));
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }));
     
     return ctx.reply({ embed });
   }

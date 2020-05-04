@@ -34,7 +34,7 @@ class Anime extends Command {
       .setThumbnail(res.attributes.posterImage && res.attributes.posterImage.original)
       .setURL(`https://kitsu.io/anime/${res.id}`)
       .setFooter(`Page ${page}/${data.length}`)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
 
     return ctx.reply({ embed });
   }

@@ -21,7 +21,7 @@ class Meme extends Command {
       .setTitle(meme.title)
       .setImage(meme.url)
       .setColor(0x9590EE)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
       .setFooter(`👍 ${meme.ups} | 👎 ${meme.downs}`);
     return ctx.reply({ embed });
   }

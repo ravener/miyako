@@ -21,7 +21,7 @@ class Joke extends Command {
     const embed = new MessageEmbed()
       .setTitle(`${body.category}${flags ? ` (${flags})` : ""}`)
       .setDescription(body.type === "single" ? `${body.joke}` : `**${body.setup}**\n*${body.delivery}*`)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
       .setColor(0x9590EE);
 
     return ctx.reply({ embed });

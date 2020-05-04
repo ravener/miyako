@@ -16,7 +16,7 @@ class Help extends Command {
       return ctx.reply(new MessageEmbed()
         .setTitle(`Help - ${cmd.name}`)
         .setColor(0x9590EE)
-        .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 256, format: "png" }))
+        .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64, format: "png" }))
         .setDescription([
           `**Description:** ${cmd.description}`,
           `**Category:** ${cmd.category}`,
@@ -36,7 +36,7 @@ class Help extends Command {
     const embed = new MessageEmbed()
       .setTitle("Help - Commands")
       .setColor(0x9590EE)
-      .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 256 }))
+      .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64 }))
       .setFooter("For more information about a command run m!help <command>");
 
     const keys = Object.keys(map).sort();

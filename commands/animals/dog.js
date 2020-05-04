@@ -20,7 +20,7 @@ class Dog extends Command {
       .setTitle("Random Dog")
       .setImage(message)
       .setColor(0x9590EE)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 })));
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 })));
   }
 }
 

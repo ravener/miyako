@@ -16,7 +16,7 @@ class Permissions extends Command {
     return ctx.reply(new MessageEmbed()
       .setTitle(`${member.displayName}'s Permissions in #${ctx.channel.name} in ${ctx.guild.name}`)
       .setColor(0x9590EE)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 256 }))
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
       .setDescription(Object.entries(ctx.channel.permissionsFor(member).serialize())
         .map((perms) => `${perms[1] ? "<:checkmark:703661431484317836>" : "<:crossmark:703661490686656522>"} ${
           this.client.events.get("message").friendlyPerms[perms[0]]}`)

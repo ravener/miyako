@@ -15,7 +15,7 @@ class Avatar extends Command {
     
     return ctx.reply(new MessageEmbed()
       .setTitle(`${user.username}'s avatar`)
-      .setAuthor(user.tag, user.displayAvatarURL({ size: 256 }))
+      .setAuthor(user.tag, user.displayAvatarURL({ size: 64 }))
       .setColor(0x9590EE)
       .setImage(user.displayAvatarURL({ size: 2048, format: "png", dynamic: true })));
   }
