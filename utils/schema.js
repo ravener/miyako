@@ -15,6 +15,13 @@ CREATE TABLE IF NOT EXISTS members (
   daily TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS users (
+  id TEXT PRIMARY KEY NOT NULL UNIQUE,
+  reputation INTEGER DEFAULT 0,
+  repcooldown TIMESTAMP,
+  title TEXT
+);
+
 CREATE TABLE IF NOT EXISTS bot (
   id TEXT PRIMARY KEY NOT NULL UNIQUE,
   "guildBlacklist" TEXT[],
