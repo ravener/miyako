@@ -7,7 +7,7 @@ class NPMPkgSize extends Command {
     super(...args, {
       description: "Shows the install/publish size of a npm package.",
       usage: "npmpkgsize express",
-      aliases: ["pkgsize"],
+      aliases: ["pkgsize", "npmsize"],
       cooldown: 5
     });
   }
