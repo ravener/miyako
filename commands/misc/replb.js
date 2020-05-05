@@ -10,7 +10,7 @@ class RepLB extends Command {
   }
 
   async run(ctx) {
-    const { rows } = await this.client.db.query("SELECT id, reputation FROM users ORDER BY reps DESC LIMIT 10");
+    const { rows } = await this.client.db.query("SELECT id, reputation FROM users ORDER BY reputation DESC LIMIT 10");
     if(!rows.length) return ctx.reply("Looks like no one has any reputations.");
 
     const embed = new MessageEmbed()
