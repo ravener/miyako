@@ -24,7 +24,7 @@ class Stats extends Command {
     return ctx.reply(new MessageEmbed()
       .setTitle("Miyako - Bot Statistics")
       .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server!")
-      .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64, format: "png" }))
+      .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64 }))
       .setColor(0x9590EE)
       .addField("Bot Stats", [
         `**Guilds:** ${client.guilds.cache.size}`,
