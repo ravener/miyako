@@ -2,7 +2,7 @@ const Command = require("../../structures/Command.js");
 
 class Leave extends Command {
   constructor(...args) {
-    super(..args, {
+    super(...args, {
       description: "Leaves a server.",
       ownerOnly: true
     });
