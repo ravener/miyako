@@ -13,7 +13,7 @@ class Pay extends Command {
 
   async run(ctx, [member, amount]) {
     member = await this.verifyMember(ctx, member);
-    amount = await this.verifyInt(amount);
+    amount = this.verifyInt(amount);
 
     if(member.id === ctx.author.id) return ctx.reply("Baka! Why would you pay yourself?");
     if(member.user.bot) return ctx.reply("Baka! You can't pay bots.");

@@ -7,6 +7,8 @@
  * this.settings = new Settings(this, "guilds");
  * And then use it's methods anywhere.
  * this.client.settings.update({ ... });
+ *
+ * The goal is to abstract away the database used and no SQL query shall be used anywhere else.
  */
 class Settings {
   constructor(client, table) {

@@ -8,7 +8,8 @@ class Pokemon extends Command {
       description: "Guess That Pokemon",
       category: "Fun",
       aliases: ["guessthatpokemon"],
-      guildOnly: true
+      guildOnly: true,
+      cost: 20
     });
   }
 

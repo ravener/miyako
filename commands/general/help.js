@@ -16,21 +16,25 @@ class Help extends Command {
       return ctx.reply(new MessageEmbed()
         .setTitle(`Help - ${cmd.name}`)
         .setColor(0x9590EE)
-        .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64, format: "png" }))
+        .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64 }))
         .setDescription([
           `**Description:** ${cmd.description}`,
           `**Category:** ${cmd.category}`,
           `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join("\n") : "None"}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"}`,
           `**Usage:** ${ctx.guild.settings.prefix}${cmd.usage}`,
+          `**Cost:** ${ctx.guild.settings.social && command.cost ? `¥${command.cost}` : "None"}`,
           `**Extended Help:** ${cmd.extendedHelp}`
         ].join("\n")));
     }
 
     const map = {}; // Map<Category, Array<Command.Name>>
     for(const command of this.store.values()) {
-      if(!map[command.category]) map[command.category] = [];
-      if(!command.hidden) map[command.category].push(command.name);
+      // Check for hidden command first so if all commands in a category is hidden we won't even show the category.
+      if(!command.hidden) {
+        if(!map[command.category]) map[command.category] = [];
+        map[command.category].push(command.name);
+      }
     }
 
     const embed = new MessageEmbed()
@@ -39,15 +43,17 @@ class Help extends Command {
       .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64 }))
       .setFooter("For more information about a command run m!help <command>");
 
+    // Sort the categories alphabetically.
     const keys = Object.keys(map).sort();
 
     for(const category of keys) {
+      // Skip un-needed categories
       if(category === "Owner" && ctx.author.id !== this.client.constants.ownerID) continue;
       if(category === "Social" && !ctx.guild.settings.social) continue;
       embed.addField(category, map[category].join(", "));
     }
 
-    return ctx.reply(embed);
+    return ctx.reply({ embed });
   }
 }
 

@@ -12,7 +12,7 @@ I currently hacked a temporary workaround for the points monitor until we needed
 ## Commands
 Commands should get an `nsfw` property for the future.
 
-Like [Misaki](https://github.com/NotAWeebDev/Misaki) make some type of `Social` class which is an extended command for more helpful utilities for social commands.
+Like [Misaki](https://github.com/NotAWeebDev/Misaki) make some type of `Social` class which is an extended command for more helpful utilities for social commands. (maybe)
 
 Add reactions, nsfw and more from [nekos.life](https://nekos.life) API, maybe write some code to reduce duplications as a lot of this commands are gonna be similar as in they just do a quick HTTP request and embed the response.
 

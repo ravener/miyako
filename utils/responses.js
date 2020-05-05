@@ -150,10 +150,13 @@ exports.reloadSuccess = [
   "I've reloaded **{{command}}**, not that I could see any point in it..."
 ];
 
+// After the following line is the end of Misaki code and are made by myself.
+
 // Errors
 
 exports.notNSFWChannel = [
-
+  "Baka! What do you think you're doing? That command can only be used in NSFW channels.",
+  "N-nani? Is this really the place to do that? That command can only be used in NSFW channels."
 ];
 
 exports.guildOnlyCommand = [

@@ -3,20 +3,22 @@ const path = require("path");
 
 class Command {
   constructor(client, file, options) {
-    this.name = options.name || file.name;
-    this.client = client;
-    this.file = file;
+    this.name = options.name || file.name; // Command name.
+    this.client = client; // Client.
+    this.file = file; // file path information.
     this.description = options.description || "No Description Provided.";
     this.extendedHelp = options.extendedHelp || "No extended help provided.";
     this.ownerOnly = options.ownerOnly || false;
     this.aliases = options.aliases || [];
     this.cooldown = options.cooldown || 0;
+    this.cost = options.cost || 0;
+    this.nsfw = options.nsfw || false;
     // File path is like general/ping.js we split by / and take general title-cased if not provided.
     this.category = options.category || this.client.utils.toProperCase(file.path.split(path.sep)[0]) || "General";
     this.guildOnly = options.guildOnly || false;
     this.hidden = options.hidden || false;
     this.enabled = typeof options.enabled !== "undefined" ? options.enabled : true;
-    this.usage = options.usage || "No Usage Provided.";
+    this.usage = options.usage || this.name;
     this.botPermissions = new Permissions(options.botPermissions || []).freeze();
     this.userPermissions = new Permissions(options.userPermissions || []).freeze();
     // Helper aliases.
@@ -26,10 +28,22 @@ class Command {
 
   async _run(ctx, args) {
     try {
-      const results = await this.before(ctx, args);
-      if(results === true) await this.run(ctx, args);
-      if(typeof results === "string" && results !== "") return ctx.reply(results);
+      // Run the check function first.
+      const check = await this.before(ctx, args);
+
+      // If the value is falsy, silently fail.
+      if(!check) return;
+
+      // If the value is a string reply it to the user.
+      if(typeof check === "string") return ctx.reply(check);
+
+      // Run the command.
+      const results = await this.run(ctx, args);
+
+      // If the results is a string reply it to the user.
+      if(typeof results === "string") return ctx.reply(results);
     } catch(err) {
+      // Forward errors to commandError event.
       this.client.emit("commandError", ctx, err);
     }
   }

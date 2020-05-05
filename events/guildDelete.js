@@ -15,7 +15,7 @@ class GuildDelete extends Event {
       .setDescription(guild.name)
       .setThumbnail(guild.iconURL())
       .setColor(0xFF0000)
-      .addField("Owner", guild.owner.user.tag)
+      .addField("Owner", guild.owner ? guild.owner.user.tag : "Failed to fetch owner information.")
       .addField("Member Count", guild.memberCount)
       .setFooter(guild.id);
     await channel.send({ embed }).catch(() => null);
