@@ -118,9 +118,11 @@ class MessageEvent extends Event {
     if(command.cost && msg.guild && msg.guild.settings.social) {
       // Grab the current balance.
       const balance = parseInt(msg.member.settings.points);
+      const claim = (msg.member.settings.daily === null || msg.member.settings.daily <  Date.now()) ?
+        `\n\nSeems like you're broke. Why don't you start with claiming your daily credits with \`${msg.guild.settings.prefix}daily\`?` : ""
       // Verify enough balance.
       if(balance < command.cost)
-        return msg.channel.send(`You need **¥${command.cost}** to run that command but you only have **¥${balance}**.${msg.member.settings.daily === null `\n\nSeems like you're broke. Why don't you start with claiming your daily credits with \`${msg.guild.settings.prefix}daily\`?` : ""}`);
+        return msg.channel.send(`You need **¥${command.cost}** to run that command but you only have **¥${balance}**.${claim}`);
       // Deduct.
       await msg.member.takePoints(command.cost);
     }
