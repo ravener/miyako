@@ -20,3 +20,6 @@ And last but not least port over more commands from [LadyBug-Bot](https://github
 
 ## Git
 Actually start using proper commit messages :P
+
+## Console
+I made `MiyakoClient#console` an alias to the Node.js `console` temporarily, but it's there to add a better logger in there.

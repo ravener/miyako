@@ -12,6 +12,8 @@ This repository contains the always up to date code for the bot so you can contr
 
 See [FEATURES.md](FEATURES.md) for a detailed description about the bot itself, it's the file we use for bot lists etc while this README is more from a developer's perspective for this repository.
 
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file for how to contribute and understanding Miyako's code base.
+
 ## Running it yourself
 Requirements:
 - Node.js v12+ (Version requirement may change at any time.)
