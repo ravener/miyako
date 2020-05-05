@@ -23,7 +23,7 @@ class Help extends Command {
           `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join("\n") : "None"}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"}`,
           `**Usage:** ${ctx.guild.settings.prefix}${cmd.usage}`,
-          `**Cost:** ${ctx.guild.settings.social && command.cost ? `¥${command.cost}` : "None"}`,
+          `**Cost:** ${ctx.guild.settings.social && cmd.cost ? `¥${cmd.cost}` : "None"}`,
           `**Extended Help:** ${cmd.extendedHelp}`
         ].join("\n")));
     }
