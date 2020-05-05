@@ -2,7 +2,7 @@ const Command = require("../../structures/Command.js");
 
 class Award extends Command {
   constructor(...args) {
-    super(..args, {
+    super(...args, {
       description: "Award points to someone.",
       userPermissions: ["ADMINISTRATOR"],
       cooldown: 30,

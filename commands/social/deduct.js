@@ -2,7 +2,7 @@ const Command = require("../../structures/Command.js");
 
 class Deduct extends Command {
   constructor(...args) {
-    super(..args, {
+    super(...args, {
       description: "Deduct someone's points.",
       userPermissions: ["ADMINISTRATOR"],
       cooldown: 30,
