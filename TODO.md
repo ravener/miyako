@@ -17,3 +17,6 @@ Like [Misaki](https://github.com/NotAWeebDev/Misaki) make some type of `Social` 
 Add reactions, nsfw and more from [nekos.life](https://nekos.life) API, maybe write some code to reduce duplications as a lot of this commands are gonna be similar as in they just do a quick HTTP request and embed the response.
 
 And last but not least port over more commands from [LadyBug-Bot](https://github.com/pollen5/ladybug-archive) which was the older version of this bot which used Klasa, I'm actively porting most commands from there but sometimes i hold off some that needs special support in the code structure.
+
+## Git
+Actually start using proper commit messages :P
