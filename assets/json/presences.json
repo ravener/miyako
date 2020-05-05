@@ -1,0 +1,38 @@
+[
+  {
+    "type": "PLAYING",
+    "message": "@Miyako help | {{guilds}} servers"
+  },
+  {
+    "type": "PLAYING",
+    "message": "m!help | {{guilds}} servers"
+  },
+  {
+    "type": "LISTENING",
+    "message": "in {{guilds}} servers"
+  },
+  {
+    "type": "WATCHING",
+    "message": "over {{guilds}} servers"
+  },
+  {
+    "type": "WATCHING",
+    "message": "you"
+  },
+  {
+    "type": "PLAYING",
+    "message": "invite me using m!invite"
+  },
+  {
+    "type": "PLAYING",
+    "message": "life has no limits"
+  },
+  {
+    "type": "PLAYING",
+    "message": "with ones and zeroes"
+  },
+  {
+    "type": "WATCHING",
+    "message": "Anime"
+  }
+]

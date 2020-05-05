@@ -10,6 +10,7 @@ class GuildDelete extends Event {
     await this.client.settings.guilds.delete(guild.id).catch(() => null);
     
     const channel = this.client.channels.cache.get("454776806869041154");
+
     const embed = new MessageEmbed()
       .setTitle("Miyako left a server.")
       .setDescription(guild.name)
@@ -18,8 +19,8 @@ class GuildDelete extends Event {
       .addField("Owner", guild.owner ? guild.owner.user.tag : "Failed to fetch owner information.")
       .addField("Member Count", guild.memberCount)
       .setFooter(guild.id);
-    await channel.send({ embed }).catch(() => null);
-    return this.client.user.setActivity(`@${this.client.user.username} help | ${this.client.guilds.cache.size} Servers!`);
+
+    return channel.send({ embed });
   }
 }
 

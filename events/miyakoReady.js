@@ -2,8 +2,13 @@ const Event = require("../structures/Event.js");
 
 class MiyakoReady extends Event {
   async run() {
-    this.client.user.setActivity(`@${this.client.user.username} help | ${this.client.guilds.cache.size} Server${this.client.guilds.cache.size > 1 ? "s" : ""}!`);
+    // Setup presence.
+    this.client.rollPresence();
+    // Roll a random presence every 5 minutes.
+    this.client.setInterval(() => this.client.rollPresence(), 300000);
+    // Sweep cache.
     this.client.sweeper.run();
+    // Sweep cache every 10 minutes.
     this.client.sweeper.task = this.client.setInterval(() => this.client.sweeper.run(), 600000);
   } 
 }

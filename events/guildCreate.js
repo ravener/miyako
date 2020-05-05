@@ -4,8 +4,11 @@ const { MessageEmbed } = require("discord.js");
 class GuildCreate extends Event {
   async run(guild) {
     if(!guild.available) return;
+
     const channel = this.client.channels.cache.get("454776806869041154");
+
     if(!guild.owner && guild.ownerID) await guild.members.fetch(guild.ownerID);
+
     const embed = new MessageEmbed()
       .setTitle("Miyako joined a new server!")
       .setDescription(guild.name)
@@ -21,8 +24,8 @@ class GuildCreate extends Event {
       this.client.emit("warn", `Blacklisted guild detected: ${guild.name} [${guild.id}]`);
     }*/
     
-    await channel.send({ embed }).catch(() => null);
-    this.client.user.setActivity(`@${this.client.user.username} help | ${this.client.guilds.cache.size} Servers!`);
+    return channel.send({ embed });
+
     /* TODO
     const join = guild.channels.find((c) => c.type === "text" && c.postable);
     if(!join) return;

@@ -7,6 +7,7 @@ const { Pool } = require("pg");
 const DBL = require("dblapi.js");
 const loadSchema = require("../utils/schema.js");
 const Settings = require("./Settings.js");
+const presences = require("../assets/json/presences.json");
 
 class MiyakoClient extends Client {
   constructor() {
@@ -52,6 +53,12 @@ class MiyakoClient extends Client {
   async login() {
     await this.init();
     return super.login(this.config.token);
+  }
+
+  rollPresence() {
+    const { message, type } = this.utils.random(presences);
+    return this.user.setActivity(message.replace(/{{guilds}}/g, this.guilds.cache.size), { type })
+      .catch(() => null);
   }
   
   async init() {
