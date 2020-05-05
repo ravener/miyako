@@ -21,7 +21,7 @@ class RepLB extends Command {
     for(let i = 0; i < rows.length; i++) {
       const row = rows[i];
       const user = await this.client.users.fetch(row.id);
-      embed.addField(`${(i + 1).padEnd(2, " ")} ❯ ${user.tag} - ${row.reputation}`);
+      embed.addField(`${((i + 1).toString()).padEnd(2, " ")} ❯ ${user.tag} - ${row.reputation}`);
     }
 
     return ctx.reply({ embed });
