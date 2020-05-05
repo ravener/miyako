@@ -11,7 +11,8 @@ class Reboot extends Command {
 
   async run(ctx, args) {
     await ctx.reply("Shutting down...");
-    // Do other cleanup in the future, e.g close database connection.
+    await this.client.dbconn.release();
+    await this.client.db.end();
     process.exit();
   }
 }
