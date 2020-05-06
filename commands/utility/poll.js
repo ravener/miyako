@@ -17,7 +17,7 @@ class Poll extends Command {
   
   async run(ctx, [channeltxt, ...choices]) {
     // Optional argument trick, maybe find a better way sometimes.
-    channel = await this.verifyChannel(ctx, channeltxt, true).catch(() => null);
+    const channel = await this.verifyChannel(ctx, channeltxt, true).catch(() => null);
     const args = [...choices];
     if(!channel) args.unshift(channeltxt);
 
