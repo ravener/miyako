@@ -21,7 +21,7 @@ class Poll extends Command {
     const args = [...choices];
     if(!channel) args.unshift(channeltxt);
 
-    if(!args.channel) return ctx.reply(`Baka! You need to provide me arguments. Usage: \`${ctx.guild.settings.prefix}${this.usage}\``);
+    if(!args.length) return ctx.reply(`Baka! You need to provide me arguments. Usage: \`${ctx.guild.settings.prefix}${this.usage}\``);
 
     // if(!channel.postable) throw "I cannot send message in that channel.";
     if(!channel.permissionsFor(ctx.member).has("SEND_MESSAGES")) return ctx.reply("Baka! You can't post in that channel.");
