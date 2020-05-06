@@ -17,9 +17,10 @@ class Poll extends Command {
   
   async run(ctx, [channeltxt, ...choices]) {
     // Optional argument trick, maybe find a better way sometimes.
-    const channel = await this.verifyChannel(ctx, channeltxt, true).catch(() => null);
+    let channel = await this.verifyChannel(ctx, channeltxt, true).catch(() => null);
     const args = [...choices];
     if(!channel) args.unshift(channeltxt);
+    channel = ctx.channel;
 
     if(!args.length) return ctx.reply(`Baka! You need to provide me arguments. Usage: \`${ctx.guild.settings.prefix}${this.usage}\``);
 
