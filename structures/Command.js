@@ -70,6 +70,16 @@ class Command {
     return ctx.guild.members.fetch(user);
   }
 
+  async verifyChannel(ctx, channel, defaultToCurrent = false) {
+    if(!channel && defaultToCurrent) return ctx.channel;
+    if(!channel) throw "You need to mention a channel or provide an ID.";
+    const match = /^(?:<#)?(\d{17,19})>?$/.exec(channel);
+    if(!match) throw "Invalid channel, must be a mention or an ID.";
+    const chan = await this.client.channels.fetch(match[1]).catch(() => null);
+    if(!chan) throw "I could not find that channel.";
+    return chan;
+  }
+
   verifyInt(num, def) {
     if(typeof def === "number" && !num) return def;
     const parsed = parseInt(num);
