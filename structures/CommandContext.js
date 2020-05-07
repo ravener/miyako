@@ -12,8 +12,18 @@ class CommandContext {
     this.flags = {};
     this.parsedContent = "";
     this.command = null;
-    this.invokedName = ""; // The exact alias the user used to refer to this command.
+    this.invokedName = ""; // The exact alias the user used to refer to the command.
     this.prefix = "m!"; // Prefix used to invoke the command.
+  }
+
+  /**
+   * Gets the raw args.
+   * By default it trims extra spaces and stuff.
+   * This is useful for e.g code to preserve indents and all.
+   */
+  get rawArgs() {
+    // Slice prefix + command name and trim the start/ending spaces.
+    return this.message.content.slice(this.prefix.length + this.invokedName.length).trim();
   }
 
   get member() {

@@ -64,7 +64,17 @@ class MessageEvent extends Event {
     if(msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
       return msg.channel.send(`Hi! Run \`${prefix}help\` to get a list of commands you can use.`);
 
-    const prefixMatch = new RegExp(`^<@!?${this.client.user.id}> |^${this.client.utils.escapeRegex(prefix)}`).exec(msg.content);
+    // Possibilities:
+    // - miyako ping
+    // - yo miyako ping
+    // - hey miyako ping
+    // - @Miyako ping
+    // - m!ping
+    // - Or custom prefix.
+    // A comma can be added after the (hey|yo|ok) and the (miyako) (e.g hey, miyako, ping)
+    const prefixMatch = new RegExp(`^(?:(?:(?:hey|yo|ok),? )?miyako,? )|^<@!?${this.client.user.id}> |^${
+      this.client.utils.escapeRegex(prefix)}`, "i").exec(msg.content);
+
     // If the message is not a command run the point system monitor.
     if(!prefixMatch) return this.client.points.run(msg);
 
