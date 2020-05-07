@@ -116,15 +116,23 @@ class MessageEvent extends Event {
 
     // If the command costs points and we are in a guild with the social system enabled.
     if(command.cost && msg.guild && msg.guild.settings.social) {
+      const premium = await this.client.verifyPremium(msg.author);
+
+      // Premium users get a 25% off the cost.
+      const cost = command.cost - Math.floor(premium ? (command.cost / 2 / 2) : 0);
+
       // Grab the current balance.
       const balance = parseInt(msg.member.settings.points);
+
+      // Give the user a tip if their daily is available.
       const claim = (msg.member.settings.daily === null || msg.member.settings.daily <  Date.now()) ?
-        `\n\nSeems like you're broke. Why don't you start with claiming your daily credits with \`${msg.guild.settings.prefix}daily\`?` : ""
+        `\n\nSeems like you're broke. Why don't you start with claiming your daily credits with \`${prefix}daily\`?` : "";
+
       // Verify enough balance.
-      if(balance < command.cost)
-        return msg.channel.send(`You need **¥${command.cost}** to run that command but you only have **¥${balance}**.${claim}`);
+      if(balance < cost)
+        return msg.channel.send(`You need **¥${cost}** to run that command but you only have **¥${balance}**.${claim}`);
       // Deduct.
-      await msg.member.takePoints(command.cost);
+      await msg.member.takePoints(cost);
     }
 
     // Create a context and prepare to execute the command.

@@ -31,6 +31,8 @@ class Daily extends Command {
     let amount = 500;
     const voted = await this.client.dbl.hasVoted(ctx.author.id);
     const weekend = await this.client.dbl.isWeekend();
+    const premium = await this.client.verifyPremium(ctx.author);
+
     if(!voted) {
       const embed = new MessageEmbed()
         .setAuthor(ctx.author.username, ctx.author.displayAvatarURL({ size: 64 }))
@@ -43,6 +45,7 @@ class Daily extends Command {
       if(!response) return ctx.reply("No reply within 60 seconds. Time out.");
 
       if(["yes", "y", "confirm", "ok"].includes(response.toLowerCase())) {
+        if(premium) amount += 250;
         await ctx.member.givePoints(amount);
         await this.setCooldown(ctx);
         return ctx.reply(this.client.utils.random(this.client.responses.dailySuccessMessages)
@@ -57,6 +60,7 @@ class Daily extends Command {
 
     amount *= 2;
     if(weekend) amount *= 2;
+    if(premium) amount += 250;
 
     await ctx.member.givePoints(amount);
     await this.setCooldown(ctx);

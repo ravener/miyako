@@ -21,7 +21,7 @@ class Award extends Command {
     
     if(amount < 0) return ctx.rely("Baka! You can't reward them a negative amount. Are you trying to rob them?");
     if(amount === 0) return ctx.reply("Baka! Why would you pay them nothing?");
-    if(amount >= Number.MAX_SAFE_INTEGER) return ctx.reply("That number is too high!");
+    if(amount >= 100000) return ctx.reply("You can't reward more than 100,000 at a time.");
 
     await member.syncSettings();
     await member.givePoints(amount);

@@ -60,6 +60,25 @@ class MiyakoClient extends Client {
     return this.user.setActivity(message.replace(/{{guilds}}/g, this.guilds.cache.size), { type })
       .catch(() => null);
   }
+
+  /**
+   * Check if a given user is a premium user.
+   * @returns {Promise<Boolean>}
+   */
+  async verifyPremium(user) {
+    // First grab the support guild.
+    const guild = this.guilds.cache.get(this.constants.mainGuildID);
+
+    try {
+      // Grab the member.
+      const member = await guild.members.fetch(user);
+      // See if they have the role.
+      return member.roles.has(this.constants.premiumRole);
+    } catch(err) {
+      // If an error happens, e.g member is not in the support guild then just return false.
+      return false;
+    }
+  }
   
   async init() {
     // Load pieces.

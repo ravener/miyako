@@ -23,7 +23,9 @@ class Announcements extends Command {
       .setDescription(announcement.cleanContent)
       .setThumbnail(announcement.author.displayAvatarURL({ size: 512 }))
       .setTimestamp(new Date(announcement.createdTimestamp))
+      .setFooter(`From Miyako Lounge (run ${ctx.guild ? ctx.guild.settings.prefix : "m!"}support to join us)`)
       .setColor(0x9590EE);
+
     return ctx.reply({ embed });
   }
 }

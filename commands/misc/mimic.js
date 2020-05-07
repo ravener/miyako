@@ -7,7 +7,8 @@ class Mimic extends Command {
       aliases: ["copycat"],
       botPermissions: ["MANAGE_WEBHOOKS"],
       usage: "mimic <@user> <msg...>",
-      guildOnly: true
+      guildOnly: true,
+      cost: 20
     });
   }
 

@@ -46,7 +46,7 @@ Porting commands were much easier this way, I managed to copy-paste some of my c
 I just would like to have some more core devs/maintainers/supporters and more friends on the way to be with me as this project gets developed. So if you are interested in meeting me join the [Discord Server](https://discord.gg/mDKMbEh) :)
 
 Currently the community is very small and inactive which is the part I'm trying to fix at the moment.
-It's been a long time since I had any solid Discord friends and most of my current friends kind of don't care much so I am kinda lonely at this point with this project.
+It's been a long time since I had any solid Discord friends and most of my current friends kind of don't care much so I am kinda lonely at this point with this project
 
 ## Running it yourself
 Requirements:

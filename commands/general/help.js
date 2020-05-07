@@ -11,8 +11,24 @@ class Help extends Command {
 
   async run(ctx, [command]) {
     if(command) {
+      let cost = "None";
+
+      if(command.cost && (msg.guild && msg.guild.settings.social)) {
+        const premium = await this.client.verifyPremium(ctx.author);
+
+        if(premium) {
+          // Premium users get a 25% off the cost.
+          cost = `¥${command.cost - Math.floor(command.cost / 2 / 2)}`;
+        } else {
+          cost = `¥${command.cost}`;
+        }
+      }
+
       const cmd = this.store.get(command);
       if(!cmd) return ctx.reply("That command does not exist! Why would you think I'd have such a thing?");
+
+      if(cmd.nsfw) return ctx.reply("Baka! You can't view details of that command in a non NSFW channel.");
+
       return ctx.reply(new MessageEmbed()
         .setTitle(`Help - ${cmd.name}`)
         .setColor(0x9590EE)
@@ -22,8 +38,8 @@ class Help extends Command {
           `**Category:** ${cmd.category}`,
           `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join("\n") : "None"}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"}`,
-          `**Usage:** ${ctx.guild.settings.prefix}${cmd.usage}`,
-          `**Cost:** ${ctx.guild.settings.social && cmd.cost ? `¥${cmd.cost}` : "None"}`,
+          `**Usage:** ${ctx.guild ? ctx.guild.settings.prefix : "m!"}${cmd.usage}`,
+          `**Cost:** ${cost}`,
           `**Extended Help:** ${cmd.extendedHelp}`
         ].join("\n")));
     }
@@ -50,6 +66,8 @@ class Help extends Command {
       // Skip un-needed categories
       if(category === "Owner" && ctx.author.id !== this.client.constants.ownerID) continue;
       if(category === "Social" && !ctx.guild.settings.social) continue;
+      if(category === "Nsfw" && !ctx.channel.nsfw) continue;
+
       embed.addField(category, map[category].join(", "));
     }
 
