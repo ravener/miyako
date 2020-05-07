@@ -26,4 +26,4 @@ class Tits extends Command {
   }
 }
 
-module.exports = Boobs;
+module.exports = Tits;
