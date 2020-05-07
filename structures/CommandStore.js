@@ -61,7 +61,7 @@ class CommandStore extends Store {
       // Skip commands that the user does not have permissions to run.
       if(msg.guild && !msg.channel.permissionsFor(msg.author).has(command.userPermissions)) return false;
       // Skip NSFW commands.
-      if(command.nsfw && !ctx.channel.nsfw) return false;
+      if(command.nsfw && !msg.channel.nsfw) return false;
       return true;
     });
   }
