@@ -27,7 +27,8 @@ class Help extends Command {
         }
       }
 
-      if(cmd.nsfw) return ctx.reply("Baka! You can't view details of that command in a non NSFW channel.");
+      if(cmd.nsfw && (ctx.guild && !ctx.channel.nsfw))
+        return ctx.reply("Baka! You can't view details of that command in a non NSFW channel.");
 
       return ctx.reply(new MessageEmbed()
         .setTitle(`Help - ${cmd.name}`)
