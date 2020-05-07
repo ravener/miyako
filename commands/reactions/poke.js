@@ -1,6 +1,6 @@
 const Command = require("../../structures/Command.js");
 const fetch = require("node-fetch");
-const { MessageEmbed } = require("node-fetch");
+const { MessageEmbed } = require("discord.js");
 
 class Poke extends Command {
   constructor(...args) {
