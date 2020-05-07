@@ -11,21 +11,21 @@ class Help extends Command {
 
   async run(ctx, [command]) {
     if(command) {
+      const cmd = this.store.get(command);
+      if(!cmd) return ctx.reply("That command does not exist! Why would you think I'd have such a thing?");
+
       let cost = "None";
 
-      if(command.cost && (msg.guild && msg.guild.settings.social)) {
+      if(cmd.cost && (msg.guild && msg.guild.settings.social)) {
         const premium = await this.client.verifyPremium(ctx.author);
 
         if(premium) {
           // Premium users get a 25% off the cost.
-          cost = `¥${command.cost - Math.floor(command.cost / 2 / 2)}`;
+          cost = `¥${cmd.cost - Math.floor(cmd.cost / 2 / 2)}`;
         } else {
-          cost = `¥${command.cost}`;
+          cost = `¥${cmd.cost}`;
         }
       }
-
-      const cmd = this.store.get(command);
-      if(!cmd) return ctx.reply("That command does not exist! Why would you think I'd have such a thing?");
 
       if(cmd.nsfw) return ctx.reply("Baka! You can't view details of that command in a non NSFW channel.");
 
