@@ -16,7 +16,7 @@ class Help extends Command {
 
       let cost = "None";
 
-      if(cmd.cost && (msg.guild && msg.guild.settings.social)) {
+      if(cmd.cost && (ctx.guild && ctx.guild.settings.social)) {
         const premium = await this.client.verifyPremium(ctx.author);
 
         if(premium) {
