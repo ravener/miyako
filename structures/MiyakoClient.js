@@ -73,7 +73,7 @@ class MiyakoClient extends Client {
       // Grab the member.
       const member = await guild.members.fetch(user);
       // See if they have the role.
-      return member.roles.has(this.constants.premiumRole);
+      return member.roles.cache.has(this.constants.premiumRole);
     } catch(err) {
       // If an error happens, e.g member is not in the support guild then just return false.
       return false;
