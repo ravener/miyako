@@ -8,6 +8,10 @@ class EventStore extends Store {
     this.raw = new Collection();
   }
 
+  get(name) {
+    return super.get(name) || this.raw.get(name);
+  }
+
   set(event) {
     // Store raw events seperately.
     // See events/raw.js for triggering this.
