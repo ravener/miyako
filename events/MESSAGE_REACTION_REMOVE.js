@@ -53,6 +53,10 @@ class RawMessageReactionRemove extends Event {
     if(!stars) return;
 
     const star = /^⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
+
+    // If it went below the limit delete it.
+    if(parseInt(star[1]) - 1 < guild.settings.starboardLimit) return stars.delete();
+
     const foundStar = stars.embeds[0];
     const embed = new MessageEmbed()
       .setColor(foundStar.color)
@@ -61,7 +65,7 @@ class RawMessageReactionRemove extends Event {
       .setDescription(foundStar.description || "")
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ size: 64 }))
       .setTimestamp()
-      .setFooter(`⭐ ${parseInt(star[1])-1} | ${msg.id}`)
+      .setFooter(`⭐ ${parseInt(star[1]) - 1} | ${msg.id}`)
       .setImage(this.client.utils.getImage(msg));
     
     return stars.edit({ embed });
