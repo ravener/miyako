@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS "guilds" (
   prefix VARCHAR(10) NOT NULL DEFAULT 'm!',
   "weebGreetings" TEXT,
   levelup BOOLEAN DEFAULT true,
-  social BOOLEAN DEFAULT true
+  social BOOLEAN DEFAULT true,
+  starboard TEXT,
+  "starboardLimit" INTEGER DEFAULT 2
 );
 
 CREATE TABLE IF NOT EXISTS members (

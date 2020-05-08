@@ -13,8 +13,10 @@ class Eval extends Command {
   }
 
   async run(ctx, args) {
+    if(!args.length) return ctx.reply("Baka! You need to give me code to evaluate.");
+
     const { clean, client } = this;
-    const code = args.join(" ");
+    const { code } = this.client.utils.getCodeBlock(ctx.rawArgs);
     const token = client.token.split("").join("[^]{0,2}");
     const rev = client.token.split("").reverse().join("[^]{0,2}");
     const filter = new RegExp(`${token}|${rev}`, "g");

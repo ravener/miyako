@@ -5,6 +5,8 @@ class Event {
     this.client = client;
     this.file = file;
     this.enabled = typeof options.enabled !== "undefined" ? options.enabled : true;
+    // Wether this event should be registered as a raw event.
+    this.raw = options.raw || false;
     this.store = this.client.events;
   }
 

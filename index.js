@@ -7,4 +7,5 @@ require("./extensions/User.js");
 const MiyakoClient = require("./structures/MiyakoClient.js");
 
 // Login.
-new MiyakoClient().login();
+new MiyakoClient()
+  .login(process.argv.includes("--dev"));

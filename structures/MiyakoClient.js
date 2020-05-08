@@ -50,9 +50,10 @@ class MiyakoClient extends Client {
     this.emit("miyakoReady");
   }
 
-  async login() {
+  async login(dev = false) {
     await this.init();
-    return super.login(this.config.token);
+    const { devtoken, token } = this.config;
+    return super.login(dev ? devtoken : token);
   }
 
   rollPresence() {
