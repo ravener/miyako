@@ -37,7 +37,7 @@ class RawMessageReactionRemove extends Event {
     if(msg.author.id === user.id) return;
 
     // Grab the starboard channel.
-    const starboard = guild.channels.get(guild.settings.starboard);
+    const starboard = guild.channels.cache.get(guild.settings.starboard);
     if(!starboard) return;
 
     const messages = await starboard.messages.fetch({ limit: 50 })
