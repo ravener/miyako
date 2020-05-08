@@ -72,7 +72,7 @@ class RawMessageReactionAdd extends Event {
     // Otherwise this must be a new message so send a new starboard entry for it.
 
     // If the star limit is not satisfied do not post it.
-    if(msg.reactions.get("⭐").count < guild.settings.starboardLimit) return;
+    if(msg.reactions.cache.get("⭐").count < guild.settings.starboardLimit) return;
 
     // Grab the content.
     const content = msg.content ? msg.content : (msg.embeds.length && msg.embeds[0].description) ? msg.embeds[0].description : "";
