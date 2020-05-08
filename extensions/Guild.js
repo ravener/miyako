@@ -7,7 +7,9 @@ module.exports = Structures.extend("Guild", (Guild) => class MiyakoGuild extends
       weebGreetings: false,
       prefix: "m!",
       levelup: true,
-      social: true
+      social: true,
+      starboard: null,
+      starboardLimit: 2
     };
   }
 

@@ -29,7 +29,7 @@ class Coliru extends Command {
   async run(ctx) {
     const { lang, code } = this.client.utils.getCodeBlock(ctx.rawArgs);
 
-    if(!lang) throw "Usage: coliru \\`\\`\\`lang\nCode\n\\`\\`\\`\n\nCodeBlock language will be used to determine how to compile the code.";
+    if(!lang) throw "Usage: coliru \\`\\`\\`lang\nCode\n\\`\\`\\`\nCodeBlock language will be used to determine how to compile the code.";
     if(!this.commands[lang]) throw `Invalid Language, supported ones are: **${Object.keys(this.commands).join(", ")}**`;
 
     const cmd = this.commands[lang];
