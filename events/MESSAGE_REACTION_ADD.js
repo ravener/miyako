@@ -30,7 +30,7 @@ class RawMessageReactionAdd extends Event {
     if(!user || user.bot) return;
 
     // Fetch the full message.
-    const msg = await channel.messages.fetch(data.message_id).catch(() => null);
+    const msg = await channel.messages.fetch(packet.message_id).catch(() => null);
     if(!msg) return;
 
     // Users cannot star their own message.
