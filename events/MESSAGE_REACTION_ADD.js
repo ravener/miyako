@@ -9,7 +9,7 @@ class RawMessageReactionAdd extends Event {
   }
 
   async run(packet, shard) {
-    if(package.emoji.name === "⭐") return this.starboard(packet);
+    if(packet.emoji.name === "⭐") return this.starboard(packet);
   }
 
   async starboard(packet) {
