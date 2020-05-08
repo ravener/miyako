@@ -2,7 +2,7 @@ const Command = require("../../structures/Command.js");
 
 class Zalgo extends Command {
   constructor(...args) {
-    super(..args, {
+    super(...args, {
       description: "Make a text with zalgo characters.",
       usage: "zalgo <text>",
       cost: 10
