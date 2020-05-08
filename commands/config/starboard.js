@@ -28,6 +28,7 @@ class Starboard extends Command {
 
     if(action === "limit") {
       amount = this.verifyInt(amount);
+      if(amount < 1) return ctx.reply("Baka! Limit cannot be less than 1");
       await ctx.guild.update({ starboardLimit: amount });
       return ctx.reply(`Successfully updated the starboard star limit to ${amount}`);
     }
