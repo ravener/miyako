@@ -1,5 +1,5 @@
 {
-  "devtoken": "Development token. Currently unused you have to swap the code manually to use this.",
+  "devtoken": "Development token. Used when running the bot with --dev",
   "token": "Production bot token.",
   "postgresql": {
     "user": "pgsql username",

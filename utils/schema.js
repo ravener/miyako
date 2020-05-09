@@ -29,4 +29,10 @@ CREATE TABLE IF NOT EXISTS bot (
   "guildBlacklist" TEXT[],
   "userBlacklist" TEXT[]
 );
+
+CREATE TABLE IF NOT EXISTS store (
+  id TEXT PRIMARY KEY NOT NULL UNIQUE,
+  guild TEXT NOT NULL,
+  price BIGINT DEFAULT 0
+);
 `);

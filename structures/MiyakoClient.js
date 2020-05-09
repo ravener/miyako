@@ -32,7 +32,8 @@ class MiyakoClient extends Client {
     this.settings = {
       guilds: new Settings(this, "guilds"),
       members: new Settings(this, "members"),
-      users: new Settings(this, "users")
+      users: new Settings(this, "users"),
+      store: new Settings(this, "store")
     };
 
     this.dbl = new DBL(this.config.dbl, this);

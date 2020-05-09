@@ -13,6 +13,10 @@ module.exports = Structures.extend("Guild", (Guild) => class MiyakoGuild extends
     };
   }
 
+  get prefix() {
+    return this.settings.prefix;
+  }
+
   syncSettings() {
     return this.client.settings.guilds.sync(this.id);
   }
