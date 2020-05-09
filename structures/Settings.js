@@ -119,7 +119,7 @@ class Settings {
       Object.values(options.sort)[0] === 1 ? "ASC" : "DESC"}` : "";
     // Shouldn't need user input here so we didn't use $ parameters, but will modify this if ever needed.
     const limit = options.limit ? ` LIMIT ${options.limit}` : "";
-    const query = `SELECT * FROM "${this.table}"${where}${sort}${limit};`;
+    const query = `SELECT * FROM "${this.table}"${where}${sort}${limit}`;
     return this.client.db.query(query).then((r) => r.rows);
   }
 
