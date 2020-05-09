@@ -120,8 +120,7 @@ class Settings {
     // Shouldn't need user input here so we didn't use $ parameters, but will modify this if ever needed.
     const limit = options.limit ? ` LIMIT ${options.limit}` : "";
     const query = `SELECT * FROM "${this.table}"${where}${sort}${limit}`;
-    //return this.client.db.query(query, values).then((r) => r.rows);
-    return query;
+    return this.client.db.query(query, values).then((r) => r.rows);
   }
 
   /**
