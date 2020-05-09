@@ -4,6 +4,7 @@ require("./extensions/Message.js");
 require("./extensions/Guild.js");
 require("./extensions/User.js");
 
+// Import the Client.
 const MiyakoClient = require("./structures/MiyakoClient.js");
 
 // Login.
