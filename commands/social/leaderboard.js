@@ -14,7 +14,7 @@ class Leaderboard extends Command {
     page = this.verifyInt(page, 1);
 
     const rows = await this.client.settings.members.find({
-      where: { id: { like: `${ctx.guild.id}.%` }, sort: { points: -1 } }
+      where: { id: { like: `${ctx.guild.id}.%` } }, sort: { points: -1 }
     });
 
     const totalPages = Math.round(rows.length / 10);
