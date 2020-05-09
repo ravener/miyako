@@ -8,7 +8,7 @@ Miyako is a multipurpose [Discord](https://discordapp.com) Bot
 
 [![Discord Bots](https://top.gg/api/widget/397796982120382464.svg)](https://top.gg/bot/397796982120382464)
 
-This repository contains the always up to date code for the bot so you can contribute if you want. If you just want to use the bot [invite link](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=1345350758&scope=bot)
+This repository contains the always up to date code for the bot so you can contribute if you want. If you just want to use the bot [invite it here](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=1345350758&scope=bot)
 
 See [FEATURES.md](FEATURES.md) for a detailed description about the bot itself, it's the file we use for bot lists etc while this README is more from a developer's perspective for this repository.
 
