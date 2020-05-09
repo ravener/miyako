@@ -49,6 +49,8 @@ class Store extends Command {
     const role = ctx.guild.roles.cache.find((r) => r.name === rolename);
     if(!role) return ctx.reply("That role does not exist!");
 
+    if(ctx.member.roles.cache.has(role.id)) return ctx.reply("Baka! You already have that role.");
+
     const store = this.client.settings.store.get(role.id);
 
     if(!store) return ctx.reply("Baka! That role is not for sale!");
