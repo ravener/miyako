@@ -16,6 +16,7 @@ class Warn extends Command {
 
     if(user.id === ctx.author.id) return ctx.reply("Baka! You can't warn yourself.");
     if(user.id === this.client.user.id) return ctx.reply("Why would you try to warn me?");
+    if(user.bot) return ctx.reply("Baka! You can't warn bots.");
     if(user.id === ctx.guild.ownerID) return ctx.reply("Baka! You can't warn the owner.");
 
     try {
