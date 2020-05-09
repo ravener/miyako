@@ -115,7 +115,7 @@ class Store extends Command {
 
     // Add it.
     await this.client.settings.store.update(role.id, { price, guild: ctx.guild.id });
-    return ctx.reply(`Success! **${rolename.join(" ")}** is now on sale for **¥${price}**`);
+    return ctx.reply(`Success! **${rolename.join(" ")}** is now on sale for **¥${price.toLocaleString()}**`);
   }
 
   async view(ctx) {
