@@ -37,7 +37,7 @@ class Store extends Command {
     const refund = Math.floor(parseInt(store.price) / 2);
 
     await ctx.member.roles.remove(role);
-    await ctx.member.givePoints(refund);
+    if(refund !== 0) await ctx.member.givePoints(refund);
 
     return ctx.reply(`Successfully sold the role **${rolename}** for **¥${refund.toLocaleString()}** refund.`);
   }
@@ -54,15 +54,16 @@ class Store extends Command {
     const store = this.client.settings.store.get(role.id);
 
     if(!store) return ctx.reply("Baka! That role is not for sale!");
+    const price = parseInt(store.price);
 
-    if(ctx.member.points < parseInt(store.price))
-      return ctx.reply(`Baka! You only have **¥${ctx.member.points.toLocaleString()}**, but the role costs: **¥${parseInt(store.price).toLocaleString()}**`);
+    if(ctx.member.points < price)
+      return ctx.reply(`Baka! You only have **¥${ctx.member.points.toLocaleString()}**, but the role costs: **¥${price.toLocaleString()}**`);
 
     if(role.position > ctx.guild.me.roles.highest.position)
       return ctx.reply("I cannot add that role to you! My role position must be higher than the role you are trying to buy.");
     
     await ctx.member.roles.add(role);
-    await ctx.member.takePoints(parseInt(store.price));
+    if(price !== 0) await ctx.member.takePoints(price);
 
     return ctx.reply(`Successfully bought the role **${rolename}** for **¥${parseInt(store.price).toLocaleString()}**`);
   }
