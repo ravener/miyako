@@ -22,7 +22,7 @@ class Store extends Command {
     const rolename = args.join(" ");
     if(!rolename) return ctx.reply(`Usage: \`${ctx.guild.prefix}store sell <rolename>\``);
 
-    const role = ctx.guild.roles.cache.get(rolename);
+    const role = ctx.guild.roles.cache.get((r) => r.name === rolename);
     if(!role) return ctx.reply("That role does not exist!");
 
     if(!ctx.member.roles.cache.has(role.id)) return ctx.reply("Baka! You don't have that role!");
@@ -46,7 +46,7 @@ class Store extends Command {
     const rolename = args.join(" ");
     if(!rolename) return ctx.reply(`Usage: \`${ctx.guild.settings.prefix}store buy <rolename>\``);
 
-    const role = ctx.guild.roles.cache.get(rolename);
+    const role = ctx.guild.roles.cache.get((r) => r.name === rolename);
     if(!role) return ctx.reply("That role does not exist!");
 
     const store = this.client.settings.store.get(role.id);
@@ -72,7 +72,7 @@ class Store extends Command {
     const rolename = args.join(" ");
     if(!rolename) return ctx.reply(`Usage: \`${ctx.guild.settings.prefix}store delete <role>\``);
 
-    const role = ctx.guild.roles.cache.get(rolename);
+    const role = ctx.guild.roles.cache.get((r) => r.name === rolename);
     if(!role) return ctx.reply(`The role **${rolename}** does not exist.`);
 
     if(!this.client.settings.store.cache.has(role.id)) return ctx.reply("That role isn't on sale.");
@@ -94,7 +94,7 @@ class Store extends Command {
 
     // Verify the role.
     if(!rolename.length) return ctx.reply(`Usage: \`${ctx.guild.settings.prefix}store add <price> <rolename>\``);
-    const role = ctx.guild.roles.cache.get(rolename.join(" "));
+    const role = ctx.guild.roles.cache.find((r) => r.name === rolename.join(" "));
     if(!role) return ctx.reply(`The role **${rolename.join(" ")}** does not exist!`);
 
     // Make sure we can add it.
