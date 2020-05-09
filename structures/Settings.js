@@ -83,6 +83,54 @@ class Settings {
   }
 
   /**
+   * find({ where: { guild: "id", price: { gt: 25, lt: 100 } }, sort: { price: -1 }, limit: 5 })
+   */
+  find(options = {}) {
+    let count = 1;
+    const values = [];
+    const where = options.where ? ` WHERE ${Object.entries(options.where).map(([k, v]) => {
+      if(typeof v !== "object") {
+        values.push(v);
+        return `"${k}" = $${count++}`;
+      }
+
+      if(v.like) {
+        values.push(v.like);
+        return `"${k}" LIKE $${count++}`;
+      }
+
+      // Both GT and LT in one object.
+      if(!isNaN(v.gt) && !isNaN(v.lt)) {
+        values.push(v.gt);
+        values.push(v.lt);
+
+        count += 2;
+        return `"${k}" > $${count - 2} AND "${k}" < $${count - 1}`;
+      } else if(!isNaN(v.gt)) {
+        values.push(v.gt);
+        return `"${k}" > $${count++}`;
+      } else if(!isNaN(v.lt)) {
+        values.push(v.lt);
+        return `"${k}" < $${count++}`;
+      }
+
+    }).join(" AND ")}` : "";
+    const sort = options.sort && Object.keys(options.sort).length === 1 ? ` ORDER BY "${Object.keys(options.sort)[0]}" ${
+      Object.values(options.sort)[0] === 1 ? "ASC" : "DESC"}` : "";
+    // Shouldn't need user input here so we didn't use $ parameters, but will modify this if ever needed.
+    const limit = options.limit ? ` LIMIT ${options.limit}` : "";
+    const query = `SELECT * FROM "${this.table}"${where}${sort}${limit};`;
+    return this.client.db.query(query).then((r) => r.rows);
+  }
+
+  /**
+   * Like find but returns only the first element or null.
+   */
+  findOne(options = {}) {
+    return this.find(options).then((r) => r[0] || null);
+  }
+
+  /**
    * Initializes this settings by loading the cache.
    * Call this before the client is logged in.
    */

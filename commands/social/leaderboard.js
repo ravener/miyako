@@ -13,8 +13,9 @@ class Leaderboard extends Command {
   async run(ctx, [page]) {
     page = this.verifyInt(page, 1);
 
-    // SQL injection risk, can't use $1 params here so we have to do this. However guild.id is always safe.
-    const { rows } = await this.client.db.query(`SELECT * FROM members WHERE id LIKE '${ctx.guild.id}.%' ORDER BY points DESC`);
+    const rows = await this.client.settings.members.find({
+      where: { id: { like: `${ctx.guild.id}.%` }, sort: { points: -1 } }
+    });
 
     const totalPages = Math.round(rows.length / 10);
 

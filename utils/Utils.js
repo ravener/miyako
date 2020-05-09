@@ -27,6 +27,7 @@ class Utils {
     return str.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
   }
 
+  // Convert milliseconds into human readable string.
   static getDuration(time) {
     const seconds = Math.floor(time / 1000) % 60 ;
     const minutes = Math.floor((time / (1000 * 60)) % 60);

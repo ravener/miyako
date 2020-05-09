@@ -5,11 +5,8 @@ class EventStore extends Store {
   constructor(client) {
     super(client, "events");
 
+    // Raw Events are stored in this collection.
     this.raw = new Collection();
-  }
-
-  get(name) {
-    return super.get(name) || this.raw.get(name);
   }
 
   set(event) {

@@ -12,8 +12,9 @@ class Reload extends Command {
 
   async run(ctx, [pieceName]) {
     if(!pieceName) return ctx.reply(this.client.utils.random(this.client.responses.reloadMissingArg));
-    const piece = this.client.commands.get(pieceName) || this.client.events.get(pieceName);
+    const piece = this.client.commands.get(pieceName) || this.client.events.get(pieceName) || this.client.events.raw.get(pieceName);
     if(!piece) return ctx.reply(this.client.utils.random(this.client.responses.reloadNotFound));
+
     try {
       const reloaded = await piece.reload();
       return ctx.reply(this.client.utils.random(this.client.responses.reloadSuccess)
