@@ -62,7 +62,7 @@ class UserPrefix extends Command {
     const prefix = ctx.author.settings.prefix;
     if(!prefix.includes(prefixInput)) return ctx.reply("Baka! That prefix is not in your list.");
 
-    prefix.slice(prefix.indexOf(prefixInput), 1);
+    prefix.splice(prefix.indexOf(prefixInput), 1);
 
     await ctx.author.update({ prefix });
 
