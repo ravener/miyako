@@ -28,7 +28,7 @@ class UserPrefix extends Command {
     if(prefixInput.length > 15) return ctx.reply("Baka! Prefix cannot be longer than 15 characters!");
 
     // Get existing prefixes to append to.
-    const prefix = msg.author.settings.prefix || [];
+    const prefix = ctx.author.settings.prefix || [];
 
     // Avoid duplicates.
     if(prefix.includes(prefixInput)) return ctx.reply("Baka! That prefix is already on the list.");
