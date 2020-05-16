@@ -5,7 +5,7 @@ class Starboard extends Command {
     super(...args, {
       description: "Configure the server starboard.",
       extendedHelp: "The starboard is a channel where when users add a star reaction to messages it will be posted there. It is used to highlight funny/embarassing/dumb moments and such. You can set a limit to avoid messages below the limit to be posted in the starboard channel.",
-      usage: "starboard limit <amount> | enable <#channel | disable",
+      usage: "starboard limit <amount> | enable <#channel> | disable",
       userPermissions: ["MANAGE_GUILD"],
       guildOnly: true
     });

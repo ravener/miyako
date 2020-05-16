@@ -4,6 +4,7 @@ const { MessageEmbed } = require("discord.js");
 class GuildDelete extends Event {
 
   async run(guild) {
+    // If the guild went unavailable don't do anything.
     if(!guild.available) return;
     
     // Delete guild settings.

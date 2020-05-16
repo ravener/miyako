@@ -73,11 +73,26 @@ class Command {
   async verifyChannel(ctx, channel, defaultToCurrent = false) {
     if(!channel && defaultToCurrent) return ctx.channel;
     if(!channel) throw "You need to mention a channel or provide an ID.";
+
     const match = /^(?:<#)?(\d{17,19})>?$/.exec(channel);
     if(!match) throw "Invalid channel, must be a mention or an ID.";
+
     const chan = await this.client.channels.fetch(match[1]).catch(() => null);
     if(!chan) throw "I could not find that channel.";
+
     return chan;
+  }
+
+  verifyRole(ctx, rolename, optional = false) {
+    if(!rolename && optional) return null;
+    if(!rolename) throw "Baka! You must provide a role name or ID.";
+    rolename = rolename.toLowerCase();
+
+    // We check by ID or name. Nobody mentions roles for an argument.
+    const role = ctx.guild.roles.cache.find((role) => (role.id === rolename) || (role.name.toLowerCase() === rolename));
+    if(!role) throw "That role does not exist.";
+
+    return role;
   }
 
   verifyInt(num, def) {

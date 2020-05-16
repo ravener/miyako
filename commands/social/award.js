@@ -21,9 +21,16 @@ class Award extends Command {
     
     if(amount < 0) return ctx.rely("Baka! You can't reward them a negative amount. Are you trying to rob them?");
     if(amount === 0) return ctx.reply("Baka! Why would you pay them nothing?");
-    if(amount >= 100000) return ctx.reply("You can't reward more than 100,000 at a time.");
+
+    // Guard against abuse. We have to be careful not to let users add infinite points and overflow the database.
+    if(amount >= 100000) return ctx.reply("You can't reward more than **¥100,000** at a time.");
 
     await member.syncSettings();
+
+    // Even more guard.
+    if(member.points >= Number.MAX_SAFE_INTEGER)
+      return ctx.reply(`N-nani? **${member.displayName}** have too much credits that I can't even keep track of it anymore. You cannot reward them anymore credits until they spend some.`);
+
     await member.givePoints(amount);
 
     return ctx.reply(`Successfully rewarded **¥${amount.toLocaleString()}** to ${member}`);

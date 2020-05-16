@@ -6,15 +6,19 @@ class Prefix extends Command {
       description: "Set or reset the prefix for this server.",
       usage: "prefix [prefix|reset]",
       guildOnly: true,
-      aliases: ["setprefix", "changeprefix"],
-      userPermissions: ["MANAGE_GUILD"]
+      aliases: ["setprefix", "changeprefix"]
     });
   }
   
-  async run(ctx, [prefix]) {
-    if(!prefix) {
+  async run(ctx, args) {
+    if(!args.length) {
       return ctx.reply(`The prefix for this server is \`${ctx.guild.settings.prefix}\``);
     }
+
+    if(!ctx.members.permissions.has("MANAGE_GUILD"))
+      return ctx.reply("Baka! You need the `Manage Server` permissions to change the prerix.");
+
+    const prefix = args.join(" ");
 
     if(prefix === "reset") return this.reset(ctx);
     if(prefix.length > 10) return ctx.reply("Prefix can't be longer than 10 characters.");

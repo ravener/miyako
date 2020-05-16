@@ -24,6 +24,15 @@ and more...
 ## Fun
 Lot of fun commands to keep you entertained with Miyako.
 
+## Anime Reactions
+Add some Anime GIFs to spice up your conversations with commands like:
+
+- **hug**
+- **slap**
+- **kiss**
+
+and more...
+
 ## Tsundere
 Miyako has a tsundere-like personality for interactions, e.g error messages. And you can enable weeb greetings (`m!weebgreetings enable #channel`) to let Miyako greet new people ;)
 

@@ -41,3 +41,26 @@ Events are reloadable.
 
 ## Commands.
 TODO
+
+## Comments
+It is encouraged to add some comments and have some space between lines to keep the code readable, for example:
+
+**Bad:**
+```js
+const id = doStuff();
+if(!id) return ctx.reply("Not found.");
+const role = ctx.guild.roles.cache.get(id);
+await role.delete();
+```
+**Good:**
+```js
+// Try to find the role.
+const id = doStuff();
+if(!id) return ctx.reply("Not found.");
+
+// Grab the role.
+const role = ctx.guild.roles.cache.get(id);
+// Delete it.
+await role.delete();
+```
+The code should be clear and understandable by even beginners. No we won't document every single step to help people learn JavaScript and copy it but have some comments to explain the logic a little bit so it's easier to read and navigate the code.

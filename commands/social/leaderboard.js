@@ -17,9 +17,9 @@ class Leaderboard extends Command {
       where: { id: { like: `${ctx.guild.id}.%` } }, sort: { points: -1 }
     });
 
-    const totalPages = Math.round(rows.length / 10);
+    if(rows.length === 0) return ctx.reply("There is no leaderboard in this server, maybe its a dead place???")
 
-    if(totalPages === 0) return ctx.reply("There is no leaderboard in the server, maybe its a dead place???");
+    const totalPages = Math.max(Math.round(rows.length / 10), 1);
 
     page -= 1;
 

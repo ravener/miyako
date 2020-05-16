@@ -1,5 +1,4 @@
 
-// This code makes me feel sick, I hate my database management, I should implement some sort of cache and abstraction.
 class Points {
   constructor(client) {
     this.client = client;

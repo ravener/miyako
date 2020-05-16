@@ -8,8 +8,16 @@
     "message": "m!help | {{guilds}} servers"
   },
   {
+    "type": "PLAYING",
+    "message": "m!invite | {{guilds}} servers"
+  },
+  {
+    "type": "PLAYING",
+    "message": "m!support | {{guilds}} servers"
+  },
+  {
     "type": "LISTENING",
-    "message": "in {{guilds}} servers"
+    "message": "to {{guilds}} servers"
   },
   {
     "type": "WATCHING",

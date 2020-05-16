@@ -1,5 +1,5 @@
-const Command = require("../../structures/Command.js");
-const pokemons = require("../../assets/json/pokemon.json");
+const Command = require("../../../structures/Command.js");
+const pokemons = require("../../../assets/json/pokemon.json");
 const { MessageEmbed } = require("discord.js");
 
 class Pokemon extends Command {

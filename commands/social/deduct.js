@@ -26,7 +26,7 @@ class Deduct extends Command {
     // Synchronize settings before reading points.
     await member.syncSettings();
 
-    if(parseInt(member.settings.points) < amount) return ctx.reply("Baka! You can't deduct more than their balance.");
+    if(member.points < amount) return ctx.reply("Baka! You can't deduct more than their balance.");
 
     await member.takePoints(amount);
 

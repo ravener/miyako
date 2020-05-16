@@ -16,6 +16,7 @@ class Translate extends Command {
   
   async run(ctx, [language, ...text]) {
     if(!language) return ctx.reply("Baka! What language am I supposed to translate to?");
+    if(language.length !== 2) return ctx.reply("Language must be the 2 letter alias. E.g `French` -> `fr`");
     if(!text.length) return ctx.reply("Baka! What am I supposed to translate?");
 
     const $ = await fetch(`http://translate.google.com/m?hl=${language}&sl=auto&q=${encodeURIComponent(text.join(" "))}`, {

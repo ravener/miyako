@@ -40,7 +40,13 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
 
   async givePoints(amount) {
     const points = parseInt(this.settings.points) + parseInt(amount);
+
+    // Guard against overflow.
+    if(points >= Number.MAX_SAFE_INTEGER) return false;
+
+    // Validate against any accidents.
     if(isNaN(points)) throw new Error("Cannot give NaN points to member.");
+
     return this.update({ points });
   }
 

@@ -33,7 +33,8 @@ class MessageEvent extends Event {
     if(msg.channel.type !== "text") return true; // No permissions in DMs.
 
     // Check if user has permissions to run the command. Owner gets a bypass.
-    const user = msg.author.id === this.client.constants.ownerID ? [] : msg.member.permissions.missing(cmd.userPermissions);
+    const user = msg.author.id === this.client.constants.ownerID ? [] :
+      msg.channel.permissionsFor(msg.author).missing(cmd.userPermissions);
 
     if(user.length > 0) {
       await msg.channel.send(`You do not have the following permission${user.length === 1 ? "" : "s"} to run this command: \`${
@@ -64,6 +65,12 @@ class MessageEvent extends Event {
     if(msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
       return msg.channel.send(`Hi! Run \`${prefix}help\` to get a list of commands you can use.`);
 
+    // Users can have their own list of prefixes globally.
+    // Might confuse other users but doesn't matter too much
+    // it allows users to use their comfortable prefix everywhere.
+    const userPrefix = (msg.author.settings.prefix && msg.author.settings.prefix.length) ?
+    `|${msg.author.settings.prefix.map((p) => `^${this.client.utils.escapeRegex(p)}`).join("|")}` : "";
+
     // Possibilities:
     // - miyako ping
     // - yo miyako ping
@@ -71,9 +78,11 @@ class MessageEvent extends Event {
     // - @Miyako ping
     // - m!ping
     // - Or custom prefix.
+    // - Or custom per-user prefix.
+    //
     // A comma can be added after the (hey|yo|ok) and the (miyako) (e.g hey, miyako, ping)
     const prefixMatch = new RegExp(`^(?:(?:(?:hey|yo|ok),? )?miyako,? )|^<@!?${this.client.user.id}> |^${
-      this.client.utils.escapeRegex(prefix)}`, "i").exec(msg.content);
+      this.client.utils.escapeRegex(prefix)}${userPrefix}`, "i").exec(msg.content);
 
     // If the message is not a command run the point system monitor.
     if(!prefixMatch) return this.client.points.run(msg);

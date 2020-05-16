@@ -7,7 +7,8 @@ class Store extends Command {
       extendedHelp: "Examples: m!store add 1000 VIP (sell VIP role for ¥1000)\nm!store add 0 Cool Guy (Sell the Cool Guy role for free)\nm!store buy VIP (buy the role.)\nm!store sell VIP (sell and remove the role for a 50% refund)",
       usage: "store <add|sell|buy|delete|view:default> <role>",
       guildOnly: true,
-      aliases: ["shop"]
+      aliases: ["shop"],
+      botPermissions: ["MANAGE_ROLES"]
     });
   }
 
@@ -19,10 +20,10 @@ class Store extends Command {
   }
 
   async sell(ctx, args) {
-    const rolename = args.join(" ");
+    const rolename = args.join(" ").toLowerCase();
     if(!rolename) return ctx.reply(`Usage: \`${ctx.guild.prefix}store sell <rolename>\``);
 
-    const role = ctx.guild.roles.cache.find((r) => r.name === rolename);
+    const role = ctx.guild.roles.cache.find((r) => (r.id === rolename) || (r.name.toLowerCase() === rolename));
     if(!role) return ctx.reply("That role does not exist!");
 
     if(!ctx.member.roles.cache.has(role.id)) return ctx.reply("Baka! You don't have that role!");
@@ -39,14 +40,14 @@ class Store extends Command {
     await ctx.member.roles.remove(role);
     if(refund !== 0) await ctx.member.givePoints(refund);
 
-    return ctx.reply(`Successfully sold the role **${rolename}** for **¥${refund.toLocaleString()}** refund.`);
+    return ctx.reply(`Successfully sold the role **${role.name}** for **¥${refund.toLocaleString()}** refund.`);
   }
 
   async buy(ctx, args) {
-    const rolename = args.join(" ");
+    const rolename = args.join(" ").toLowerCase();
     if(!rolename) return ctx.reply(`Usage: \`${ctx.guild.settings.prefix}store buy <rolename>\``);
 
-    const role = ctx.guild.roles.cache.find((r) => r.name === rolename);
+    const role = ctx.guild.roles.cache.find((r) => (r.id === rolename) || (r.name.toLowerCase() === rolename));
     if(!role) return ctx.reply("That role does not exist!");
 
     if(ctx.member.roles.cache.has(role.id)) return ctx.reply("Baka! You already have that role.");
@@ -65,26 +66,27 @@ class Store extends Command {
     await ctx.member.roles.add(role);
     if(price !== 0) await ctx.member.takePoints(price);
 
-    return ctx.reply(`Successfully bought the role **${rolename}** for **¥${parseInt(store.price).toLocaleString()}**`);
+    return ctx.reply(`Successfully bought the role **${role.name}** for **¥${price.toLocaleString()}**`);
   }
 
   async delete(ctx, args) {
     if(!ctx.member.permissions.has("MANAGE_GUILD"))
       return ctx.reply("Baka! You need the `Manage Server` permissions to delete roles from the store.");
 
-    const rolename = args.join(" ");
+    const rolename = args.join(" ").toLowerCase();
     if(!rolename) return ctx.reply(`Usage: \`${ctx.guild.settings.prefix}store delete <role>\``);
 
-    const role = ctx.guild.roles.cache.find((r) => r.name === rolename);
-    if(!role) return ctx.reply(`The role **${rolename}** does not exist.`);
+    const role = ctx.guild.roles.cache.find((r) => (r.id === rolename) || (r.name.toLowerCase() === rolename));
+
+    if(!role) return ctx.reply(`That role does not exist.`);
 
     if(!this.client.settings.store.cache.has(role.id)) return ctx.reply("That role isn't on sale.");
 
     await this.client.settings.store.delete(role.id);
-    return ctx.reply(`Successfully removed the role **${rolename}** from the store.`);
+    return ctx.reply(`Successfully removed the role **${role.name}** from the store.`);
   }
 
-  async add(ctx, [price, ...rolename]) {
+  async add(ctx, [price, ...args]) {
     // Check for permissions.
     if(!ctx.member.permissions.has("MANAGE_GUILD"))
       return ctx.reply("Baka! You need the `Manage Server` permissions to add roles to the store.")
@@ -96,9 +98,10 @@ class Store extends Command {
     if(price >= Number.MAX_SAFE_INTEGER) return ctx.reply("Baka! That price is too high.");
 
     // Verify the role.
-    if(!rolename.length) return ctx.reply(`Usage: \`${ctx.guild.settings.prefix}store add <price> <rolename>\``);
-    const role = ctx.guild.roles.cache.find((r) => r.name === rolename.join(" "));
-    if(!role) return ctx.reply(`The role **${rolename.join(" ")}** does not exist!`);
+    const rolename = args.join(" ").toLowerCase();
+    if(!rolename) return ctx.reply(`Usage: \`${ctx.guild.settings.prefix}store add <price> <rolename>\``);
+    const role = ctx.guild.roles.cache.find((r) => (r.id === rolename) || (r.name.toLowerCase() === rolename));
+    if(!role) return ctx.reply(`That role does not exist!`);
 
     // Make sure we can add it.
     if(role.position >= ctx.guild.me.roles.highest.position)
@@ -115,7 +118,7 @@ class Store extends Command {
 
     // Add it.
     await this.client.settings.store.update(role.id, { price, guild: ctx.guild.id });
-    return ctx.reply(`Success! **${rolename.join(" ")}** is now on sale for **¥${price.toLocaleString()}**`);
+    return ctx.reply(`Success! **${role.name}** is now on sale for **¥${price.toLocaleString()}**`);
   }
 
   async view(ctx) {

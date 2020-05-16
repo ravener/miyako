@@ -9,8 +9,11 @@ class GuildCreate extends Event {
 
     if(!guild.owner && guild.ownerID) await guild.members.fetch(guild.ownerID);
 
+    // If it exists in the settings then definitely an unavailable guild came back.
+    const exists = this.client.settings.guilds.cache.has(guild.id);
+
     const embed = new MessageEmbed()
-      .setTitle("Miyako joined a new server!")
+      .setTitle(exists ? "An unavailable guild came back" : "Miyako joined a new server!")
       .setDescription(guild.name)
       .setColor(0x9590EE)
       .setThumbnail(guild.iconURL())

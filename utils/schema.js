@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS users (
   id TEXT PRIMARY KEY NOT NULL UNIQUE,
   reputation INTEGER DEFAULT 0,
   repcooldown TIMESTAMP,
-  title TEXT
+  title TEXT,
+  prefix TEXT[]
 );
 
 CREATE TABLE IF NOT EXISTS bot (
