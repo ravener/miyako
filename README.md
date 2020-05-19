@@ -51,7 +51,7 @@ It's been a long time since I had any solid Discord friends and most of my curre
 ## Running it yourself
 Requirements:
 - Node.js v12+ (Version requirement may change at any time.)
-- PostgreSQL
+- PostgreSQL 9.5+
 
 Clone the repository or fetch it however you want:
 ```sh
@@ -62,7 +62,7 @@ Install dependencies (don't worry I'm very picky about dependencies and keep it 
 ```sh
 $ npm install
 ```
-Copy `config.json.example` to `config.json` and fill the fields.
+Copy `config.json.example` to `config.json` and fill in the fields.
 
 Finally run the bot using `node index.js` (use pm2/nodemon whatever you want)
 
