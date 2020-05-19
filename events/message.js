@@ -122,7 +122,7 @@ class MessageEvent extends Event {
       return msg.channel.send("The social economy system has been disabled in this server by an Admin so I cannot let you use that command.");
 
     // Verify the member is available and its settings are synchronized.
-    if(command.guildOnly) {
+    if(msg.guild) {
       if(!msg.member) await msg.guild.members.fetch(msg.author);
       await msg.member.syncSettingsCache();
     }
@@ -135,6 +135,7 @@ class MessageEvent extends Event {
 
     // If the command costs points and we are in a guild with the social system enabled.
     if(command.cost && msg.guild && msg.guild.settings.social) {
+
       const premium = await this.client.verifyPremium(msg.author);
 
       // Premium users get a 25% off the cost.
