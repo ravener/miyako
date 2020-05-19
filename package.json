@@ -22,7 +22,7 @@
     "dblapi.js": "^2.4.0",
     "discord.js": "^12.2.0",
     "fast-levenshtein": "^2.0.6",
-    "img-api": "^1.0.0",
+    "img-api": "^1.0.1",
     "klaw": "^3.0.0",
     "pg": "^8.0.3"
   }
