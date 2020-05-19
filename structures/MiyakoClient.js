@@ -8,6 +8,7 @@ const DBL = require("dblapi.js");
 const loadSchema = require("../utils/schema.js");
 const Settings = require("./Settings.js");
 const presences = require("../assets/json/presences.json");
+const imgapi = require("img-api");
 
 class MiyakoClient extends Client {
   constructor() {
@@ -27,6 +28,7 @@ class MiyakoClient extends Client {
     this.events = new EventStore(this);
     this.sweeper = new MemorySweeper(this);
     this.responses = require("../utils/responses.js");
+    this.img = new imgapi.Client();
 
     // Settings.
     this.settings = {
