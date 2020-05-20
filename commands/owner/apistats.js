@@ -26,11 +26,11 @@ class APIStats extends Command {
       .addField("Version", `v${version}`, true)
       .addField("Uptime", this.client.utils.getDuration(uptime * 1000))
       .addField("Memory Stats", [
-        `**Used:** ${stats.Alloc} / ${stats.Sys}`,
+        `**Used:** ${this.client.utils.getBytes(stats.Alloc)} / ${this.client.utils.getBytes(stats.Sys)}`,
         `**Garbage Collected:** ${this.client.utils.getBytes(stats.TotalAlloc - stats.Alloc)}`,
         `**GC Cycles:** ${stats.NumGC}`,
         `**Forced GC Cycles:** ${stats.NumForcedGC}`,
-        `**Last GC:** ${this.client.utils.getDuration(Date.now() - new Date(stats.LastGC * 1000))} ago`,
+        `**Last GC:** ${this.client.utils.getDuration(Date.now() - new Date(stats.stats.LastGC * 1000))} ago`,
         `**Next GC Target:** ${this.client.utils.getBytes(stats.NextGC)}`,
         `**Goroutines:** ${stats.goroutines}`
       ].join("\n"));
