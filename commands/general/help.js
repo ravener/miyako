@@ -47,11 +47,13 @@ class Help extends Command {
 
     const map = {}; // Map<Category, Array<Command.Name>>
     for(const command of this.store.values()) {
-      // Check for hidden command first so if all commands in a category is hidden we won't even show the category.
-      if(!command.hidden) {
-        if(!map[command.category]) map[command.category] = [];
-        map[command.category].push(command.name);
-      }
+      // Check for hidden commands first so if all commands in a category is hidden we won't even show the category.
+      if(command.hidden) continue;
+      if(command.ownerOnly && ctx.author.id !== this.client.constants.ownerID) continue;
+      if(command.nsfw && !ctx.channel.nsfw) continue;
+
+      if(!map[command.category]) map[command.category] = [];
+      map[command.category].push(command.name);
     }
 
     const embed = new MessageEmbed()
@@ -65,10 +67,7 @@ class Help extends Command {
 
     for(const category of keys) {
       // Skip un-needed categories
-      if(category === "Owner" && ctx.author.id !== this.client.constants.ownerID) continue;
       if(category === "Social" && !ctx.guild.settings.social) continue;
-      if(category === "Nsfw" && !ctx.channel.nsfw) continue;
-
       embed.addField(category, map[category].join(", "));
     }
 

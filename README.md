@@ -52,6 +52,7 @@ It's been a long time since I had any solid Discord friends and most of my curre
 Requirements:
 - Node.js v12+ (Version requirement may change at any time.)
 - PostgreSQL 9.5+
+- [IMG API](https://github.com/pollen5/img-api) optional but image commands won't work.
 
 Clone the repository or fetch it however you want:
 ```sh
