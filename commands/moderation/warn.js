@@ -20,7 +20,7 @@ class Warn extends Command {
     if(user.id === ctx.guild.ownerID) return ctx.reply("Baka! You can't warn the owner.");
 
     try {
-      await user.send(`You've been warned in **${msg.guild.name}** by **${msg.author.tag}** for: ${reason.join(" ")}`);
+      await user.send(`You've been warned in **${ctx.guild.name}** by **${ctx.author.tag}** for: ${reason.join(" ")}`);
       return ctx.reply(`I've warned **${user.user.tag}** for: ${reason.join(" ")}`);
     } catch(err) {
       return ctx.reply("I couldn't DM the user, maybe they have DMs blocked.");

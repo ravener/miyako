@@ -21,6 +21,7 @@ class Event {
     }
   }
 
+  /* eslint-disable-next-line no-unused-vars */
   async run(...args) {}
 
   reload() {

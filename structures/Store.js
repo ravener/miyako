@@ -1,6 +1,5 @@
 const { Collection } = require("discord.js");
 const path = require("path");
-const klaw = require("klaw");
 
 class Store extends Collection {
   constructor(client, name) {
@@ -41,20 +40,14 @@ class Store extends Collection {
   /**
    * Walks files and returns a promise that resolves with the amount of pieces loaded.
    */
-  loadFiles() {
-    return new Promise((resolve, reject) => {
-      klaw(this.dir)
-        .on("data", (item) => {
-          if(!item.path.endsWith(".js")) return;
-          try {
-            this.load(path.relative(this.dir, item.path));
-          } catch(err) {
-            return reject(err);
-          }
-        })
-        .on("error", (err) => reject(err))
-        .on("end", () => resolve(this.size));
+  async loadFiles() {
+    const files = await this.client.utils.walk(this.dir, {
+      filter: (stats, file) => stats.isFile() && file.endsWith(".js")
     });
+
+    [...files.keys()].map((file) => this.load(path.relative(this.dir, file)));
+
+    return this.size;
   }
 }
 

@@ -2,6 +2,9 @@ const { promisify } = require("util");
 
 const suffixes = ["Bytes", "KB", "MB", "GB"];
 
+const { promises: { lstat, readdir } } = require("fs");
+const path = require("path");
+
 /**
  * Static class with utilities used throughout the bot.
  */
@@ -60,6 +63,19 @@ class Utils {
     if(!match) return { lang: null, code: txt };
     if(match[1] && !match[2]) return { lang: null, code: match[1] };
     return { lang: match[1], code: match[2] };
+  }
+
+  // This piece of code is taken from fs-nextra by BDISTIN
+  // MIT Licensed
+  // I just didn't want to add a dependency I wouldn't use more than once.
+  static async walk(dir, options = {}, results = new Map(), level = -1) {
+    dir = path.resolve(dir);
+    const stats = await lstat(dir);
+    if(!options.filter || options.filter(stats, dir)) results.set(dir, stats);
+    if(stats.isDirectory() && (typeof options.depthLimit === "undefined" || level < options.depthLimit)) {
+      await Promise.all((await readdir(dir)).map((part) => Utils.walk(path.join(dir, part), options, results, ++level)));
+    }
+    return results;
   }
 }
 

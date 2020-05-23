@@ -8,7 +8,7 @@ class RawMessageReactionAdd extends Event {
     });
   }
 
-  async run(packet, shard) {
+  async run(packet, shard) { // eslint-disable-line no-unused-vars
     if(packet.emoji.name === "⭐") return this.starboard(packet);
   }
 

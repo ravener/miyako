@@ -15,7 +15,7 @@ class Leave extends Command {
     guild = this.client.guilds.cache.get(guild);
     if(!guild) return ctx.reply("Baka! I'm not in that server.");
     
-    const msg = await ctx.reply(`Are you sure you want me to leave **${guild.name}** (${guild.id})`);
+    await ctx.reply(`Are you sure you want me to leave **${guild.name}** (${guild.id})`);
     const filter = (msg) => msg.author.id === ctx.author.id;
     const attempts = await ctx.channel.awaitMessages(filter, { time: 15000, max: 1 });
 

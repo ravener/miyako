@@ -1,6 +1,5 @@
 const Command = require("../../structures/Command.js");
 const fetch = require("node-fetch");
-const { MessageEmbed } = require("node-fetch");
 
 class CatFace extends Command {
   constructor(...args) {

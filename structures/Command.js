@@ -109,14 +109,14 @@ class Command {
    * Incase of string the command won't run but the string is sent to the channel.
    * Incase of true the command is ran as normal.
    */
-  async before(ctx, args) {
+  async before(ctx, args) { // eslint-disable-line no-unused-vars
     return true;
   }
 
   /**
    * The actual command implementation, must be implemented in a subclass.
    */
-  async run(ctx, args) {
+  async run(ctx, args) { // eslint-disable-line no-unused-vars
     return ctx.reply(`${this.constructor.name} does not provide a \`run()\` implementation.${ctx.author.id !== this.client.constants.ownerID ? " This is a bug, please report this in our server at https://discord.gg/mDkMbEh" : ""}`);
   }
 

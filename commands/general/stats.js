@@ -9,7 +9,7 @@ class Stats extends Command {
     });
   }
 
-  async run(ctx, args) {
+  async run(ctx, args) { // eslint-disable-line no-unused-vars
     const { client } = this; // Avoid typing a lot of 'this'
 
     const seconds = Math.floor(client.uptime / 1000) % 60 ;

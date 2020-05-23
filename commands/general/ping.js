@@ -7,7 +7,7 @@ class Ping extends Command {
     });
   }
 
-  async run(ctx, args) {
+  async run(ctx, args) { // eslint-disable-line no-unused-vars
     const msg = await ctx.reply("Ping?");
 
     return msg.edit(this.client.utils.random(this.client.responses.pingMessages)

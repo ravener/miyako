@@ -8,7 +8,7 @@ class Support extends Command {
     });
   }
 
-  async run(ctx, args) {
+  async run(ctx, args) { // eslint-disable-line no-unused-vars
     return ctx.reply(new MessageEmbed()
       .setTitle("Join Miyako Lounge")
       .setColor(0x9590EE)
