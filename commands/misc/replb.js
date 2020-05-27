@@ -19,7 +19,8 @@ class RepLB extends Command {
     const embed = new MessageEmbed()
       .setColor(0x9590EE)
       .setTitle(`Top${rows.length === 1 ? "" : ` ${rows.length}`} respected user${rows.length > 1 ? "s" : ""} by reputations`)
-      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }));
+      .setAuthor(ctx.author.tag, ctx.author.displayAvatarURL({ size: 64 }))
+      .setFooter(`Give reputation to users via ${ctx.guild.settings.prefix}rep @user to help them climb the leaderboard.`);
 
     const lb = [];
     
