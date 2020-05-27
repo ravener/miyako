@@ -16,7 +16,7 @@ class Respect extends Command {
 
     const img = await this.client.img.respect(user.displayAvatarURL({ size: 128, format: "png" }));
 
-    const m = await ctx.reply("Press 🇫 to pay respects", new MessageAttachment(img,"respect.png"));
+    const m = await ctx.reply("Press 🇫 to pay respects", new MessageAttachment(img, "respect.png"));
     return m.react("🇫");
   }
 }
