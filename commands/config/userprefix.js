@@ -6,7 +6,8 @@ class UserPrefix extends Command {
     super(...args, {
       description: "Manage Per-User Global prefixes.",
       aliases: ["uprefix"],
-      usage: "userprefix <add|remove|list:default> <prefix>"
+      usage: "userprefix <add|remove|list:default> <prefix>",
+      extendedHelp: "With this command you can add a prefix that only you can use everywhere this bot is available. Convenient for those who find the prefix uncomfortable or just wants to stick with one prefix everywhere. Keep in mind prefixes are case insensitives so do not worry about that."
     });
   }
 
@@ -21,7 +22,7 @@ class UserPrefix extends Command {
     if(ctx.author.settings.prefix && ctx.author.settings.prefix.length >= 10)
       return ctx.reply("Baka! You can't have more than 10 prefixes. Remove some before trying again.");
     
-    const prefixInput = args.join(" ");
+    const prefixInput = args.join(" ").toLowerCase();
     if(!prefixInput) return ctx.reply("Baka! You must provide a prefix.");
 
     // User prefixes get an extra 5 chars compared to guild prefixes.
@@ -56,7 +57,7 @@ class UserPrefix extends Command {
     if(!ctx.author.settings.prefix || !ctx.author.settings.prefix)
       return ctx.reply("You don't have any prefixes to remove!");
 
-    const prefixInput = args.join(" ");
+    const prefixInput = args.join(" ").toLowerCase();
     if(!prefixInput) return ctx.reply("Baka! You must provide a prefix to remove!");
 
     const prefix = ctx.author.settings.prefix;
