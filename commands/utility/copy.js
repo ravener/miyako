@@ -22,12 +22,12 @@ class Copy extends Command {
     return this.create(ctx, url, name, "Couldn't create emoji, make sure the ID is valid.");
   }
   
-  async create(msg, url, name, err = "Something went wrong, make sure the URL is valid and returns an image.") {
-    const emoji = await msg.guild.emojis.create(url, name).catch(() => {
+  async create(ctx, url, name, err = "Something went wrong, make sure the URL is valid and returns an image.") {
+    const emoji = await ctx.guild.emojis.create(url, name).catch(() => {
       throw err;
     });
 
-    return msg.send(`Done! created new emoji ${emoji.name} ${emoji.toString()}`);
+    return ctx.reply(`Done! created new emoji ${emoji.name} ${emoji.toString()}`);
   }
 }
 
