@@ -16,7 +16,7 @@ class Copy extends Command {
   async run(ctx, [emoji, name]) {
     if(!emoji || !name) return ctx.reply(`Usage: \`${ctx.guild.prefix}copy <url to image or emoji id> <name to save as>\``);
     if(emoji.includes("http")) return this.create(ctx, emoji, name);
-    const e = this.client.emojis.get(emoji);
+    const e = this.client.emojis.cache.get(emoji);
     if(e) return this.create(ctx, e.url, name, "Something went wrong.");
     const url = `https://cdn.discordapp.com/emojis/${emoji}.png`;
     return this.create(ctx, url, name, "Couldn't create emoji, make sure the ID is valid.");
