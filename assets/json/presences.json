@@ -17,7 +17,7 @@
   },
   {
     "type": "LISTENING",
-    "message": "to {{guilds}} servers"
+    "message": "{{guilds}} servers"
   },
   {
     "type": "WATCHING",

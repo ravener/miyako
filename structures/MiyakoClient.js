@@ -5,13 +5,14 @@ const MemorySweeper = require("../utils/cleanup.js");
 const Points = require("../monitors/points.js"); // Implement better way when we have more monitors.
 const { Pool } = require("pg");
 const DBL = require("dblapi.js");
+const DBLMock = require("../utils/DBLMock.js")
 const loadSchema = require("../utils/schema.js");
 const Settings = require("./Settings.js");
 const presences = require("../assets/json/presences.json");
 const imgapi = require("img-api");
 
 class MiyakoClient extends Client {
-  constructor() {
+  constructor(dev) {
     super({
       fetchAllMembers: false,
       disableMentions: "everyone",
@@ -19,7 +20,8 @@ class MiyakoClient extends Client {
       messageCacheLifetime: 240,
       messageSweepInterval: 300
     });
-    
+
+    this.dev = dev || false;
     this.config = require("../config.json");
     this.console = console; // TODO: Implement a console logger.
     this.constants = require("../utils/constants.js");
@@ -38,7 +40,7 @@ class MiyakoClient extends Client {
       store: new Settings(this, "store")
     };
 
-    this.dbl = new DBL(this.config.dbl, this);
+    this.dbl = this.config.dbl && !this.dev ? new DBL(this.config.dbl, this) : new DBLMock();
     this.points = new Points(this);
     this.on("ready", this.onReady.bind(this));
 
@@ -53,10 +55,10 @@ class MiyakoClient extends Client {
     this.emit("miyakoReady");
   }
 
-  async login(dev = false) {
+  async login() {
     await this.init();
     const { devtoken, token } = this.config;
-    return super.login(dev ? devtoken : token);
+    return super.login(this.dev ? devtoken : token);
   }
 
   rollPresence() {

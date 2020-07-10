@@ -49,14 +49,23 @@ Currently the community is very small and inactive which is the part I'm trying 
 It's been a long time since I had any solid Discord friends and most of my current friends kind of don't care much so I am kinda lonely at this point with this project
 
 ## Running it yourself
-Requirements:
+**Requirements:** (Things that require an external installation)
 - Node.js v12+ (Version requirement may change at any time.)
 - PostgreSQL 9.5+
 - [IMG API](https://github.com/pollen5/img-api) optional but image commands won't work.
 
+**Keys to collect** (not required but the respective command won't work)
+- [top.gg](https://top.gg) (json: `dbl`) If your bot is on top.gg this is used for vote checks and stats posting. Running the bot with `--dev` will disable dbl and provide a mocked api. If your bot is not in DBL leave the field empty and the same case as `--dev` applies.
+- Giphy (json: `giphy`) For gif command.
+- Genius. (json: `genius`) For lyrics API.
+- TMDB (json: `tmdb`) for movie/tvshow commands.
+- Wolfram Alpha (json: `wolfram`) For wolfram queries.
+
+The bot will run with some of the keys missing but the respective commands are not guarded and will throw errors.
+
 Clone the repository or fetch it however you want:
 ```sh
-$ git clone https://github.com/pollen5/miyako
+$ git clone https://github.com/ravener/miyako
 $ cd miyako
 ```
 Install dependencies (don't worry I'm very picky about dependencies and keep it very minimal)
@@ -67,9 +76,9 @@ Copy `config.json.example` to `config.json` and fill in the fields.
 
 Finally run the bot using `node index.js` (use pm2/nodemon whatever you want)
 
-For the first time the bot will automatically create the database schemas, it isn't future proof though so if you decide to update the bot be careful of schema changes that you will have to manually update.
+For the first time the bot will automatically create the database schemas, it isn't future proof though so if you decide to update the bot be careful of schema changes that you will have to manually update. If you notice a schema change use the builtin `sql` command to run things like `ALTER TABLE xxx ADD COLUMN types...` accordingly as the changes **BEFORE** pulling and running the updated code. This might be annoying but it's your reminder that this bot wasn't specifically made for others to host themselves.
 
-Self-hosting is more aimed towards contributing rather than running your own instance, there will be lot of changes you have to do to make it truly yours which is not recommended and you will not recieve support.
+Self-hosting is more aimed towards contributing rather than running your own instance, there will be lot of changes you have to do to make it truly yours which is not recommended and you will not recieve support. That being said I don't mind too much if you run an instance but please don't claim it as your own.
 
 Be sure to join our [support server](https://discord.gg/mDkMbEh) for feedback and discussions when contributing or just to hang out. We like to meet new people so come and say Hi!
 

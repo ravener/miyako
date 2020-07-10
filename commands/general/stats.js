@@ -23,7 +23,7 @@ class Stats extends Command {
 
     return ctx.reply(new MessageEmbed()
       .setTitle("Miyako - Bot Statistics")
-      .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server!")
+      .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server brought to you by my master Ravener#5796")
       .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64 }))
       .setColor(0x9590EE)
       .addField("Bot Stats", [

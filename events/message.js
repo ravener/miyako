@@ -61,6 +61,9 @@ class MessageEvent extends Event {
     // Grab the current prefix.
     const prefix = msg.guild ? msg.guild.settings.prefix : this.prefix;
 
+    // If we don't have permissions to send messages don't run the command.
+    if(!msg.channel.postable) return;
+
     // Check for @mention only.
     if(msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
       return msg.channel.send(`Hi! Run \`${prefix}help\` to get a list of commands you can use.`);
