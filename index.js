@@ -6,6 +6,9 @@
  * @license MIT
  */
 
+// Setup Module Alias.
+require("module-alias/register");
+
 // Load discord.js extensions.
 require("./extensions/GuildMember.js");
 require("./extensions/TextChannel.js");
