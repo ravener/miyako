@@ -3,10 +3,9 @@ const CommandStore = require("./CommandStore.js");
 const EventStore = require("./EventStore.js");
 const MemorySweeper = require("../utils/cleanup.js");
 const Points = require("../monitors/points.js"); // Implement better way when we have more monitors.
-const { Pool } = require("pg");
 const DBL = require("dblapi.js");
 const DBLMock = require("../utils/DBLMock.js")
-const loadSchema = require("../utils/schema.js");
+const { MongoClient } = require("mongodb");
 const Settings = require("./Settings.js");
 const presences = require("../assets/json/presences.json");
 const imgapi = require("img-api");
@@ -30,23 +29,42 @@ class MiyakoClient extends Client {
     this.events = new EventStore(this);
     this.sweeper = new MemorySweeper(this);
     this.responses = require("../utils/responses.js");
-    this.img = new imgapi.Client();
+
+    this.img = new imgapi.Client({
+      port: this.config.imgapi.port,
+      host: this.config.imgapi.host
+    });
 
     // Settings.
     this.settings = {
-      guilds: new Settings(this, "guilds"),
-      members: new Settings(this, "members"),
-      users: new Settings(this, "users"),
-      store: new Settings(this, "store")
+      guilds: new Settings(this, "guilds", {
+        weebGreetings: false,
+        prefix: "m!",
+        levelup: true,
+        social: true,
+        starboard: { channel: null, limit: 2 }
+      }),
+      members: new Settings(this, "members", {
+        level: 0,
+        points: 0,
+        daily: null
+      }),
+      users: new Settings(this, "users", {
+        reputation: 0,
+        repscooldown: 0,
+        title: null,
+        prefix: null
+      }),
+      store: new Settings(this, "store", {
+        price: 0
+      })
     };
 
     this.dbl = this.config.dbl && !this.dev ? new DBL(this.config.dbl, this) : new DBLMock();
     this.points = new Points(this);
     this.on("ready", this.onReady.bind(this));
 
-    const { user, password, database } = this.config.postgresql;
-    this.db = new Pool({ user, password, database });
-    this.dbconn = null;
+    this.db = null;
   }
 
   onReady() {
@@ -92,12 +110,16 @@ class MiyakoClient extends Client {
     this.console.log(`Loaded ${commands} commands.`);
     this.console.log(`Loaded ${events} events.`);
 
-    // Connect database.
-    this.dbconn = await this.db.connect();
-    this.console.log("Connected to PostgreSQL");
+    // Connect our database.
+    const client = await MongoClient.connect(this.config.mongodb, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
 
-    // Initialize schema.
-    await loadSchema(this.db);
+    this.console.log("Connected to MongoDB");
+
+    // Store reference to our database.
+    this.db = client.db("miyako");
 
     // Initialize settings.
     for(const [name, settings] of Object.entries(this.settings)) {

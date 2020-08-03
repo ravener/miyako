@@ -15,14 +15,14 @@ class Starboard extends Command {
     if(!action) return ctx.reply("Baka! Specify one of `enable #channel`, `disable` or `limit <amount>`");
 
     if(action === "disable") {
-      await ctx.guild.update({ starboard: null });
+      await ctx.guild.update({ starboard: { channel: null } });
       return ctx.reply("Successfully disabled the server starboard.");
     }
 
     if(action === "enable") {
       if(!ctx.message.mentions.channels.size) return ctx.reply("Baka! Specify the channel you want to enable it on.");
       const channel = ctx.message.mentions.channels.first();
-      await ctx.guild.update({ starboard: channel.id });
+      await ctx.guild.update({ starboard: { channel: channel.id } });
       return ctx.reply(`Successfully enabled the server starboard for the channel ${channel}`);
     }
 
@@ -30,7 +30,7 @@ class Starboard extends Command {
       amount = this.verifyInt(amount);
       if(amount < 1) return ctx.reply("Baka! Limit cannot be less than 1");
       if(amount > ctx.guild.memberCount) return ctx.reply("Baka! Limit cannot be more than the amount of members in the server.");
-      await ctx.guild.update({ starboardLimit: amount });
+      await ctx.guild.update({ starboard: { limit: amount } });
       return ctx.reply(`Successfully updated the starboard star limit to ${amount}`);
     }
 

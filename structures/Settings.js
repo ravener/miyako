@@ -1,3 +1,4 @@
+const { mergeDefault } = require("discord.js");
 
 /**
  * Manages settings for a specific table.
@@ -7,17 +8,16 @@
  * this.settings = new Settings(this, "guilds");
  * And then use it's methods anywhere.
  * this.client.settings.update({ ... });
- *
- * The goal is to abstract away the database used and no SQL query shall be used anywhere else.
  */
 class Settings {
-  constructor(client, table) {
+  constructor(client, collection, defaults = {}) {
     this.client = client;
 
     // Maps ID -> Value.
-    // Assumes the table uses a standard 'id' column, which for our bot it does.
+    // Assumes the collection uses a standard '_id' column, which for our bot it does.
     this.cache = new Map();
-    this.table = table;
+    this.collection = collection;
+    this.defaults = defaults; // Default values.
   }
 
   /**
@@ -29,6 +29,10 @@ class Settings {
     return this.cache.get(id);
   }
 
+  getDefaults(id) {
+    return this.cache.get(id) || this.defaults;
+  }
+
   /**
    * Updates settings for the table this settings instance manages.
    * The input is safe for upserts. If the document does not exist it inserts it.
@@ -38,26 +42,32 @@ class Settings {
    * @param {Object} obj - An object with key-value changes to apply.
    * @returns {Object} The updated object from the database.
    */
-  async update(id, obj) {
+  async update(_id, obj) {
     // Safety Check.
     if(typeof obj !== "object") throw new Error("Expected an object.");
-    // Get the keys and values.
-    const keys = Object.keys(obj);
-    const values = Object.values(obj);
 
-    // Another safety check.
-    if(!keys.length) throw new Error("Nothing to update.");
+    const defaults = {};
+    for(const [k, v] of Object.entries(this.defaults)) {
+      // Do not insert defaults if the key is one of the keys the user is trying to update.
+      // And if the key updating is an object do merge the rest of the keys.
+      if(typeof obj[k] === "object") {
+        obj[k] = mergeDefault(defaults[k], obj[k]);
+      } else if(typeof obj[k] === "undefined") {
+        defaults[k] = v;
+      }
+    }
 
-    // Build the query.
-    const query = `INSERT INTO "${this.table}" ("id", ${
-      keys.map((key) => `"${key}"`).join(", ")}) VALUES ($1, ${
-      keys.map((_, i) => `$${i + 2}`).join(", ")}) ON CONFLICT ("id") DO UPDATE SET ${
-      keys.map((key, i) => `"${key}" = $${i + 2}`).join(", ")} RETURNING *;`;
+    const update = { $set: obj };
+    // MongoDB rejects empty values for this.
+    if(Object.keys(defaults).length) update.$setOnInsert = defaults;
 
-    // Execute the query and update the cache.
-    const { rows } = await this.client.db.query(query, [id, ...values]);
-    this.cache.set(id, rows[0]);
-    return rows[0];
+    const { value } = await this.client.db.collection(this.collection).findOneAndUpdate({ _id }, update, {
+      upsert: true,
+      returnOriginal: false
+    });
+
+    this.cache.set(_id, value);
+    return value;
   }
 
   /**
@@ -66,68 +76,34 @@ class Settings {
    * @param {String} id - ID of the document to sync.
    * @returns {Object} The newly fetched data from the database.
    */
-  async sync(id) {
-    const { rows } = await this.client.db.query(`SELECT * FROM "${this.table}" WHERE id = $1`, [id]);
-    if(!rows.length) return;
-    this.cache.set(id, rows[0]);
-    return rows[0];
+  async sync(_id) {
+    const doc = await this.client.db.collection(this.collection).findOne({ _id });
+    if(!doc) return;
+    this.cache.set(_id, doc);
+    return doc;
   }
 
   /**
    * Deletes a document with the given ID.
    * @param {String} id - ID of the document to delete.
    */
-  async delete(id) {
-    await this.client.db.query(`DELETE FROM "${this.table}" WHERE id = $1`, [id]);
-    this.cache.delete(id);
+  async delete(_id) {
+    await this.client.db.collection(this.collection).deleteOne({ _id });
+    this.cache.delete(_id);
   }
 
   /**
-   * find({ where: { guild: "id", price: { gt: 25, lt: 100 } }, sort: { price: -1 }, limit: 5 })
+   * Alias to db.collection(col).find(...)
    */
-  find(options = {}) {
-    let count = 1;
-    const values = [];
-    const where = options.where ? ` WHERE ${Object.entries(options.where).map(([k, v]) => {
-      if(typeof v !== "object") {
-        values.push(v);
-        return `"${k}" = $${count++}`;
-      }
-
-      if(v.like) {
-        values.push(v.like);
-        return `"${k}" LIKE $${count++}`;
-      }
-
-      // Both GT and LT in one object.
-      if(!isNaN(v.gt) && !isNaN(v.lt)) {
-        values.push(v.gt);
-        values.push(v.lt);
-
-        count += 2;
-        return `"${k}" > $${count - 2} AND "${k}" < $${count - 1}`;
-      } else if(!isNaN(v.gt)) {
-        values.push(v.gt);
-        return `"${k}" > $${count++}`;
-      } else if(!isNaN(v.lt)) {
-        values.push(v.lt);
-        return `"${k}" < $${count++}`;
-      }
-
-    }).join(" AND ")}` : "";
-    const sort = options.sort && Object.keys(options.sort).length === 1 ? ` ORDER BY "${Object.keys(options.sort)[0]}" ${
-      Object.values(options.sort)[0] === 1 ? "ASC" : "DESC"}` : "";
-    // Shouldn't need user input here so we didn't use $ parameters, but will modify this if ever needed.
-    const limit = options.limit ? ` LIMIT ${options.limit}` : "";
-    const query = `SELECT * FROM "${this.table}"${where}${sort}${limit}`;
-    return this.client.db.query(query, values).then((r) => r.rows);
+  find(...args) {
+    return this.client.db.collection(this.collection).find(...args);
   }
 
   /**
-   * Like find but returns only the first element or null.
+   * Alias to db.collection(col).findOne(...)
    */
-  findOne(options = {}) {
-    return this.find(options).then((r) => r[0] || null);
+  findOne(...args) {
+    return this.client.db.collection(this.collection).findOne(...args);
   }
 
   /**
@@ -135,8 +111,8 @@ class Settings {
    * Call this before the client is logged in.
    */
   async init() {
-    const { rows } = await this.client.db.query(`SELECT * FROM "${this.table}"`);
-    for(const row of rows) this.cache.set(row.id, row);
+    const docs = await this.client.db.collection(this.collection).find({}).toArray();
+    for(const doc of docs) this.cache.set(doc._id, doc);
   }
 }
 

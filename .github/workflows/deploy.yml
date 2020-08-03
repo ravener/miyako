@@ -1,0 +1,28 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ${{ secrets.DOCKER_URL }} -u admin --password-stdin
+      - name: Build
+        run: docker build -t ${{ secrets.DOCKER_URL }}/miyako:${{github.sha}} .
+      - name: Push
+        run: docker push ${{ secrets.DOCKER_URL }}/miyako:${{github.sha}}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login
+        run: |
+          mkdir ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+      - name: Set image
+        run: kubectl set image deployment/miyako miyako=${{ secrets.DOCKER_URL }}/miyako:${{github.sha}}
+      - name: Rollout status
+        run: kubectl rollout status deployment/miyako

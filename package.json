@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/pollen5/miyako#readme",
   "_moduleAliases": {
-    "@utils"      : "./utils",
+    "@utils": "./utils",
     "@structures": "./structures"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "fast-levenshtein": "^2.0.6",
     "img-api": "^1.0.3",
     "module-alias": "^2.2.2",
+    "mongodb": "^3.6.0",
     "pg": "^8.0.3"
   }
 }

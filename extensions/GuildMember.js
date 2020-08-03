@@ -14,7 +14,7 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
 
   get settings() {
     const id = `${this.guild.id}.${this.id}`;
-    return this.client.settings.members.get(id) || { id, level: 0, points: 0, daily: null };
+    return this.client.settings.members.getDefaults(id);
   }
 
   get points() {
