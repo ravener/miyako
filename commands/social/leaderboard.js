@@ -25,14 +25,14 @@ class Leaderboard extends Command {
     if(page > totalPages && !totalPages) return ctx.reply(`There are only **${totalPages || 1}** pages in the leaderboard.`);
     if(totalPages && page + 1 > totalPages) return ctx.reply(`There are only **${totalPages || 1}** pages in the leaderboard.`);
 
-    const positions = rows.map((row) => row.id.split(".")[1]);
+    const positions = rows.map((row) => row._id.split(".")[1]);
     const leaderboard = [];
 
     const top = rows.slice(page * 10, (page + 1) * 10);
 
     for(let i = 0; i < top.length; i++) {
       const u = top[i];
-      const user = await this.client.users.fetch(u.id.split(".")[1]);
+      const user = await this.client.users.fetch(u._id.split(".")[1]);
       leaderboard.push(`- [${(page * 10 + (i + 1)).toString().padStart(2, "0")}] ❯ ${user.tag}\n    => ¥${parseInt(u.points).toLocaleString()}`);
     }
     
