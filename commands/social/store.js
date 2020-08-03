@@ -123,10 +123,8 @@ class Store extends Command {
 
   async view(ctx) {
     // Fetch all roles for this server.
-    const roles = await this.client.settings.store.find({
-      where: { guild: ctx.guild.id },
-      sort: { price: -1 }
-    });
+    const roles = await this.client.settings.store.find({ guild: ctx.guild.id },
+      { sort: { price: -1 } }).toArray();
     
     // Make sure there is something to view.
     if(!roles.length) return ctx.reply("There are no roles for sale in this server.");

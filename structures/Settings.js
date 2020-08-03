@@ -46,27 +46,12 @@ class Settings {
     // Safety Check.
     if(typeof obj !== "object") throw new Error("Expected an object.");
 
-    const defaults = {};
-    for(const [k, v] of Object.entries(this.defaults)) {
-      // Do not insert defaults if the key is one of the keys the user is trying to update.
-      // And if the key updating is an object do merge the rest of the keys.
-      if(typeof obj[k] === "object") {
-        obj[k] = mergeDefault(defaults[k], obj[k]);
-      } else if(typeof obj[k] === "undefined") {
-        defaults[k] = v;
-      }
-    }
-
-    const update = { $set: obj };
-    // MongoDB rejects empty values for this.
-    if(Object.keys(defaults).length) update.$setOnInsert = defaults;
-
-    const { value } = await this.client.db.collection(this.collection).findOneAndUpdate({ _id }, update, {
+    const { value } = await this.client.db.collection(this.collection).findOneAndUpdate({ _id }, { $set: obj }, {
       upsert: true,
       returnOriginal: false
     });
 
-    this.cache.set(_id, value);
+    this.cache.set(_id, mergeDefault(this.defaults, value));
     return value;
   }
 
@@ -79,7 +64,7 @@ class Settings {
   async sync(_id) {
     const doc = await this.client.db.collection(this.collection).findOne({ _id });
     if(!doc) return;
-    this.cache.set(_id, doc);
+    this.cache.set(_id, mergeDefault(this.defaults, doc));
     return doc;
   }
 
@@ -112,7 +97,7 @@ class Settings {
    */
   async init() {
     const docs = await this.client.db.collection(this.collection).find({}).toArray();
-    for(const doc of docs) this.cache.set(doc._id, doc);
+    for(const doc of docs) this.cache.set(doc._id, mergeDefault(this.defaults, doc));
   }
 }
 
