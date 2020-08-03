@@ -14,7 +14,7 @@ class Leaderboard extends Command {
     page = this.verifyInt(page, 1);
 
     const rows = await this.client.settings.members.find({ id: { $regex: `^${ctx.guild.id}`  } },
-      { sort: { points: -1 } });
+      { sort: { points: -1 } }).toArray();
 
     if(rows.length === 0) return ctx.reply("There is no leaderboard in this server, maybe its a dead place???")
 
