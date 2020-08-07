@@ -37,7 +37,7 @@ class Help extends Command {
         .setDescription([
           `**Description:** ${cmd.description}`,
           `**Category:** ${cmd.category}`,
-          `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join("\n") : "None"}`,
+          `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join(", ") : "None"}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"}`,
           `**Usage:** ${ctx.guild ? ctx.guild.settings.prefix : "m!"}${cmd.usage}`,
           `**Cost:** ${cost}`,
