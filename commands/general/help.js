@@ -67,7 +67,8 @@ class Help extends Command {
 
     for(const category of keys) {
       // Skip un-needed categories
-      if(category === "Social" && !ctx.guild.settings.social) continue;
+      if(category === "Social" && ctx.guild && !ctx.guild.settings.social) continue;
+      
       embed.addField(category, map[category].join(", "));
     }
 
