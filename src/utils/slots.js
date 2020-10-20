@@ -1,4 +1,4 @@
-const { random } = require("./Utils.js");
+const { random } = require("./utils.js");
 
 const slots = [
   {
