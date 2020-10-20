@@ -17,18 +17,14 @@
     "url": "https://github.com/pollen5/miyako/issues"
   },
   "homepage": "https://github.com/pollen5/miyako#readme",
-  "_moduleAliases": {
-    "@utils": "./utils",
-    "@structures": "./structures"
-  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "dblapi.js": "^2.4.0",
     "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
     "fast-levenshtein": "^2.0.6",
-    "img-api": "^1.0.3",
+    "img-api": "^1.0.4",
     "module-alias": "^2.2.2",
-    "mongodb": "^3.6.0",
-    "pg": "^8.0.3"
+    "mongodb": "^3.6.0"
   }
 }

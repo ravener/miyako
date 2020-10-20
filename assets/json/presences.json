@@ -46,5 +46,9 @@
   {
     "type": "PLAYING",
     "message": "with Senpai"
+  },
+  {
+    "type": "PLAYING",
+    "message": "with {{users}} users"
   }
 ]

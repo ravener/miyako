@@ -6,19 +6,28 @@
  * @license MIT
  */
 
+// Load .env
+require("dotenv").config();
+
 // Setup Module Alias.
-require("module-alias/register");
+const moduleAlias = require("module-alias");
+
+moduleAlias.addAliases({
+  "@utils":      __dirname + "/src/utils",
+  "@structures": __dirname + "/src/structures",
+  "@json":       __dirname + "/assets/json"
+});
 
 // Load discord.js extensions.
-require("./extensions/GuildMember.js");
-require("./extensions/TextChannel.js");
-require("./extensions/DMChannel.js");
-require("./extensions/Message.js");
-require("./extensions/Guild.js");
-require("./extensions/User.js");
+require("./src/extensions/GuildMember.js");
+require("./src/extensions/TextChannel.js");
+require("./src/extensions/DMChannel.js");
+require("./src/extensions/Message.js");
+require("./src/extensions/Guild.js");
+require("./src/extensions/User.js");
 
 // Import the Client.
-const MiyakoClient = require("./structures/MiyakoClient.js");
+const MiyakoClient = require("./src/structures/MiyakoClient.js");
 
 // Login. (And start in development mode if --dev is passed)
 new MiyakoClient(process.argv.includes("--dev")).login();
