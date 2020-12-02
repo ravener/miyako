@@ -10,7 +10,7 @@ class Ping extends Command {
   async run(msg, args) { // eslint-disable-line no-unused-vars
     const sent = await msg.send("Ping?");
 
-    return sent.edit(this.client.utils.random(this.client.responses.pingMessages)
+    return sent.edit(this.client.utils.random(msg.language.get("PING_MESSAGES"))
       .replace(/{{user}}/g, msg.guild ? msg.member.displayName : msg.author.username)
       .replace(/{{ms}}/g, `${sent.createdTimestamp - msg.createdTimestamp}`));
   }

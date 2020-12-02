@@ -14,7 +14,7 @@ class Level extends Command {
     const member = await this.verifyMember(msg, user, true);
     await member.syncSettings();
 
-    return msg.send(this.client.utils.random(member.id === msg.author.id ? this.client.responses.levelMessages :
+    return msg.send(this.client.utils.random(member.id === msg.author.id ? msg.language.get("LEVEL_MESSAGES") :
       this.client.responses.otherLevelMessages)
       .replace(/{{user}}/g, member.displayName)
       .replace(/{{level}}/g, member.settings.level));

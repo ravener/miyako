@@ -8,7 +8,7 @@ class MyID extends Command {
   }
 
   async run(msg) {
-    return msg.send(`${msg.author} Your User ID is: **${msg.author.id}**`);
+    return msg.sendLocale("COMMAND_MYID", [msg.author]);
   }
 }
 

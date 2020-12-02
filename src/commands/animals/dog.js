@@ -17,7 +17,7 @@ class Dog extends Command {
       .then((res) => res.json());
 
     return msg.send(this.client.embed()
-      .setTitle("Random Dog")
+      .setTitle(msg.tr("COMMAND_DOG_TITLE"))
       .setImage(message)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ size: 64 })));
   }

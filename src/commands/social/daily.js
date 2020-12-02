@@ -47,7 +47,7 @@ class Daily extends Command {
         if(premium) amount += 250;
         await msg.member.givePoints(amount);
         await this.setCooldown(msg);
-        return msg.send(this.client.utils.random(this.client.responses.dailySuccessMessages)
+        return msg.send(this.client.utils.random(msg.language.get("DAILY_SUCCESS_MESSAGES"))
           .replace(/{{user}}/g, msg.member.displayName)
           .replace(/{{amount}}/g, `¥${amount.toLocaleString()}`));
       } else if(["no", "n", "cancel"].includes(response)) {
@@ -64,7 +64,7 @@ class Daily extends Command {
     await msg.member.givePoints(amount);
     await this.setCooldown(msg);
 
-    return msg.send(this.client.utils.random(this.client.responses.dailySuccessMessages)
+    return msg.send(this.client.utils.random(msg.language.get("DAILY_SUCCESS_MESSAGES"))
       .replace(/{{user}}/g, msg.member.displayName)
       .replace(/{{amount}}/g, `¥${amount.toLocaleString()}`));
   }

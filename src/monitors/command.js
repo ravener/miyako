@@ -108,14 +108,14 @@ class CommandHandler extends Monitor {
     // Command checks.
 
     if(command.ownerOnly && msg.author.id !== this.client.constants.ownerID)
-      return msg.send("Baka! What do you think you're doing? That command is only for my master!");
+      return msg.sendLocale("OWNER_ONLY");
 
     // Check for NSFW channel. NSFW is allowed in DMs
     if(command.nsfw && msg.guild && !msg.channel.nsfw)
       return msg.send(this.client.utils.random(this.client.responses.notNSFWChannel));
 
     if(command.guildOnly && !msg.guild)
-      return msg.send("Baka! This command can only be used in a guild. What are you doing sliding in my DMs?");
+      return msg.sendLocale("GUILD_ONLY");
 
     if(!command.enabled && msg.author.id !== this.client.constants.ownerID)
       return msg.send("My master has ordered me to disable that command so I cannot let you use it!");

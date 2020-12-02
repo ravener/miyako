@@ -1,5 +1,6 @@
 const { Structures, APIMessage } = require("discord.js");
 const schema = require("@utils/schema");
+const languages = require("../languages");
 
 module.exports = Structures.extend("Message", (Message) => class MiyakoMessage extends Message {
   constructor(...args) {
@@ -34,6 +35,15 @@ module.exports = Structures.extend("Message", (Message) => class MiyakoMessage e
     return schema.guilds;
   }
 
+  get language() {
+    return this.guild ? this.guild.language : languages.english;
+  }
+
+  // Alias
+  tr(...args) {
+    return this.language.get(...args);
+  }
+
   async awaitReply(question, filter, limit = 60000, embed) {
     await this.channel.send(question, embed);
 
@@ -64,6 +74,11 @@ module.exports = Structures.extend("Message", (Message) => class MiyakoMessage e
     this.lastResponse = Array.isArray(sent) ? sent.slice(-1)[0] : sent;
 
     return sent;
+  }
+
+  sendLocale(key, value = [], options) {
+    if(!Array.isArray(value)) [options, value] = [value, []];
+    return this.send(APIMessage.transformOptions(this.language.get(key, ...value), options));
   }
   
   reply(content, options) {

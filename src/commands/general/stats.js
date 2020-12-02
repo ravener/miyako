@@ -22,10 +22,10 @@ class Stats extends Command {
       `${seconds} Seconds`].filter((time) => !time.startsWith("0")).join(", ");
 
     return msg.send(this.client.embed()
-      .setTitle("Miyako - Bot Statistics")
-      .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server brought to you by my master Ravener#5796")
+      .setTitle(msg.language.get("COMMAND_STATS_TITLE"))
+      .setDescription(msg.language.get("COMMAND_STATS_DESCRIPTION"))
       .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64 }))
-      .addField("Bot Stats", [
+      .addField(msg.language.get("COMMAND_STATS_FIELD"), [
         `**Guilds:** ${client.guilds.cache.size}`,
         `**Users:** ${this.client.guilds.cache.reduce((sum, guild) => sum + (guild.available ? guild.memberCount : 0), 0)}`,
         `**Channels:** ${client.channels.cache.size}`,

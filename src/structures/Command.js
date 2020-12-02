@@ -90,7 +90,7 @@ class Command extends Base {
     if(!match) throw "Invalid channel, must be a mention or an ID.";
 
     const chan = await this.client.channels.fetch(match[1]).catch(() => null);
-    if(!chan) throw "I could not find that channel.";
+    if(!chan) throw msg.language.get("CHANNEL_NOT_FOUND");
 
     return chan;
   }
@@ -104,7 +104,7 @@ class Command extends Base {
     const role = msg.guild.roles.cache.find((role) => (role.id === rolename) ||
       (role.name.toLowerCase() === rolename));
 
-    if(!role) throw "That role does not exist.";
+    if(!role) throw msg.language.get("ROLE_NOT_FOUND");
 
     return role;
   }

@@ -54,7 +54,7 @@ class Help extends Command {
     }
 
     const embed = this.client.embed(this.client.user)
-      .setTitle("Help - Commands")
+      .setTitle(msg.tr("COMMAND_HELP_TITLE"))
       .setDescription("Join our [Discord Server](https://discord.gg/mDkMbEh) for support and updates!")
       .setFooter("For more information about a command run m!help <command>");
 

@@ -15,7 +15,8 @@ const moduleAlias = require("module-alias");
 moduleAlias.addAliases({
   "@utils":      __dirname + "/src/utils",
   "@structures": __dirname + "/src/structures",
-  "@json":       __dirname + "/assets/json"
+  "@json":       __dirname + "/assets/json",
+  "@languages":  __dirname + "/src/languages"
 });
 
 // Load discord.js extensions.

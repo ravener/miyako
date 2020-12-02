@@ -17,7 +17,7 @@ class Cat extends Command {
       .then((body) => body.file);
 
     const embed = this.client.embed()
-      .setTitle("Random Cat")
+      .setTitle(msg.tr("COMMAND_CAT_TITLE"))
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ size: 64 }))
       .setImage(file);
     return msg.send({ embed });

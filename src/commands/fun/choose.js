@@ -14,13 +14,13 @@ class Choose extends Command {
     const choices = args.join(" ").split(",");
     if(choices.length < 2) return msg.send("Not enough choices to pick from. Seperate your choices with a comma.");
 
-    const sent = await msg.send(`${this.client.constants.typing} **${this.client.user.username}** is thinking...`);
+    const sent = await msg.sendLocale("COMMAND_CHOOSE_THINKING", [this.client.user.username]);
 
     await this.client.utils.sleep(Math.floor(Math.random() * 1500) + 1000);
 
     const choice = this.client.utils.random(choices);
 
-    return sent.edit(`I think \`${choice.trim()}\``);
+    return sent.edit(msg.language.get("COMMAND_CHOOSE", [`\`${choice.trim()}\``]));
   }
 }
 

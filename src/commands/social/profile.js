@@ -19,9 +19,9 @@ class Profile extends Command {
       .setDescription(member.user.settings.title || `No Title set yet, use \`${msg.guild.settings.prefix}title\` to set one`)
       .setAuthor(member.user.tag, member.user.displayAvatarURL({ size: 64 }))
       .setThumbnail(member.user.displayAvatarURL())
-      .addField("Level", member.settings.level)
-      .addField("Points", `¥${parseInt(member.settings.points).toLocaleString()}`)
-      .addField("Reputation Points", member.user.settings.reputation);
+      .addField(msg.language.get("COMMAND_PROFILE_LEVEL"), member.settings.level)
+      .addField(msg.language.get("COMMAND_PROFILE_POINTS"), `¥${parseInt(member.settings.points).toLocaleString()}`)
+      .addField(msg.language.get("COMMAND_PROFILE_REP"), member.user.settings.reputation);
     return msg.send({ embed });
   }
 }

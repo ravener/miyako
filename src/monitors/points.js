@@ -24,7 +24,7 @@ class Points extends Monitor {
 
     if(msg.member.settings.level < curLevel) {
       if(msg.guild.settings.levelup) {
-        await msg.channel.send(this.client.utils.random(this.client.responses.levelUpMessages)
+        await msg.channel.send(this.client.utils.random(msg.tr("LEVELUP_MESSAGES"))
           .replace(/{{user}}/g, msg.member.displayName)
           .replace(/{{level}}/g, curLevel))
           .catch(() => null);

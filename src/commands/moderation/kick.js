@@ -14,12 +14,12 @@ class Kick extends Command {
   async run(msg, [member, ...reason]) {
     member = await this.verifyMember(msg, member);
 
-    if(member.id === msg.author.id) return msg.send("Baka! Why would you kick yourself?");
-    if(member.id === this.client.user.id) return msg.send("Baka! Why would you kick me?");
-    if(member.id === msg.guild.ownerID) return msg.send("Baka! You can't kick the owner.");
+    if(member.id === msg.author.id) return msg.sendLocale("COMMAND_KICK_SELF");
+    if(member.id === this.client.user.id) return msg.sendLocale("COMMAND_KICK_BOT");
+    if(member.id === msg.guild.ownerID) return msg.sendLocale("COMMAND_KICK_OWNER");
     
-    if(member.roles.highest.position >= msg.member.roles.highest.position) return msg.send("You cannot kick this user.");
-    if(!member.kickable) return msg.send("I cannot kick this user.");
+    if(member.roles.highest.position >= msg.member.roles.highest.position) return msg.sendLocale("COMMAND_KICK_USER_CANNOT");
+    if(!member.kickable) return msg.sendLocale("COMMAND_KICK_BOT_CANNOT");
     
     const options = {};
     reason = reason.length ? reason.join(" ") : null;
