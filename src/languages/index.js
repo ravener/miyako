@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const langs = fs.readdirSync(".").filter(file => file !== "index.js");
+const langs = fs.readdirSync("./src/languages").filter(file => file !== "index.js");
 
 for(const lang of langs) {
   const mod = require(`./${lang}`);
