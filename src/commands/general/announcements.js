@@ -7,7 +7,7 @@ class Announcements extends Command {
       name: "announcements",
       description: "Get bot related announcements.",
       usage: "announcements",
-      aliases: ["announce", "news"]
+      aliases: ["announce", "news", "announcement"]
     });
   }
 
@@ -18,7 +18,7 @@ class Announcements extends Command {
     const announcement = messages.first();
     
     const embed = this.client.embed()
-      .setTitle("Bot announcement!")
+      .setTitle(msg.tr("COMMAND_ANNOUNCEMENTS_TITLE"))
       .setAuthor(announcement.author.username, announcement.author.displayAvatarURL({ size: 64 }))
       .setDescription(announcement.cleanContent)
       .setThumbnail(announcement.author.displayAvatarURL({ size: 512 }))

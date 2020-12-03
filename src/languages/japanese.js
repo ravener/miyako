@@ -2,11 +2,30 @@ const Language = require("../structures/Language.js");
 const constants = require("@utils/constants");
 
 module.exports = new Language("japanese", "日本語", {
-  LANGUAGE_SET: "言語は日本語に設定されました",
+  LANGUAGE_SET: "言語は日本語に設定されました\n\n**ノート**: 日本語の翻訳はまだ未完です",
   GUILD_ONLY: "馬鹿! このコマンドはサーバーでのみ使用できます。私のダイレクトメッセージでは何をしてるの?",
   OWNER_ONLY: "馬鹿! 何をしてんだよ? そのコマンドは私のマスターのためだけです",
   CHANNEL_NOT_FOUND: "そのチャンネルが見つかりません",
   ROLE_NOT_FOUND: "そのロールが存在しません",
+  MENTION_REMINDER: (prefix) => `こんにちは! コマンドのリストために\`${prefix}help\`を使用してください`,
+  DID_YOU_MEAN: (cmd) => `|\`❔\`|あなたは\`${cmd}\`を意味しましたか？`,
+  NONE: "無し",
+  SECONDS: "秒",
+  // Categories
+  CATEGORY_GENERAL: "ジェネラル",
+  CATEGORY_ANIME: "アニメ",
+  CATEGORY_NSFW: "エロ",
+  CATEGORY_OWNER: "オーナー",
+  CATEGORY_FUN: "ファン",
+  CATEGORY_UTILITY: "ユーティリティ",
+  CATEGORY_ANIMALS: "動物",
+  CATEGORY_CONFIG: "設定",
+  CATEGORY_IMAGES: "画像",
+  CATEGORY_MODERATION: "適度",
+  CATEGORY_REACTIONS: "リアクション",
+  CATEGORY_SOCIAL: "ソーシャル",
+  CATEGORY_PROGRAMMING: "プログラミング",
+  CATEGORY_MISC: "その他",
   WELCOME_MESSAGES: [
     "お! おはようございます **{{user}}-さん**",
     "**{{user}}-さん**, **{{guild}}**へようこそ!"
@@ -47,7 +66,7 @@ module.exports = new Language("japanese", "日本語", {
     "やった！ あなたはレベルアップされました、**{{user}}-さん**！ あなたは今レベル**{{level}}**、それは何も意味するのではありません！",
     "あなたはただレベル**{{level}}**? 最低!",
     "**{{user}}-さん**、あなたがレベル**{{level}}**のために今私を忘れないでください",
-    "どのようにあなたはレベル**{{level}}** あなた馬鹿！"
+    "どのようにあなたはレベル**{{level}}**あなた馬鹿！"
   ],
   COMMAND_STATS_DESCRIPTION: "こんにちは、私はミヤコです。 あなたのサーバーのためのオールインワンエンターテイメントボットが私のマスターRavener#5796によってあなたにもたらされました",
   COMMAND_STATS_TITLE: "ミヤコ - ボット統計",
@@ -58,6 +77,7 @@ module.exports = new Language("japanese", "日本語", {
   COMMAND_PROFILE_LEVEL: "レベル",
   COMMAND_PROFILE_POINTS: "ポイント",
   COMMAND_PROFILE_REP: "評判ポイント",
+  COMMAND_PROFILE_TITLE: (name) => `${name}のプロフィール`,
   COMMAND_CAT_TITLE: "ランダムな猫",
   COMMAND_DOG_TITLE: "ランダムな犬",
   COMMAND_MYID: (user) => `${user} あなたのユーザーIDは **${user.id}**`,
@@ -66,5 +86,16 @@ module.exports = new Language("japanese", "日本語", {
   COMMAND_KICK_OWNER: "馬鹿! オーナーをキックできません",
   COMMAND_KICK_USER_CANNOT: "あなたはこのユーザをキックできません",
   COMMAND_KICK_BOT_CANNOT: "私はこのユーザをキックできません",
-  COMMAND_HELP_TITLE: "ヘルプ - コマンド"
+  COMMAND_HELP_TITLE: "ヘルプ - コマンド",
+  COMMAND_LANGUAGE_SELECT: "言語を選択してください",
+  COMMAND_SAY: "私はあなたの何でもほしいを言います",
+  COMMAND_SAY_WHAT: "馬鹿! あなたは私に何を言ってほしいですか？",
+  COMMAND_HELP_FOR: (cmd) => `コマンド${cmd}のためのヘルプ`,
+  COMMAND_EVAL_ERROR: (err) => `このエラーは起こりました: \`\`\`js\n${err.stack || err}\`\`\``,
+  COMMAND_EVAL_TOKEN: "[トークン]",
+  COMMAND_ANNOUNCEMENTS_TITLE: "ボットの告知!",
+  // NSFW Commands
+  COMMAND_BOOBS: "エロアニメのおっぱい",
+  COMMAND_PUSSY: "エロアニメのおまんこ"
 }, require("./english.js"));
+

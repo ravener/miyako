@@ -65,7 +65,7 @@ class CommandHandler extends Monitor {
 
     // Check for @mention only.
     if(msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
-      return msg.send(`Hi! Run \`${prefix}help\` to get a list of commands you can use.`);
+      return msg.sendLocale("MENTION_REMINDER", [prefix]);
 
     // Users can have their own list of prefixes globally.
     // Might confuse other users but doesn't matter too much

@@ -15,13 +15,13 @@ class Profile extends Command {
     if(member.user.bot) return msg.send("Baka! You can't view a bot's profile.");
 
     const embed = this.client.embed()
-      .setTitle(`${member.displayName}'s profile`)
+      .setTitle(msg.tr("COMMAND_PROFILE_TITLE", member.displayName))
       .setDescription(member.user.settings.title || `No Title set yet, use \`${msg.guild.settings.prefix}title\` to set one`)
       .setAuthor(member.user.tag, member.user.displayAvatarURL({ size: 64 }))
       .setThumbnail(member.user.displayAvatarURL())
-      .addField(msg.language.get("COMMAND_PROFILE_LEVEL"), member.settings.level)
-      .addField(msg.language.get("COMMAND_PROFILE_POINTS"), `¥${parseInt(member.settings.points).toLocaleString()}`)
-      .addField(msg.language.get("COMMAND_PROFILE_REP"), member.user.settings.reputation);
+      .addField(msg.tr("COMMAND_PROFILE_LEVEL"), member.settings.level)
+      .addField(msg.tr("COMMAND_PROFILE_POINTS"), `¥${parseInt(member.settings.points).toLocaleString()}`)
+      .addField(msg.tr("COMMAND_PROFILE_REP"), member.user.settings.reputation);
     return msg.send({ embed });
   }
 }

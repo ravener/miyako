@@ -8,6 +8,10 @@ module.exports = new Language("english", "English", {
   OWNER_ONLY: "Baka! What do you think you're doing? That command is only for my master!",
   CHANNEL_NOT_FOUND: "I could not find that channel.",
   ROLE_NOT_FOUND: "That role does not exist.",
+  MENTION_REMINDER: (prefix) => `Hi! Run \`${prefix}help\` for a list of commands you can use.`,
+  DID_YOU_MEAN: (cmd) => `|\`❔\`| Did you mean \`${cmd}\`?`,
+  NONE: "None",
+  SECONDS: "Seconds",
   WELCOME_MESSAGES: responses.welcomeMessages,
   GOODBYE_MESSAGES: responses.goodbyeMessages,
   LEVEL_MESSAGES: responses.levelMessages,
@@ -26,6 +30,7 @@ module.exports = new Language("english", "English", {
   COMMAND_PROFILE_LEVEL: "Level",
   COMMAND_PROFILE_POINTS: "Points",
   COMMAND_PROFILE_REP: "Reputation Points",
+  COMMAND_PROFILE_TITLE: (name) => `${name}'s profile`,
   COMMAND_CAT_TITLE: "Random Cat",
   COMMAND_DOG_TITLE: "Random Dog",
   COMMAND_MYID: (user) => `${user} Your User ID is: **${user.id}**`,
@@ -34,6 +39,16 @@ module.exports = new Language("english", "English", {
   COMMAND_KICK_OWNER: "Baka! You can't kick the owner.",
   COMMAND_KICK_USER_CANNOT: "You cannot kick this user.",
   COMMAND_KICK_BOT_CANNOT: "I cannot kick this user.",
-  COMMAND_HELP_TITLE: "Help - Commands"
+  COMMAND_HELP_TITLE: "Help - Commands",
+  COMMAND_LANGUAGE_SELECT: "Please select a language.",
+  COMMAND_SAY: "I will say whatever you want me to.",
+  COMMAND_SAY_WHAT: "Baka! What do you want me to say?",
+  COMMAND_HELP_FOR: (cmd) => `Help for command ${cmd}`,
+  COMMAND_EVAL_ERROR: (err) => `The following error occured: \`\`\`js\n${err.stack || err}\`\`\``,
+  COMMAND_EVAL_TOKEN: "[TOKEN]",
+  COMMAND_ANNOUNCEMENTS_TITLE: "Bot Announcements!",
+  // NSFW Commands
+  COMMAND_BOOBS: "Hentai Boobs",
+  COMMAND_PUSSY: "Hentai Pussy"
 });
 

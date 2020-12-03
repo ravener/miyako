@@ -20,7 +20,7 @@ class CommandUnknown extends Event {
     const prefix = msg.guild ? msg.guild.prefix : "m!";
 
     if(distances[0].dist > 0 && distances[0].dist <= 2)
-      return msg.send(`|\`❔\`| Did you mean \`${prefix + distances[0].cmd.name}\`?`)
+      return msg.sendLocale("DID_YOU_MEAN", [prefix + distances[0].cmd.name])
         .catch(() => null);
   }
 }

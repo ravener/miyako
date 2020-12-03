@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 class Boobs extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Hentai Boobs",
+      description: (msg) => msg.tr("COMMAND_BOOBS"),
       cooldown: 5,
       cost: 15,
       nsfw: true
@@ -17,7 +17,7 @@ class Boobs extends Command {
       .then((res) => res.json());
 
     const embed = this.client.embed()
-      .setTitle("Hentai Boobs")
+      .setTitle(msg.tr("COMMAND_BOOBS"))
       .setImage(url)
       .setFooter(`Requested by: ${msg.author.tag} | Powered by nekos.life`, msg.author.displayAvatarURL({ size: 32 }));
 

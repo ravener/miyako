@@ -30,15 +30,15 @@ class Help extends Command {
         return msg.send("Baka! You can't view details of that command in a non NSFW channel.");
 
       return msg.send(this.client.embed(this.client.user)
-        .setTitle(`Help for command ${cmd.name}`)
+        .setTitle(msg.tr("COMMAND_HELP_FOR", cmd.name))
         .setDescription([
-          `**Description:** ${cmd.description}`,
+          `**Description:** ${typeof cmd.description === "function" ? cmd.description(msg) : cmd.description}`,
           `**Category:** ${cmd.category}`,
-          `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join(", ") : "None"}`,
-          `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"}`,
-          `**Usage:** ${msg.guild ? msg.guild.settings.prefix : "m!"}${cmd.usage}`,
+          `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join(", ") : msg.tr("NONE")}`,
+          `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " " + msg.tr("SECONDS") : msg.tr("NONE")}`,
+          `**Usage:** ${msg.guild ? msg.guild.prefix : "m!"}${cmd.usage}`,
           `**Cost:** ${cost}`,
-          `**Extended Help:** ${cmd.extendedHelp}`
+          `**Extended Help:** ${typeof cmd.extendedHelp === "function" ? cmd.extendedHelp(msg) : cmd.extendedHelp}`
         ].join("\n")));
     }
 
@@ -49,8 +49,12 @@ class Help extends Command {
       if(command.ownerOnly && msg.author.id !== this.client.constants.ownerID) continue;
       if(command.nsfw && !msg.channel.nsfw) continue;
 
-      if(!map[command.category]) map[command.category] = [];
-      map[command.category].push(command.name);
+      // If language is not English try translating the category name.
+      const category = msg.language.name === "english" ? command.category :
+        msg.tr(`CATEGORY_${command.category.toUpperCase()}`) || command.category;
+
+      if(!map[category]) map[category] = [];
+      map[category].push(command.name);
     }
 
     const embed = this.client.embed(this.client.user)

@@ -14,7 +14,7 @@ class Language extends Command {
 
   async run(msg, [action]) {
     const display = Object.values(languages).map(lang => `\`${lang.name}\` - ${lang.display}`).join("\n");
-    if(!action) return msg.send(`Please select a language.\nUsage: \`${msg.prefix}${this.usage}\`\n\n${display}`);
+    if(!action) return msg.send(`${msg.tr("COMMAND_LANGUAGE_SELECT")}\nUsage: \`${msg.guild.prefix}${this.usage}\`\n\n${display}`);
 
     const lang = languages[action.toLowerCase()];
 

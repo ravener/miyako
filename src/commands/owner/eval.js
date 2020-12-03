@@ -34,7 +34,7 @@ class Eval extends Command {
       if(msg.commandFlags.hidden) return;
       const depth = !isNaN(msg.commandFlags.depth) ? msg.commandFlags.depth : 0;
       output = inspect(output, { depth, maxArrayLength: null });
-      output = output.replace(filter, "[TOKEN]");
+      output = output.replace(filter, msg.tr("COMMAND_EVAL_TOKEN"));
       output = clean(output);
       if(output.length < 1950) {
         msg.send(`\`\`\`js\n${output}\n\`\`\``);
@@ -49,8 +49,8 @@ class Eval extends Command {
           return msg.send(`I tried to upload the output to hastebin but encountered this error ${error.name}:${error.message}`);
         }
       }
-    } catch (error) {
-      return msg.send(`The following error occured \`\`\`js\n${error.stack}\`\`\``);
+    } catch(error) {
+      return msg.sendLocale("COMMAND_EVAL_ERROR", [error]);
     }
   }
 

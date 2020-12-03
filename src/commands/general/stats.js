@@ -42,7 +42,7 @@ class Stats extends Command {
         `**Commands Ran:** ${this.store.ran}`
       ].join("\n"))
       .addField("Links", [
-        ":star: [Github Repository](https://github.com/pollen5/miyako)",
+        ":star: [GitHub Repository](https://github.com/pollen5/miyako)",
         ":robot: [Upvote me at top.gg](https://top.gg/bot/397796982120382464)",
         ":envelope_with_arrow: [Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=2016537702&scope=bot)",
         ":video_game: [Join our Discord Server](https://discord.gg/mDkMbEh)"

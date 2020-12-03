@@ -4,13 +4,13 @@ class Say extends Command {
   constructor(...args) {
     super(...args, {
       aliases: ["echo", "talk", "repeat", "saymiyako", "miyakosay"],
-      description: "I will say whatever you want me to.",
+      description: (msg) => msg.tr("COMMAND_SAY"),
       usage: "say <message>"
     });
   }
 
   async run(msg, args) {
-    if(!args.length) return msg.send("Baka! What do you want me to say?");
+    if(!args.length) return msg.send(msg.tr("COMMAND_SAY_WHAT"));
     if(msg.deletable) await msg.delete().catch(() => null);
     return msg.send(args.join(" "), { disableMentions: "all" });
   }
