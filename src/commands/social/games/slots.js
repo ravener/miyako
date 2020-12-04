@@ -18,8 +18,7 @@ class Slots extends Command {
     const { win, view, reward } = slots();
 
     const embed = this.client.embed()
-      .setTitle("Miyako Slots")
-      .setColor(0xff0000)
+      .setTitle(msg.tr("COMMAND_SLOTS_TITLE"))
       .setDescription(view)
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ size: 64 }));
 
@@ -33,7 +32,7 @@ class Slots extends Command {
         const points = voted ? reward * 2 : reward;
 
         // Make a message and remind them to vote if they haven't
-        message = `Congratulation! You won **¥${points}**`;
+        message = msg.tr("COMMAND_SLOTS_WIN", points);
         if(!voted) message += `\nYou can get double the points by upvoting me here: <${this.store.get("upvote").url}>`;
 
         // Pay the user.

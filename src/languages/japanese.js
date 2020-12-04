@@ -80,6 +80,7 @@ module.exports = new Language("japanese", "日本語", {
   COMMAND_PROFILE_TITLE: (name) => `${name}のプロフィール`,
   COMMAND_CAT_TITLE: "ランダムな猫",
   COMMAND_DOG_TITLE: "ランダムな犬",
+  COMMAND_FOX_TITLE: "ランダムな狐",
   COMMAND_MYID: (user) => `${user} あなたのユーザーIDは **${user.id}**`,
   COMMAND_KICK_BOT: "馬鹿! 何で私をキックしますか?",
   COMMAND_KICK_SELF: "馬鹿! 何で自分をキックしますか?",
@@ -94,7 +95,20 @@ module.exports = new Language("japanese", "日本語", {
   COMMAND_EVAL_ERROR: (err) => `このエラーは起こりました: \`\`\`js\n${err.stack || err}\`\`\``,
   COMMAND_EVAL_TOKEN: "[トークン]",
   COMMAND_ANNOUNCEMENTS_TITLE: "ボットの告知!",
+  COMMAND_ANNOUNCEMENTS_FOOTER: (prefix) => `ミヤコのラウンジから (${prefix}supportを使って私たちに参加してください)`,
+  COMMAND_SUPPORT_DESCRIPTION: "サポートサーバーに参加する",
+  COMMAND_SUPPORT_TITLE: "ミヤコのラウンジを参加する",
+  COMMAND_POKEMON_GUESS: "推測するには15秒があります。そのポケモンは誰ですか？英語の名前を入力してください",
+  COMMAND_SLOTS_TITLE: "ミヤコのスロット",
+  COMMAND_SLOTS_WIN: (points) => `おめでとうございます! あなたは**¥${points}**を勝った！`,
+  COMMAND_OWO: "OwO! 何これ?",
+  COMMAND_HELP_DESCRIPTION: "説明",
+  COMMAND_HELP_CATEGORY: "カテゴリー",
+  COMMAND_AVATAR_TITLE: (user) => `${user}のアバター`,
+  COMMAND_LYRICS_WHAT: "馬鹿! 何歌を見つけたいの?",
+  COMMAND_SERVERICON_TITLE: (guild) => `${guild}のアイコン`,
   // NSFW Commands
+  COMMAND_HENTAI: "エロアニメ",
   COMMAND_BOOBS: "エロアニメのおっぱい",
   COMMAND_PUSSY: "エロアニメのおまんこ"
 }, require("./english.js"));

@@ -13,7 +13,7 @@ class Lyrics extends Command {
   }
 
   async run(msg, args) {
-    if(!args.length) return msg.send("Baka! What song are you looking for?");
+    if(!args.length) return msg.sendLocale("COMMAND_LYRICS_WHAT");
 
     const hits = await fetch(`https://api.genius.com/search?q=${encodeURIComponent(args.join(" "))}`, {
       headers: { "Authorization": `Bearer ${process.env.GENIUS}` }

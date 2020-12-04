@@ -17,7 +17,7 @@ class Pokemon extends Command {
     const pokemon = this.client.utils.random(pokemons);
 
     const embed = this.client.embed()
-      .setTitle("You have 15 seconds to guess! Who's that Pokémon!")
+      .setTitle(msg.tr("COMMAND_POKEMON_GUESS"))
       .setAuthor(msg.member.displayName, msg.author.displayAvatarURL({ size: 64 }))
       .setImage(pokemon.imageURL);
     

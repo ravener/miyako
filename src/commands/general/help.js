@@ -13,7 +13,7 @@ class Help extends Command {
       const cmd = this.store.get(command);
       if(!cmd) return msg.send("That command does not exist! Why would you think I'd have such a thing?");
 
-      let cost = "None";
+      let cost = msg.tr("NONE");
 
       if(cmd.cost && (msg.guild && msg.guild.settings.social)) {
         const premium = await this.client.verifyPremium(msg.author);
@@ -32,8 +32,8 @@ class Help extends Command {
       return msg.send(this.client.embed(this.client.user)
         .setTitle(msg.tr("COMMAND_HELP_FOR", cmd.name))
         .setDescription([
-          `**Description:** ${typeof cmd.description === "function" ? cmd.description(msg) : cmd.description}`,
-          `**Category:** ${cmd.category}`,
+          `**${msg.tr("COMMAND_HELP_DESCRIPTION")}:** ${typeof cmd.description === "function" ? cmd.description(msg) : cmd.description}`,
+          `**${msg.tr("COMMAND_HELP_CATEGORY")}:** ${cmd.category}`,
           `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join(", ") : msg.tr("NONE")}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " " + msg.tr("SECONDS") : msg.tr("NONE")}`,
           `**Usage:** ${msg.guild ? msg.guild.prefix : "m!"}${cmd.usage}`,

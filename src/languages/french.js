@@ -32,6 +32,8 @@ module.exports = new Language("french", "Français", {
   COMMAND_MYID: (user) => `${user} Votre identifiant d'utilisateur est **${user.id}**`,
   COMMAND_HELP_TITLE: "aide - commandes",
   COMMAND_EVAL_TOKEN: "[JETON]",
+  COMMAND_AVATAR_TITLE: (user) => `Avatar de ${user}`,
+  COMMAND_SERVERICON_TITLE: (guild) => `Icône de ${guild}`,
   // NSFW Commands
   COMMAND_BOOBS: "Hentai seins"
 }, require("./english.js"));

@@ -17,7 +17,7 @@ class Fox extends Command {
       .then((res) => res.json());
 
     return msg.send(this.client.embed()
-      .setTitle("Random Fox")
+      .setTitle(msg.tr("COMMAND_FOX_TITLE"))
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ size: 64 }))
       .setImage(image));
   }

@@ -33,6 +33,7 @@ module.exports = new Language("english", "English", {
   COMMAND_PROFILE_TITLE: (name) => `${name}'s profile`,
   COMMAND_CAT_TITLE: "Random Cat",
   COMMAND_DOG_TITLE: "Random Dog",
+  COMMAND_FOX_TITLE: "Random Fox",
   COMMAND_MYID: (user) => `${user} Your User ID is: **${user.id}**`,
   COMMAND_KICK_BOT: "Baka! Why would you kick me?",
   COMMAND_KICK_SELF: "Baka! Why would you kick yourself?",
@@ -47,7 +48,20 @@ module.exports = new Language("english", "English", {
   COMMAND_EVAL_ERROR: (err) => `The following error occured: \`\`\`js\n${err.stack || err}\`\`\``,
   COMMAND_EVAL_TOKEN: "[TOKEN]",
   COMMAND_ANNOUNCEMENTS_TITLE: "Bot Announcements!",
+  COMMAND_ANNOUNCEMENTS_FOOTER: (prefix) => `From Miyako Lounge (Use ${prefix}support to join us)`,
+  COMMAND_SUPPORT_DESCRIPTION: "Get the link to our support server.",
+  COMMAND_SUPPORT_TITLE: "Join Miyako Lounge",
+  COMMAND_POKEMON_GUESS: "You have 15 seconds to guess! Who's that Pokèmon?",
+  COMMAND_SLOTS_TITLE: "Miyako Slots",
+  COMMAND_SLOTS_WIN: (points) => `Congratulations! You won **¥${points}**`,
+  COMMAND_OWO: "OwO! What is this?",
+  COMMAND_HELP_DESCRIPTION: "Description",
+  COMMAND_HELP_CATEGORY: "Category",
+  COMMAND_AVATAR_TITLE: (user) => `${user}'s avatar`,
+  COMMAND_LYRICS_WHAT: "Baka! What song are you looking for?",
+  COMMAND_SERVERICON_TITLE: (guild) => `${guild}'s icon`,
   // NSFW Commands
+  COMMAND_HENTAI: "Hentai",
   COMMAND_BOOBS: "Hentai Boobs",
   COMMAND_PUSSY: "Hentai Pussy"
 });
