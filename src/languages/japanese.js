@@ -8,7 +8,7 @@ module.exports = new Language("japanese", "日本語", {
   CHANNEL_NOT_FOUND: "そのチャンネルが見つかりません",
   ROLE_NOT_FOUND: "そのロールが存在しません",
   MENTION_REMINDER: (prefix) => `こんにちは! コマンドのリストために\`${prefix}help\`を使用してください`,
-  DID_YOU_MEAN: (cmd) => `|\`❔\`|あなたは\`${cmd}\`を意味しましたか？`,
+  DID_YOU_MEAN: (cmd) => `|\`❔\`| あなたは\`${cmd}\`を意味しましたか？`,
   NONE: "無し",
   SECONDS: "秒",
   // Categories

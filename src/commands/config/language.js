@@ -5,7 +5,7 @@ class Language extends Command {
   constructor(...args) {
     super(...args, {
       description: "Change language of the bot.",
-      aliases: ["setlanguage", "setlang"],
+      aliases: ["lang", "setlanguage", "setlang"],
       userPermissions: ["MANAGE_GUILD"],
       usage: "language <language>",
       guildOnly: true

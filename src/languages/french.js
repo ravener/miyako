@@ -7,6 +7,7 @@ module.exports = new Language("french", "Français", {
   OWNER_ONLY: "Stupide! Que pensez-vous que vous faites? Cette commande est seulement pour mon maître!",
   CHANNEL_NOT_FOUND: "Je n'ai pas pu trouver ce canal",
   ROLE_NOT_FOUND: "Ce rôle n'existe pas",
+  NONE: "Rien",
   // Categories
   CATEGORY_ANIMALS: "Les animaux",
   CATEGORY_GENERAL: "Général",
@@ -17,6 +18,7 @@ module.exports = new Language("french", "Français", {
   CATEGORY_MODERATION: "Modération",
   CATEGORY_PROGRAMMING: "Programmation",
   CATEGORY_MISC: "Divers",
+  CATEGORY_CONFIG: "Réglages",
   CATEGORY_REACTIONS: "Réactions",
   COMMAND_STATS_DESCRIPTION: "Salut, je suis miyako. Le bot de divertissement tout-en-un pour votre serveur vous a apporté par mon maître Ravener#5796",
   COMMAND_STATS_TITLE: "Miyako - Statistiques de bot",
