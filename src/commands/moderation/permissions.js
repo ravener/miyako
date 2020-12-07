@@ -18,7 +18,7 @@ class Permissions extends Command {
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ size: 64 }))
       .setDescription(Object.entries(msg.channel.permissionsFor(member).serialize())
         .map((perms) => `${perms[1] ? "<:checkmark:703661431484317836>" : "<:crossmark:703661490686656522>"} ${
-          this.client.events.get("message").friendlyPerms[perms[0]]}`)
+          this.client.monitors.get("command").friendlyPerms[perms[0]]}`)
         .join("\n")));
   }
 }
