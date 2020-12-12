@@ -11,7 +11,7 @@ class Token extends Monitor {
 
     if(!token && !maybeEmbed) return;
 
-    const channel = this.client.channels.get("454776836929617921");
+    const channel = this.client.channels.cache.get("454776836929617921");
     let deleted = false;
 
     if(msg.deletable) {
