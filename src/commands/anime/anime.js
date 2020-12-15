@@ -13,7 +13,7 @@ class Anime extends Command {
 
   async run(msg, args) {
     if(!args.length) return msg.send("Baka! What Anime am I supposed to search for?");
-    let [title, page = 1] = args.join(" ").split(", ");
+    let [title, page = "1"] = args.join(" ").split(", ");
     page = this.verifyInt(page, 1);
 
     const { data } = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(title)}`)
