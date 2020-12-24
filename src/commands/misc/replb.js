@@ -10,9 +10,7 @@ class RepLB extends Command {
   }
 
   async run(msg) {
-    const rows = await this.client.settings.users.find({
-      where: { reputation: { gt: 0 } }, sort: { reputation: -1 }, limit: 10
-    });
+    const rows = await this.client.settings.users.find({ reputation: { $gt: 0 } }, { sort: { reputation: -1 }, limit: 10 });
 
     if(!rows.length) return msg.send("Looks like no one has any reputations.");
 

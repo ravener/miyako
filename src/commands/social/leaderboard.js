@@ -39,7 +39,7 @@ class Leaderboard extends Command {
     const pos = positions.indexOf(msg.author.id).toString().padStart(2, "0");
     const posTxt = pos == -1 ? "??" : (positions.indexOf(msg.author.id) + 1).toString().padStart(2, "0");
     leaderboard.push(`\n+ [${posTxt}] ❯ ${msg.author.tag}\n    => ¥${parseInt(msg.member.settings.points).toLocaleString()}`);
-    return msg.send(`**__${msg.guild.name}__**'s Leaderboard (Page **${page + 1}** out of **${totalPages || 1}**)\n\`\`\`${leaderboard.join("\n")}\`\`\``);
+    return msg.send(`**__${msg.guild.name}__**'s Leaderboard (Page **${page + 1}** out of **${totalPages || 1}**)\n\`\`\`\n${leaderboard.join("\n")}\`\`\``);
   }
 }
 
