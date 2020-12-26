@@ -54,6 +54,11 @@ class CommandHandler extends Monitor {
 
   async run(msg) {
     if(msg.webhookID || msg.author.bot) return; // Ignore bots and webhooks.
+
+    // Ignore blacklisted users/guilds. DM them a reminder if possible.
+    if(msg.guild.blacklisted) return msg.author.send(msg.tr("BLACKLISTED_GUILD", msg.guild)).catch(() => null);
+    if(msg.author.blacklisted) return msg.author.send(msg.tr("BLACKLISTED")).catch(() => null);
+
     // Ensure the bot itself is in the member cache.
     if(msg.guild && !msg.guild.me) await msg.guild.members.fetch(this.client.user);
 
@@ -170,8 +175,10 @@ class CommandHandler extends Monitor {
 
     // Start typing and run the command and then stop typing.
     msg.channel.startTyping();
-    return command._run(msg, args)
-      .then(() => msg.channel.stopTyping());
+    await command._run(msg, args);
+    msg.channel.stopTyping();
+
+    return this.stats(command);
   }
 
   ratelimit(msg, cmd) {
@@ -197,6 +204,16 @@ class CommandHandler extends Monitor {
       this.ratelimits.set(msg.author.id, ratelimits); // set it
       return true;
     }
+  }
+
+  // Tracks how many times a command is ran.
+  stats(command) {
+    const commands = this.client.settings.commands || {};
+    if(!commands[command.name]) commands[command.name] = 0;
+    
+    commands[command.name]++;
+
+    return this.client.user.update({ commands });
   }
 }
 

@@ -49,9 +49,8 @@ class Help extends Command {
       if(command.ownerOnly && msg.author.id !== this.client.constants.ownerID) continue;
       if(command.nsfw && !msg.channel.nsfw) continue;
 
-      // If language is not English try translating the category name.
-      const category = msg.language.name === "english" ? command.category :
-        msg.tr(`CATEGORY_${command.category.toUpperCase()}`) || command.category;
+      // Try translating the category name.
+      const category = msg.tr(`CATEGORY_${command.category.toUpperCase()}`) || command.category;
 
       if(!map[category]) map[category] = [];
       map[category].push(command.name);

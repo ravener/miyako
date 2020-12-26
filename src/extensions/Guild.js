@@ -10,6 +10,10 @@ module.exports = Structures.extend("Guild", (Guild) => class MiyakoGuild extends
     return this.settings.prefix;
   }
 
+  get blacklisted() {
+    return this.client.user.settings.guildBlacklist.includes(this.id);
+  }
+
   get social() {
     return this.settings.social;
   }

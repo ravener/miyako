@@ -2,7 +2,19 @@ const Language = require("../structures/Language.js");
 const responses = require("@utils/responses");
 const constants = require("../utils/constants.js");
 
+// English translation.
+// This can be used as a template to start translating into a different language.
+// So I've included comments to help you out with using this as a base.
+// When copying the file to start a new translation please remove the unnecessary comments such as this
+
+// Argument 1: Language name. This is the English name for the language that will be used to switch the language.
+// Argument 2: Native name. This is the name of the language in the language itself, used for extra display.
+// Argument 3: Keys. All the translations go here.
+// Argument 4: Default language. Language to lookup keys from if one wasn't found in the current one. (see bottom of file)
 module.exports = new Language("english", "English", {
+  // Translation keys are mostly incomplete as some English replies are still hardcoded
+  // When translating this key to a different language please append two newlines (\n\n) and a translation of
+  // **Note**: The (insert language name) translation is still incomplete
   LANGUAGE_SET: "Language has been set to English",
   GUILD_ONLY: "Baka! You can only use this command in a server. What are you doing in my DMs?",
   OWNER_ONLY: "Baka! What do you think you're doing? That command is only for my master!",
@@ -12,6 +24,13 @@ module.exports = new Language("english", "English", {
   DID_YOU_MEAN: (cmd) => `|\`❔\`| Did you mean \`${cmd}\`?`,
   NONE: "None",
   SECONDS: "Seconds",
+  BLACKLISTED: "You've been blacklisted from using the bot for abusive reasons. Please join https://discord.gg/mDkMbEh or contact Ravener#5796 for a chance to appeal.",
+  BLACKLISTED_GUILD: (guild) => `The server **${guild.name}** has been blacklisted from using the bot. If you are an Admin of the server please join https://discord.gg/mDkMbEh or contact Ravener#5796 for a chance to appeal.`,
+
+  // These are random funny responses we use for some replies
+  // Located in utils/responses.js
+  // They can be translated too so look there.
+  // I was lazy to move them here but that's a TODO
   WELCOME_MESSAGES: responses.welcomeMessages,
   GOODBYE_MESSAGES: responses.goodbyeMessages,
   LEVEL_MESSAGES: responses.levelMessages,
@@ -21,6 +40,23 @@ module.exports = new Language("english", "English", {
   RELOAD_NOT_FOUND: responses.reloadNotFound,
   RELOAD_MISSING_ARG: responses.reloadMissingArg,
   LEVELUP_MESSAGES: responses.levelUpMessages,
+
+  // Categories.
+  CATEGORY_GENERAL: "General",
+  CATEGORY_CONFIG: "Config",
+  CATEGORY_ANIME: "Anime",
+  CATEGORY_NSFW: "NSFW",
+  CATEGORY_OWNER: "Owner",
+  CATEGORY_FUN: "Fun",
+  CATEGORY_UTILITY: "Utility",
+  CAGEGORY_IMAGES: "Images",
+  CATEGORY_ANIMALS: "Animals",
+  CATEGORY_MODERATION: "Moderation",
+  CATEGORY_SOCIAL: "Social",
+  CAGEGORY_PROGRAMMING: "Programming",
+  CATEGORY_MISC: "Miscellaneous",
+  CATEGORY_REACTIONS: "Reactions",
+
   COMMAND_STATS_DESCRIPTION: "Hi, I'm Miyako. The all-in-one entertainment bot for your server brought to you by my master Ravener#5796",
   COMMAND_STATS_TITLE: "Miyako - Bot Statistics",
   COMMAND_STATS_FIELD: "Bot Stats",
@@ -64,5 +100,10 @@ module.exports = new Language("english", "English", {
   COMMAND_HENTAI: "Hentai",
   COMMAND_BOOBS: "Hentai Boobs",
   COMMAND_PUSSY: "Hentai Pussy"
-});
+
+  // Uncomment this line below when translating a different language.
+  // it just makes English the default language to lookup keys that weren't found.
+  // But since we are already in English we comment this out.
+  // Just a note for those using the English file as template to start translating.
+}/*, require("./english.js")*/);
 

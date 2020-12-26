@@ -10,7 +10,10 @@ class Points extends Monitor {
   }
 
   async run(msg) {
-    if(!msg.guild || !msg.guild.settings.social || msg.author.bot || msg.webhookID || msg.command) return;
+    if(!msg.guild || !msg.guild.settings.social || msg.author.bot || msg.webhookID ||
+      msg.command || msg.author.blacklisted || msg.guild.blacklisted) return;
+
+    // A little cooldown to prevent spam.
     if(this.timeouts.has(msg.author.id)) return;
 
     if(!msg.member) await msg.guild.members.fetch(msg.author);

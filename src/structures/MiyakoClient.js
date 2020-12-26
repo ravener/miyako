@@ -41,7 +41,8 @@ class MiyakoClient extends Client {
       guilds: new Settings(this, "guilds", schema.guilds),
       members: new Settings(this, "members", schema.members),
       users: new Settings(this, "users", schema.users),
-      store: new Settings(this, "store", schema.store)
+      store: new Settings(this, "store", schema.store),
+      client: new Settings(this, "client", schema.client)
     };
 
     this.dbl = process.env.DBL && !this.dev ? new DBL(process.env.DBL, this) : new DBLMock();

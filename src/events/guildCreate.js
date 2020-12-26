@@ -19,30 +19,28 @@ class GuildCreate extends Event {
       .addField("Member Count", guild.memberCount)
       .setFooter(guild.id);
 
-    /* if (this.client.settings.guildBlacklist.includes(guild.id)) { TODO
+    if (this.client.settings.guildBlacklist.includes(guild.id)) {
       embed.setFooter(guild.id + " | Blacklisted");
-      guild.leave();
-      this.client.emit("warn", `Blacklisted guild detected: ${guild.name} [${guild.id}]`);
-    }*/
+      await guild.leave();
+    }
     
-    return channel.send({ embed });
+    await channel.send({ embed }).catch(() => null);
 
-    /* TODO
-    const join = guild.channels.find((c) => c.type === "text" && c.postable);
+    const join = guild.channels.cache.find((c) => c.type === "text" && c.postable);
     if(!join) return;
+
     return join.send([
       "Hey there, thanks for inviting me in to this wonderful server",
-      `Start by typing \`${guild.settings.prefix}help\` to get a list of commands`,
-      `If you found any bugs please report them using \`${guild.settings.prefix}bug\``,
-      `If you have any ideas that you would like to see in this bot feel free to suggest them using \`${guild.settings.prefix}suggest\``,
+      `Start by typing \`${guild.prefix}help\` to get a list of commands`,
+      `If you found any bugs please report them using \`${guild.prefix}bug\``,
+      `If you have any ideas that you would like to see in this bot feel free to suggest them using \`${guild.prefix}suggest\``,
       "",
-      `Note: levelup messages are enabled by default if you found them annoying feel free to disable it using \`${guild.settings.prefix}levelup disable\``,
+      `Note: levelup messages are enabled by default if you found them annoying feel free to disable it using \`${guild.prefix}levelup disable\``,
       "",
-      `If you still have any questions ask them in our server, use \`${guild.settings.prefix}support\``,
+      `If you still have any questions ask them in our server, use \`${guild.prefix}support\``,
       "",
       "Have a great day!"
     ].join("\n")).catch(() => null);
-    */
   }
 }
 

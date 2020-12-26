@@ -12,6 +12,9 @@ class Stats extends Command {
   async run(msg, args) { // eslint-disable-line no-unused-vars
     const { client } = this; // Avoid typing a lot of 'this'
 
+    const cmd = Object.entries(this.client.settings.commands).sort((x, y) => x[1] < y[1] ? 1 : -1);
+    const mostUsed = cmd.length ? `${cmd[0][0]} (${cmd[0][1]} times)` : "None";
+
     const seconds = Math.floor(client.uptime / 1000) % 60 ;
     const minutes = Math.floor((client.uptime / (1000 * 60)) % 60);
     const hours = Math.floor((client.uptime / (1000 * 60 * 60)) % 24);
@@ -39,10 +42,11 @@ class Stats extends Command {
       ].join("\n"))
       .addField("Command Stats", [
         `**Total Commands:** ${this.store.size}`,
-        `**Commands Ran:** ${this.store.ran}`
+        `**Commands Ran:** ${this.store.ran}`,
+        `**Most Used:** ${mostUsed}`
       ].join("\n"))
       .addField("Links", [
-        ":star: [GitHub Repository](https://github.com/pollen5/miyako)",
+        ":star: [GitHub Repository](https://github.com/ravener/miyako)",
         ":robot: [Upvote me at top.gg](https://top.gg/bot/397796982120382464)",
         ":envelope_with_arrow: [Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=2016537702&scope=bot)",
         ":video_game: [Join our Discord Server](https://discord.gg/mDkMbEh)"
