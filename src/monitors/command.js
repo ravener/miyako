@@ -55,10 +55,6 @@ class CommandHandler extends Monitor {
   async run(msg) {
     if(msg.webhookID || msg.author.bot) return; // Ignore bots and webhooks.
 
-    // Ignore blacklisted users/guilds. DM them a reminder if possible.
-    if(msg.guild.blacklisted) return msg.author.send(msg.tr("BLACKLISTED_GUILD", msg.guild)).catch(() => null);
-    if(msg.author.blacklisted) return msg.author.send(msg.tr("BLACKLISTED")).catch(() => null);
-
     // Ensure the bot itself is in the member cache.
     if(msg.guild && !msg.guild.me) await msg.guild.members.fetch(this.client.user);
 
@@ -93,6 +89,10 @@ class CommandHandler extends Monitor {
 
     // If the message is not a command do nothing.
     if(!prefixMatch) return;
+
+    // Ignore blacklisted users/guilds. DM them a reminder if possible.
+    if(msg.guild.blacklisted) return msg.author.send(msg.tr("BLACKLISTED_GUILD", msg.guild)).catch(() => null);
+    if(msg.author.blacklisted) return msg.author.send(msg.tr("BLACKLISTED")).catch(() => null);
 
     // Parse flags.
     const { content, flags } = this.getFlags(msg.content);
