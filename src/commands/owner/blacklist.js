@@ -26,7 +26,7 @@ class Blacklist extends Command {
       }
 
       await this.client.user.update({ guildBlacklist });
-      return msg.sendLocale(`COMMAND_BLACKLIST_GUILD_${unblacklist ? "UN" : ""}BLACKLIST`, [userOrGuild]);
+      return msg.sendLocale(`COMMAND_BLACKLIST_GUILD_${unblacklist ? "UN" : ""}BLACKLIST`, [this.client.guilds.cache.get(userOrGuild)]);
     }
 
     const user = await this.verifyUser(msg, userOrGuild).catch(() => null);

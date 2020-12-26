@@ -96,6 +96,10 @@ module.exports = new Language("english", "English", {
   COMMAND_AVATAR_TITLE: (user) => `${user}'s avatar`,
   COMMAND_LYRICS_WHAT: "Baka! What song are you looking for?",
   COMMAND_SERVERICON_TITLE: (guild) => `${guild}'s icon`,
+  COMMAND_BLACKLIST_USER_BLACKLIST: (user) => `Blacklisted user **${user.tag}** (${user.id})`,
+  COMMAND_BLACKLIST_USER_UNBLACKLIST: (user) => `Unblacklisted user **${user.tag}** (${user.id})`,
+  COMMAND_BLACKLIST_GUILD_BLACKLIST: (guild) => `Blacklisted the guild **${guild.name}** (${guild.id})`,
+  COMMAND_BLACKLIST_GUILD_UNBLACKLIST: (guild) => `Unblacklisted the guild **${guild.name}** (${guild.id})`,
   // NSFW Commands
   COMMAND_HENTAI: "Hentai",
   COMMAND_BOOBS: "Hentai Boobs",
