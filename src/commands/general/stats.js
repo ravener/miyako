@@ -12,7 +12,7 @@ class Stats extends Command {
   async run(msg, args) { // eslint-disable-line no-unused-vars
     const { client } = this; // Avoid typing a lot of 'this'
 
-    const cmd = Object.entries(this.client.settings.commands).sort((x, y) => x[1] < y[1] ? 1 : -1);
+    const cmd = Object.entries(this.client.users.settings.commands).sort((x, y) => x[1] < y[1] ? 1 : -1);
     const mostUsed = cmd.length ? `${cmd[0][0]} (${cmd[0][1]} times)` : "None";
 
     const seconds = Math.floor(client.uptime / 1000) % 60 ;
