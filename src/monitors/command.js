@@ -208,7 +208,7 @@ class CommandHandler extends Monitor {
 
   // Tracks how many times a command is ran.
   stats(command) {
-    const commands = this.client.settings.commands || {};
+    const commands = this.client.user.settings.commands || {};
     if(!commands[command.name]) commands[command.name] = 0;
     
     commands[command.name]++;
