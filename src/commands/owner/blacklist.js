@@ -29,7 +29,7 @@ class Blacklist extends Command {
       return msg.sendLocale(`COMMAND_BLACKLIST_GUILD_${unblacklist ? "UN" : ""}BLACKLIST`, [userOrGuild]);
     }
 
-    const user = await this.verifyUser(userOrGuild).catch(() => null);
+    const user = await this.verifyUser(msg, userOrGuild).catch(() => null);
     if(!user) return msg.send("That guild/user wasn't found.");
 
     const blacklist = this.client.user.blacklist || [];
