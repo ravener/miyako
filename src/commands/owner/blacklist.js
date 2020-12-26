@@ -32,7 +32,7 @@ class Blacklist extends Command {
     const user = await this.verifyUser(msg, userOrGuild).catch(() => null);
     if(!user) return msg.send("That guild/user wasn't found.");
 
-    const blacklist = this.client.user.blacklist || [];
+    const blacklist = this.client.user.settings.blacklist || [];
     let unblacklist = false;
     
     if(blacklist.includes(user.id)) {
