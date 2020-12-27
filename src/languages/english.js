@@ -49,11 +49,11 @@ module.exports = new Language("english", "English", {
   CATEGORY_OWNER: "Owner",
   CATEGORY_FUN: "Fun",
   CATEGORY_UTILITY: "Utility",
-  CAGEGORY_IMAGES: "Images",
+  CATEGORY_IMAGES: "Images",
   CATEGORY_ANIMALS: "Animals",
   CATEGORY_MODERATION: "Moderation",
   CATEGORY_SOCIAL: "Social",
-  CAGEGORY_PROGRAMMING: "Programming",
+  CATEGORY_PROGRAMMING: "Programming",
   CATEGORY_MISC: "Miscellaneous",
   CATEGORY_REACTIONS: "Reactions",
 
