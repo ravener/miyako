@@ -91,7 +91,7 @@ class CommandHandler extends Monitor {
     if(!prefixMatch) return;
 
     // Ignore blacklisted users/guilds. DM them a reminder if possible.
-    if(msg.guild.blacklisted) return msg.author.send(msg.tr("BLACKLISTED_GUILD", msg.guild)).catch(() => null);
+    if(msg.guild && msg.guild.blacklisted) return msg.author.send(msg.tr("BLACKLISTED_GUILD", msg.guild)).catch(() => null);
     if(msg.author.blacklisted) return msg.author.send(msg.tr("BLACKLISTED")).catch(() => null);
 
     // Parse flags.
