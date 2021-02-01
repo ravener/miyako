@@ -6,148 +6,148 @@
 // Member Join
 exports.welcomeMessages = [
   "O-ohayou gozaimasu **{{user}}-san**.",
-  "Hmph, looks like **{{user}}**, another baka, has joined.",
-  "It's not like I like you or anything... but welcome to the server **{{user}}**.",
-  "O-oh, welcome **{{user}}-san**. I hope I haven't embarrased you...",
-  "OwO who's this? **{{user}}** has joined the server.",
-  "**{{user}}**, looks like you landed on the wrong side of Discord!",
-  "Hi **{{user}}**! Welcome to **{{guild}}**, I hope you enjoy your stay!",
-  "ERGH, why has **{{user}}** got to come, I already have to handle **{{amount}}** users!",
-  "Y-yay! More people to deal with! Welcome **{{user}}**!",
-  "Hi! Waifu/husbando **{{user}}** has joined the Academy!",
-  "**{{user}}-san**, welcome to **{{guild}}**!"
+  "Hmph, sepertinya **{{user}}**, orang konyol lainnnya, telah bergabung.",
+  "Ini bukan seperti aku menyukaimu atau apapun... tapi selamat datang di server **{{user}}**.",
+  "O-oh, selamat datang **{{user}}-san**. Aku harap, Aku tidak membuat kamu malu...",
+  "OwO siapa ini? **{{user}}** telah bergabung dengan server.",
+  "**{{user}}**, Sepertinya Kamu mendarat di sisi yang salah dari Discord!",
+  "Hai **{{user}}**! Selamat Datang di **{{guild}}**, Aku harap Kamu betah disini!",
+  "ERGH, kenapa **{{user}}** harus bergabung, Aku sudah harus menangani **{{amount}}** user!",
+  "Y-yay! Lebih banyak orang untuk ditangani! Selamat datang **{{user}}**!",
+  "Hai! Waifu/husbando **{{user}}** telah bergabung dengan Akademi!",
+  "**{{user}}-san**, selamat datang di **{{guild}}**!"
 ];
 
 // Member Leave
 exports.goodbyeMessages = [
-  "Awh, I-I have no words for t-this, b-but, I-I'll miss you **{{user}}-san**!",
-  "Awh, **{{user}}** has left... n-not that I care! Baka!",
-  "**{{user}}-san**.... N-no...",
-  "**{{user}}** left, not like we needed them or anything.",
-  "**{{user}}** why would you leave me here, alone!?",
-  "**{{user}}** discovered the leave button.",
-  "Eep! **{{user}}** left?! Th-they're always leaving me, that baka...",
-  "Finally, I thought **{{user}}** would never leave!",
-  "Woah! **{{user}}** left **{{guild}}**! B-baka, why did they even join?!",
-  "Woo, **{{user}}** left, now I only have to handle **{{amount}}** users!"
+  "Awh, A-Aku tidak punya kata-kata untuk ini, ta-tapi, A-Aku akan merindukanmu **{{user}}-san**!",
+  "Awh, **{{user}}** telah pergi... A-aku tidak peduli! Bodoh!",
+  "**{{user}}-san**.... Ja-jangan...",
+  "**{{user}}** telah pergi, begitu saja seperti kita tidak membutuhkannya atau apapun.",
+  "**{{user}}** kenapa kamu meninggalkan aku di sini, sendirian!?",
+  "**{{user}}** menemukan tombol keluar.",
+  "Eep! **{{user}}** pergi?! Me-mereka selalu meninggalkanku, sialan itu...",
+  "A-akhirnya..., aku kira **{{user}}** tidak akan pernah pergi dari sini!",
+  "Woah! **{{user}}** meninggalkan **{{guild}}**! sialan, lalu kenapa mereka bergabung?!",
+  "Woo, **{{user}}** telah pergi, sekarang aku hanya perlu menangani **{{amount}}** user!"
 ];
 
 // Level Up
 exports.levelUpMessages = [
-  "You've only become level **{{level}}**, peasant!",
-  "YATTA! You leveled up, **{{user}}-san**! You're now level **{{level}}**, n-not that it means a-anything!",
-  "E-eh? You leveled up? Well just because you're level **{{level}}** now, doesn't mean I'll like you more **{{user}}**... baka.",
-  "Hmph, you leveled up to **{{level}}**, **{{user}}-san**. W-well, it makes no difference to me!",
-  "Hyaa~! You've leveled up **{{user}}-san**, you're now level **{{level}}**.",
-  "**{{user}}**, you baka. Don't leave me behind now that you're level **{{level}}**.",
-  "**{{user}}-san**, don't forget me now just because you're level **{{level}}**",
-  "Pfft, you've only just become level **{{level}}**, hurry up **{{user}}**.",
-  "Ah nuts, **{{user}}** is getting smart, now with an I.Q. of **{{level}}**",
-  "N-nani? You've reached level **{{level}}** so quickly...",
-  "You're only level **{{level}}**? You disgust me!",
-  "How can you be level **{{level}}** y-you baka!",
-  "B-baka! You're at level **{{level}}**, now go be free! D-dummy...",
-  "You're definitely level **{{level}}** you baka!",
+  "Kamu telah menjadi level **{{level}}**, petani!",
+  "YATTA! Kamu telah naik level, **{{user}}-san**! Level kamu sekarang **{{level}}**, i-itu bukan bermaksud apa-apa!",
+  "E-eh? Kamu sudah naik level? well, jangan karena kamu sudah level **{{level}}** sekarang, bukan berarti aku akan lebih menyukaimu **{{user}}**... bodoh.",
+  "Hmph, Kamu telah naik level **{{level}}**, **{{user}}-san**. W-well, tidak ada bedanya bagiku!",
+  "Hyaa~! Kamu telah naik level**{{user}}-san**, level kamu sekarang **{{level}}**.",
+  "**{{user}}**, sialan. Jangan tinggalkan aku karena kamu sudah level **{{level}}**.",
+  "**{{user}}-san**, jangan lupakan aku! Hanya karena kamu sudah level **{{level}}**",
+  "Pfft, Kamu baru saja menjadi level **{{level}}**, Ayo cepat **{{user}}**.",
+  "Wah gila, **{{user}}** semakin pintar sekarang dengan I.Q. **{{level}}**",
+  "A-apa? Kamu sudah mencapai level **{{level}}** cepat sekali...",
+  "Kamu baru naik level **{{level}}**? Kamu membuat aku jijik!!",
+  "Bagaimana mungkin Kamu bisa menjadi level **{{level}}** Ka-kamu sialan!",
+  "Si-sialan! Kamu sudah mencapai level **{{level}}**, sekarang kamu bebas! D-dummy...",
+  "Kamu sudah level **{{level}}**, sial!",
 ];
 
 // Commands
 exports.pingMessages = [
-  "Ugh, again? You always ask, and I tell you that I responded in **{{ms}}ms**.",
-  "B-baka, I responded... just in **{{ms}}ms**.",
-  "H-here you go, I responded in **{{ms}}ms**.",
-  "Here you go, not that it was worth my time. It only took me **{{ms}}ms**.",
-  "Is this right? I've responded in **{{ms}}ms**.",
-  "**{{user}}**? I've responded in **{{ms}}ms**.",
-  "**{{user}}**! You wasted **{{ms}}ms** of my time, ERGH",
-  "D-did I do it right? I responded in **{{ms}}ms**.",
-  "**{{user}}**, yes I'm here, and it took me **{{ms}}ms** to respond!",
-  "**{{user}}** why are you pinging me man! You wasted **{{ms}}ms** of my time!!",
-  "**{{user}}** hey, it took me **{{ms}}ms** to send this message",
-  "You've made me **{{ms}}ms** older - just from asking.",
-  "**{{user}}** I've seen your message and it took me **{{ms}}ms** not to care.",
-  "Do you know how long it took me to read that message? You pretty much wasted **{{ms}}ms** of my day!",
-  "B-baka! My ping is **{{ms}}ms**! Are you happy now?"
+  "Ugh, lagi? Kamu selalu bertanya, dan aku selalu memberi tahu kamu bahwa aku merespon **{{ms}}ms**.",
+  "Bo-bodoh, Aku mendengarnya... baru saja masuk **{{ms}}ms**.",
+  "I-ini dia, Aku merespon **{{ms}}ms**.",
+  "Ini dia, bukankah itu sepadan dengan waktuku. Aku hanya butuh **{{ms}}ms**.",
+  "Apakah ini benar? Aku merespon **{{ms}}ms**.",
+  "**{{user}}**? aku telah merespon **{{ms}}ms**.",
+  "**{{user}}**! Kamu sudah menyia-nyiakan **{{ms}}ms** waktuku, ERGH",
+  "A-apakah aku melakukannya dengan benar? Aku merespon **{{ms}}ms**.",
+  "**{{user}}**, ya aku di sini, dan itu membuatku **{{ms}}ms** untuk merespon!",
+  "**{{user}}** kenapa kamu ping aku! Kamu sudah menyia-nyiakan **{{ms}}ms** waktuku!!",
+  "hey **{{user}}**, itu membutuhkan **{{ms}}ms** untuk mengirim pesan ini",
+  "Kamu sudah membuat aku **{{ms}}ms** lebih tua - hanya karena bertanya.",
+  "**{{user}}** Aku sudah menerima pesan Kamu dan pesan itu diterima pada **{{ms}}ms**, aku tidak peduli.",
+  "Tahukah Kamu berapa lama waktu yang aku butuhkan untuk membaca pesan itu? Kamu cukup banyak membuang **{{ms}}ms** hariku!",
+  "Si-sialan! Pingku **{{ms}}ms**! Apa kamu senang sekarang?"
 ];
 
 exports.dailySuccessMessages = [
-  "Yatta! You've got **{{amount}}**.",
-  "Well done, you've redeemed your daily **{{amount}}**!",
-  "Finally I thought you were never going to claim your **{{amount}}** today!",
-  "Your dad gave you **{{amount}}**? I get more than that every hour!",
-  "You have claimed your daily **{{amount}}**, ain't that dandy?",
-  "N-nani?! You got **{{amount}}**, woah...",
-  "You just got **{{amount}}**? Maybe buy me dinner some time **{{user}}-san**? :wink:",
-  "Oh goody, you finally got your **{{amount}}**. It's about time, now get me some Pocky."
+  "Yatta! Kamu mendapatkan **{{amount}}**.",
+  "Selamat, kamu sudah redeem hadiah harian **{{amount}}**!",
+  "Akhirnya, Aku kira kamu tidak akan mengklaim **{{amount}}** milik kamu hari ini!",
+  "Ayah kamu memberikan **{{amount}}**? Aku bisa mendapatkan lebih dari itu setiap jamnya!",
+  "Kamu telah mengklaim hadiah harian Kamu **{{amount}}**, tidak begitu keren bukan?",
+  "A-apa?! Kamu mendapatkan **{{amount}}**, woah...",
+  "Kamu baru saja mendapatkan **{{amount}}**? Mungkin kamu bisa membelikanku makan malam kapan-kapan **{{user}}-san**? :wink:",
+  "Ya ampun, akhirnya kamu mendapatkan keberuntunganmu juga, sebanyak **{{amount}}**. kamu hanya perlu bersabar, sekarang berikan aku Pocky."
 ];
 
 exports.dailyFailureMessages = [
-  "You cannot claim your daily reward yet, please try again in **{{time}}**",
-  "Oh come on now, you know better than to ask ahead of time.. You can get your daily in **{{time}}**",
-  "**{{user}}-san**, you already got your allowance today. You can get it in **{{time}}**",
-  "This again? I told you to wait **{{time}}**",
-  "Hey! Money is already tight around here. Ask in **{{time}}**",
-  "You're gonna make m-me mad please wait **{{time}}** to claim again!"
+  "Kamu belum bisa mengklaim hadiah harian Kamu, silahkan coba lagi dalam **{{time}}**",
+  "ah ayolah, Kamu belum bisa mendapatkannya sekarang.. Kamu bisa mendapatkan hadiah harian lagi dalam **{{time}}**",
+  "**{{user}}-san**, Kamu sudah menerima uang saku Kamu hari ini. Kamu bisa mendapatkannya lagi dalam **{{time}}**",
+  "Ini lagi? Aku sudah menyuruhmu untuk menunggu selama **{{time}}**",
+  "Hey! Uang sudah menipis disini. tanyakan lagi dalam **{{time}}**",
+  "Ka-kamu akan membuatku marah! **{{time}}** lagi untuk mengklaim!"
 ];
 
 exports.balanceMessages = [
-  "Pfft, a measly **{{amount}}**? My father gives me more as an allowance!",
-  "Only **{{amount}}**? That's nothing compared to my pocket money!",
-  "**{{user}}-san**, you have **{{amount}}**, but you don't need it to make me happy.",
-  "**{{user}}**, again? Ugh, you have **{{amount}}**... Jeez, maybe if you kept track of it you'd remember..."
+  "Pfft,**{{amount}}** sangat sedikit? Ayahku memberi aku uang jajan lebih banyak!",
+  "Hanya **{{amount}}**? Itu tidak seberapa dibandingkan dengan uang dikantongku!",
+  "**{{user}}-san**, kamu memiliki **{{amount}}**, tapi kamu tidak membutuhkan itu untuk membuatku bahagia.",
+  "**{{user}}**, lagi? Ugh, kamu memiliki **{{amount}}**... Jeez, coba kamu catat. Mungkin kamu akan ingat..."
 ];
 
 exports.otherBalanceMessages = [
-  "Why do you want to know **{{user}}**'s balance? Whatever, it's **{{amount}}** anyway.",
-  "N-nani? **{{user}}-san**'s balance? It's **{{amount}}**..",
-  "Why do you care so much about **{{user}}**'s balance? N-not that I care, it's **{{amount}}**.",
-  "Some particular reason you want to know **{{user}}**'s balance? It's **{{amount}}**.",
-  "Hm, one second... It's **{{amount}}**, but why do you want to know **{{user}}**'s balance?",
-  "You've aleady asked for **{{user}}**'s balance, gosh! Anyway, it's **{{amount}}**."
+  "Kenapa kamu ingin tahu saldo **{{user}}**? Masa bodoh, lagi pula saldonya hanya **{{amount}}**.",
+  "A-apa? **saldo {{user}}-san**? **{{amount}}**..",
+  "Kenapa Kamu begitu peduli dengan saldo **{{user}}**? lagi pula A-aku tidak peduli, dia memiliki saldo **{{amount}}**.",
+  "Adakah alasan kenapa kamu ingin mengetahui saldo **{{user}}**? dia memiliki saldo **{{amount}}**.",
+  "Hm, tunggu sebentar... dia memiliki saldo **{{amount}}**, tapi kenapa kamu ingin tahu saldo milik **{{user}}**?",
+  "Kamu sudah bertanya mengenai saldo milik **{{user}}**, oh my god! Lagi pula, saldonya hanya **{{amount}}**."
 ];
 
 exports.levelMessages = [
-  "You're only level **{{level}}**, Not bad...",
+  "Level kamu **{{level}}**, Tidak buruk...",
   "Pfft, level **{{level}}**?",
-  "**{{user}}** your level? It's **{{level}}**, baka",
-  "**{{user}}**, again with this? Whatever, you're level **{{level}}**.",
-  "**{{user}}-san** here you go, it's **{{level}}**.",
-  "You're level **{{level}}**, maybe if you were a wee bit more active it'd be higher.",
-  "Only a level **{{level}}**? Even I'm better than that.",
-  "Level **{{level}}**? What, where you hoping to be higher than **{{level}}**?",
-  "Only level **{{level}}**? Pfft! I've seen much better than that."
+  "**{{user}}** level kamu**{{level}}**?, payah",
+  "**{{user}}**, Kamu menanyakan ini lagi? Masa bodoh, level kamu **{{level}}**.",
+  "ini dia **{{user}}-san**, level kamu **{{level}}**.",
+  "Level kamu **{{level}}**, mungkin jika kamu mau lebih aktif lagi, level kamu bisa lebih tinggi dari ini.",
+  "Hanya level **{{level}}**? sepertinya aku lebih baik dari itu.",
+  "Level **{{level}}**? Apa? kamu berharap lebih tinggi dari **{{level}}**?",
+  "Hanya level **{{level}}**? Pfft! Aku sudah pernah melihat yang lebih baik dari itu."
 ];
 
 exports.otherLevelMessages = [
-  "Look just ask **{{user}}** next time, but I will forgive you. Here, this is their level: **{{level}}**.",
-  "Why do you want to view **{{user}}**'s level? Anyway they are level **{{level}}**."
+  "Lain kali tanya saja sendiri pada **{{user}}**, tapi Aku akan memaafkanmu kali ini. ini dia levelnya: **{{level}}**.",
+  "Kenapa kamu ingin tahu level **{{user}}**? Lagian level dia hanya **{{level}}**."
 ];
 
 // System
 
 // Reload
 exports.reloadMissingArg = [
-  "N-nani?! I don't know what to do, you didn't give me anything!",
-  "Baka! You are supposed to provide a command to reload!"
+  "A-apa?! Aku tidak tahu harus berbuat apa, karena kamu tidak memberitahuku apa yang harus dilakukan!",
+  "Bodoh! Kamu harus memberikan perintah untuk mereload!"
 ];
 
 exports.reloadNotFound = [
-  "Eeeh?! **{{user}}-san**, why would you ask me to find a command that doesn't exist, it wasn't even an alias.",
-  "What are you doing? **{{command}}** doesn't exist! Baka!"
+  "Eeeh?! **{{user}}-san**, kenapa Kamu meminta aku untuk menemukan perintah yang tidak ada, bahkan itu bukan alias/singkatan.",
+  "apa yang kamu lakukan? **{{command}}** tidak ada! Bodoh!"
 ];
 
 exports.reloadErrUnload = [
-  "**{{user}}-san**, I think I broke it... This happened: **{{response}}**",
-  "There was an error, probably your fault! Baka! **{{response}}**"
+  "**{{user}}-san**, Aku pikir Aku merusaknya... Ini yang terjadi: **{{response}}**",
+  "ada kesalahan, mungkin itu salahmu! Bodoh! **{{response}}**"
 ];
 
 exports.reloadErrLoad = [
-  "Ugh, can't you do one thing right? You ended up breaking **{{command}}**.",
-  "**{{command}}** is broken... Not my fault or problem though! (**{{response}}**)"
+  "Ugh, tidak bisakah kamu melakukan satu hal saja dengan benar? berakhir dengan kerusakan **{{command}}**.",
+  "**{{command}}** rusak... Bukan salahku atau masalahku! (**{{response}}**)"
 ];
 
 exports.reloadSuccess = [
-  "Yatta! **{{command}}** reloaded, now we can get back to what we were doing, or whatever you want to do...",
-  "I've reloaded **{{command}}**, not that I could see any point in it..."
+  "Yatta! **{{command}}** dimuat ulang, sekarang kita bisa melakukan itu seperti sebelumnya, atau apapun yang ingin Kamu lakukan...",
+  "Aku sudah memuat ulang **{{command}}**, bukan berarti aku bisa melihat kegunaannya..."
 ];
 
 // After the following line is the end of Misaki code and are made by myself.
@@ -155,8 +155,8 @@ exports.reloadSuccess = [
 // Errors
 
 exports.notNSFWChannel = [
-  "Baka! What do you think you're doing? That command can only be used in NSFW channels.",
-  "N-nani? Is this really the place to do that? That command can only be used in NSFW channels."
+  "Bodoh! Kamu pikir apa yang ingin kamu lakukan? Perintah itu hanya dapat digunakan di channel NSFW.",
+  "A-apa? Apakah ini tempat yang benar untuk melakukan itu? Perintah itu hanya dapat digunakan di channel NSFW."
 ];
 
 exports.guildOnlyCommand = [
