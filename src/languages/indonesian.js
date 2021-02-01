@@ -2,7 +2,7 @@ const Language = require("../structures/Language.js");
 const responses = require("@utils/responses");
 const constants = require("../utils/constants.js");
 
-module.exports = new Language("bahasa", "Indonesia", {
+module.exports = new Language("indonesian", "Bahasa Indonesia", {
   LANGUAGE_SET: "Bahasa telah diatur ke Bahasa Indonesia",
   GUILD_ONLY: "Baka! Kamu hanya dapat menggunakan perintah ini di dalam server. Apa yang ingin kamu lakukan dengan dm saya?",
   OWNER_ONLY: "Baka! Apa yang ingin kamu lakukan? Perintah itu hanya untuk tuanku!",
