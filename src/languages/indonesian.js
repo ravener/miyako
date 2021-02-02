@@ -1,5 +1,4 @@
 const Language = require("../structures/Language.js");
-const responses = require("@utils/responses");
 const constants = require("../utils/constants.js");
 
 module.exports = new Language("indonesian", "Bahasa Indonesia", {
