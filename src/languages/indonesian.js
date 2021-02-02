@@ -15,15 +15,71 @@ module.exports = new Language("indonesian", "Bahasa Indonesia", {
   BLACKLISTED: "Kamu telah masuk blacklist dari penggunaan bot karena alasan penyalahgunaan bot. Silahkan bergabung ke https://discord.gg/mDkMbEh atau menghubungi Ravener#5796 untuk mendapatkan kesempatan mengajukan permohonan.",
   BLACKLISTED_GUILD: (guild) => `Server **${guild.name}** telah masuk blacklist dari penggunaan bot. Jika Kamu adalah Admin server, silakan bergabung ke https://discord.gg/mDkMbEh atau menghubungi Ravener#5796 untuk mendapatkan kesempatan mengajukan permohonan.`,
 
-  WELCOME_MESSAGES: responses.welcomeMessages,
-  GOODBYE_MESSAGES: responses.goodbyeMessages,
-  LEVEL_MESSAGES: responses.levelMessages,
-  DAILY_SUCCESS_MESSAGES: responses.dailySuccessMessages,
-  PING_MESSAGES: responses.pingMessages,
-  RELOAD_ERR_UNLOAD: responses.reloadErrUnload,
-  RELOAD_NOT_FOUND: responses.reloadNotFound,
-  RELOAD_MISSING_ARG: responses.reloadMissingArg,
-  LEVELUP_MESSAGES: responses.levelUpMessages,
+  WELCOME_MESSAGES: [
+  "O-ohayou gozaimasu **{{user}}-san**.",
+  "Ini bukan seperti aku menyukaimu atau apapun... tapi selamat datang di server **{{user}}**.",
+  "O-oh, selamat datang **{{user}}-san**. Aku harap, Aku tidak membuatmu tidak nyaman...",
+  "**{{user}}**, Sepertinya Kamu mendarat di sisi yang salah dari Discord!",
+  "Hai **{{user}}**! Selamat Datang di **{{guild}}**, Aku harap Kamu betah disini!",
+  "Y-yay! Lebih banyak orang untuk ditangani! Selamat datang **{{user}}**!",
+  "Hai! Waifu/husbando **{{user}}** telah bergabung dengan Akademi!",
+  "**{{user}}-san**, selamat datang di **{{guild}}**!"
+  ],
+  GOODBYE_MESSAGES: [ 
+  "Awh, **{{user}}** telah pergi... A-aku tidak peduli! Bodoh!",
+  "**{{user}}** telah pergi, begitu saja seperti kita tidak membutuhkannya atau apapun.",
+  "**{{user}}** kenapa kamu meninggalkan aku di sini, sendirian!?",
+  "Eep! **{{user}}** pergi?! Me-mereka selalu meninggalkanku, sialan itu...",
+  "A-akhirnya..., aku kira **{{user}}** tidak akan pernah pergi dari sini!",
+  "Woah! **{{user}}** meninggalkan **{{guild}}**! sialan, lalu kenapa mereka bergabung?!",
+  "Woo, **{{user}}** telah pergi, sekarang aku hanya perlu menangani **{{amount}}** user!"
+  ],
+  LEVEL_MESSAGES: [
+  "Level kamu **{{level}}**, Tidak buruk...",
+  "Pfft, level **{{level}}**?",
+  "**{{user}}**, Kamu menanyakan ini lagi? Masa bodoh, level kamu **{{level}}**.",
+  "ini dia **{{user}}-san**, level kamu **{{level}}**.",
+  "Level kamu **{{level}}**, mungkin jika kamu mau lebih aktif lagi, level kamu bisa lebih tinggi dari itu.",
+  "Level **{{level}}**? Apa? kamu berharap lebih tinggi dari **{{level}}**?",
+  ],
+  DAILY_SUCCESS_MESSAGES: [
+  "Yatta! Kamu mendapatkan **{{amount}}**.",
+  "Selamat, kamu sudah redeem hadiah harian kamu. **{{amount}}**!",
+  "Akhirnya, Aku kira kamu tidak akan mengklaim **{{amount}}** milik kamu hari ini!",
+  "Kamu hanya mendapatkan **{{amount}}**? Aku bisa mendapatkan lebih dari itu setiap jamnya!",
+  "A-apa?! Kamu mendapatkan **{{amount}}**, woah...",
+  "Kamu baru saja mendapatkan **{{amount}}**? Mungkin kamu bisa membelikanku makan malam kapan-kapan **{{user}}-san**? :wink:",
+  "Ya ampun, akhirnya kamu mendapatkan keberuntunganmu juga, sebanyak **{{amount}}**. kamu hanya perlu bersabar, sekarang berikan aku Pocky."
+  ],
+  PING_MESSAGES: [
+  "Ugh, lagi? Kamu selalu bertanya, dan aku selalu memberi tahu kamu bahwa aku merespon **{{ms}}ms**.",
+  "I-ini dia, Aku merespon **{{ms}}ms**.",
+  "**{{user}}**? aku telah merespon **{{ms}}ms**.",
+  "**{{user}}**! Kamu sudah menyia-nyiakan **{{ms}}ms** waktuku, ERGH",
+  "**{{user}}**, ya aku di sini, dan aku membutuhkan **{{ms}}ms** untuk merespon!",
+  "**{{user}}** kenapa kamu ping aku! Kamu sudah menyia-nyiakan **{{ms}}ms** waktuku!!",
+  "hey **{{user}}**, itu membutuhkan **{{ms}}ms** untuk mengirim pesan ini",
+  "Kamu sudah membuat aku **{{ms}}ms** lebih tua - hanya karena bertanya.",
+  "Tahukah Kamu berapa lama waktu yang aku butuhkan untuk membaca pesan itu? Kamu cukup banyak membuang **{{ms}}ms** hariku!",
+  ],
+  RELOAD_ERR_UNLOAD: [
+    "**{{user}}-san**, Aku pikir Aku merusaknya... Ini yang terjadi: **{{response}}**"
+  ],
+  RELOAD_NOT_FOUND: [
+    "Eeeh?! **{{user}}-san**, kenapa Kamu meminta aku untuk menemukan perintah yang tidak ada, bahkan itu bukan alias/singkatan."
+  ],
+  RELOAD_MISSING_ARG: [
+    "A-apa?! Aku tidak tahu harus berbuat apa, karena kamu tidak memberitahuku apa yang harus dilakukan!"
+  ],
+  LEVELUP_MESSAGES: [
+  "Kamu telah menjadi level **{{level}}**, dasar tukang farming!",
+  "E-eh? Kamu sudah naik level? well, jangan karena kamu sudah level **{{level}}** sekarang, bukan berarti aku akan lebih menyukaimu **{{user}}**... bodoh.",
+  "Hmph, Kamu telah naik level **{{level}}**, **{{user}}-san**. W-well, tidak ada bedanya bagiku!",
+  "Hyaa~! Kamu telah naik level**{{user}}-san**, level kamu sekarang **{{level}}**.",
+  "**{{user}}-san**, jangan lupakan aku! Hanya karena kamu sudah level **{{level}}**",
+  "Wah gila, **{{user}}** semakin pintar sekarang dengan I.Q. **{{level}}**",
+  "A-apa? Kamu sudah mencapai level **{{level}}** cepat sekali...",
+  ],
 
   // Categories.
   CATEGORY_GENERAL: "Umum",
