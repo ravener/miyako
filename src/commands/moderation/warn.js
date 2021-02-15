@@ -21,7 +21,7 @@ class Warn extends Command {
 
     try {
       await user.send(`You've been warned in **${msg.guild.name}** by **${msg.author.tag}** for: ${reason.join(" ")}`);
-      return msg.send(`I've warned **${user.user.tag}** for: ${reason.join(" ")}`);
+      return msg.send(`I've warned **${user.tag}** for: ${reason.join(" ")}`);
     } catch(err) {
       return msg.send("I couldn't DM the user, maybe they have DMs blocked.");
     }
