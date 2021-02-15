@@ -10,7 +10,8 @@ class Translate extends Command {
       extendedHelp: "Note that the languages should be an abbreviation, i.e french -> fr",
       usage: "translate <to> <message>",
       cooldown: 5,
-      aliases: ["tr"]
+      aliases: ["tr"],
+      enabled: false
     });
   }
   

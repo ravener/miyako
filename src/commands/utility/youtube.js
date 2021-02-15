@@ -8,7 +8,8 @@ class YouTube extends Command {
       description: "Searches something on YouTube",
       usage: "youtube <query>",
       cooldown: 5,
-      aliases: ["yt"]
+      aliases: ["yt"],
+      enabled: false
     });
   }
 
