@@ -9,13 +9,6 @@ class UserInfo extends Command {
       guildOnly: true,
       aliases: ["ui", "user"]
     });
-    
-    this.statuses = {
-      online: "<:online:473263910045351957> Online",
-      idle: "<:idle:473264190346493964> Idle",
-      dnd: "<:dnd:473264076852559873> Do Not Disturb",
-      offline: "Offline"
-    };
   }
   
   async run(msg, [member]) {
@@ -30,7 +23,6 @@ class UserInfo extends Command {
       .addField("❯ ID", member.id, true)
       .addField("❯ Discord Join Date", `${member.user.createdAt.toDateString()} (${days} days ago!)`, true)
       .addField("❯ Server Join Date", `${member.joinedAt.toDateString()} (${joinedDays} days ago!)`, true)
-      .addField("❯ Status", this.statuses[member.presence.status], true)
       .addField("❯ Bot", member.user.bot ? "Yes" : "No", true)
       .addField("❯ Highest Role", member.roles.cache.size > 1 ? member.roles.highest.name : "None", true)
       .addField("❯ Hoist Role", member.roles.hoist ? member.roles.hoist.name : "None", true);
