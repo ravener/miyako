@@ -21,22 +21,24 @@ class Eval extends Command {
   }
 
   async run(msg, args) {
-    if(!args.length) return msg.send("Baka! You need to give me code to evaluate.");
+    if (!args.length) return msg.send("Baka! You need to give me code to evaluate.");
 
     const { clean, client } = this;
     const { code } = this.client.utils.getCodeBlock(msg.rawArgs);
     const token = client.token.split("").join("[^]{0,2}");
     const rev = client.token.split("").reverse().join("[^]{0,2}");
     const filter = new RegExp(`${token}|${rev}`, "g");
+
     try {
       let output = eval(code);
-      if(output instanceof Promise || (Boolean(output) && typeof output.then === "function" && typeof output.catch === "function")) output = await output;
-      if(msg.commandFlags.hidden) return;
+      if (output instanceof Promise || (Boolean(output) &&
+        typeof output.then === "function" && typeof output.catch === "function")) output = await output;
+      if (msg.commandFlags.hidden) return;
       const depth = !isNaN(msg.commandFlags.depth) ? msg.commandFlags.depth : 0;
       output = inspect(output, { depth, maxArrayLength: null });
       output = output.replace(filter, msg.tr("COMMAND_EVAL_TOKEN"));
       output = clean(output);
-      if(output.length < 1950) {
+      if (output.length < 1950) {
         msg.send(`\`\`\`js\n${output}\n\`\`\``);
       } else {
         try {

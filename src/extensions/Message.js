@@ -26,12 +26,12 @@ module.exports = Structures.extend("Message", (Message) => class MiyakoMessage e
   }
 
   get member() {
-    if(this.guild) return super.member;
+    if (this.guild) return super.member;
     return { user: this.author, displayName: this.author.username };
   }
 
   get settings() {
-    if(this.guild) return this.guild.settings;
+    if (this.guild) return this.guild.settings;
     return schema.guilds;
   }
 
@@ -56,18 +56,18 @@ module.exports = Structures.extend("Message", (Message) => class MiyakoMessage e
     const transformedOptions = APIMessage.transformOptions(content, options);
 
     // Condition 1: Attachments cannot be edited.
-    if("files" in transformedOptions) return this.channel.send(transformedOptions);
+    if ("files" in transformedOptions) return this.channel.send(transformedOptions);
 
     // When editing always remove the previous content/embed
-    if(!transformedOptions.content) transformedOptions.content = null;
-    if(!transformedOptions.embed) transformedOptions.embed = null;
+    if (!transformedOptions.content) transformedOptions.content = null;
+    if (!transformedOptions.embed) transformedOptions.embed = null;
 
     // Condition 2: A last response is available and we can edit it.
-    if(this.lastResponse && !this.lastResponse.deleted && !this.lastResponse.attachments.size) {
+    if (this.lastResponse && !this.lastResponse.deleted && !this.lastResponse.attachments.size) {
       return this.lastResponse.edit(transformedOptions);
     }
 
-    // Condition 4: No previous reply to edit. Send a reply and save it.
+    // Condition 3: No previous reply to edit. Send a reply and save it.
     const sent = await this.channel.send(transformedOptions);
 
     // Store the response for editing.
@@ -77,7 +77,7 @@ module.exports = Structures.extend("Message", (Message) => class MiyakoMessage e
   }
 
   sendLocale(key, value = [], options) {
-    if(!Array.isArray(value)) [options, value] = [value, []];
+    if (!Array.isArray(value)) [options, value] = [value, []];
     return this.send(APIMessage.transformOptions(this.language.get(key, ...value), options));
   }
   
@@ -101,12 +101,14 @@ module.exports = Structures.extend("Message", (Message) => class MiyakoMessage e
    *   "Baka! {{user}} stop.",
    *   "...other responses."
    * ], { user: msg.author.username });
+   * msg.response("Hello {{user}}", msg.author.username);
+   *
    * Normally a response would be used from client.responses
    */
   response(arr, replace = {}) {
-    let res = this.client.utils.random(arr);
+    let res = Array.isArray(arr) ? this.client.utils.random(arr) : arr;
 
-    for(const [k, v] of Object.entries(replace))
+    for (const [k, v] of Object.entries(replace))
       res = res.replace(new RegExp(`{{${k}}}`, "g"), v);
 
     return this.send(res);

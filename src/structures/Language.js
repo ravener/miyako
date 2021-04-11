@@ -12,8 +12,8 @@ class Language {
 
   get(key, ...args) {
     const value = this.keys[key] || (this.defaultLanguage && this.defaultLanguage.keys[key]);
-    if(!value) return `Requested an untranslated key \`${key}\``;
-    if(typeof value === "function") return value(...args);
+    if (!value) return `Requested an untranslated key \`${key}\``;
+    if (typeof value === "function") return value(...args);
     return value;
   }
 }

@@ -32,7 +32,7 @@ module.exports = {
     points: 0
   },
 
-  // Guild role store.
+  // Guild role store. (Per-server)
   store: {
     price: 0
   }

@@ -22,9 +22,9 @@ I made a bunch of bots before but not many was successful, most successful one w
 I had experience with discord.js and discord.py, Python was my first and the team used it, however I was in love with discord.js at the time too, but at the same time was bored and couldn't decide so after that I made a bot named `Ladybug` with Python and discord.py (In fact I did prototype a command handler in JavaScript with discord.js but I just never released it).
 
 I had made the bot account before for testing purposes before I actually worked on releasing it.
-Ladybug was doing great, probably around 100 servers at this point (or likely less) when I found about [Klasa](https://github.com/dirigeants/klasa) and it looked cool which motivated me to get back at discord.js.
+Ladybug was doing great, probably around 100 servers at this point (or likely less) when I found about [Klasa](https://github.com/dirigeants/klasa) and it looked cool which motivated me to get back to discord.js.
 
-I immediately jumped to rewriting it to Klasa (The python version is [archived here](https://github.com/pollen5/ladybug-archive)).
+I immediately jumped to rewriting it to Klasa (The python version is [archived here](https://github.com/ravener/ladybug-archive)).
 The klasa rewrite was a success, it was going great I had fun, I made about 149 commands and by the end it had about 300 servers.
 
 Slowly I got bored of Klasa felt nothing interesting was going on and lot of my code was messed up, felt like I'm doing everything wrong and it had high memory usage which annoyed me.
@@ -35,7 +35,7 @@ I found about Golang, I loved the simplicity and it had pretty low memory use so
 I had hard time figuring out a good code structure, reading the existed bots had very messed up structure and mainly manually registering commands, I came with a simple structure that I felt comfortable and wrote some commands but then I got an idea and built up a Klasa-like framework for Go (which is [archived here](https://github.com/sapphire-cord/sapphire)) so I rewrote my code to use my new framework which was public this time and not just for my bot.
 Rewriting it took so long. My bot was all offline at this point I was afraid of it taking too long and losing servers while it's offline so I pushed to production immediately with lots of functionality still missing I then found out after production release I started to work on it less and less and eventually decided to stop working on it.
 Go is simple but that simplicity is a con for Discord Bot development we need high level functionality and such to focus on the bot, it took me a long time to build a command as I was too lazy to port the logic and unwrap bunch of readable code into what will look like a mess in Go and finding equivalent libraries.
-I was losing confidence in my framework too, felt the design is terrible and could get a rewrite, tried hard to stay motivated and I found out about [arikawa](https://github.com/diamondburned/arikawa) decided discordgo is horrible for me and wanted to rewrite to arikawa instead, however again code structure and structure, their command handler looked like it would make a horrible file structure that's gonna give me OCD every second so I decided to rewrite my Sapphire framework to use arikawa and fix a lot of the design regrets I had so I began writing code but then I decided "screw it" writing this framework will take me ages and I lost all the motivation in discord bots like this. I was trying to get away from JavaScript but I said screw it I'm gonna admit JavaScript is good, I really felt like I needed it when i was suffering with Go, the times I chained promises and used `async`/`await` good days, I missed the syntax and I decided that I don't care about memory usage and such anymore I just want to get work done quickly so I did a yet another rewrite to JavaScript which is this one. (The Go version is [archived here](https://github.com/pollen5/taiga-archive))
+I was losing confidence in my framework too, felt the design is terrible and could get a rewrite, tried hard to stay motivated and I found out about [arikawa](https://github.com/diamondburned/arikawa) decided discordgo is horrible for me and wanted to rewrite to arikawa instead, however again code structure and structure, their command handler looked like it would make a horrible file structure that's gonna give me OCD every second so I decided to rewrite my Sapphire framework to use arikawa and fix a lot of the design regrets I had so I began writing code but then I decided "screw it" writing this framework will take me ages and I lost all the motivation in discord bots like this. I was trying to get away from JavaScript but I said screw it I'm gonna admit JavaScript is good, I really felt like I needed it when i was suffering with Go, the times I chained promises and used `async`/`await` good days, I missed the syntax and I decided that I don't care about memory usage and such anymore I just want to get work done quickly so I did a yet another rewrite to JavaScript which is this one. (The Go version is [archived here](https://github.com/ravener/taiga-archive))
 
 This time I didn't want to use Klasa. I took a look at Akairo and Commando but didn't feel like it.
 I was always inspired by [Misaki](https://github.com/NotAWeebDev/Misaki) which had its own command handler, it felt fun to have my own that I can have full control over it so I made a manual command handler partially based on Misaki's and this time I don't plan on any more rewrites or killing it.
@@ -52,14 +52,14 @@ It's been a long time since I had any solid Discord friends and most of my curre
 **Requirements:** (Things that require an external installation)
 - Node.js v12+ (Version requirement may change at any time.)
 - MongoDB
-- [IMG API](https://github.com/pollen5/img-api) optional but image commands won't work.
+- [IMG API](https://github.com/ravener/img-api) optional but image commands won't work.
 
-**Keys to collect** (not required but the respective command won't work)
-- [top.gg](https://top.gg) (json: `dbl`) If your bot is on top.gg this is used for vote checks and stats posting. Running the bot with `--dev` will disable dbl and provide a mocked api. If your bot is not in DBL leave the field empty and the same case as `--dev` applies.
-- Giphy (json: `giphy`) For gif command.
-- Genius. (json: `genius`) For lyrics API.
-- TMDB (json: `tmdb`) for movie/tvshow commands.
-- Wolfram Alpha (json: `wolfram`) For wolfram queries.
+**Keys to collect** (not required but the respective commands won't work)
+- [top.gg](https://top.gg): If your bot is on top.gg this is used for vote checks and stats posting. Running the bot with `--dev` will disable dbl and provide a mocked api. If your bot is not in DBL leave the field empty and the same case as `--dev` applies.
+- Giphy: For gif command.
+- Genius: For lyrics API.
+- TMDB: for movie/tvshow commands.
+- Wolfram Alpha: For wolfram queries.
 
 The bot will run with some of the keys missing but the respective commands are not guarded and will throw errors.
 

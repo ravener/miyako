@@ -4,12 +4,14 @@ class GuildDelete extends Event {
 
   async run(guild) {
     // If the guild went unavailable don't do anything.
-    if(!guild.available) return;
+    if (!guild.available) return;
     
     // Delete guild settings.
     await this.client.settings.guilds.delete(guild.id).catch(() => null);
     
     const channel = this.client.channels.cache.get("454776806869041154");
+
+    if (!channel) return;
 
     const embed = this.client.embed()
       .setTitle("Miyako left a server.")

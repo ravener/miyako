@@ -9,28 +9,19 @@ class Stats extends Command {
     });
   }
 
-  async run(msg, args) { // eslint-disable-line no-unused-vars
+  async run(msg) {
     const { client } = this; // Avoid typing a lot of 'this'
 
     const cmd = Object.entries(this.client.user.settings.commands).sort((x, y) => x[1] < y[1] ? 1 : -1);
     const mostUsed = cmd.length ? `${cmd[0][0]} (${cmd[0][1]} times)` : "None";
+    const uptime = this.client.utils.getDuration(client.uptime);
 
-    const seconds = Math.floor(client.uptime / 1000) % 60 ;
-    const minutes = Math.floor((client.uptime / (1000 * 60)) % 60);
-    const hours = Math.floor((client.uptime / (1000 * 60 * 60)) % 24);
-    const days = Math.floor((client.uptime / (1000 * 60 * 60 * 24)) % 7);
-    const uptime = [`${days} Days`,
-      `${hours} Hours`,
-      `${minutes} Minutes`,
-      `${seconds} Seconds`].filter((time) => !time.startsWith("0")).join(", ");
-
-    return msg.send(this.client.embed()
+    return msg.send(this.client.embed(this.client.user)
       .setTitle(msg.language.get("COMMAND_STATS_TITLE"))
       .setDescription(msg.language.get("COMMAND_STATS_DESCRIPTION"))
-      .setAuthor(this.client.user.tag, this.client.user.displayAvatarURL({ size: 64 }))
       .addField(msg.language.get("COMMAND_STATS_FIELD"), [
         `**Guilds:** ${client.guilds.cache.size}`,
-        `**Users:** ${this.client.guilds.cache.reduce((sum, guild) => sum + (guild.available ? guild.memberCount : 0), 0)}`,
+        `**Users:** ${client.guilds.cache.reduce((sum, guild) => sum + (guild.available ? guild.memberCount : 0), 0)}`,
         `**Channels:** ${client.channels.cache.size}`,
         `**Uptime:** ${uptime}`,
         `**Total Memory Usage:** ${(process.memoryUsage().heapTotal / 1024 / 1024).toFixed(2)} MB`,

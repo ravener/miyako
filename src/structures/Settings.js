@@ -47,7 +47,7 @@ class Settings {
    */
   async update(id, obj) {
     // Safety Check.
-    if(typeof obj !== "object") throw new Error("Expected an object.");
+    if (typeof obj !== "object") throw new Error("Expected an object.");
 
     const { value } = await this.client.db.collection(this.collection).findOneAndUpdate({ id }, { $set: obj }, {
       upsert: true,
@@ -70,7 +70,7 @@ class Settings {
       projection: { _id: 0 }
     });
 
-    if(!doc) return;
+    if (!doc) return;
 
     this.cache.set(id, mergeDefault(this.defaults, doc));
 
@@ -109,7 +109,7 @@ class Settings {
       projection: { _id: 0 }
     }).toArray();
 
-    for(const doc of docs) this.cache.set(doc.id, mergeDefault(this.defaults, doc));
+    for (const doc of docs) this.cache.set(doc.id, mergeDefault(this.defaults, doc));
   }
 }
 

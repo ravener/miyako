@@ -1,27 +1,33 @@
 const { Client, MessageEmbed } = require("discord.js");
+const { MongoClient } = require("mongodb");
 const CommandStore = require("./CommandStore.js");
 const EventStore = require("./EventStore.js");
 const MemorySweeper = require("@utils/cleanup");
 const MonitorStore = require("../structures/MonitorStore.js");
 const DBL = require("dblapi.js");
 const DBLMock = require("../utils/DBLMock.js");
-const { MongoClient } = require("mongodb");
 const Settings = require("./Settings.js");
 const presences = require("@json/presences");
 const imgapi = require("img-api");
 const schema = require("@utils/schema");
 
 class MiyakoClient extends Client {
-  constructor(dev) {
+  constructor(dev = false) {
     super({
       fetchAllMembers: false,
       disableMentions: "everyone",
       messageCacheMaxSize: 100,
       messageCacheLifetime: 240,
-      messageSweepInterval: 300
+      messageSweepInterval: 300,
+      ws: {
+        intents: [
+          "GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES",
+          "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES"
+        ]
+      }
     });
 
-    this.dev = dev || false;
+    this.dev = dev;
     this.console = console; // TODO: Implement a console logger.
     this.constants = require("@utils/constants");
     this.commands = new CommandStore(this);
@@ -99,12 +105,13 @@ class MiyakoClient extends Client {
   /**
    * Embed template.
    * @param {UserResolvable} [user] - Set the embed's author if given.
+   * @param {Object} [embed={}] - Embed data.
    * @returns {MessageEmbed}
    */
-  embed(user) {
-    const embed = new MessageEmbed().setColor(0xD3176A);
+  embed(user, data = {}) {
+    const embed = new MessageEmbed(data).setColor(0xD3176A);
 
-    if(user) embed.setAuthor(user.tag, user.displayAvatarURL({ size: 64 }));
+    if (user) embed.setAuthor(user.tag, user.displayAvatarURL({ size: 64 }));
 
     return embed;
   }
@@ -136,7 +143,7 @@ class MiyakoClient extends Client {
     this.db = this.dbClient.db();
 
     // Initialize settings.
-    for(const [name, settings] of Object.entries(this.settings)) {
+    for (const [name, settings] of Object.entries(this.settings)) {
       await settings.init();
       this.console.log(`Loaded ${settings.cache.size} ${name}`);
     }

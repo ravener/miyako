@@ -6,7 +6,7 @@ class Token extends Monitor {
     const token = msg.content.includes(this.client.token);
     let maybeEmbed = false;
 
-    if(!token) maybeEmbed = msg.embeds.length ?
+    if (!token) maybeEmbed = msg.embeds.length ?
       this.client.utils.embedContains(msg.embeds[0], this.client.token) : false;
 
     if(!token && !maybeEmbed) return;
@@ -14,7 +14,7 @@ class Token extends Monitor {
     const channel = this.client.channels.cache.get("454776836929617921");
     let deleted = false;
 
-    if(msg.deletable) {
+    if (msg.deletable) {
       await msg.delete();
       deleted = true;
     }

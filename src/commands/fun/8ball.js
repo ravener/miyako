@@ -38,7 +38,7 @@ class Eightball extends Command {
     // Reuse the translation from choose command.
     const sent = await msg.sendLocale("COMMAND_CHOOSE_THINKING", ["8ball"]);
     await this.client.utils.sleep(1500);
-    return sent.edit(`**${this.client.utils.random(this.responses)}**`);
+    return sent.edit(`🎱 **${this.client.utils.random(this.responses)}**`);
   }
 }
 

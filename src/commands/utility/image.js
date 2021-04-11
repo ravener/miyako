@@ -17,14 +17,15 @@ class Image extends Command {
   }
 
   async run(msg, args) {
-    if(!args.length) return msg.send("Baka! What am I supposed to search?");
+    if (!args.length) return msg.send("Baka! What am I supposed to search?");
     const query = args.join(" ");
 
     // Quick validation before we go straight to requesting.
-    if(msg.commandFlags.index && isNaN(parseInt(msg.commandFlags.index)))
+    if (msg.commandFlags.index && isNaN(parseInt(msg.commandFlags.index))) {
       return msg.send("--index Provided but not a number.");
+    }
 
-    const $ = await fetch(this.url(query, msg.channel.nsfw))
+    const $ = await fetch(this.url(encodeURIComponent(query), msg.channel.nsfw))
       .then((res) => {
         if(!res.ok) throw "Something went wrong with Bing.";
         return res.text();
@@ -44,13 +45,15 @@ class Image extends Command {
       });
     });
 
-    if(!results.length) return msg.send("No Results Found.");
+    if (!results.length) return msg.send("No Results Found.");
     const index = msg.commandFlags.index ? parseInt(msg.commandFlags.index) : undefined;
 
-    if(index && index > results.length)
+    if (index && index > results.length) {
       return msg.send(`--index provided as \`${index}\` but there is only \`${results.length}\` results.`);
+    }
 
     const image = index ? results[index - 1] : this.client.utils.random(results);
+
     const embed = this.client.embed()
       .setTitle(`Image Results: ${query}`)
       .setImage(image.url)

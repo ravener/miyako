@@ -15,7 +15,7 @@ class Exec extends Command {
 
     const output = result.stdout ? `**\`OUTPUT\`**${"```prolog\n" + result.stdout + "```"}` : "";
     const outerr = result.stderr ? `**\`ERROR\`**${"```prolog\n" + result.stderr + "```"}` : "";
-    if(output === "" && outerr === "") return msg.send("No output returned.");
+    if (output === "" && outerr === "") return msg.send("No output returned.");
     return msg.send([output, outerr].join("\n"));
   }
 }

@@ -8,7 +8,7 @@ class Monitor extends Base {
   }
 
   async _run(msg) {
-    if(!this.enabled || (this.ignoreEdits && msg._edits.length)) return;
+    if (!this.enabled || (this.ignoreEdits && msg._edits.length)) return;
     
     try {
       await this.run(msg);

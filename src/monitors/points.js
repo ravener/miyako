@@ -14,9 +14,9 @@ class Points extends Monitor {
       msg.command || msg.author.blacklisted || msg.guild.blacklisted) return;
 
     // A little cooldown to prevent spam.
-    if(this.timeouts.has(msg.author.id)) return;
+    if (this.timeouts.has(msg.author.id)) return;
 
-    if(!msg.member) await msg.guild.members.fetch(msg.author);
+    if (!msg.member) await msg.guild.members.fetch(msg.author);
     await msg.member.syncSettingsCache();
 
     // Random point between 1-5
@@ -25,8 +25,8 @@ class Points extends Monitor {
 
     const curLevel = Math.floor(0.1 * Math.sqrt(msg.member.points));
 
-    if(msg.member.settings.level < curLevel) {
-      if(msg.guild.settings.levelup) {
+    if (msg.member.settings.level < curLevel) {
+      if (msg.guild.settings.levelup) {
         await msg.channel.send(this.client.utils.random(msg.tr("LEVELUP_MESSAGES"))
           .replace(/{{user}}/g, msg.member.displayName)
           .replace(/{{level}}/g, curLevel))

@@ -12,14 +12,15 @@ class Update extends Command {
   async run(msg) {
     await this.store.get("exec").run(msg, ["git pull"]);
 
-    if(msg.commandFlags.reload) {
-      if(msg.commandFlags.reload === "commands" || msg.commandFlags.reload === "events")
+    if (msg.commandFlags.reload) {
+      if (msg.commandFlags.reload === "commands" || msg.commandFlags.reload === "events") {
         await this.store.get("load").run(msg, [msg.commandFlags.reload]);
-      else
+      } else {
         await this.client.commands.get("reload").run(msg, [msg.commandFlags.reload]);
+      }
     }
     
-    if(msg.commandFlags.reboot) {
+    if (msg.commandFlags.reboot) {
       await this.client.commands.get("reboot").run(msg);
     }
   }

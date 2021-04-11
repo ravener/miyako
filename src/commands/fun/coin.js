@@ -12,13 +12,15 @@ class Coin extends Command {
   }
 
   async run(msg, [bet]) {
-    if(bet && !["heads", "tails"].includes(bet.toLowerCase()))
+    if (bet && !["heads", "tails"].includes(bet.toLowerCase())) {
       return msg.send("Invalid bet. You can only bet on `heads` or `tails`");
+    }
 
     const flipped = this.client.utils.random(["Heads", "Tails"]);
     
-    if(bet && flipped.toLowerCase() === bet.toLowerCase())
+    if (bet && flipped.toLowerCase() === bet.toLowerCase()) {
       return msg.send(`Congratulations! The coin landed on \`${flipped}\``);
+    }
 
     return msg.send(`The coin landed on \`${flipped}\``);
   }

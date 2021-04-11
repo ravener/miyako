@@ -29,7 +29,7 @@ class Command extends Base {
 
   async _run(msg, args) {
     try {
-      if(this.loading && msg.guild) {
+      if (this.loading && msg.guild) {
         await msg.send(this.loading
           .replace(/{{displayName}}/g, msg.member.displayName)
           .replace(/{{username}}/g, msg.author.username)
@@ -41,19 +41,19 @@ class Command extends Base {
       }
 
       // Run the check function first.
-      const check = await this.before(msg, args);
+      const check = await this.check(msg, args);
 
       // If the value is falsy, silently fail.
-      if(!check) return;
+      if (!check) return;
 
       // If the value is a string reply it to the user.
-      if(typeof check === "string") return msg.send(check);
+      if (typeof check === "string") return msg.send(check);
 
       // Run the command.
       const results = await this.run(msg, args);
  
       // If the results is a string reply it to the user.
-      if(typeof results === "string") return msg.send(results);
+      if (typeof results === "string") return msg.send(results);
     } catch(err) {
       // Forward errors to commandError event.
       this.client.emit("commandError", msg, err);
@@ -64,13 +64,13 @@ class Command extends Base {
    * Verifies that a user is given.
    */
   async verifyUser(msg, user, defaultToAuthor = false) {
-    if(!user && defaultToAuthor) return msg.author;
-    if(!user) throw "What do you expect me to do without a user mention or an ID?";
+    if (!user && defaultToAuthor) return msg.author;
+    if (!user) throw "What do you expect me to do without a user mention or an ID?";
     const match = /^(?:<@!?)?(\d{17,19})>?$/.exec(user);
-    if(!match) throw "Baka! That's not a user mention or an ID. What were you trying to do?";
+    if (!match) throw "Baka! That's not a user mention or an ID. What were you trying to do?";
     user = await this.client.users.fetch(match[1]).catch(() => null);
     // We will assume they gave IDs as mentions are highly unlikely to fail.
-    if(!user) throw "I couldn't find that user! Make sure the ID is correct.";
+    if (!user) throw "I couldn't find that user! Make sure the ID is correct.";
     return user;
   }
 
@@ -79,58 +79,61 @@ class Command extends Base {
    */
   async verifyMember(msg, member, defaultToAuthor = false) {
     const user = await this.verifyUser(msg, member, defaultToAuthor);
-    return msg.guild.members.fetch(user);
+    const guildMember = await msg.guild.members.fetch(user).catch(() => null);
+    if (!guildMember) throw "Baka! That user is not in this server.";
+    return guildMember;
   }
 
   async verifyChannel(msg, channel, defaultToCurrent = false) {
-    if(!channel && defaultToCurrent) return msg.channel;
-    if(!channel) throw "You need to mention a channel or provide an ID.";
+    if (!channel && defaultToCurrent) return msg.channel;
+    if (!channel) throw "You need to mention a channel or provide an ID.";
 
     const match = /^(?:<#)?(\d{17,19})>?$/.exec(channel);
-    if(!match) throw "Invalid channel, must be a mention or an ID.";
+    if (!match) throw "Invalid channel, must be a mention or an ID.";
 
     const chan = await this.client.channels.fetch(match[1]).catch(() => null);
-    if(!chan) throw msg.language.get("CHANNEL_NOT_FOUND");
+    if (!chan) throw msg.language.get("CHANNEL_NOT_FOUND");
 
     return chan;
   }
 
   verifyRole(msg, rolename, optional = false) {
-    if(!rolename && optional) return null;
-    if(!rolename) throw "Baka! You must provide a role name or ID.";
+    if (!rolename && optional) return null;
+    if (!rolename) throw "Baka! You must provide a role name or ID.";
     rolename = rolename.toLowerCase();
 
     // We check by ID or name. Nobody mentions roles for an argument.
-    const role = msg.guild.roles.cache.find((role) => (role.id === rolename) ||
+    const role = msg.guild.roles.cache.find(role => (role.id === rolename) ||
       (role.name.toLowerCase() === rolename));
 
-    if(!role) throw msg.language.get("ROLE_NOT_FOUND");
+    if (!role) throw msg.language.get("ROLE_NOT_FOUND");
 
     return role;
   }
 
   verifyInt(num, def) {
-    if(typeof def === "number" && !num) return def;
+    if (typeof def === "number" && !num) return def;
     const parsed = parseInt(num && num.replace(/,/g, ""));
-    if(isNaN(parsed)) throw "Baka! You must provide a valid number.";
+    if (isNaN(parsed)) throw "Baka! You must provide a valid number.";
     return parsed;
   }
 
   /**
    * Executed before the command is ran.
-   * The return value can be either true/false or a string.
-   * Incase of false the command won't run.
-   * Incase of string the command won't run but the string is sent to the channel.
-   * Incase of true the command is ran as normal.
+   * A boolean is to be returned to either allow command execution or not.
+   * A string can be returned to block execution with an error message.
+   * @abstract
+   * @returns {Boolean|String}
    */
-  async before(msg, args) { // eslint-disable-line no-unused-vars
+  async check() {
     return true;
   }
 
   /**
    * The actual command implementation, must be implemented in a subclass.
+   * @abstract
    */
-  async run(msg, args) { // eslint-disable-line no-unused-vars
+  async run(msg) {
     return msg.send(`${this.constructor.name} does not provide a \`run()\` implementation.${msg.author.id !== this.client.constants.ownerID ? " This is a bug, please report this in our server at https://discord.gg/mDkMbEh" : ""}`);
   }
 }

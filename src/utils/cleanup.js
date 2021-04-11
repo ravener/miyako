@@ -13,7 +13,7 @@ class MemorySweeper {
   }
 
   setup(ms = 600000 /* 10 mins */) {
-    if(this.task) clearInterval(this.task);
+    if (this.task) clearInterval(this.task);
 
     this.run();
     this.task = setInterval(() => this.run(), ms);
@@ -24,8 +24,8 @@ class MemorySweeper {
     let presences = 0, guildMembers = 0, voiceStates = 0, emojis = 0, lastMessages = 0, users = 0;
     
     // Per-Guild sweeper
-    for(const guild of this.client.guilds.cache.values()) {
-      if(!guild.available) continue;
+    for (const guild of this.client.guilds.cache.values()) {
+      if (!guild.available) continue;
 
       // Clear presences
       presences += guild.presences.cache.size;
@@ -33,35 +33,37 @@ class MemorySweeper {
       
       // Clear members that haven't send a message in the last 30 minutes
       const { me } = guild;
-      for(const [id, member] of guild.members.cache) {
-        if(member === me) continue;
-        if(member.voice.channelID) continue;
-        if(member.lastMessageID && member.lastMessageID > OLD_SNOWFLAKE) continue;
+      for (const [id, member] of guild.members.cache) {
+        if (member === me) continue;
+        if (member.voice.channelID) continue;
+        if (member.lastMessageID && member.lastMessageID > OLD_SNOWFLAKE) continue;
+
         guildMembers++;
         voiceStates++;
         guild.voiceStates.cache.delete(id);
         guild.members.cache.delete(id);
-        // Clear the settings, will be synced when member is back.
+
+        // Clear the settings, will be synchronized when member is back.
         this.client.settings.members.cache.delete(`${guild.id}.${id}`);
       }
       
       // Clear emojis
-      if(guild.id !== this.client.constants.mainGuildID) { // don't clear support guild's emojis.
+      if (guild.id !== this.client.constants.mainGuildID) { // don't clear support guild's emojis.
         emojis += guild.emojis.cache.size;
         guild.emojis.cache.clear();
       }
     }
     
     // Per-Channel sweeper
-    for(const channel of this.client.channels.cache.values()) {
-      if(!channel.lastMessageID) continue;
+    for (const channel of this.client.channels.cache.values()) {
+      if (!channel.lastMessageID) continue;
       channel.lastMessageID = null;
       lastMessages++;
     }
     
     // Per-User sweeper
-    for(const user of this.client.users.cache.values()) {
-      if(user.lastMessageID && user.lastMessageID > OLD_SNOWFLAKE) continue;
+    for (const user of this.client.users.cache.values()) {
+      if (user.lastMessageID && user.lastMessageID > OLD_SNOWFLAKE) continue;
       this.client.users.cache.delete(user.id);
       this.client.settings.users.cache.delete(user.id);
       users++;

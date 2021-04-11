@@ -12,14 +12,14 @@ class Store extends Collection {
 
   set(piece) {
     const exists = this.get(piece.name);
-    if(exists) this.delete(piece.name);
+    if (exists) this.delete(piece.name);
     super.set(piece.name, piece);
     return piece;
   }
 
   delete(key) {
     const exists = this.get(key);
-    if(!exists) return false;
+    if (!exists) return false;
     return super.delete(key);
   }
 
@@ -28,8 +28,14 @@ class Store extends Collection {
    */
   load(file) {
     const filepath = path.join(this.dir, file);
-    
-    const piece = this.set(new (require(filepath))(this.client, this, {
+
+    const Class = require(filepath);
+
+    if(typeof Class !== "function" || typeof Class.constructor !== "function") {
+      throw new TypeError(`The file at ${filepath} could not be loaded because it does not export a class.`);
+    }
+
+    const piece = this.set(new Class(this.client, this, {
       path: file,
       name: path.parse(filepath).name
     }));
@@ -46,7 +52,7 @@ class Store extends Collection {
       filter: (stats, file) => stats.isFile() && file.endsWith(".js")
     });
 
-    [...files.keys()].map((file) => this.load(path.relative(this.dir, file)));
+    for (const file of files.keys()) this.load(path.relative(this.dir, file));
 
     return this.size;
   }

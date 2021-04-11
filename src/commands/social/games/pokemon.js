@@ -1,5 +1,5 @@
 const Command = require("../../../structures/Command.js");
-const pokemons = require("@json/pokemon.json");
+const pokemons = require("@json/pokemon");
 
 
 class Pokemon extends Command {

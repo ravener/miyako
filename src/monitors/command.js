@@ -29,23 +29,23 @@ class CommandHandler extends Monitor {
   }
 
   async checkPerms(msg, cmd) {
-    if(msg.channel.type !== "text") return true; // No permissions in DMs.
+    if (msg.channel.type !== "text") return true; // No permissions in DMs.
 
     // Check if user has permissions to run the command. Owner gets a bypass.
     const user = msg.author.id === this.client.constants.ownerID ? [] :
       msg.channel.permissionsFor(msg.author).missing(cmd.userPermissions);
 
-    if(user.length > 0) {
-      await msg.send(`You do not have the following permission${user.length === 1 ? "" : "s"} to run this command: \`${
-        user.map((p) => this.friendlyPerms[p]).join(", ")}\``);
+    if (user.length > 0) {
+      const perms = user.map(perm => this.friendlyPerms[perm]).join(", ");
+      await msg.send(`You do not have the following permission${user.length === 1 ? "" : "s"} to run this command: \`${perms}\``);
       return false;
     }
 
     // Now check if the bot has the permissions to perform the intended action.
     const bot = msg.channel.permissionsFor(this.client.user).missing(cmd.botPermissions);
-    if(bot.length > 0) {
-      await msg.send(`Hey! I need the following permission${bot.length === 1 ? "" : "s"} to do that: \`${
-        bot.map((p) => this.friendlyPerms[p]).join(", ")}\``);
+    if (bot.length > 0) {
+      const perms = bot.map(perm => this.friendlyPerms[perm]).join(", ");
+      await msg.send(`Hey! I need the following permission${bot.length === 1 ? "" : "s"} to do that: \`${perms}\``);
       return false;
     }
     
@@ -53,19 +53,19 @@ class CommandHandler extends Monitor {
   }
 
   async run(msg) {
-    if(msg.webhookID || msg.author.bot) return; // Ignore bots and webhooks.
+    if (msg.webhookID || msg.author.bot) return; // Ignore bots and webhooks.
 
     // Ensure the bot itself is in the member cache.
-    if(msg.guild && !msg.guild.me) await msg.guild.members.fetch(this.client.user);
+    if (msg.guild && !msg.guild.me) await msg.guild.members.fetch(this.client.user);
 
     // Grab the current prefix.
     const prefix = msg.guild ? msg.guild.settings.prefix : this.prefix;
 
     // If we don't have permissions to send messages don't run the command.
-    if(!msg.channel.postable) return;
+    if (!msg.channel.postable) return;
 
     // Check for @mention only.
-    if(msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
+    if (msg.content === this.client.user.toString() || (msg.guild && msg.content === msg.guild.me.toString()))
       return msg.sendLocale("MENTION_REMINDER", [prefix]);
 
     // Users can have their own list of prefixes globally.
@@ -88,11 +88,11 @@ class CommandHandler extends Monitor {
       this.client.utils.escapeRegex(prefix)}${userPrefix}`, "i").exec(msg.content);
 
     // If the message is not a command do nothing.
-    if(!prefixMatch) return;
+    if (!prefixMatch) return;
 
     // Ignore blacklisted users/guilds. DM them a reminder if possible.
-    if(msg.guild && msg.guild.blacklisted) return msg.author.send(msg.tr("BLACKLISTED_GUILD", msg.guild)).catch(() => null);
-    if(msg.author.blacklisted) return msg.author.send(msg.tr("BLACKLISTED")).catch(() => null);
+    if (msg.guild && msg.guild.blacklisted) return msg.author.send(msg.tr("BLACKLISTED_GUILD", msg.guild)).catch(() => null);
+    if (msg.author.blacklisted) return msg.author.send(msg.tr("BLACKLISTED")).catch(() => null);
 
     // Parse flags.
     const { content, flags } = this.getFlags(msg.content);
@@ -103,34 +103,38 @@ class CommandHandler extends Monitor {
     const command = this.client.commands.get(cmd);
 
     // Handle unknown commands in a seperate event.
-    if(!command) return this.client.emit("commandUnknown", msg, cmd);
+    if (!command) return this.client.emit("commandUnknown", msg, cmd);
 
     // Check cooldown.
     const rl = this.ratelimit(msg, command);
-    if(typeof rl === "string")
-      return msg.send(rl);
+    if (typeof rl === "string") return msg.send(rl);
 
     // Command checks.
 
-    if(command.ownerOnly && msg.author.id !== this.client.constants.ownerID)
+    if (command.ownerOnly && msg.author.id !== this.client.constants.ownerID) {
       return msg.sendLocale("OWNER_ONLY");
+    }
 
     // Check for NSFW channel. NSFW is allowed in DMs
-    if(command.nsfw && msg.guild && !msg.channel.nsfw)
+    if (command.nsfw && msg.guild && !msg.channel.nsfw) {
       return msg.send(this.client.utils.random(this.client.responses.notNSFWChannel));
+    }
 
-    if(command.guildOnly && !msg.guild)
+    if (command.guildOnly && !msg.guild) {
       return msg.sendLocale("GUILD_ONLY");
+    }
 
-    if(!command.enabled && msg.author.id !== this.client.constants.ownerID)
+    if (!command.enabled && msg.author.id !== this.client.constants.ownerID) {
       return msg.send("My master has ordered me to disable that command so I cannot let you use it!");
+    }
 
-    if(command.category === "Social" && !msg.guild.settings.social)
+    if (command.category === "Social" && !msg.guild.settings.social) {
       return msg.send("The social economy system has been disabled in this server by an Admin so I cannot let you use that command.");
+    }
 
     // Verify the member is available and its settings are synchronized.
-    if(msg.guild) {
-      if(!msg.member) await msg.guild.members.fetch(msg.author);
+    if (msg.guild) {
+      if (!msg.member) await msg.guild.members.fetch(msg.author);
       await msg.member.syncSettingsCache();
     }
 
@@ -138,10 +142,10 @@ class CommandHandler extends Monitor {
     await msg.author.syncSettingsCache();
 
     // Check for permissions.
-    if(!(await this.checkPerms(msg, command))) return;
+    if (!(await this.checkPerms(msg, command))) return;
 
     // If the command costs points and we are in a guild with the social system enabled.
-    if(command.cost && msg.guild && msg.guild.settings.social) {
+    if (command.cost && msg.guild && msg.guild.settings.social) {
 
       const premium = await this.client.verifyPremium(msg.author);
 
@@ -156,8 +160,10 @@ class CommandHandler extends Monitor {
         `\n\nSeems like you're broke. Why don't you start with claiming your daily credits with \`${prefix}daily\`?` : "";
 
       // Verify enough balance.
-      if(balance < cost)
+      if (balance < cost) {
         return msg.send(`You need **¥${cost}** to run that command but you only have **¥${balance}**.${claim}`);
+      }
+
       // Deduct.
       await msg.member.takePoints(cost);
     }
@@ -183,9 +189,9 @@ class CommandHandler extends Monitor {
 
   ratelimit(msg, cmd) {
     // Owner is immune to cooldown.
-    if(msg.author.id === this.client.constants.ownerID) return false;
+    if (msg.author.id === this.client.constants.ownerID) return false;
     // Nothing to do here if the command doesn't have a cooldown.
-    if(cmd.cooldown === 0) return false;
+    if (cmd.cooldown === 0) return false;
 
     // Convert cooldown seconds to milliseconds.
     const cooldown = cmd.cooldown * 1000;
@@ -209,7 +215,7 @@ class CommandHandler extends Monitor {
   // Tracks how many times a command is ran.
   stats(command) {
     const commands = this.client.user.settings.commands || {};
-    if(!commands[command.name]) commands[command.name] = 0;
+    if (!commands[command.name]) commands[command.name] = 0;
     
     commands[command.name]++;
 

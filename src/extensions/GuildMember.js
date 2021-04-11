@@ -30,11 +30,13 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
   }
 
   syncSettingsCache() {
-    if(!this.client.settings.members.cache.has(`${this.guild.id}.${this.id}`)) return this.syncSettings();
+    if (!this.client.settings.members.cache.has(`${this.guild.id}.${this.id}`)) {
+      return this.syncSettings();
+    }
   }
 
   setLevel(level) {
-    if(isNaN(level)) throw new Error("Level cannot be NaN");
+    if (isNaN(level)) throw new Error("Level cannot be NaN");
     return this.update({ level });
   }
 
@@ -42,10 +44,10 @@ module.exports = Structures.extend("GuildMember", (GuildMember) => class MiyakoG
     const points = parseInt(this.settings.points) + parseInt(amount);
 
     // Guard against overflow.
-    if(points >= Number.MAX_SAFE_INTEGER) return false;
+    if (points >= Number.MAX_SAFE_INTEGER) return false;
 
     // Validate against any accidents.
-    if(isNaN(points)) throw new Error("Cannot give NaN points to member.");
+    if (isNaN(points)) throw new Error("Cannot give NaN points to member.");
 
     return this.update({ points });
   }

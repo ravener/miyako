@@ -21,7 +21,7 @@ class Coliru extends Command {
     };
     
     // Aliases.
-    for(const [x, y] of [ ["c++", "cpp"], ["rb", "ruby"], ["py", "python"], ["hs", "haskell"], ["sh", "shell"] ]) {
+    for (const [x, y] of [ ["c++", "cpp"], ["rb", "ruby"], ["py", "python"], ["hs", "haskell"], ["sh", "shell"] ]) {
       this.commands[x] = this.commands[y];
     }
   }
@@ -29,8 +29,13 @@ class Coliru extends Command {
   async run(msg) {
     const { lang, code } = this.client.utils.getCodeBlock(msg.rawArgs);
 
-    if(!lang) throw "Usage: coliru \\`\\`\\`lang\nCode\n\\`\\`\\`\nCodeBlock language will be used to determine how to compile the code.";
-    if(!this.commands[lang]) throw `Invalid Language, supported ones are: **${Object.keys(this.commands).join(", ")}**`;
+    if (!lang) {
+      throw "Usage: coliru \\`\\`\\`lang\nCode\n\\`\\`\\`\nCodeBlock language will be used to determine how to compile the code.";
+    }
+
+    if (!this.commands[lang]) {
+      throw `Invalid Language, supported ones are: **${Object.keys(this.commands).join(", ")}**`;
+    }
 
     const cmd = this.commands[lang];
     const src = code;
@@ -40,12 +45,12 @@ class Coliru extends Command {
     })
       .then((res) => res.text());
 
-    if(res.length < 1980) return msg.send(res, { code: lang });
+    if (res.length < 1990) return msg.send(res, { code: lang });
     return this.post(msg, { cmd, src });
   }
   
   async post(msg, { cmd, src }) {
-    const id = await fetch("https://coliru.stacked-crooked.com/share", {
+    const id = await fetch("http://coliru.stacked-crooked.com/share", {
       method: "POST",
       body: JSON.stringify({ cmd, src })
     })
