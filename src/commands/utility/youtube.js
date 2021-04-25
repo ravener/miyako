@@ -9,6 +9,7 @@ class YouTube extends Command {
       usage: "youtube <query>",
       cooldown: 5,
       aliases: ["yt"],
+      // FIXME: This is broken, so for now disable it.
       enabled: false
     });
   }

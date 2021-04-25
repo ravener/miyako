@@ -13,7 +13,7 @@ class Wolfram extends Command {
   }
   
   async run(msg, args) {
-    if(!args.length) return msg.send("What are you trying to ask?");
+    if (!args.length) return msg.send("What are you trying to ask?");
     
     // Allow users to trigger this in a fancy way using @Miyako What time is it?
     // If they invoke it with the "what"/"where"/"when"/"who"/"why" alias, we must also treat it as an argument.
@@ -34,11 +34,11 @@ class Wolfram extends Command {
       .then((res) => res.json())
       .then((body) => body.queryresult.pods);
     
-    if(!pods || pods.error) return msg.send("Couldn't find an answer to that question!");
+    if (!pods || pods.error) return msg.send("Couldn't find an answer to that question!");
 
     return msg.send(this.client.embed()
       .setTitle(pods[0].subpods[0].plaintext)
-      .setDescription(pods[1].subpods[0].plaintext.substring(0, 1950)));
+      .setDescription(pods[1].subpods[0].plaintext.substring(0, 1980)));
   }
 }
 

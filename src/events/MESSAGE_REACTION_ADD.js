@@ -15,32 +15,32 @@ class RawMessageReactionAdd extends Event {
   async starboard(packet) {
     // Grab the channel.
     const channel = this.client.channels.cache.get(packet.channel_id);
-    if(!channel || channel.type !== "text") return;
+    if (!channel || channel.type !== "text") return;
 
     // Grab the guild.
     const guild = channel.guild;
-    if(!guild.settings.starboard) return;
+    if (!guild.settings.starboard) return;
 
     // Grab the starboard channel.
     const starboard = guild.channels.cache.get(guild.settings.starboard);
-    if(!starboard || !starboard.permissionsFor(guild.me).has(["SEND_MESSAGES", "EMBED_LINKS"])) return;
+    if (!starboard || !starboard.permissionsFor(guild.me).has(["SEND_MESSAGES", "EMBED_LINKS"])) return;
     
     // Grab the author.
     const user = await this.client.users.fetch(packet.user_id);
-    if(!user || user.bot) return;
+    if (!user || user.bot) return;
 
     // Fetch the full message.
     const msg = await channel.messages.fetch(packet.message_id).catch(() => null);
-    if(!msg) return;
+    if (!msg) return;
 
     // Users cannot star their own message.
-    if(msg.author.id === user.id) return;
+    if (msg.author.id === user.id) return;
 
     // Fetch last 50 messages from the starboard channel.
     const messages = await starboard.messages.fetch({ limit: 50 })
       .catch(() => null);
 
-    if(!messages) return;
+    if (!messages) return;
 
     // Try to find an existing starboard message.
     const stars = messages.find((m) => m.author.id === this.client.user.id && m.embeds.length &&
@@ -48,7 +48,7 @@ class RawMessageReactionAdd extends Event {
       m.embeds[0].footer.text.endsWith(msg.id));
 
     // If we found the existing message just update the star count.
-    if(stars) {
+    if (stars) {
       // Regex to check how many stars the embed has.
       const star = /^⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
       // A variable that allows us to use the color of the pre-existing embed.
@@ -72,7 +72,7 @@ class RawMessageReactionAdd extends Event {
     // Otherwise this must be a new message so send a new starboard entry for it.
 
     // If the star limit is not satisfied do not post it.
-    if(msg.reactions.cache.get("⭐").count < guild.settings.starboardLimit) return;
+    if (msg.reactions.cache.get("⭐").count < guild.settings.starboardLimit) return;
 
     // Grab the content.
     const content = msg.content ? msg.content : (msg.embeds.length && msg.embeds[0].description) ? msg.embeds[0].description : "";

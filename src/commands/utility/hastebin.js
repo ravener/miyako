@@ -7,12 +7,15 @@ class Hastebin extends Command {
       aliases: ["hb"],
       description: "Upload some code to hastebin.",
       usage: "hastebin <code>",
-      cooldown: 5
+      cooldown: 5,
+      // FIXME: Hastebin is totally broken.
+      // disable until I find an alternative.
+      enabled: false
     });
   }
 
   async run(msg, args) {
-    if(!args.length) return msg.send("Baka! What am I supposed to upload?");
+    if (!args.length) return msg.send("Baka! What am I supposed to upload?");
 
     const { code, lang } = this.client.utils.getCodeBlock(msg.rawArgs);
   
@@ -21,7 +24,7 @@ class Hastebin extends Command {
       body: code
     })
       .then((res) => {
-        if(!res.ok) throw `Something went wrong with Hastebin. Try again later. (Status: ${res.status} ${res.statusText})`;
+        if (!res.ok) throw `Something went wrong with Hastebin. Try again later. (Status: ${res.status} ${res.statusText})`;
         return res.json();
       });
 

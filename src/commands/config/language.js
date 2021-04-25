@@ -14,12 +14,13 @@ class Language extends Command {
 
   async run(msg, [action]) {
     const display = Object.values(languages).map(lang => `\`${lang.name}\` - ${lang.display}`).join("\n");
-    if(!action) return msg.send(`${msg.tr("COMMAND_LANGUAGE_SELECT")}\nUsage: \`${msg.guild.prefix}${this.usage}\`\n\n${display}`);
+    if (!action) return msg.send(`${msg.tr("COMMAND_LANGUAGE_SELECT")}\nUsage: \`${msg.guild.prefix}${this.usage}\`\n\n${display}`);
 
     const lang = languages[action.toLowerCase()];
 
-    if(!lang)
+    if (!lang) {
       return msg.send(`Baka! That's not a valid language.\nAvailable languages:\n\n${display}`);
+    }
 
     await msg.guild.update({ language: lang.name });
     return msg.sendLocale("LANGUAGE_SET");

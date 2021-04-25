@@ -1,6 +1,5 @@
 const Command = require("../../structures/Command.js");
 
-
 class ServerInfo extends Command {
   constructor(...args) {
     super(...args, {
@@ -26,11 +25,12 @@ class ServerInfo extends Command {
 
   async run(msg) {
     const days = Math.floor((new Date() - msg.guild.createdAt) / (1000 * 60 * 60 * 24));
+
     const bans = await msg.guild.fetchBans()
       .then((bans) => bans.size)
       .catch(() =>  "Couldn't fetch bans.");
 
-    if(!msg.guild.owner) await msg.guild.members.fetch(msg.guild.ownerID).catch(() => null);
+    if (!msg.guild.owner) await msg.guild.members.fetch(msg.guild.ownerID).catch(() => null);
 
     const embed = this.client.embed()
       .setThumbnail(msg.guild.iconURL())
@@ -43,6 +43,7 @@ class ServerInfo extends Command {
       .addField("❯ Owner", msg.guild.owner ? msg.guild.owner.user.tag : "Failed to get owner information.", true)
       .addField("❯ Members", `${msg.guild.memberCount}`, true)
       .addField("❯ Ban Count", bans, true);
+
     return msg.send({ embed });
   }
 }

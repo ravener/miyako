@@ -1,6 +1,5 @@
 const Command = require("../../structures/Command.js");
 
-
 class Avatar extends Command {
   constructor(...args) {
     super(...args, {
@@ -13,9 +12,8 @@ class Avatar extends Command {
   async run(msg, [userArg]) {
     const user = await this.verifyUser(msg, userArg, true);
     
-    return msg.send(this.client.embed()
+    return msg.send(this.client.embed(user)
       .setTitle(msg.tr("COMMAND_AVATAR_TITLE", user.username))
-      .setAuthor(user.tag, user.displayAvatarURL({ size: 64 }))
       .setImage(user.displayAvatarURL({ size: 2048, format: "png", dynamic: true })));
   }
 }

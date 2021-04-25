@@ -104,6 +104,10 @@ class Utils {
 
     return results;
   }
+
+  static link(name, url) {
+    return `[${name}](${url})`;
+  }
 }
 
 Utils.sleep = promisify(setTimeout);

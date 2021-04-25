@@ -1,6 +1,5 @@
 const Command = require("../../structures/Command.js");
 
-
 class Quote extends Command {
   constructor(...args) {
     super(...args, {
@@ -13,13 +12,13 @@ class Quote extends Command {
   }
 
   async run(msg, [channeltxt, messageid]) {
-    if(!channeltxt && !messageid) return msg.send("Baka! Give me a message ID to quote!");
+    if (!channeltxt && !messageid) return msg.send("Baka! Give me a message ID to quote!");
 
     let channel = msg.channel;
     let message = "";
 
     // quote <id>
-    if(channeltxt && !messageid) {
+    if (channeltxt && !messageid) {
       message = channeltxt;
     } else { // quote <channel> <id>
       channel = await this.verifyChannel(msg, channeltxt);
@@ -31,12 +30,11 @@ class Quote extends Command {
         throw "Message must be a valid message id.";
       });
 
-    const embed = this.client.embed()
+    const embed = this.client.embed(message.author)
       .setTitle("Message Quote")
       .setURL(message.url)
       .setDescription(message.content)
       .setTimestamp(message.createdAt)
-      .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 64 }))
       .setThumbnail(message.author.displayAvatarURL({ size: 64 }))
       .setImage(this.client.utils.getImage(message));
 

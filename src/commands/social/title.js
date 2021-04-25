@@ -9,7 +9,7 @@ class Title extends Command {
   }
 
   async run(msg, args) {
-    if(!args.length) return msg.send("Baka! You must provide a title.");
+    if (!args.length) return msg.send("Baka! You must provide a title.");
     const title = args.join(" ");
     await msg.author.update({ title });
     return msg.send(`Success! changed your title view it with \`${msg.guild.settings.prefix}profile\``);

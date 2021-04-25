@@ -11,6 +11,7 @@ class Translate extends Command {
       usage: "translate <to> <message>",
       cooldown: 5,
       aliases: ["tr"],
+      // FIXME: This is broken, so for now disable it.
       enabled: false
     });
   }

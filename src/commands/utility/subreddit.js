@@ -1,7 +1,6 @@
 const Command = require("../../structures/Command.js");
 const fetch = require("node-fetch");
 
-
 class SubReddit extends Command {
   constructor(...args) {
     super(...args, {
@@ -18,7 +17,7 @@ class SubReddit extends Command {
     const subreddit = await fetch(`https://www.reddit.com/r/${subredditName}/about.json`)
       .then((res) => res.json())
       .then((body) => {
-        if(body.kind === "t5") return body.data;
+        if (body.kind === "t5") return body.data;
         throw "That subreddit doesn't exist.";
       })
       .catch(() => { throw this.errorMessage; });
@@ -31,6 +30,7 @@ class SubReddit extends Command {
       .setImage(subreddit.banner_img)
       .addField("Subscribers", subreddit.subscribers.toLocaleString(), true)
       .addField("Users Active", subreddit.accounts_active.toLocaleString(), true);
+
     return msg.send({ embed });
   }
 }

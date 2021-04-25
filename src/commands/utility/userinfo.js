@@ -1,6 +1,5 @@
 const Command = require("../../structures/Command.js");
 
-
 class UserInfo extends Command {
   constructor(...args) {
     super(...args, {
@@ -26,6 +25,7 @@ class UserInfo extends Command {
       .addField("❯ Bot", member.user.bot ? "Yes" : "No", true)
       .addField("❯ Highest Role", member.roles.cache.size > 1 ? member.roles.highest.name : "None", true)
       .addField("❯ Hoist Role", member.roles.hoist ? member.roles.hoist.name : "None", true);
+
     return msg.send({ embed });
   }
 }

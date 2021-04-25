@@ -16,27 +16,29 @@ class Pokemon extends Command {
   async run(msg) {
     const pokemon = this.client.utils.random(pokemons);
 
-    const embed = this.client.embed()
+    const embed = this.client.embed(msg.author)
       .setTitle(msg.tr("COMMAND_POKEMON_GUESS"))
-      .setAuthor(msg.member.displayName, msg.author.displayAvatarURL({ size: 64 }))
       .setImage(pokemon.imageURL);
     
     const sent = await msg.send({ embed });
     const filter = (m) => m.author.id === msg.author.id;
-    const attempts = await msg.channel.awaitMessages(filter, { time: 15000, max: 1 });
+    const attempts = await msg.channel.awaitMessages(filter, {
+      time: 15000,
+      max: 1
+    });
       
-    if(!attempts || !attempts.size) {
-      await sent.delete();
+    if (!attempts || !attempts.size) {
+      if (sent.deletable) await sent.delete();
       return msg.send(`Ba-Baka! You took too long to answer. It was ${pokemon.name}.`);
-    } 
-      
+    }
+
     const answer = attempts.first().content.toLowerCase();
       
-    if(answer === pokemon.name) {
-      await sent.delete();
+    if (answer === pokemon.name) {
+      if (sent.deletable) await sent.delete();
       let points = "";
 
-      if(msg.guild.settings.social) {
+      if (msg.guild.settings.social) {
         await msg.member.givePoints(200);
         points = " You got **¥200**";
       }
@@ -44,9 +46,9 @@ class Pokemon extends Command {
       return msg.send(`Yatta! Well done, **${this.client.utils.toProperCase(pokemon.name)}** was correct.${points}`);
     }
 
-    await sent.delete();
+    if (sent.deletable) await sent.delete();
     return msg.send(`Ba-Baka! You answered incorrectly, It was **${this.client.utils.toProperCase(pokemon.name)}.**`);
-  } 
+  }
 }
 
 module.exports = Pokemon;
