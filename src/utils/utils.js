@@ -108,6 +108,19 @@ class Utils {
   static link(name, url) {
     return `[${name}](${url})`;
   }
+  
+
+  static success(msg, title = '[Success]'){
+    return console.log('\x1b[32m', title, '\x1b[0m', msg);
+  };
+
+  static warn(msg, title = '[Warn]'){
+    return console.log('\x1b[33m', title, '\x1b[0m', msg);
+  };
+
+  static error(msg, title = '[Err]'){
+    return console.log('\x1b[31m', title, '\x1b[0m', msg);
+  };
 }
 
 Utils.sleep = promisify(setTimeout);
