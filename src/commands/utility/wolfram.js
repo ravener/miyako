@@ -22,23 +22,28 @@ class Wolfram extends Command {
       msg.alias === "where" || msg.alias === "who" || msg.alias === "why" ?
       `${this.client.utils.toProperCase(msg.alias)} ${args.join(" ")}` : args.join(" ");
 
-    const url = new URL("http://api.wolframalpha.com/v2/query");
-    url.search = new URLSearchParams([
-      ["input", query],
-      ["primary", true],
-      ["appid", process.env.WOLFRAM],
-      ["output", "json"]
-    ]);
-    
-    const pods = await fetch(url)
-      .then((res) => res.json())
-      .then((body) => body.queryresult.pods);
-    
-    if (!pods || pods.error) return msg.send("Couldn't find an answer to that question!");
+    if (process.env.WOLFRAM !== 'appid') {
 
-    return msg.send(this.client.embed()
-      .setTitle(pods[0].subpods[0].plaintext)
-      .setDescription(pods[1].subpods[0].plaintext.substring(0, 1980)));
+      const url = new URL("http://api.wolframalpha.com/v2/query");
+      url.search = new URLSearchParams([
+        ["input", query],
+        ["primary", true],
+        ["appid", process.env.WOLFRAM],
+        ["output", "json"]
+      ]);
+      
+      const pods = await fetch(url)
+        .then((res) => res.json())
+        .then((body) => body.queryresult.pods);
+      
+      if (!pods || pods.error) return msg.send("Couldn't find an answer to that question!");
+
+      return msg.send(this.client.embed()
+        .setTitle(pods[0].subpods[0].plaintext)
+        .setDescription(pods[1].subpods[0].plaintext.substring(0, 1980)));
+    } else {
+      return msg.send("No configured Wolfram AppID!");
+    }
   }
 }
 

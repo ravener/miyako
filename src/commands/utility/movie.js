@@ -13,6 +13,7 @@ class Movie extends Command {
   }
 
   async run(msg, args) {
+    if (process.env.TMDB !== 'key') {
     if (!args.length) return msg.send("Baka! What am I supposed to search?");
 
     const [query, page = 1] = args.join(" ").split(",");
@@ -43,6 +44,9 @@ class Movie extends Command {
       .addField("Release Date", movie.release_date || "Unknown");
 
     return msg.send({ embed });
+    } else {
+      return msg.send("No configured TMDb API key!");
+    }
   }
 }
 

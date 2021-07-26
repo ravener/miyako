@@ -11,14 +11,18 @@ class GIF extends Command {
   }
 
   async run(msg, args) {
-    if(!args.length) return msg.send("Baka! What am I supposed to search?");
+    if (process.env.GIPHY !== "token") {
+      if(!args.length) return msg.send("Baka! What am I supposed to search?");
 
-    const data = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY}&limit=1&q=${encodeURIComponent(args.join(" "))}`)
-      .then((res) => res.json())
-      .then((body) => body.data[0]);
+      const data = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY}&limit=1&q=${encodeURIComponent(args.join(" "))}`)
+        .then((res) => res.json())
+        .then((body) => body.data[0]);
 
-    if(!data) return msg.send("No Results Found.");
-    return msg.send(data.embed_url);
+      if(!data) return msg.send("No Results Found.");
+      return msg.send(data.embed_url);
+    } else {
+      return msg.send("No configured Giphy API token!")
+    }
   }
 }
 
