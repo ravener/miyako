@@ -1,9 +1,11 @@
-const { promisify } = require("util");
+const { promisify, inspect } = require("util");
 
 const suffixes = ["Bytes", "KB", "MB", "GB"];
 
 const { promises: { lstat, readdir } } = require("fs");
 const path = require("path");
+const moment = require('moment');
+const chalk = require('chalk');
 
 /**
  * Static class with utilities used throughout the bot.
@@ -108,6 +110,40 @@ class Utils {
   static link(name, url) {
     return `[${name}](${url})`;
   }
+
+      static log(content, { color = 'grey', tag = 'Log' } = {}) {
+        this.write(content, { color, tag });
+    }
+
+    static info(content, { color = 'blue', tag = 'Info' } = {}) {
+        this.write(content, { color, tag });
+    }
+
+    static warn(content, { color = 'yellow', tag = 'Warn' } = {}) {
+        this.write(content, { color, tag });
+    }
+
+    static error(content, { color = 'red', tag = 'Error' } = {}) {
+        this.write(content, { color, tag, error: true });
+    }
+
+    static stacktrace(content, { color = 'white', tag = 'Error' } = {}) {
+        this.write(content, { color, tag, error: true });
+    }
+
+    static write(content, { color = 'grey', tag = 'Log', error = false } = {}) {
+        const timestamp = chalk.cyan(`[${moment().format('DD-MM-YYYY kk:mm:ss')}]:`);
+        const levelTag = chalk.bold(`[${tag}]`);
+        const text = chalk[color](this.clean(content));
+        const stream = error ? process.stderr : process.stdout;
+        stream.write(`${timestamp} ${levelTag} ${text}\n`);
+    }
+
+    static clean(item) {
+        if (typeof item === 'string') return item;
+        const cleaned = util.inspect(item, { depth: Infinity });
+        return cleaned;
+    }
 }
 
 Utils.sleep = promisify(setTimeout);
