@@ -10,10 +10,8 @@ class DogFacts extends Command {
   }
   
   async run(msg) {
-    const fact = await fetch("http://dog-api.kinduff.com/api/facts?number=1")
-      .then((res) => res.json())
-      .then((body) => body.facts[0]);
-    return msg.send(`📢 **Dogfact:** *${fact}*`);
+    const fact = await fetch("http://dog-api.kinduff.com/api/facts?number=1").json()
+    return msg.send(`📢 **Dogfact:** *${fact.facts[0]}*`);
   }
 }
 
