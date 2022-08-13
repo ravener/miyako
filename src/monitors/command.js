@@ -197,16 +197,22 @@ class CommandHandler extends Monitor {
     const cooldown = cmd.cooldown * 1000;
     // Get the bucket for the user.
     const ratelimits = this.ratelimits.get(msg.author.id) || {};
+
     // Make sure the command is available in the bucket.
-    if (!ratelimits[cmd.name]) ratelimits[cmd.name] = Date.now() - cooldown;
+    if (!ratelimits[cmd.name]) {
+      ratelimits[cmd.name] = Date.now() - cooldown;
+    }
+
     // Calculate the difference.
     const difference = Date.now() - ratelimits[cmd.name];
 
-    if (difference < cooldown) { // check the if the duration the command was run, is more than the cooldown
+    // check if enough time has passed since last run.
+    if (difference < cooldown) {
       // Return a human-readable string to the user with the remaining seconds.
       return `Woah! Why the hurry? You can run this command again in **${Math.round((cooldown - difference) / 1000)}** seconds.`;
     } else {
-      ratelimits[cmd.name] = Date.now(); // set the key to now, to mark the start of the cooldown
+      // set the key to now, to mark the start of the cooldown
+      ratelimits[cmd.name] = Date.now();
       this.ratelimits.set(msg.author.id, ratelimits); // set it
       return true;
     }

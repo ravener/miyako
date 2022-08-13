@@ -7,7 +7,8 @@ class CommandError extends Event {
 
     console.log(`[COMMAND] ${msg.command.name}: ${err.stack || err}`);
 
-    await msg.send(`Uh! Something went wrong unexpectedly!${msg.author.id !== this.client.constants.ownerID ? " Don't worry my master will keep track of the problem and fix it soon." : ""}`);
+    await msg.send(`Uh! Something went wrong unexpectedly!${msg.author.id !== this.client.constants.ownerID ? " Don't worry my master will keep track of the problem and fix it soon." : ""}`)
+      .catch(() => null);
 
     const channel = this.client.channels.cache.get("454776836929617921");
     if (!channel) return;

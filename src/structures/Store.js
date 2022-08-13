@@ -13,6 +13,7 @@ class Store extends Collection {
   set(piece) {
     const exists = this.get(piece.name);
     if (exists) this.delete(piece.name);
+    
     super.set(piece.name, piece);
     return piece;
   }
@@ -20,6 +21,7 @@ class Store extends Collection {
   delete(key) {
     const exists = this.get(key);
     if (!exists) return false;
+
     return super.delete(key);
   }
 
@@ -31,7 +33,7 @@ class Store extends Collection {
 
     const Class = require(filepath);
 
-    if(typeof Class !== "function" || typeof Class.constructor !== "function") {
+    if (typeof Class !== "function" || typeof Class.constructor !== "function") {
       throw new TypeError(`The file at ${filepath} could not be loaded because it does not export a class.`);
     }
 
@@ -52,7 +54,9 @@ class Store extends Collection {
       filter: (stats, file) => stats.isFile() && file.endsWith(".js")
     });
 
-    for (const file of files.keys()) this.load(path.relative(this.dir, file));
+    for (const file of files.keys()) {
+      this.load(path.relative(this.dir, file));
+    }
 
     return this.size;
   }
