@@ -6,6 +6,8 @@
 
 Miyako is a multipurpose [Discord](https://discordapp.com) Bot
 
+> **Note:** Miyako's development has been halted for now, mainly because I don't have the motivation for discord bots anymore. I might make another bot one day if I feel like it, but for now take this project with a huge grain of salt, anything can break.
+
 [![Discord Bots](https://top.gg/api/widget/397796982120382464.svg)](https://top.gg/bot/397796982120382464)
 
 This repository contains the always up to date code for the bot so you can contribute if you want. If you just want to use the bot [invite it here](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=1345350758&scope=bot)
