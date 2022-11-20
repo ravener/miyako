@@ -9,6 +9,7 @@ class CommandOptions {
     this.getMember = this.get.bind(this);
     this.getChannel = this.get.bind(this);
     this.getString = this.get.bind(this);
+    this.getInteger = this.get.bind(this);
   }
 
   get(name) {

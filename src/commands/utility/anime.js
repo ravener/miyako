@@ -26,7 +26,7 @@ class Anime extends Command {
 
   async run(ctx, options) {
     const title = options.getString("title");
-    const page = options.getInt("page") ?? 1;
+    const page = options.getInteger("page") ?? 1;
 
     const { data } = await request(`https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(title)}`)
       .then(({ body }) => body.json());
