@@ -49,7 +49,7 @@ class MessageCreate extends Event {
     if (!command.modes.includes("text")) return;
 
     const contexts = this.client.commands.contexts;
-    const ctx = contexts.get(message.id) ?? new CommandContext(command, {
+    const ctx = new CommandContext(command, {
       message, flags, content,
       prefixLength, alias, args
     });
