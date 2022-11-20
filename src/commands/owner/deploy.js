@@ -14,7 +14,7 @@ class Deploy extends Command {
       const body = [];
 
       for (const command of this.client.commands.values()) {
-        if (command.modes.includes("slash") && command.enabled) {
+        if (command.modes.includes("slash") && command.enabled && !command.ownerOnly) {
           body.push(command.getSlashCommandData().toJSON());
         }
       }
