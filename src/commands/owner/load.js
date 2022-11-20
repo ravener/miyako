@@ -6,6 +6,7 @@ class Load extends Command {
     super(...args, {
       description: "Loads all commands/events",
       ownerOnly: true,
+      modes: ["text"],
       options: [
         {
           name: "store",
