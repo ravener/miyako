@@ -1,0 +1,35 @@
+{
+  "name": "miyako",
+  "version": "0.0.1",
+  "private": true,
+  "description": "General purpose Discord Bot",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "eslint .",
+    "start": "node src/index.js",
+    "deploy": "node src/deploy-commands.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravener/miyako.git"
+  },
+  "keywords": [
+    "miyako",
+    "discord",
+    "bot",
+    "api"
+  ],
+  "author": "Raven <ravener.anime@gmail.com> (https://ravener.now.sh/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ravener/miyako/issues"
+  },
+  "homepage": "https://github.com/ravener/miyako#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.1",
+    "fastest-levenshtein": "^1.0.16",
+    "img-api": "^1.0.4"
+  }
+}
