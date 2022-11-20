@@ -12,7 +12,7 @@ class CommandContext {
       this.prefixLength = prefixLength;
       this.flags = flags;
       this.alias = alias;
-      this.args = args;
+      this.args = args.join(" ").split(command.delim);
     }
   }
 

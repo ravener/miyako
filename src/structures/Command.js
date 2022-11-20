@@ -22,6 +22,7 @@ class Command extends Base {
     this.usage = options.usage ?? this.name;
     this.loading = options.loading;
     this.options = options.options ?? [];
+    this.delim = options.delim ?? " ";
 
     this.botPermissions = new PermissionsBitField(options.botPermissions ?? []).freeze();
     this.userPermissions = new PermissionsBitField(options.userPermissions ?? []).freeze();
@@ -107,6 +108,11 @@ class Command extends Base {
 
       if (last) return ctx.args.slice(i).join(" ");
       return arg;
+    }
+
+    if (option.type === "integer") {
+      if (!option.required && !arg) return;
+      return this.verifyInt(arg);
     }
   }
 
