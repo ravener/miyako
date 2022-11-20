@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command.js");
+const { link } = require("../../utils/utils.js");
 
 class Invite extends Command {
   constructor(...args) {
@@ -10,8 +11,6 @@ class Invite extends Command {
   }
 
   async run(ctx) {
-    const { link } = this.client.utils;
-
     const embed = this.client.embed(this.client.user)
       .setTitle("Invite Miyako to your server")
       .setDescription([
