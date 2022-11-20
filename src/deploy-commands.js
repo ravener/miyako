@@ -2,9 +2,9 @@ require("dotenv").config();
 
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-const { TOKEN_DEV, CLIENT_ID, GUILD_ID } = process.env;
+const { TOKEN_DEV, TOKEN, DEV, CLIENT_ID, GUILD_ID } = process.env;
 
-const rest = new REST({ version: "10" }).setToken(TOKEN_DEV);
+const rest = new REST({ version: "10" }).setToken(DEV ? TOKEN_DEV : TOKEN);
 
 const MiyakoClient = require("./structures/MiyakoClient.js");
 
