@@ -3,7 +3,7 @@ const { random } = require("../utils/utils.js");
 const responses = require("../utils/responses.js");
 
 class CommandError extends Event {
-  run(ctx, err) {
+  async run(ctx, err) {
     // Allow throw "string" to unwind stack from deepest calls
     // for replying with an error message.
     if (typeof err === "string") {
