@@ -29,7 +29,9 @@ class GitHub extends Command {
     const [username, repository] = repo.split("/");
     if (!username || !repository) return ctx.reply("Repository must be in the form `username/repository`");
 
-    const body = await request(`https://api.github.com/repos/${username}/${repository}`)
+    const body = await request(`https://api.github.com/repos/${username}/${repository}`, {
+      headers: { "User-Agent": "miyako https://github.com/ravener/miyako" }
+    })
       .then(({ body, statusCode }) => statusCode === 200 && body.json())
       .catch(() => null)
 
