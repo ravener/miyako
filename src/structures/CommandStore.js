@@ -6,7 +6,6 @@ class CommandStore extends Store {
     super(client, "commands");
 
     this.aliases = new Collection();
-    this.contexts = new Map();
     this.ran = 0;
   }
 

@@ -48,7 +48,6 @@ class MessageCreate extends Event {
     if (!command) return this.closestCommand(message, alias);
     if (!command.modes.includes("text")) return;
 
-    const contexts = this.client.commands.contexts;
     const ctx = new CommandContext(command, {
       message, flags, content,
       prefixLength, alias, args
@@ -60,7 +59,6 @@ class MessageCreate extends Event {
       });
     }
 
-    this.client.commands.contexts.set(message.id, ctx);
     return command.execute(ctx);
   }
 
