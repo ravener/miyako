@@ -23,7 +23,7 @@ class Compliment extends Command {
       return ctx.reply("Thanks but you don't have to ask me to compliment myself. Baka!");
     }
 
-    return msg.send(`${user}: ${compliments[Math.floor(Math.random() * compliments.length)]}`);
+    return ctx.reply(`${user}: ${compliments[Math.floor(Math.random() * compliments.length)]}`);
   }
 }
 
