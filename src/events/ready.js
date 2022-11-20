@@ -10,7 +10,7 @@ class ReadyEvent extends Event {
     // Clean up command contexts every hour to prevent big accumulations.
     this.cleanTask = setInterval(() => {
       this.client.commands.contexts.clear();
-    }, 60 * 1000);
+    }, 60 * 60 * 1000);
   }
 }
 
