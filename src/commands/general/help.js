@@ -48,7 +48,7 @@ class Help extends Command {
           `**Category:** ${cmd.category}`,
           `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join(", ") : "None"}`,
           `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " seconds" : "None"}`,
-          `**Usage:** @Miyako ${cmd.usage}`,
+          `**Usage:** @Miyako ${cmd.name} ${cmd.usage}`,
           // `**Cost:** ${cost}`,
           `**Extended Help:** ${cmd.extendedHelp}`
         ].join("\n"));
