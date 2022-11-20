@@ -36,7 +36,7 @@ class MessageCreate extends Event {
 
     // A mention only.
     if (!rawContent) {
-      return message.channel.send("Hi, I'm Miyako, tell my master to write a proper introduction for me cause I'm too lazy to say anything about myself at this time.");
+      return message.channel.send("👋 Hi there! Run `@Miyako help` to see all I can do or browse the slash commands by typing `/`");
     }
 
     const { content, flags } = this.getFlags(rawContent);
