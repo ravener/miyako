@@ -165,6 +165,9 @@ class Command extends Base {
       return;
     }
 
+    if (user.toLowerCase() === "me") return msg.author;
+    if (user.toLowerCase() === "you") return this.client.user;
+
     const match = /^(?:<@!?)?(\d{17,19})>?$/.exec(user);
 
     if (!match) {
