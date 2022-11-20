@@ -16,7 +16,7 @@ class Eval extends Command {
     super(...args, {
       description: "Evaluates arbitrary JavaScript",
       ownerOnly: true,
-      usage: "<code>",
+      usage: "eval <code>",
       aliases: ["ev"],
       modes: ["text"]
     });
