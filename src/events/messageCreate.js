@@ -21,6 +21,7 @@ class MessageCreate extends Event {
 
   async run(message) {
     if (!message.content || message.author.bot) return;
+    if (message.channel.partial) await message.channel.fetch();
 
     const { user } = this.client;
 

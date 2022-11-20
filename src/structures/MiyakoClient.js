@@ -1,4 +1,4 @@
-const { Client, EmbedBuilder, GatewayIntentBits } = require("discord.js");
+const { Client, EmbedBuilder, GatewayIntentBits, Partials } = require("discord.js");
 const { COLOR } = require("../utils/constants.js");
 const Logger = require("../utils/log.js");
 const CommandStore = require("./CommandStore.js");
@@ -12,7 +12,8 @@ class MiyakoClient extends Client {
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.DirectMessages
       ],
-      allowedMentions: { parse: ["users"] }
+      allowedMentions: { parse: ["users"] },
+      partials: [Partials.Channel]
     });
 
     this.dev = !!process.env.DEV;
