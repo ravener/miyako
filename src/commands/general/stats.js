@@ -56,7 +56,7 @@ class Stats extends Command {
         value: [
           ":star: [GitHub Repository](https://github.com/ravener/miyako)",
           ":robot: [Upvote me at top.gg](https://top.gg/bot/397796982120382464)",
-          ":envelope_with_arrow: [Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=2016537702&scope=bot)",
+          ":envelope_with_arrow: [Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=2016537702&scope=bot%20applications.commands)",
           ":video_game: [Join our Discord Server](https://discord.gg/mDkMbEh)"
         ].join("\n"),
         inline: true
