@@ -21,7 +21,7 @@ class YoMomma extends Command {
   async run(ctx, options) {
     const user = options.getUser("user") ?? ctx.author;
 
-    const { joke } = await fetch("http://api.yomomma.info")
+    const { joke } = await request("http://api.yomomma.info")
       .then(({ body }) => body.json());
 
     return ctx.reply(`${user}, ${joke}`);
