@@ -13,13 +13,26 @@ class CommandError extends Event {
     this.client.log.error(err);
 
     if (ctx.owner) {
-      return ctx.reply(random(responses.reloadErr)
+      await ctx.reply(random(responses.reloadErr)
         .replace(/{{command}}/g, ctx.command.name)
         .replace(/{{user}}/g, ctx.author.username)
-        .replace(/{{response}}/g, err.message || err));
+        .replace(/{{response}}/g, err.message || err))
+        .catch(() => null);
     } else {
-      return ctx.reply("Something went wrong with the command, whoopsie! I have reportd it to my master, now you are gonna have to wait for it to be fixed.")
+      await ctx.reply("Something went wrong with the command, whoopsie! I have reportd it to my master, now you are gonna have to wait for it to be fixed, how is that?").catch(() => null);
     }
+
+    const channel = this.client.channels.cache.get("454776836929617921");
+    if (!channel) return;
+
+    const embed = this.client.embed(ctx.author)
+      .setTitle("Command Error")
+      .setDescription(`An Error occured in command: ${ctx.command.name}\n\`\`\`js\n${err.stack || err}\`\`\``)
+      .setFooter({  
+        text: `User ID: ${ctx.author.id}, Guild: ${ctx.guild ? ctx.guild.name : "DM" }`
+      });
+
+    return channel.send({ embeds: [embed] }).catch(() => null);
   }
 }
 
