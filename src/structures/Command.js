@@ -102,7 +102,7 @@ class Command extends Base {
 
     if (option.type === "string") {
       if (option.required && !arg) {
-        throw "Argument **${option.name}** is required.";
+        throw `Argument **${option.name}** is required.`;
       }
 
       if (last) return ctx.args.slice(i).join(" ");
