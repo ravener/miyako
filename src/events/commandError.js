@@ -29,7 +29,7 @@ class CommandError extends Event {
       .setTitle("Command Error")
       .setDescription(`An Error occured in command: ${ctx.command.name}\n\`\`\`js\n${err.stack || err}\`\`\``)
       .setFooter({  
-        text: `User ID: ${ctx.author.id}, Guild: ${ctx.guild ? ctx.guild.name : "DM" }`
+        text: `User ID: ${ctx.author.id}, Guild: ${ctx.guild ? ctx.guild.name : "DM"}`
       });
 
     return channel.send({ embeds: [embed] }).catch(() => null);
