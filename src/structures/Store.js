@@ -1,7 +1,8 @@
+const { Collection } = require("discord.js")
 const { join, dirname, parse, relative } = require("node:path");
 const { walk } = require("../utils/utils.js");
 
-class Store extends Map {
+class Store extends Collection {
   constructor(client, name) {
     super();
 

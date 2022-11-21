@@ -1,5 +1,6 @@
 const Store = require("./Store.js");
 const { Collection } = require("discord.js");
+const { OWNER_ID } = require("../utils/constants.js");
 
 class CommandStore extends Store {
   constructor(client) {
@@ -46,18 +47,18 @@ class CommandStore extends Store {
   /**
    * Return list of usable commands in context.
    */
-  usableCommands(ctx) {
+  usableCommands(msg) {
     return [...this.filter(command => {
       // Skip disabled commands.
       if (!command.enabled) return false;
       // Skip owner commands.
-      if (command.ownerOnly && !ctx.owner) return false;
+      if (command.ownerOnly && msg.author.id !== OWNER_ID) return false;
       // Skip guild only commands.
-      if (!ctx.guild && command.guildOnly) return false;
+      if (!msg.guild && command.guildOnly) return false;
       // Skip commands that the user does not have permissions to run.
-      if (ctx.guild && !ctx.channel.permissionsFor(ctx.author).has(command.userPermissions)) return false;
+      if (msg.guild && !msg.channel.permissionsFor(msg.author).has(command.userPermissions)) return false;
       // Skip NSFW commands.
-      if (command.nsfw && !ctx.channel.nsfw) return false;
+      if (command.nsfw && !msg.channel.nsfw) return false;
       return true;
     })];
   }
