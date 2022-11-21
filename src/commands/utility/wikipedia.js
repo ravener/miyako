@@ -21,7 +21,9 @@ class Wikipedia extends Command {
   async run(ctx, options) {
     const query = options.getString("query");
 
-    const article = await request(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`)
+    const article = await request(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`, {
+      maxRedirections: 1
+    })
       .then(({ body }) => body.json())
       .catch(() => {
         throw "I couldn't find a wikipedia article with that title!";
