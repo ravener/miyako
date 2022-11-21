@@ -19,7 +19,9 @@ class Ping extends Command {
     const took = msg.createdTimestamp - ctx.createdTimestamp;
 
     return ctx.editReply({
-      content: random(pingMessages).replace(/{{ms}}/g, took)
+      content: random(pingMessages)
+        .replace(/{{ms}}/g, took)
+        .replace(/{{user}}/g, ctx.author.username)
     });
   }
 }
