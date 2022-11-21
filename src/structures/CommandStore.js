@@ -47,7 +47,7 @@ class CommandStore extends Store {
    * Return list of usable commands in context.
    */
   usableCommands(msg) {
-    return [...this].filter(command => {
+    return [...this.values()].filter(command => {
       // Skip disabled commands.
       if (!command.enabled) return false;
       // Skip owner commands.
