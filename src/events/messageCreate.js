@@ -64,8 +64,9 @@ class MessageCreate extends Event {
   }
 
   closestCommand(msg, cmd) {
-    const { commands } = this.client;
-    const arr = [...commands.keys(), ...commands.aliases.keys()];
+    const commands = this.client.commands.usableCommands(msg);
+    const aliases = commands.map(command => command.aliases).flat();
+    const arr = [...commands.map(command => command.name), ...aliases];
 
     let minDistance = Infinity;
     let minIndex = 0;
