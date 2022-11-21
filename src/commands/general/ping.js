@@ -1,4 +1,6 @@
 const Command = require("../../structures/Command.js");
+const { random } = require("../../utils/utils.js");
+const { pingMessages } = require("../../utils/responses.js");
 
 class Ping extends Command {
   constructor(...args) {
@@ -10,15 +12,14 @@ class Ping extends Command {
 
   async run(ctx) { 
     const msg = await ctx.reply({
-      content: "Pong!",
+      content: "Ping?",
       fetchReply: true
     });
 
     const took = msg.createdTimestamp - ctx.createdTimestamp;
-    const latency = this.client.ws.ping;
 
     return ctx.editReply({
-      content: `Pong! Took **${took}ms** API Latency **${latency}ms**`
+      content: random(pingMessages).replace(/{{ms}}/g, took)
     });
   }
 }
