@@ -21,6 +21,10 @@ class YoMomma extends Command {
   async run(ctx, options) {
     const user = options.getUser("user") ?? ctx.author;
 
+    if (user.id === this.client.user.id) {
+      return ctx.reply("My mom is doing fine thanks, how about yours?");
+    }
+
     const { joke } = await request("https://api.yomomma.info")
       .then(({ body }) => body.json());
 
