@@ -1,12 +1,11 @@
 const Store = require("./Store.js");
-const { Collection } = require("discord.js");
 const { OWNER_ID } = require("../utils/constants.js");
 
 class CommandStore extends Store {
   constructor(client) {
     super(client, "commands");
 
-    this.aliases = new Collection();
+    this.aliases = new Map();
     this.ran = 0;
   }
 
@@ -48,7 +47,7 @@ class CommandStore extends Store {
    * Return list of usable commands in context.
    */
   usableCommands(msg) {
-    return [...this.filter(command => {
+    return [...this].filter(command => {
       // Skip disabled commands.
       if (!command.enabled) return false;
       // Skip owner commands.
@@ -60,7 +59,7 @@ class CommandStore extends Store {
       // Skip NSFW commands.
       if (command.nsfw && !msg.channel.nsfw) return false;
       return true;
-    })];
+    });
   }
 }
 
