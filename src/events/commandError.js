@@ -19,7 +19,7 @@ class CommandError extends Event {
         .replace(/{{response}}/g, err.message || err))
         .catch(() => null);
     } else {
-      await ctx.reply("Something went wrong with the command, whoopsie! I have reportd it to my master, now you are gonna have to wait for it to be fixed, how is that?").catch(() => null);
+      await ctx.reply("Something went wrong with the command, whoopsie! I have reportd it to my master, now you are gonna have to wait for it to be fixed, how is that? ｡ﾟ･ (>﹏<) ･ﾟ｡").catch(() => null);
     }
 
     const channel = this.client.channels.cache.get("454776836929617921");
