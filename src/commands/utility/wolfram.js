@@ -39,10 +39,12 @@ class Wolfram extends Command {
       .then((body) => body.queryresult.pods);
     
     if (!pods || pods.error) return ctx.reply("Couldn't find an answer to that question!");
+    const description = pods[1].subpods[0].plaintext.substring(0, 1980);
 
     const embed = this.client.embed()
-      .setTitle(pods[0].subpods[0].plaintext)
-      .setDescription(pods[1].subpods[0].plaintext.substring(0, 1980));
+      .setTitle(pods[0].subpods[0].plaintext);
+
+    if (description) embed.setDescription(description);
 
     return ctx.reply({ embeds: [embed] });
   }
