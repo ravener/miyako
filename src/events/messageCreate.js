@@ -1,6 +1,5 @@
 const Event = require("../structures/Event.js");
 const CommandContext = require("../structures/CommandContext.js");
-// const TextCommand = require("../structures/TextCommand.js");
 const { distance } = require("fastest-levenshtein");
 
 const quotes = ['"', "'", '“”', '‘’'];
