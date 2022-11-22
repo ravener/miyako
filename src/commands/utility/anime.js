@@ -49,6 +49,10 @@ class Anime extends Command {
         value: `${res.attributes.episodeCount} (${res.attributes.episodeLength} Min Per Episode)`,
         inline: true
       })
+      .addFields({
+        name: "Date Aired",
+        value: `**Start:** ${res.attributes.startDate}\n**End:** ${res.attributes.endDate}`
+      })
       .setImage(res.attributes.coverImage && res.attributes.coverImage.original)
       .setThumbnail(res.attributes.posterImage && res.attributes.posterImage.original)
       .setURL(`https://kitsu.io/anime/${res.id}`)
