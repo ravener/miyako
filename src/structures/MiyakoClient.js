@@ -50,7 +50,7 @@ class MiyakoClient extends Client {
     return embed;
   }
 
-  async login(token) {
+  async login() {
     await this.load();
 
     const { TOKEN, TOKEN_DEV } = process.env;
