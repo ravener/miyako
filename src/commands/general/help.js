@@ -24,19 +24,6 @@ class Help extends Command {
         return ctx.reply("That command does not exist! Why would you think I'd have such a thing?");
       }
 
-      /* let cost = msg.tr("NONE");
-
-      if (cmd.cost && (msg.guild && msg.guild.settings.social)) {
-        const premium = await this.client.verifyPremium(msg.author);
-
-        if (premium) {
-          // Premium users get a 25% off the cost.
-          cost = `¥${cmd.cost - Math.floor(cmd.cost / 2 / 2)}`;
-        } else {
-          cost = `¥${cmd.cost}`;
-        }
-      }*/
-
       if (cmd.nsfw && (ctx.guild && !ctx.channel.nsfw)) {
         return ctx.reply("Baka! You can't view details of that command in a non NSFW channel.");
       }
