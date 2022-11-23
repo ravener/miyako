@@ -24,15 +24,13 @@ class MessageCreate extends Event {
 
     const { user } = this.client;
 
-    let rawContent = message.content;
-    let prefixLength = 0;
     const regex = new RegExp(`<@!?${user.id}>${!message.guild ? "|" : ""}`);
     const match = message.content.match(regex);
 
-    if (match) {
-      prefixLength = match[0].length;
-      rawContent = message.content.slice(prefixLength).trim();
-    }
+    if (!match) return;
+
+    const prefixLength = match[0].length;
+    const rawContent = message.content.slice(prefixLength).trim();
 
     // A mention only.
     if (!rawContent) {
