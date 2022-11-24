@@ -1,12 +1,6 @@
 const Event = require("../structures/Event.js");
 
-class ReadyEvent extends Event {
-  constructor(...args) {
-    super(...args, {
-      once: true
-    })
-  }
-
+class ReadyEvent extends Event { 
   async run() {
     const { user, log } = this.client;
 
