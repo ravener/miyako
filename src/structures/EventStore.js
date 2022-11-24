@@ -11,7 +11,11 @@ class EventStore extends Store {
     // Add a listener if it's not a raw event.
     // Raw events are handled by events/raw.js
     if (!event.raw) {
-      this.client.on(event.name, event._run.bind(event));
+      if (event.once) {
+        this.client.once(event.name, event._run.bind(event));
+      } else {
+        this.client.on(event.name, event._run.bind(event));
+      }
     }
 
     return event;
