@@ -77,7 +77,7 @@ class CommandContext {
     return this.reply(options);
   }
 
-  deferReply({ ephemeral }) {
+  deferReply({ ephemeral } = {}) {
     if (this.slash) return this.interaction.deferReply({ ephemeral });
 
     const { username } = this.client.user;
