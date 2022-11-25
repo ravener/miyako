@@ -20,7 +20,9 @@ class Meme extends Command {
     const embed = this.client.embed(ctx.author)
       .setTitle(data.title)
       .setImage(data.url)
-      .setFooter(`👍 ${data.ups} | 👎 ${data.downs}`);
+      .setFooter({
+        text: `👍 ${data.ups} | 👎 ${data.downs}`
+      });
 
     return ctx.reply({ embeds: [embed] });
   }
