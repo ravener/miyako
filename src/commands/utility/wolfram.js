@@ -7,7 +7,7 @@ class Wolfram extends Command {
     super(...args, {
       description: "Query Wolfram Alpha with any mathematical question.",
       usage: "wolfram <query>",
-      aliases: ["what", "when", "where", "who", "why", "how"],
+      aliases: ["what", "when", "where", "who", "why", "how", "define"],
       cooldown: 5,
       options: [
         {
@@ -23,8 +23,8 @@ class Wolfram extends Command {
   async run(ctx, options) {
     // Allow users to trigger this in a fancy way using @Miyako What time is it?
     // If they invoke it with the "what"/"where"/"when"/"who"/"why" alias, we must also treat it as an argument.
-    // A trick to make it look like some advanced A.I bot i guess.
-    const query = ["what", "where", "when", "how", "who", "why"].includes(ctx.alias) ? `${toProperCase(ctx.alias)} ${options.getString("query")}` : options.getString("query");
+    // A trick to make it look like some advanced A.I bot I guess.
+    const query = this.aliases.includes(ctx.alias) ? `${toProperCase(ctx.alias)} ${options.getString("query")}` : options.getString("query");
 
     const url = new URL("http://api.wolframalpha.com/v2/query");
     url.search = new URLSearchParams([
