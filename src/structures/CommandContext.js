@@ -60,6 +60,10 @@ class CommandContext {
     return this.author.id === OWNER_ID;
   }
 
+  get nsfw() {
+    return this.guild ? this.channel.nsfw : true;
+  }
+
   async reply(options) {
     if (this.slash) return this.interaction.reply(options);
     if (this.message.lastReply) return this.message.lastReply.edit(options);

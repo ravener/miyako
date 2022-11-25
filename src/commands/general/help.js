@@ -37,7 +37,7 @@ class Help extends Command {
         }
       }*/
 
-      if (cmd.nsfw && (ctx.guild && !ctx.channel.nsfw)) {
+      if (cmd.nsfw && !ctx.nsfw) {
         return ctx.reply("Baka! You can't view details of that command in a non NSFW channel.");
       }
 

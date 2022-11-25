@@ -31,6 +31,10 @@ class SubReddit extends Command {
       })
       .catch(() => { throw this.errorMessage; });
 
+    if (subreddit.over18 && !ctx.nsfw) {
+      return ctx.reply("I cannot show 18+ subreddits in this channel. You pervert!");
+    }
+
     const embed = this.client.embed()
       .setTitle(subreddit.title)
       .setDescription(subreddit.public_description)
