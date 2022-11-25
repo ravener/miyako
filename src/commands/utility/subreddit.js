@@ -35,8 +35,6 @@ class SubReddit extends Command {
       .setTitle(subreddit.title)
       .setDescription(subreddit.public_description)
       .setURL(`https://www.reddit.com/r/${subredditName}/`)
-      .setThumbnail(subreddit.icon_img)
-      .setImage(subreddit.banner_img)
       .addFields({
         name: "Subscribers",
         value: subreddit.subscribers.toLocaleString(),
@@ -47,6 +45,9 @@ class SubReddit extends Command {
         value: subreddit.accounts_active.toLocaleString(),
         inline: true
       });
+
+    if (subreddit.icon_img) embed.setThumbnail(subreddit.icon_img);
+    if (subreddit.banner_img) embed.setImage(subreddit.banner_img);
 
     return ctx.reply({ embeds: [embed] });
   }
