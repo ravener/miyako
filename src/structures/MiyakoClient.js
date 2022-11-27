@@ -57,7 +57,10 @@ class MiyakoClient extends Client {
     return request(`https://top.gg/api/bots/${this.user.id}/stats`, {
       method: "POST",
       body: JSON.stringify({ server_count }),
-      headers: { Authorization: process.env.DBL }
+      headers: {
+        Authorization: process.env.DBL,
+        "Content-Type": "application/json"
+      }
     })
       .then(({ statusCode }) => {
         if (statusCode !== 200) {
@@ -78,7 +81,7 @@ class MiyakoClient extends Client {
       headers: { Authorization: process.env.DBL }
     })
       .then(({ body }) => body.json())
-      .then(({ isVoted }) => Boolean(isVoted));
+      .then(({ voted }) => Boolean(voted));
   }
 
   async login() {
