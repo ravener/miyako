@@ -1,6 +1,7 @@
 const Event = require("../structures/Event.js");
 const CommandContext = require("../structures/CommandContext.js");
 const { distance } = require("fastest-levenshtein");
+const { plural, missingPermissions } = require("../utils/utils.js");
 
 const quotes = ['"', "'", '“”', '‘’'];
 const flagRegex = new RegExp(`(?:--|—)(\\w[\\w-]+)(?:=(?:${quotes.map((qu) => `[${qu}]((?:[^${qu}\\\\]|\\\\.)*)[${qu}]`).join("|")}|([\\w<>@#&!-]+)))?`, "g");
@@ -57,7 +58,41 @@ class MessageCreate extends Event {
       });
     }
 
+    if (!(await this.checkPermissions(ctx, command))) return;
+
     return command.execute(ctx);
+  }
+
+  async checkPermissions(ctx, command) {
+    // No Permissions for DMs
+    if (!ctx.guild) return true;
+
+    const permissions = ctx.channel.permissionsFor(this.client.user);
+    const missing = missingPermissions(permissions, command.botPermissions);
+
+    if (missing.length) {
+      await ctx.reply({
+        content: `I need the following permission${plural(missing)} to run that command: **${missing.join(", ")}**`
+      });
+
+      return false;
+    }
+
+    // Owner bypasses permission restrictions.
+    if (ctx.owner) return true;
+
+    const userPermissions = ctx.channel.permissionsFor(ctx.author);
+    const user = missingPermissions(userPermissions, command.userPermissions);
+
+    if (user.length) {
+      await ctx.reply({
+        content: `You need the following permission${plural(user)} to run that command: **${user.join(", ")}**`
+      });
+
+      return false;
+    }
+
+    return true;
   }
 
   closestCommand(msg, cmd) {

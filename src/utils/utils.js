@@ -1,5 +1,4 @@
 const { promisify } = require("util");
-
 const suffixes = ["Bytes", "KB", "MB", "GB"];
 
 const { promises: { lstat, readdir } } = require("fs");
@@ -12,6 +11,11 @@ class Utils {
   constructor() {
     throw new Error("Utils is a static class and cannot be instantiated.");
   }
+
+  static missingPermissions(permissions, target) {
+    return permissions.missing(target)
+      .map(perms => perms.replace(/([a-z])([A-Z])/g, "$1 $2"));
+  }
   
   static toProperCase(str) {
     return str.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -19,6 +23,14 @@ class Utils {
 
   static random(arr) {
     return arr[~~(Math.random() * arr.length)];
+  }
+
+  static plural(arrayOrLength) {
+    if (Array.isArray(arrayOrLength)) {
+      return arrayOrLength.length > 1 ? "s" : "";
+    }
+
+    return arrayOrLength > 1 ? "s" : "";
   }
   
   static getBytes(bytes) {
