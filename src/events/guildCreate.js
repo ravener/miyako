@@ -6,7 +6,10 @@ class GuildCreate extends Event {
 
     const channel = this.client.channels.cache.get("454776806869041154");
     if (!channel) return;
-    if (!guild.owner && guild.ownerID) await guild.members.fetch(guild.ownerID);
+
+    const owner = guild.owner?.user ?? await this.client.users
+      .fetch(guild.ownerID)
+      .catch(() => null);
 
     const embed = this.client.embed()
       .setTitle("Miyako joined a new server!")
@@ -14,7 +17,7 @@ class GuildCreate extends Event {
       .setThumbnail(guild.iconURL())
       .addFields({
         name: "Owner",
-        value: guild.owner.user.tag,
+        value: owner?.tag ?? "No Owner Information",
         inline: true
       })
       .addFields({

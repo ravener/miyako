@@ -9,6 +9,10 @@ class GuildDelete extends Event {
     const channel = this.client.channels.cache.get("454776806869041154");
     if (!channel) return;
 
+    const owner = guild.owner?.user ?? await this.client.users
+      .fetch(guild.ownerID)
+      .catch(() => null);
+
     const embed = this.client.embed()
       .setTitle("Miyako left a server.")
       .setDescription(guild.name)
@@ -16,7 +20,7 @@ class GuildDelete extends Event {
       .setColor(0xFF0000)
       .addFields({
         name: "Owner",
-        value: guild.owner ? guild.owner.user.tag : "Failed to fetch owner information.",
+        value: owner?.tag ?? "Failed to fetch owner information.",
         inline: true
       })
       .addFields({
