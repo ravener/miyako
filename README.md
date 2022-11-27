@@ -12,6 +12,7 @@ $ cd miyako
 $ cp .env.example .env
 $ nano .env # Fill this
 $ npm install
+$ node src/deploy-commands.js # Deploy slash commands.
 $ node src/index.js
 ```
 

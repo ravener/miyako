@@ -51,7 +51,7 @@ class Eval extends Command {
             body: output
           }).then(({ body }) => body.json());
 
-          return ctx.reply(`Output was to long so it was uploaded to hastebin https://hastebin.com/${key}.js `);
+          return ctx.reply(`Output was too long so it was uploaded to hastebin https://hastebin.com/${key}.js `);
         } catch (error) {
           return ctx.reply(`I tried to upload the output to hastebin but encountered this error ${error.name}:${error.message}`);
         }
