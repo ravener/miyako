@@ -22,7 +22,12 @@ class SubReddit extends Command {
   }
 
   async run(ctx, options) {
-    const subredditName = options.getString("subreddit");
+    let subredditName = options.getString("subreddit");
+
+    if (subredditName.startsWith("r/")) {
+      subredditName = subredditName.slice(2);
+    }
+
     const subreddit = await request(`https://www.reddit.com/r/${subredditName}/about.json`)
       .then(({ body }) => body.json())
       .then((body) => {
