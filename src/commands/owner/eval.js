@@ -1,13 +1,13 @@
 const Command = require("../../structures/Command.js");
 const { inspect } = require("util");
 const { getCodeBlock } = require("../../utils/utils.js");
-// const fetch = require("node-fetch");
+const { request } = require("undici");
 
 // These are only to be available in scope of eval for easier access.
 /* eslint-disable no-unused-vars */
-// const utils = require("@utils/utils");
-// const constants = require("@utils/constants");
-// const responses = require("@utils/responses");
+const utils = require("../../utils/utils.js");
+const constants = require("../../utils/constants");
+const responses = require("../../utils/responses");
 // const schema = require("@utils/schema");
 /* eslint-disable no-unused-vars */
 
@@ -46,10 +46,11 @@ class Eval extends Command {
         return ctx.reply(`\`\`\`js\n${output}\n\`\`\``);
       } else {
         try {
-          const { key } = await fetch("https://hastebin.com/documents", {
+          const { key } = await request("https://hastebin.com/documents", {
             method: "POST",
             body: output
-          }).then((res) => res.json());
+          }).then(({ body }) => body.json());
+
           return ctx.reply(`Output was to long so it was uploaded to hastebin https://hastebin.com/${key}.js `);
         } catch (error) {
           return ctx.reply(`I tried to upload the output to hastebin but encountered this error ${error.name}:${error.message}`);
