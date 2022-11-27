@@ -7,8 +7,10 @@ class ReadyEvent extends Event {
     log.info(`Logged in as ${user.tag} (${user.id})`);
     log.info(`Bot is in ${this.client.guilds.cache.size} servers.`);
 
-    // Post bot statistics to top.gg every 5 minutes.
-    this.stats = setInterval(() => this.client.postStats(), 5 * 60 * 1000);
+    if (!this.client.dev) {
+      // Post bot statistics to top.gg every 5 minutes.
+      this.stats = setInterval(() => this.client.postStats(), 300000);
+    }
   }
 }
 
