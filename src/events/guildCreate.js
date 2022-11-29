@@ -7,8 +7,7 @@ class GuildCreate extends Event {
     const channel = this.client.channels.cache.get("454776806869041154");
     if (!channel) return;
 
-    const owner = guild.owner?.user ?? await this.client.users
-      .fetch(guild.ownerID)
+    const owner = await this.client.users.fetch(guild.ownerId)
       .catch(() => null);
 
     const embed = this.client.embed()
