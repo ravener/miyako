@@ -1,4 +1,4 @@
-const { Client, EmbedBuilder, GatewayIntentBits, Partials } = require("discord.js");
+const { Client, EmbedBuilder, GatewayIntentBits, Partials, OAuth2Scopes, PermissionFlagsBits } = require("discord.js");
 const { COLOR } = require("../utils/constants.js");
 const Logger = require("../utils/log.js");
 const CommandStore = require("./CommandStore.js");
@@ -35,6 +35,22 @@ class MiyakoClient extends Client {
       const count = await store.loadFiles();
       this.log.info(`Loaded ${count} ${store.name}`);
     }
+  }
+
+  get invite() {
+    // Generate an invite URL with the minimum permissions.
+    // The commands will warn when more permissions are needed.
+    return this.generateInvite({
+      scopes: [OAuth2Scopes.Bot, OAuth2Scopes.ApplicationsCommands],
+      permissions: [
+        PermissionFlagsBits.SendMessages,
+        PermissionFlagsBits.EmbedLinks,
+        PermissionFlagsBits.AttachFiles,
+        PermissionFlagsBits.AddReactions,
+        PermissionFlagsBits.ViewChannel,
+        PermissionFlagsBits.UseExternalEmojis
+      ]
+    });
   }
 
   embed(user, data = {}) {

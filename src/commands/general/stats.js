@@ -18,7 +18,6 @@ class Stats extends Command {
     // const cmd = Object.entries(this.client.user.settings.commands).sort((x, y) => x[1] < y[1] ? 1 : -1);
     // const mostUsed = cmd.length ? `${cmd[0][0]} (${cmd[0][1]} times)` : "None";
     const uptime = getDuration(client.uptime);
-
     const embed = this.client.embed(this.client.user)
       .setTitle("Miyako - Bot Statistics")
       .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server brought to you by my master Ravener#5796")
@@ -56,7 +55,7 @@ class Stats extends Command {
         value: [
           ":star: [GitHub Repository](https://github.com/ravener/miyako)",
           ":robot: [Upvote me at top.gg](https://top.gg/bot/397796982120382464)",
-          ":envelope_with_arrow: [Invite me to your server](https://discordapp.com/oauth2/authorize?client_id=397796982120382464&permissions=2016537702&scope=bot%20applications.commands)",
+          `:envelope_with_arrow: [Invite me to your server](${client.invite})`,
           ":video_game: [Join our Discord Server](https://discord.gg/mDkMbEh)"
         ].join("\n"),
         inline: true
