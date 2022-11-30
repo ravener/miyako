@@ -22,7 +22,7 @@ class InteractionCreate extends Event {
 
     if (missing.length) {
       await ctx.reply({
-        content: `I need the following permission${plural(missing)} to runnthat command: **${missing.join(", ")}**`
+        content: `I need the following permission${plural(missing)} to run that command: **${missing.join(", ")}**`
       });
 
       return false;
