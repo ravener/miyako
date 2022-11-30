@@ -127,39 +127,6 @@ class Command extends Base {
     return new CommandOptions(options);
   }
 
-  async _run(msg, args) {
-    try {
-      if (this.loading && msg.guild) {
-        await msg.send(this.loading
-          .replace(/{{displayName}}/g, msg.member.displayName)
-          .replace(/{{username}}/g, msg.author.username)
-          .replace(/{{tag}}/g, msg.author.tag)
-          .replace(/{{mention}}/g, msg.member.toString())
-          .replace(/{{guild}}/g, msg.guild.name)
-          .replace(/{{typing}}/g, this.client.constants.typing))
-          .catch(() => null);
-      }
-
-      // Run the check function first.
-      const check = await this.check(msg, args);
-
-      // If the value is falsy, silently fail.
-      if (!check) return;
-
-      // If the value is a string reply it to the user.
-      if (typeof check === "string") return msg.send(check);
-
-      // Run the command.
-      const results = await this.run(msg, args);
- 
-      // If the results is a string reply it to the user.
-      if (typeof results === "string") return msg.send(results);
-    } catch(err) {
-      // Forward errors to commandError event.
-      this.client.emit("commandError", msg, err);
-    }
-  }
-
   /**
    * Verifies that a user is given.
    */
@@ -252,8 +219,8 @@ class Command extends Base {
    * The actual command implementation, must be implemented in a subclass.
    * @abstract
    */
-  async run(msg) {
-    return msg.send(`${this.constructor.name} does not provide a \`run()\` implementation.${msg.author.id !== this.client.constants.ownerID ? " This is a bug, please report this in our server at https://discord.gg/mDkMbEh" : ""}`);
+  async run(ctx) {
+    return ctx.reply(`${this.constructor.name} does not provide a \`run()\` implementation.${!ctx.owner ? " This is a bug, please report this in our server at https://discord.gg/mDkMbEh" : ""}`);
   }
 }
 
