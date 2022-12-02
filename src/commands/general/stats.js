@@ -18,15 +18,19 @@ class Stats extends Command {
     // const cmd = Object.entries(this.client.user.settings.commands).sort((x, y) => x[1] < y[1] ? 1 : -1);
     // const mostUsed = cmd.length ? `${cmd[0][0]} (${cmd[0][1]} times)` : "None";
     const uptime = getDuration(client.uptime);
+    const users = client.guilds.cache
+      .filter(guild => guild.available)
+      .reduce((sum, guild) => sum + guild.memberCount, 0);
+    
     const embed = this.client.embed(this.client.user)
       .setTitle("Miyako - Bot Statistics")
       .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server brought to you by my master Ravener#5796")
       .addFields({
         name: "Bot Statistics",
         value: [
-          `**Guilds:** ${client.guilds.cache.size}`,
-          `**Users:** ${client.guilds.cache.reduce((sum, guild) => sum + (guild.available ? guild.memberCount : 0), 0)}`,
-          `**Channels:** ${client.channels.cache.size}`,
+          `**Guilds:** ${client.guilds.cache.size.toLocaleString()}`,
+          `**Users:** ${users.toLocaleString()}`,
+          `**Channels:** ${client.channels.cache.size.toLocaleString()}`,
           `**Uptime:** ${uptime}`,
           `**Total Memory Usage:** ${(process.memoryUsage().heapTotal / 1024 / 1024).toFixed(2)} MB`,
           `**Memory Usage:** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`
@@ -45,7 +49,7 @@ class Stats extends Command {
         name: "Command Stats",
         value: [
           `**Total Commands:** ${this.store.size}`,
-          `**Commands Ran:** ${this.store.ran}`,
+          `**Commands Ran:** ${this.store.ran.toLocaleString()}`,
           // `**Most Used:** ${mostUsed}`
         ].join("\n"),
         inline: true
