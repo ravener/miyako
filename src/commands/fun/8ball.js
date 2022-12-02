@@ -47,7 +47,7 @@ class Eightball extends Command {
     const question = options.getString("question");
 
     await ctx.deferReply();
-    await setTimeout(1500);
+    await setTimeout(1000 + Math.floor(Math.random() * 2000));
 
     return ctx.editReply(stripIndents`
       **Question:** ${question}
