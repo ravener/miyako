@@ -7,21 +7,13 @@ class EventStore extends Store {
 
   set(event) {
     super.set(event);
-
-    // Add a listener if it's not a raw event.
-    // Raw events are handled by events/raw.js
-    if (!event.raw) {
-      this.client.on(event.name, event._run.bind(event));
-    }
-
+    this.client.on(event.name, event._run.bind(event));
     return event;
   }
 
   clear() {
     // Remove the event handlers before clearing.
-    for (const event of this.values()) {
-      this.delete(event.name);
-    }
+    for (const event of this.values()) this.delete(event.name);
   }
 
   delete(name) {
