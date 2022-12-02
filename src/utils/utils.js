@@ -50,10 +50,10 @@ class Utils {
     const days = Math.floor((time / (1000 * 60 * 60 * 24)) % 7);
 
     return [
-      `${days} Day${days > 1 ? "s" : ""}`,
-      `${hours} Hour${hours > 1 ? "s" : ""}`,
-      `${minutes} Minute${minutes > 1 ? "s" : ""}`,
-      `${seconds} Second${seconds > 1 ? "s" : ""}`
+      `${days} day${days > 1 ? "s" : ""}`,
+      `${hours} hour${hours > 1 ? "s" : ""}`,
+      `${minutes} minute${minutes > 1 ? "s" : ""}`,
+      `${seconds} second${seconds > 1 ? "s" : ""}`
     ].filter((time) => !time.startsWith("0")).join(", ");
   }
 
