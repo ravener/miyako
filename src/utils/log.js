@@ -1,4 +1,4 @@
-
+const { inspect } = require("node:util");
 
 const modes = [
   { name: "trace", color: "\x1b[34m", },
@@ -31,6 +31,16 @@ class Logger {
     return this;
   }
 
+  inspect(data) {
+    if (Array.isArray(data)) {
+      return data.map(data => this.inspect(data)).join("\n");
+    } else if (typeof data === "object") {
+      return inspect(data, { depth: 0, colors: true });
+    }
+
+    return String(data);
+  }
+
   log(level, name, color, ...args) {
     if (level < this.level) return;
 
@@ -40,7 +50,7 @@ class Logger {
       .map(date => date.toString().padStart(2, "0"))
       .join(":");
     
-    console.log(`${color}[${tag} ${time}]\x1b[0m`, ...args);
+    console.log(`${color}[${tag} ${time}]\x1b[0m`, this.inspect(args));
     return this;
   }
 }
