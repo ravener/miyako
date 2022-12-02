@@ -44,17 +44,23 @@ class MessageCreate extends Event {
     const alias = args.shift().toLowerCase();
 
     const command = this.client.commands.get(alias);
-    if (!command) return this.closestCommand(message, alias);
-    if (!command.modes.includes("text")) return;
-
     const ctx = new CommandContext(command, {
       message, flags, content,
       prefixLength, alias, args
     });
 
+    if (!command) return this.closestCommand(ctx, alias);
+    if (!command.modes.includes("text")) return;
+
     if (command.ownerOnly && !ctx.owner) {
       return ctx.reply({
         content: "This command can only be used by the owner."
+      });
+    }
+
+    if (command.guildOnly && !ctx.guild) {
+      return ctx.reply({
+        content: "Ba-baka! What do you think you're doing in my DMs? That command can only be used in a server!"
       });
     }
 
@@ -95,8 +101,8 @@ class MessageCreate extends Event {
     return true;
   }
 
-  closestCommand(msg, cmd) {
-    const commands = this.client.commands.usableCommands(msg);
+  closestCommand(ctx, cmd) {
+    const commands = this.client.commands.usableCommands(ctx.message);
     const aliases = commands.map(command => command.aliases).flat();
     const arr = [...commands.map(command => command.name), ...aliases];
 
@@ -114,7 +120,7 @@ class MessageCreate extends Event {
     if (minDistance > 2) return;
 
     const match = arr[minIndex];
-    return msg.channel.send(`|\`❔\`| Did you mean \`${match}\`?`);
+    return ctx.reply(`|\`❔\`| Did you mean \`${match}\`?`);
   }
 }
 
