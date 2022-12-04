@@ -6,7 +6,7 @@ class Ping extends Command {
   constructor(...args) {
     super(...args, {
       description: "Pong! Checks Bot latency.",
-      modes: ["slash", "text"]
+      modes: ["text"]
     });
   }
 
