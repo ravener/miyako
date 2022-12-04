@@ -1,8 +1,7 @@
-const { promisify } = require("util");
+const { promisify } = require("node:util");
 const suffixes = ["Bytes", "KB", "MB", "GB"];
-
-const { promises: { lstat, readdir } } = require("fs");
-const path = require("path");
+const { promises: { lstat, readdir } } = require("node:fs");
+const path = require("node:path");
 
 /**
  * Static class with utilities used throughout the bot.
@@ -54,26 +53,7 @@ class Utils {
       `${hours} hour${hours > 1 ? "s" : ""}`,
       `${minutes} minute${minutes > 1 ? "s" : ""}`,
       `${seconds} second${seconds > 1 ? "s" : ""}`
-    ].filter((time) => !time.startsWith("0")).join(", ");
-  }
-
-  // Deep search an embed if it contains a given string.
-  static embedContains(embed, str) {
-    str = str.toLowerCase();
-
-    if (embed.title && embed.title.toLowerCase().includes(str)) return true;
-    if (embed.description && embed.description.toLowerCase().includes(str)) return true;
-    if (embed.footer && embed.footer.text && embed.footer.text.toLowerCase().includes(str)) return true;
-    if (embed.author && embed.author.name && embed.author.name.toLowerCase().includes(str)) return true;
-
-    if (embed.fields && embed.fields.length) {
-      for (const field of embed.fields) {
-        if (field.name && field.name.toLowerCase().includes(str)) return true;
-        if (field.value && field.value.toLowerCase().includes(str)) return true;
-      }
-    }
-
-    return false;
+    ].filter(time => !time.startsWith("0")).join(", ");
   }
 
   // Tries to find an image from a message.
@@ -122,5 +102,4 @@ class Utils {
 }
 
 Utils.sleep = promisify(setTimeout);
-
 module.exports = Utils;
