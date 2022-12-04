@@ -35,7 +35,9 @@ class NPMPkgSize extends Command {
         `❯ **Publish Size:** ${getBytes(publishSize)}`,
         `❯ **Install Size:** ${getBytes(installSize)}`
       ].join("\n"))
-      .setFooter("Powered by packagephobia.com");
+      .setFooter({
+        text: "Powered by packagephobia.com"
+      });
     
     return ctx.reply({ embeds: [embed] });
   }
