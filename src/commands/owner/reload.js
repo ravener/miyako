@@ -38,7 +38,7 @@ class Reload extends Command {
       const reloaded = await piece.reload();
       return ctx.reply(random(responses.reloadSuccess)
         .replace(/{{command}}/g, reloaded.name));
-    } catch(err) {
+    } catch (err) {
       piece.store.set(piece);
       return ctx.reply(random(responses.reloadErr)
         .replace(/{{command}}/g, piece.name)

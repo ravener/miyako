@@ -10,7 +10,7 @@ class Coliru extends Command {
       usage: "<code>",
       modes: ["text"]
     });
-    
+
     this.commands = {
       cpp: "g++ main.cpp -pthread -pedantic -Wall -Wextra && ./a.out",
       c: "mv main.cpp main.c && gcc main.c -pedantic -O2 -pthread -Wall -Wextra && ./a.out",
@@ -29,12 +29,12 @@ class Coliru extends Command {
       ["hs", "haskell"],
       ["sh", "shell"]
     ];
-    
+
     for (const [alias, name] of aliases) {
       this.commands[alias] = this.commands[name];
     }
   }
-  
+
   async run(ctx) {
     const { lang, code } = getCodeBlock(ctx.rawArgs);
 
@@ -60,7 +60,7 @@ class Coliru extends Command {
 
     return this.post(ctx, { cmd, src });
   }
-  
+
   async post(ctx, { cmd, src }) {
     const id = await request("http://coliru.stacked-crooked.com/share", {
       method: "POST",
@@ -69,7 +69,7 @@ class Coliru extends Command {
       .then(({ body }) => body.text());
 
     return ctx.reply(`Output too long. View the results here: https://coliru.stacked-crooked.com/a/${id}`);
-  }  
+  }
 }
 
 module.exports = Coliru;

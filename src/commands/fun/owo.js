@@ -29,7 +29,7 @@ class OwO extends Command {
 
     const { owo } = await request(`https://nekos.life/api/v2/owoify?text=${encodeURIComponent(text)}`)
       .then(({ body }) => body.json());
-    
+
     return ctx.reply(owo);
   }
 }

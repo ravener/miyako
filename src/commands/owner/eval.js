@@ -34,6 +34,7 @@ class Eval extends Command {
     const filter = new RegExp(`${token}|${rev}`, "g");
 
     try {
+      // eslint-disable-next-line no-eval
       let output = eval(code);
       if (output instanceof Promise || (Boolean(output) &&
         typeof output.then === "function" && typeof output.catch === "function")) output = await output;

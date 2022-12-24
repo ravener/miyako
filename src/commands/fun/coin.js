@@ -11,7 +11,7 @@ class Coin extends Command {
   }
 
   async run(ctx) {
-    const flipped = random(["Heads", "Tails"]); 
+    const flipped = random(["Heads", "Tails"]);
     return ctx.reply(`The coin landed on \`${flipped}\``);
   }
 }

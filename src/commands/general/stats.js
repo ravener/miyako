@@ -21,7 +21,7 @@ class Stats extends Command {
     const users = client.guilds.cache
       .filter(guild => guild.available)
       .reduce((sum, guild) => sum + guild.memberCount, 0);
-    
+
     const embed = this.client.embed(this.client.user)
       .setTitle("Miyako - Bot Statistics")
       .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server brought to you by my master Ravener#5796")
@@ -49,7 +49,7 @@ class Stats extends Command {
         name: "Command Stats",
         value: [
           `**Total Commands:** ${this.store.size}`,
-          `**Commands Ran:** ${this.store.ran.toLocaleString()}`,
+          `**Commands Ran:** ${this.store.ran.toLocaleString()}`
           // `**Most Used:** ${mostUsed}`
         ].join("\n"),
         inline: true

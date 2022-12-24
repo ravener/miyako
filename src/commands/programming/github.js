@@ -33,7 +33,7 @@ class GitHub extends Command {
       headers: { "User-Agent": "miyako https://github.com/ravener/miyako" }
     })
       .then(({ body, statusCode }) => statusCode === 200 && body.json())
-      .catch(() => null)
+      .catch(() => null);
 
     if (!body) return ctx.reply("Could not fetch that repo, are you sure it exists?");
 

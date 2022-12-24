@@ -25,7 +25,7 @@ class GuildCreate extends Event {
         inline: true
       })
       .setFooter({ text: guild.id });
-    
+
     return channel.send({ embeds: [embed] }).catch(() => null);
   }
 }

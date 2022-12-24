@@ -10,7 +10,7 @@ class CatFact extends Command {
       cost: 10
     });
   }
-  
+
   async run(ctx) {
     const { fact } = await request("https://catfact.ninja/fact")
       .then(({ body }) => body.json());

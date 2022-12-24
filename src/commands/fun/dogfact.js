@@ -9,7 +9,7 @@ class DogFact extends Command {
       cooldown: 5
     });
   }
-  
+
   async run(ctx) {
     const fact = await request("https://dog-api.kinduff.com/api/facts?number=1")
       .then(({ body }) => body.json())

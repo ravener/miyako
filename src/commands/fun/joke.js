@@ -9,7 +9,7 @@ class Joke extends Command {
       aliases: ["jk"]
     });
   }
-  
+
   async run(ctx) {
     const body = await request("https://sv443.net/jokeapi/v2/joke/Any")
       .then(({ body }) => body.json());
@@ -19,7 +19,7 @@ class Joke extends Command {
     }
 
     const flags = Object.entries(body.flags).filter((x) => x[1]).map((x) => x[0]).join(", ");
-    
+
     const embed = this.client.embed(ctx.author)
       .setTitle(`${body.category}${flags ? ` (${flags})` : ""}`)
       .setDescription(body.type === "single" ? `${body.joke}` : `**${body.setup}**\n*${body.delivery}*`);

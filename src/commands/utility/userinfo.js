@@ -16,7 +16,7 @@ class UserInfo extends Command {
       ]
     });
   }
-  
+
   async run(ctx, options) {
     const member = options.getMember("user") ?? ctx.member;
 

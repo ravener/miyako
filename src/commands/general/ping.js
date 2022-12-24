@@ -10,7 +10,7 @@ class Ping extends Command {
     });
   }
 
-  async run(ctx) { 
+  async run(ctx) {
     const msg = await ctx.reply({
       content: "Ping?",
       fetchReply: true

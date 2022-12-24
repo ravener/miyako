@@ -15,7 +15,7 @@ class Utils {
     return permissions.missing(target)
       .map(perms => perms.replace(/([a-z])([A-Z])/g, "$1 $2"));
   }
-  
+
   static toProperCase(str) {
     return str.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
   }
@@ -31,7 +31,7 @@ class Utils {
 
     return arrayOrLength > 1 ? "s" : "";
   }
-  
+
   static getBytes(bytes) {
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     return (!bytes && "0 Bytes") || `${(bytes / Math.pow(1024, i)).toFixed(2)} ${suffixes[i]}`;

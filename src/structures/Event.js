@@ -3,7 +3,7 @@ const Base = require("./Base.js");
 class Event extends Base {
   async _run(...args) {
     if (!this.enabled) return;
-    
+
     try {
       await this.run(...args);
     } catch (err) {

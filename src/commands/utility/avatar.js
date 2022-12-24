@@ -27,7 +27,7 @@ class Avatar extends Command {
         dynamic: true
       }));
 
-    return ctx.reply({ embeds: [embed] })
+    return ctx.reply({ embeds: [embed] });
   }
 }
 

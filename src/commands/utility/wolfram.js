@@ -19,7 +19,7 @@ class Wolfram extends Command {
       ]
     });
   }
-  
+
   async run(ctx, options) {
     // Allow users to trigger this in a fancy way using @Miyako What time is it?
     // If they invoke it with the "what"/"where"/"when"/"who"/"why" alias, we must also treat it as an argument.
@@ -33,11 +33,11 @@ class Wolfram extends Command {
       ["appid", process.env.WOLFRAM],
       ["output", "json"]
     ]);
-    
+
     const pods = await request(url)
       .then(({ body }) => body.json())
       .then((body) => body.queryresult.pods);
-    
+
     if (!pods || pods.error) return ctx.reply("Couldn't find an answer to that question!");
     const description = pods[1].subpods[0].plaintext.substring(0, 1980);
 

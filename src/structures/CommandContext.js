@@ -7,7 +7,7 @@ class CommandContext {
     this.interaction = interaction;
     this.lastReply = null;
 
-    if (message) {
+    if (message && command) {
       this.content = content;
       this.prefixLength = prefixLength;
       this.flags = flags;
@@ -48,6 +48,10 @@ class CommandContext {
     return this.interaction?.member ?? this.message.member;
   }
 
+  get me() {
+    return this.guild?.members.me;
+  }
+
   get channel() {
     return this.interaction?.channel ?? this.message.channel;
   }
@@ -62,6 +66,10 @@ class CommandContext {
 
   get nsfw() {
     return this.guild ? this.channel.nsfw : true;
+  }
+
+  get displayName() {
+    return this.member?.displayName ?? this.author.username;
   }
 
   async reply(options) {

@@ -16,7 +16,7 @@ class Enchant extends Command {
       ]
     });
   }
-  
+
   run(ctx, options) {
     const text = options.getString("text");
 

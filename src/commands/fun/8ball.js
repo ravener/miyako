@@ -3,7 +3,7 @@ const { setTimeout } = require("node:timers/promises");
 const { random } = require("../../utils/utils.js");
 const { stripIndents } = require("common-tags");
 
-class Eightball extends Command {  
+class Eightball extends Command {
   constructor(...args) {
     super(...args, {
       description: "Ask the magic 8ball anything.",
@@ -18,7 +18,7 @@ class Eightball extends Command {
         }
       ]
     });
-   
+
     this.responses = [
       "It is certain",
       "It is decidedly so",
@@ -42,7 +42,7 @@ class Eightball extends Command {
       "Very doubtful"
     ];
   }
-  
+
   async run(ctx, options) {
     const question = options.getString("question");
 

@@ -11,7 +11,7 @@ class Meme extends Command {
       cost: 5
     });
   }
-  
+
   async run(ctx) {
     const { data: { children } } = await request("https://www.reddit.com/r/dankmemes/top.json?sort=top&t=day&limit=500")
       .then(({ body }) => body.json());

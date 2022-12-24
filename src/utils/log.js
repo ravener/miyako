@@ -1,12 +1,12 @@
 const { inspect } = require("node:util");
 
 const modes = [
-  { name: "trace", color: "\x1b[34m", },
-  { name: "debug", color: "\x1b[36m", },
-  { name: "info",  color: "\x1b[32m", },
-  { name: "warn",  color: "\x1b[33m", },
-  { name: "error", color: "\x1b[31m", },
-  { name: "fatal", color: "\x1b[35m", },
+  { name: "trace", color: "\x1b[34m" },
+  { name: "debug", color: "\x1b[36m" },
+  { name: "info",  color: "\x1b[32m" },
+  { name: "warn",  color: "\x1b[33m" },
+  { name: "error", color: "\x1b[31m" },
+  { name: "fatal", color: "\x1b[35m" }
 ];
 
 class Logger {
@@ -49,7 +49,7 @@ class Logger {
     const time = [dt.getHours(), dt.getMinutes(), dt.getSeconds()]
       .map(date => date.toString().padStart(2, "0"))
       .join(":");
-    
+
     console.log(`${color}[${tag} ${time}]\x1b[0m`, this.inspect(args));
     return this;
   }

@@ -22,7 +22,7 @@ class Invite extends Command {
         • ${link("Upvote Miyako", "https://top.gg/bot/397796982120382464/vote")}
         • ${link("Start on GitHub", "https://github.com/ravener/miyako")}`);
 
-    return ctx.reply({ embeds: [embed] })
+    return ctx.reply({ embeds: [embed] });
   }
 }
 

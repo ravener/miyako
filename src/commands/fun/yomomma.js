@@ -17,7 +17,7 @@ class YoMomma extends Command {
       ]
     });
   }
-  
+
   async run(ctx, options) {
     const user = options.getUser("user") ?? ctx.author;
 

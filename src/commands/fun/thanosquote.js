@@ -6,7 +6,7 @@ class ThanosQuote extends Command {
       description: "Gives a random quote from Thanos."
     });
   }
-  
+
   async run(ctx) {
     return ctx.reply(quotes[Math.floor(Math.random() * quotes.length)]);
   }

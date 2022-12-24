@@ -11,7 +11,7 @@ class Base {
   reload() {
     return this.store.load(this.file.path);
   }
-  
+
   enable() {
     this.enabled = true;
     return this;

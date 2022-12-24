@@ -19,12 +19,12 @@ class NPMPkgSize extends Command {
       ]
     });
   }
-  
+
   async run(ctx, options) {
     const name = options.getString("package");
     const { publishSize, installSize } = await request(`https://packagephobia.com/api.json?p=${encodeURIComponent(name)}`)
       .then(({ body }) => body.json());
-    
+
     if (!publishSize && !installSize) {
       return ctx.reply("That package doesn't exist.");
     }
@@ -38,7 +38,7 @@ class NPMPkgSize extends Command {
       .setFooter({
         text: "Powered by packagephobia.com"
       });
-    
+
     return ctx.reply({ embeds: [embed] });
   }
 }

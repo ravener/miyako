@@ -17,7 +17,7 @@ class Wikipedia extends Command {
       ]
     });
   }
-  
+
   async run(ctx, options) {
     const query = options.getString("query");
 
@@ -28,7 +28,7 @@ class Wikipedia extends Command {
       .catch(() => {
         throw "I couldn't find a wikipedia article with that title!";
       });
-    
+
     if (!article.content_urls) {
       throw "I couldn't find a wikipedia article with that title!";
     }

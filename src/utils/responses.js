@@ -47,7 +47,7 @@ exports.levelUpMessages = [
   "You're only level **{{level}}**? You disgust me!",
   "How can you be level **{{level}}** y-you baka!",
   "B-baka! You're at level **{{level}}**, now go be free! D-dummy...",
-  "You're definitely level **{{level}}** you baka!",
+  "You're definitely level **{{level}}** you baka!"
 ];
 
 // Commands
@@ -159,3 +159,22 @@ exports.notNSFWChannel = [
 exports.guildOnlyCommand = [
 
 ];
+
+const userCooldown = [
+  "This again? I told you to wait **{{time}}** before using that command again!",
+  "Senpai, you are gonna make me m-mad! You can run this command again after **{{time}}**",
+  "B-baka! You already ran that command, wait for **{{time}}** before using it again."
+];
+
+const globalCooldown = [
+  "Seems like that command is popular right now so you need to wait **{{time}}** for your turn.",
+  "H-hey! Everybody is using that command right now so you need to wait **{{time}}** for your turn.",
+  "That is a very busy command right now, wait **{{time}}** for your turn."
+];
+
+exports.cooldown = {
+  user: userCooldown,
+  guild: globalCooldown,
+  channel: globalCooldown,
+  global: globalCooldown
+};

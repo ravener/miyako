@@ -5,7 +5,7 @@ class Deploy extends Command {
     super(...args, {
       description: "Deploys slash commands.",
       ownerOnly: true,
-      modes: ["text"] 
+      modes: ["text"]
     });
   }
 

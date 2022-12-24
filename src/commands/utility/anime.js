@@ -35,7 +35,7 @@ class Anime extends Command {
 
     const res = data[page - 1];
     if (!res) return ctx.reply(`Invalid page ${page} there is only ${data.length} pages.`);
-    
+
     const embed = this.client.embed(ctx.author)
       .setTitle(res.attributes.titles.en ? `${res.attributes.titles.en} (Japanese: ${res.attributes.titles.en_jp})` : res.attributes.titles.en_jp)
       .setDescription(res.attributes.synopsis)
