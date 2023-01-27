@@ -15,7 +15,7 @@ class RateLimiter {
   }
 
   setTimeout(command, bucket, cooldown) {
-    setTimeout(() => {
+    return setTimeout(() => {
       const ratelimits = this.buckets.get(bucket);
       if (!ratelimits) return;
       delete ratelimits[command.name];
