@@ -4,6 +4,7 @@ const Logger = require("../utils/log.js");
 const CommandStore = require("./CommandStore.js");
 const EventStore = require("./EventStore.js");
 const { request } = require("undici");
+const imgapi = require("img-api");
 
 class MiyakoClient extends Client {
   constructor() {
@@ -22,6 +23,11 @@ class MiyakoClient extends Client {
     this.commands = new CommandStore(this);
     this.events = new EventStore(this);
     this.lastStats = null;
+
+    this.img = new imgapi.Client({
+      port: process.env.IMGAPI_PORT,
+      host: process.env.IMGAPI_HOST
+    });
 
     this.once("ready", () => {
       this.emit("miyakoReady");
