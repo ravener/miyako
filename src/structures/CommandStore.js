@@ -1,10 +1,10 @@
-const Store = require("./Store.js");
-const { OWNER_ID } = require("../utils/constants.js");
-const CommandHandler = require("./CommandHandler.js");
+import Store from './Store.js';
+import { OWNER_ID } from '../utils/constants.js';
+import CommandHandler from './CommandHandler.js';
 
 class CommandStore extends Store {
   constructor(client) {
-    super(client, "commands");
+    super(client, 'commands');
 
     this.aliases = new Map();
     this.handler = new CommandHandler(client);
@@ -65,4 +65,4 @@ class CommandStore extends Store {
   }
 }
 
-module.exports = CommandStore;
+export default CommandStore;

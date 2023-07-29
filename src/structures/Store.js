@@ -1,5 +1,5 @@
-const { join, dirname, parse, relative } = require("node:path");
-const { walk } = require("../utils/utils.js");
+import { join, dirname, parse, relative } from 'node:path';
+import { walk } from '../utils/utils.js';
 
 class Store extends Map {
   constructor(client, name) {
@@ -7,7 +7,7 @@ class Store extends Map {
 
     this.client = client;
     this.name = name;
-    this.dir = join(dirname(require.main.filename), name);
+    this.dir = join(client.base, name);
   }
 
   set(item) {
@@ -28,21 +28,20 @@ class Store extends Map {
   /**
    * Loads a single file.
    */
-  load(file) {
+  async load(file, reload = false) {
     const filepath = join(this.dir, file);
-    const Class = require(filepath);
+    const module = await import(filepath + (reload ? `?t=${Date.now()}` : ''));
 
-    if (typeof Class !== "function" || typeof Class.constructor !== "function") {
-      throw new TypeError(`The file at ${filepath} could not be loaded because it does not export a class.`);
+    if (typeof module.default !== 'function' || typeof module.default.constructor !== 'function') {
+      throw new TypeError(`The file at '${filepath}' could not be loaded because it does not export a class.`);
     }
 
-    const item = this.set(new Class(this.client, this, {
+    const item = this.set(new module.default(this.client, this, {
       path: file,
       name: parse(filepath).name,
       dir: dirname(filepath)
     }));
 
-    delete require.cache[filepath];
     return item;
   }
 
@@ -50,16 +49,16 @@ class Store extends Map {
    * Loads all files for this store type.
    * @returns {Number} How many items were loaded.
    */
-  async loadFiles() {
-    const filter = (stats, file) => stats.isFile() && file.endsWith(".js");
+  async loadFiles(reload = false) {
+    const filter = (stats, file) => stats.isFile() && file.endsWith('.js');
     const files = await walk(this.dir, { filter });
 
     for (const file of files.keys()) {
-      this.load(relative(this.dir, file));
+      await this.load(relative(this.dir, file), reload);
     }
 
     return this.size;
   }
 }
 
-module.exports = Store;
+export default Store;

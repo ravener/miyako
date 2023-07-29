@@ -6,10 +6,10 @@ class RateLimiter {
 
   getBucket(ctx, command) {
     switch (command.bucket) {
-      case "user": return ctx.author.id;
-      case "guild": return ctx.guild?.id ?? "global";
-      case "channel": return ctx.channel.id;
-      case "global": return "global";
+      case 'user': return ctx.author.id;
+      case 'guild': return ctx.guild?.id ?? 'global';
+      case 'channel': return ctx.channel.id;
+      case 'global': return 'global';
       default: throw new TypeError(`Invalid bucket '${command.bucket}'`);
     }
   }
@@ -20,7 +20,7 @@ class RateLimiter {
       if (!ratelimits) return;
       delete ratelimits[command.name];
 
-      if (bucket !== "global" && Object.keys(ratelimits).length === 0) {
+      if (bucket !== 'global' && Object.keys(ratelimits).length === 0) {
         this.buckets.delete(bucket);
       }
     }, cooldown);
@@ -54,4 +54,4 @@ class RateLimiter {
   }
 }
 
-module.exports = RateLimiter;
+export default RateLimiter;

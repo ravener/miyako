@@ -1,27 +1,27 @@
-const Command = require("../../structures/Command.js");
+import Command from '../../structures/Command.js';
 
 class Help extends Command {
   constructor(...args) {
     super(...args, {
-      description: "View help for commands.",
-      usage: "help [command]",
+      description: 'View help for commands.',
+      usage: 'help [command]',
       options: [
         {
-          name: "command",
-          description: "Get information about a command.",
-          type: "string"
+          name: 'command',
+          description: 'Get information about a command.',
+          type: 'string'
         }
       ]
     });
   }
 
   async run(ctx, options) {
-    const command = options.getString("command");
+    const command = options.getString('command');
 
     if (command) {
       const cmd = this.store.get(command);
       if (!cmd) {
-        return ctx.reply("That command does not exist! Why would you think I'd have such a thing?");
+        return ctx.reply('That command does not exist! Why would you think I\'d have such a thing?');
       }
 
       /* let cost = msg.tr("NONE");
@@ -38,7 +38,7 @@ class Help extends Command {
       }*/
 
       if (cmd.nsfw && !ctx.nsfw) {
-        return ctx.reply("Baka! You can't view details of that command in a non NSFW channel.");
+        return ctx.reply('Baka! You can\'t view details of that command in a non NSFW channel.');
       }
 
       const embed = this.client.embed(this.client.user)
@@ -46,12 +46,12 @@ class Help extends Command {
         .setDescription([
           `**Description:** ${cmd.description}`,
           `**Category:** ${cmd.category}`,
-          `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join(", ") : "None"}`,
-          `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + " seconds" : "None"}`,
+          `**Aliases:** ${cmd.aliases.length ? cmd.aliases.join(', ') : 'None'}`,
+          `**Cooldown:** ${cmd.cooldown ? cmd.cooldown + ' seconds' : 'None'}`,
           `**Usage:** @Miyako ${cmd.usage}`,
           // `**Cost:** ${cost}`,
           `**Extended Help:** ${cmd.extendedHelp}`
-        ].join("\n"));
+        ].join('\n'));
 
       return ctx.reply({ embeds: [embed] });
     }
@@ -71,10 +71,10 @@ class Help extends Command {
     }
 
     const embed = this.client.embed(this.client.user)
-      .setTitle("Help - Commands")
-      .setDescription("Join our [Discord Server](https://discord.gg/mDkMbEh) for support and updates!")
+      .setTitle('Help - Commands')
+      .setDescription('Join our [Discord Server](https://discord.gg/mDkMbEh) for support and updates!')
       .setFooter({
-        text: "For more information about a command run @Miyako help <command>"
+        text: 'For more information about a command run @Miyako help <command>'
       });
 
     // Sort the categories alphabetically.
@@ -85,8 +85,8 @@ class Help extends Command {
       // if (category === "Social" && msg.guild && !msg.guild.settings.social) continue;
       embed.addFields({
         name: category,
-        value: map[category].join(", "),
-        inline: true
+        value: map[category].join(', '),
+        inline: false
       });
     }
 
@@ -94,4 +94,4 @@ class Help extends Command {
   }
 }
 
-module.exports = Help;
+export default Help;

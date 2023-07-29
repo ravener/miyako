@@ -17,4 +17,4 @@ class CommandOptions {
   }
 }
 
-module.exports = CommandOptions;
+export default CommandOptions;

@@ -1,33 +1,33 @@
-const Command = require("../../structures/Command.js");
-const { request } = require("undici");
-const { getCodeBlock } = require("../../utils/utils.js");
+import Command from '../../structures/Command.js';
+import { request } from 'undici';
+import { getCodeBlock } from '../../utils/utils.js';
 
 class Coliru extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Compiles code through coliru API",
+      description: 'Compiles code through coliru API',
       cooldown: 5,
-      usage: "<code>",
-      modes: ["text"]
+      usage: '<code>',
+      modes: ['text']
     });
 
     this.commands = {
-      cpp: "g++ main.cpp -pthread -pedantic -Wall -Wextra && ./a.out",
-      c: "mv main.cpp main.c && gcc main.c -pedantic -O2 -pthread -Wall -Wextra && ./a.out",
-      ruby: "ruby main.cpp",
-      lua: "lua main.cpp",
-      python: "python main.cpp",
-      haskell: "runhaskell main.cpp",
-      bash: "bash main.cpp",
-      shell: "sh main.cpp"
+      cpp: 'g++ main.cpp -pthread -pedantic -Wall -Wextra && ./a.out',
+      c: 'mv main.cpp main.c && gcc main.c -pedantic -O2 -pthread -Wall -Wextra && ./a.out',
+      ruby: 'ruby main.cpp',
+      lua: 'lua main.cpp',
+      python: 'python main.cpp',
+      haskell: 'runhaskell main.cpp',
+      bash: 'bash main.cpp',
+      shell: 'sh main.cpp'
     };
 
     const aliases = [
-      ["c++", "cpp"],
-      ["rb", "ruby"],
-      ["py", "python"],
-      ["hs", "haskell"],
-      ["sh", "shell"]
+      ['c++', 'cpp'],
+      ['rb', 'ruby'],
+      ['py', 'python'],
+      ['hs', 'haskell'],
+      ['sh', 'shell']
     ];
 
     for (const [alias, name] of aliases) {
@@ -39,17 +39,17 @@ class Coliru extends Command {
     const { lang, code } = getCodeBlock(ctx.rawArgs);
 
     if (!lang) {
-      throw "Usage: coliru \\`\\`\\`lang\nCode\n\\`\\`\\`\nCodeBlock language will be used to determine how to compile the code.";
+      throw 'Usage: coliru \\`\\`\\`lang\nCode\n\\`\\`\\`\nCodeBlock language will be used to determine how to compile the code.';
     }
 
     if (!this.commands[lang]) {
-      throw `Invalid Language, supported ones are: **${Object.keys(this.commands).join(", ")}**`;
+      throw `Invalid Language, supported ones are: **${Object.keys(this.commands).join(', ')}**`;
     }
 
     const cmd = this.commands[lang];
     const src = code;
-    const res = await request("http://coliru.stacked-crooked.com/compile", {
-      method: "POST",
+    const res = await request('http://coliru.stacked-crooked.com/compile', {
+      method: 'POST',
       body: JSON.stringify({ cmd, src })
     })
       .then(({ body }) => body.text());
@@ -62,8 +62,8 @@ class Coliru extends Command {
   }
 
   async post(ctx, { cmd, src }) {
-    const id = await request("http://coliru.stacked-crooked.com/share", {
-      method: "POST",
+    const id = await request('http://coliru.stacked-crooked.com/share', {
+      method: 'POST',
       body: JSON.stringify({ cmd, src })
     })
       .then(({ body }) => body.text());
@@ -72,4 +72,4 @@ class Coliru extends Command {
   }
 }
 
-module.exports = Coliru;
+export default Coliru;

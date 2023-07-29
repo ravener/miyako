@@ -1,6 +1,7 @@
-require("dotenv").config();
+import 'dotenv/config';
+import MiyakoClient from './structures/MiyakoClient.js';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 
-const MiyakoClient = require("./structures/MiyakoClient.js");
-
-const client = new MiyakoClient();
+const client = new MiyakoClient(fileURLToPath(dirname(import.meta.url)));
 client.login();

@@ -1,13 +1,13 @@
-const Command = require("../../structures/Command.js");
-const { version } = require("discord.js");
-const { getDuration } = require("../../utils/utils.js");
+import Command from '../../structures/Command.js';
+import { version } from 'discord.js';
+import { getDuration } from '../../utils/utils.js';
 
 class Stats extends Command {
   constructor(...args) {
     super(...args, {
-      description: "View bot statistics and information.",
-      aliases: ["info"],
-      modes: ["text"]
+      description: 'View bot statistics and information.',
+      aliases: ['info'],
+      modes: ['text']
     });
   }
 
@@ -23,10 +23,10 @@ class Stats extends Command {
       .reduce((sum, guild) => sum + guild.memberCount, 0);
 
     const embed = this.client.embed(this.client.user)
-      .setTitle("Miyako - Bot Statistics")
-      .setDescription("Hi, I'm Miyako. The all-in-one entertainment bot for your server brought to you by my master Ravener#5796")
+      .setTitle('Miyako - Bot Statistics')
+      .setDescription('Hi, I\'m Miyako. The all-in-one entertainment bot for your server brought to you by my master **_ravener**')
       .addFields({
-        name: "Bot Statistics",
+        name: 'Bot Statistics',
         value: [
           `**Guilds:** ${client.guilds.cache.size.toLocaleString()}`,
           `**Users:** ${users.toLocaleString()}`,
@@ -34,39 +34,39 @@ class Stats extends Command {
           `**Uptime:** ${uptime}`,
           `**Total Memory Usage:** ${(process.memoryUsage().heapTotal / 1024 / 1024).toFixed(2)} MB`,
           `**Memory Usage:** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`
-        ].join("\n"),
-        inline: true
+        ].join('\n'),
+        inline: false
       })
       .addFields({
-        name: "Versions",
+        name: 'Versions',
         value: [
           `**Node.js Version:** ${process.version}`,
           `**Discord.js Version:** v${version}`
-        ].join("\n"),
-        inline: true
+        ].join('\n'),
+        inline: false
       })
       .addFields({
-        name: "Command Stats",
+        name: 'Command Stats',
         value: [
           `**Total Commands:** ${this.store.size}`,
           `**Commands Ran:** ${this.store.ran.toLocaleString()}`
           // `**Most Used:** ${mostUsed}`
-        ].join("\n"),
-        inline: true
+        ].join('\n'),
+        inline: false
       })
       .addFields({
-        name: "Links",
+        name: 'Links',
         value: [
-          ":star: [GitHub Repository](https://github.com/ravener/miyako)",
-          ":robot: [Upvote me at top.gg](https://top.gg/bot/397796982120382464)",
+          ':star: [GitHub Repository](https://github.com/ravener/miyako)',
+          ':robot: [Upvote me at top.gg](https://top.gg/bot/397796982120382464)',
           `:envelope_with_arrow: [Invite me to your server](${client.invite})`,
-          ":video_game: [Join our Discord Server](https://discord.gg/mDkMbEh)"
-        ].join("\n"),
-        inline: true
+          ':video_game: [Join our Discord Server](https://discord.gg/mDkMbEh)'
+        ].join('\n'),
+        inline: false
       });
 
     return ctx.reply({ embeds: [embed] });
   }
 }
 
-module.exports = Stats;
+export default Stats;

@@ -1,14 +1,19 @@
 {
     "env": {
-        "commonjs": true,
+        "commonjs": false,
         "es2021": true,
         "node": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 12
+        "ecmaVersion": 2022,
+        "sourceType": "module"
     },
     "rules": {
+      "quotes": [
+        "error",
+        "single"
+      ],
       "indent": [
         "error",
         2,

@@ -1,4 +1,4 @@
-const Event = require("../structures/Event.js");
+import Event from '../structures/Event.js';
 
 class ReadyEvent extends Event {
   async run() {
@@ -14,4 +14,4 @@ class ReadyEvent extends Event {
   }
 }
 
-module.exports = ReadyEvent;
+export default ReadyEvent;

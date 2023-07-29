@@ -1,22 +1,22 @@
-const Command = require("../../structures/Command.js");
-const { request } = require("undici");
+import Command from '../../structures/Command.js';
+import { request } from 'undici';
 
 class Translate extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Translate text to other languages via Google Translate",
+      description: 'Translate text to other languages via Google Translate',
       cooldown: 5,
       options: [
         {
-          name: "language",
-          description: "The target language to translate to.",
-          type: "string",
+          name: 'language',
+          description: 'The target language to translate to.',
+          type: 'string',
           required: true
         },
         {
-          name: "text",
-          description: "The text to translate.",
-          type: "string",
+          name: 'text',
+          description: 'The text to translate.',
+          type: 'string',
           required: true
         }
       ]
@@ -24,24 +24,24 @@ class Translate extends Command {
   }
 
   async run(ctx, options) {
-    const tl = options.getString("language");
-    const q = options.getString("text");
+    const tl = options.getString('language');
+    const q = options.getString('text');
 
-    const { sentences, src } = await request("https://translate.google.com/translate_a/single", {
-      query: { client: "at", dt: "t", dj: 1 },
-      method: "POST",
-      body: new URLSearchParams({ sl: "auto", tl, q }).toString(),
+    const { sentences, src } = await request('https://translate.google.com/translate_a/single', {
+      query: { client: 'at', dt: 't', dj: 1 },
+      method: 'POST',
+      body: new URLSearchParams({ sl: 'auto', tl, q }).toString(),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
       }
     })
       .then(({ body, statusCode }) => {
-        if (statusCode === 429) throw "Oh no! I have been ratelimited from the Google Translate API. Please try again in a few moments. ｡ﾟ･ (>﹏<) ･ﾟ｡";
+        if (statusCode === 429) throw 'Oh no! I have been ratelimited from the Google Translate API. Please try again in a few moments. ｡ﾟ･ (>﹏<) ･ﾟ｡';
         return body.json();
       });
 
     const embed = this.client.embed(ctx.author)
-      .setTitle("Google Translate")
+      .setTitle('Google Translate')
       .addFields([
         {
           name: `Original Text (${src})`,
@@ -50,7 +50,7 @@ class Translate extends Command {
         },
         {
           name: `Translated (${tl})`,
-          value: sentences.map(({ trans }) => trans).join(" "),
+          value: sentences.map(({ trans }) => trans).join(' '),
           inline: true
         }
       ]);
@@ -59,4 +59,4 @@ class Translate extends Command {
   }
 }
 
-module.exports = Translate;
+export default Translate;

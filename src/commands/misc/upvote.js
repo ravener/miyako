@@ -1,15 +1,15 @@
-const Command = require("../../structures/Command.js");
-const { stripIndents } = require("common-tags");
+import Command from '../../structures/Command.js';
+import { stripIndents } from 'common-tags';
 
 class Upvote extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Upvote for me!",
-      aliases: ["vote"],
-      modes: ["text"]
+      description: 'Upvote for me!',
+      aliases: ['vote'],
+      modes: ['text']
     });
 
-    this.url = "https://top.gg/bot/397796982120382464/vote";
+    this.url = 'https://top.gg/bot/397796982120382464/vote';
   }
 
   async run(ctx) {
@@ -20,4 +20,4 @@ class Upvote extends Command {
   }
 }
 
-module.exports = Upvote;
+export default Upvote;

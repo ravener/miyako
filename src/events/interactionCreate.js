@@ -1,11 +1,10 @@
-const Event = require("../structures/Event.js");
-const CommandContext = require("../structures/CommandContext.js");
-const { missingPermissions, plural } = require("../utils/utils.js");
+import Event from '../structures/Event.js';
+import { missingPermissions, plural } from '../utils/utils.js';
 
 class InteractionCreate extends Event {
   async run(interaction) {
     return this.client.commands.handler.handleInteraction(interaction);
-
+    /*
     if (!interaction.isChatInputCommand()) return;
 
     const command = this.client.commands.get(interaction.commandName);
@@ -17,12 +16,13 @@ class InteractionCreate extends Event {
     if (!(await this.checkCooldown(ctx, command))) return;
 
     return command.execute(ctx);
+    */
   }
 
   async checkCooldown(ctx, command) {
     const content = this.client.commands.ratelimit(ctx, command);
 
-    if (typeof content === "string") {
+    if (typeof content === 'string') {
       await ctx.reply({ content, ephemeral: true });
       return false;
     }
@@ -36,7 +36,7 @@ class InteractionCreate extends Event {
 
     if (missing.length) {
       await ctx.reply({
-        content: `I need the following permission${plural(missing)} to run that command: **${missing.join(", ")}**`
+        content: `I need the following permission${plural(missing)} to run that command: **${missing.join(', ')}**`
       });
 
       return false;
@@ -46,4 +46,4 @@ class InteractionCreate extends Event {
   }
 }
 
-module.exports = InteractionCreate;
+export default InteractionCreate;

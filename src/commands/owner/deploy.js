@@ -1,11 +1,11 @@
-const Command = require("../../structures/Command.js");
+import Command from '../../structures/Command.js';
 
 class Deploy extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Deploys slash commands.",
+      description: 'Deploys slash commands.',
       ownerOnly: true,
-      modes: ["text"]
+      modes: ['text']
     });
   }
 
@@ -14,7 +14,7 @@ class Deploy extends Command {
       const body = [];
 
       for (const command of this.client.commands.values()) {
-        if (command.modes.includes("slash") && command.enabled && !command.ownerOnly) {
+        if (command.modes.includes('slash') && command.enabled && !command.ownerOnly) {
           body.push(command.getSlashCommandData().toJSON());
         }
       }
@@ -27,4 +27,4 @@ class Deploy extends Command {
   }
 }
 
-module.exports = Deploy;
+export default Deploy;

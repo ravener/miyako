@@ -1,10 +1,10 @@
-const Command = require("../../structures/Command.js");
+import Command from '../../structures/Command.js';
 
 class MyID extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Retrieve your User ID.",
-      modes: ["text"]
+      description: 'Retrieve your User ID.',
+      modes: ['text']
     });
   }
 
@@ -13,4 +13,4 @@ class MyID extends Command {
   }
 }
 
-module.exports = MyID;
+export default MyID;

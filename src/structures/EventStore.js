@@ -1,8 +1,8 @@
-const Store = require("./Store.js");
+import Store from './Store.js';
 
 class EventStore extends Store {
   constructor(client) {
-    super(client, "events");
+    super(client, 'events');
   }
 
   set(event) {
@@ -24,4 +24,4 @@ class EventStore extends Store {
   }
 }
 
-module.exports = EventStore;
+export default EventStore;

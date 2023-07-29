@@ -1,18 +1,18 @@
-const Command = require("../../structures/Command.js");
-const { random } = require("../../utils/utils.js");
-const { pingMessages } = require("../../utils/responses.js");
+import Command from '../../structures/Command.js';
+import { random } from '../../utils/utils.js';
+import { pingMessages } from '../../utils/responses.js';
 
 class Ping extends Command {
   constructor(...args) {
     super(...args, {
-      description: "Pong! Checks Bot latency.",
-      modes: ["text"]
+      description: 'Pong! Checks Bot latency.',
+      modes: ['text']
     });
   }
 
   async run(ctx) {
     const msg = await ctx.reply({
-      content: "Ping?",
+      content: 'Ping?',
       fetchReply: true
     });
 
@@ -26,4 +26,4 @@ class Ping extends Command {
   }
 }
 
-module.exports = Ping;
+export default Ping;

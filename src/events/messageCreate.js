@@ -1,4 +1,4 @@
-const Event = require("../structures/Event.js");
+import Event from '../structures/Event.js';
 
 class MessageCreate extends Event {
   async run(message) {
@@ -6,4 +6,4 @@ class MessageCreate extends Event {
   }
 }
 
-module.exports = MessageCreate;
+export default MessageCreate;

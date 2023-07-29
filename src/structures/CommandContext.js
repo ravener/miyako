@@ -1,4 +1,4 @@
-const { TYPING, OWNER_ID } = require("../utils/constants.js");
+import { TYPING, OWNER_ID } from '../utils/constants.js';
 
 class CommandContext {
   constructor(command, { message, interaction, prefixLength, flags, alias, content, args }) {
@@ -12,7 +12,7 @@ class CommandContext {
       this.prefixLength = prefixLength;
       this.flags = flags;
       this.alias = alias;
-      this.args = args.join(" ").split(command.delim);
+      this.args = args.join(' ').split(command.delim);
     }
   }
 
@@ -25,7 +25,7 @@ class CommandContext {
   }
 
   get mode() {
-    return this.interaction ? "slash" : "text";
+    return this.interaction ? 'slash' : 'text';
   }
 
   get slash() {
@@ -57,7 +57,7 @@ class CommandContext {
   }
 
   get createdTimestamp() {
-    return this[this.slash ? "interaction" : "message"].createdTimestamp;
+    return this[this.slash ? 'interaction' : 'message'].createdTimestamp;
   }
 
   get owner() {
@@ -95,4 +95,4 @@ class CommandContext {
   }
 }
 
-module.exports = CommandContext;
+export default CommandContext;

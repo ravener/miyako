@@ -9,7 +9,7 @@ class Base {
   }
 
   reload() {
-    return this.store.load(this.file.path);
+    return this.store.load(this.file.path, true);
   }
 
   enable() {
@@ -23,4 +23,4 @@ class Base {
   }
 }
 
-module.exports = Base;
+export default Base;

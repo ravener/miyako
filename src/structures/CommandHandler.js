@@ -1,12 +1,12 @@
-const CommandContext = require("./CommandContext.js");
-const { distance } = require("fastest-levenshtein");
-const { plural, missingPermissions, getDuration, random } = require("../utils/utils.js");
-const RateLimiter = require("./RateLimiter.js");
-const responses = require("../utils/responses.js");
+import CommandContext from './CommandContext.js';
+import { distance } from 'fastest-levenshtein';
+import { plural, missingPermissions, getDuration, random } from '../utils/utils.js';
+import RateLimiter from './RateLimiter.js';
+import { cooldown } from '../utils/responses.js';
 
-const quotes = ['"', "'", '“”', '‘’'];
-const flagRegex = new RegExp(`(?:--|—)(\\w[\\w-]+)(?:=(?:${quotes.map((qu) => `[${qu}]((?:[^${qu}\\\\]|\\\\.)*)[${qu}]`).join("|")}|([\\w<>@#&!-]+)))?`, "g");
-const delim = new RegExp("(\\s)(?:\\s)+");
+const quotes = ['"', '\'', '“”', '‘’'];
+const flagRegex = new RegExp(`(?:--|—)(\\w[\\w-]+)(?:=(?:${quotes.map((qu) => `[${qu}]((?:[^${qu}\\\\]|\\\\.)*)[${qu}]`).join('|')}|([\\w<>@#&!-]+)))?`, 'g');
+const delim = new RegExp('(\\s)(?:\\s)+');
 
 class CommandHandler {
   constructor(client) {
@@ -17,9 +17,9 @@ class CommandHandler {
   getFlags(content) {
     const flags = {};
     content = content.replace(flagRegex, (match, fl, ...quote) => {
-      flags[fl] = (quote.slice(0, -2).find((el) => el) || fl).replace(/\\/g, "");
-      return "";
-    }).replace(delim, "$1");
+      flags[fl] = (quote.slice(0, -2).find((el) => el) || fl).replace(/\\/g, '');
+      return '';
+    }).replace(delim, '$1');
 
     return { content, flags };
   }
@@ -29,7 +29,7 @@ class CommandHandler {
     if (message.channel.partial) await message.channel.fetch();
 
     const { user } = this.client;
-    const regex = new RegExp(`<@!?${user.id}>${!message.guild ? "|" : ""}`);
+    const regex = new RegExp(`<@!?${user.id}>${!message.guild ? '|' : ''}`);
     const match = message.content.match(regex);
 
     if (!match) return;
@@ -39,7 +39,7 @@ class CommandHandler {
 
     // A mention only.
     if (!rawContent) {
-      return message.channel.send("👋 Hi there! Run `@Miyako help` to see all I can do or browse the slash commands by typing `/`");
+      return message.channel.send('👋 Hi there! Run `@Miyako help` to see all I can do or browse the slash commands by typing `/`');
     }
 
     const { content, flags } = this.getFlags(rawContent);
@@ -53,7 +53,7 @@ class CommandHandler {
     });
 
     if (!command) return this.closestCommand(ctx, alias);
-    if (!command.modes.includes("text")) return;
+    if (!command.modes.includes('text')) return;
     if (!(await this.runChecks(ctx, command))) return;
 
     return command.execute(ctx);
@@ -66,7 +66,7 @@ class CommandHandler {
     if (!command) {
       this.client.log.warn(`Command '${interaction.commandName}' not implemented.`);
       return interaction.reply({
-        content: "This command has not been implemented, this is a bug.",
+        content: 'This command has not been implemented, this is a bug.',
         ephemeral: true
       });
     }
@@ -79,7 +79,7 @@ class CommandHandler {
   async runChecks(ctx, command) {
     if (command.ownerOnly && !ctx.owner) {
       await ctx.reply({
-        content: "This command can only be used by the owner."
+        content: 'This command can only be used by the owner.'
       });
 
       return false;
@@ -87,7 +87,7 @@ class CommandHandler {
 
     if (command.guildOnly && !ctx.guild) {
       await ctx.reply({
-        content: "Ba-baka! What do you think you're doing in my DMs? That command can only be used in a server!"
+        content: 'Ba-baka! What do you think you\'re doing in my DMs? That command can only be used in a server!'
       });
 
       return false;
@@ -106,7 +106,7 @@ class CommandHandler {
 
     if (missing.length) {
       await ctx.reply({
-        content: `I need the following permission${plural(missing)} to run that command: **${missing.join(", ")}**`
+        content: `I need the following permission${plural(missing)} to run that command: **${missing.join(', ')}**`
       });
 
       return false;
@@ -120,7 +120,7 @@ class CommandHandler {
 
     if (user.length) {
       await ctx.reply({
-        content: `You need the following permission${plural(user)} to run that command: **${user.join(", ")}**`
+        content: `You need the following permission${plural(user)} to run that command: **${user.join(', ')}**`
       });
 
       return false;
@@ -134,7 +134,7 @@ class CommandHandler {
     if (pass) return true;
 
     const duration = getDuration(remaining);
-    const content = random(responses.cooldown[command.bucket])
+    const content = random(cooldown[command.bucket])
       .replace(/{{user}}/g, ctx.displayName)
       .replace(/{{time}}/g, duration);
 
@@ -165,4 +165,4 @@ class CommandHandler {
   }
 }
 
-module.exports = CommandHandler;
+export default CommandHandler;

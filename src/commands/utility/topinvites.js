@@ -1,13 +1,13 @@
-const Command = require("../../structures/Command.js");
-const { PermissionFlagsBits } = require("discord.js");
+import Command from '../../structures/Command.js';
+import { PermissionFlagsBits } from 'discord.js';
 
 class TopInvites extends Command {
   constructor(...args) {
     super(...args, {
       guildOnly: true,
-      aliases: ["ti"],
+      aliases: ['ti'],
       botPermissions: [PermissionFlagsBits.ManageGuild],
-      description: "Shows the top invites in a server."
+      description: 'Shows the top invites in a server.'
     });
   }
 
@@ -19,7 +19,7 @@ class TopInvites extends Command {
       .first(10);
 
     if (topTen.length === 0) {
-      return ctx.reply("There are no invites, or none of them have been used!");
+      return ctx.reply('There are no invites, or none of them have been used!');
     }
 
     const embed = this.client.embed()
@@ -28,10 +28,10 @@ class TopInvites extends Command {
         name: ctx.guild.name,
         iconURL: ctx.guild.iconURL()
       })
-      .setDescription(topTen.map((inv) => `• **${inv.inviter.username}**'s invite **${inv.code}** has **${inv.uses.toLocaleString()}** uses.`).join("\n"));
+      .setDescription(topTen.map((inv) => `• **${inv.inviter.username}**'s invite **${inv.code}** has **${inv.uses.toLocaleString()}** uses.`).join('\n'));
 
     return ctx.reply({ embeds: [embed] });
   }
 }
 
-module.exports = TopInvites;
+export default TopInvites;

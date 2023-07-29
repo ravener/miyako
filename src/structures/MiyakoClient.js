@@ -1,37 +1,44 @@
-const { Client, EmbedBuilder, GatewayIntentBits, Partials, OAuth2Scopes, PermissionFlagsBits } = require("discord.js");
-const { COLOR } = require("../utils/constants.js");
-const Logger = require("../utils/log.js");
-const CommandStore = require("./CommandStore.js");
-const EventStore = require("./EventStore.js");
-const { request } = require("undici");
-const imgapi = require("img-api");
+import { Client, EmbedBuilder, GatewayIntentBits, Partials, OAuth2Scopes, PermissionFlagsBits } from 'discord.js';
+import { COLOR } from '../utils/constants.js';
+import Logger from '../utils/log.js';
+import CommandStore from './CommandStore.js';
+import EventStore from './EventStore.js';
+import { request } from 'undici';
+import { Client as ImgApiClient } from 'img-api';
 
 class MiyakoClient extends Client {
-  constructor() {
+  constructor(base) {
     super({
       intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.DirectMessages
       ],
-      allowedMentions: { parse: ["users"] },
+      allowedMentions: { parse: ['users'] },
       partials: [Partials.Channel]
     });
 
-    this.dev = !!process.env.DEV;
-    this.log = new Logger(this.dev ? "trace" : "info");
+    this.base = base;
+    this.log = new Logger(this.dev ? 'trace' : 'info');
     this.commands = new CommandStore(this);
     this.events = new EventStore(this);
     this.lastStats = null;
 
-    this.img = new imgapi.Client({
+    this.img = new ImgApiClient({
       port: process.env.IMGAPI_PORT,
       host: process.env.IMGAPI_HOST
     });
 
-    this.once("ready", () => {
-      this.emit("miyakoReady");
+    this.once('ready', () => {
+      this.emit('miyakoReady');
     });
+  }
+
+  /**
+   * Whether the bot is running in development mode.
+   */
+  get dev() {
+    return !!process.env.DEV;
   }
 
   async load() {
@@ -77,11 +84,11 @@ class MiyakoClient extends Client {
     if (server_count === this.lastStats) return;
 
     return request(`https://top.gg/api/bots/${this.user.id}/stats`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ server_count }),
       headers: {
         Authorization: process.env.DBL,
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
     })
       .then(({ statusCode }) => {
@@ -114,4 +121,4 @@ class MiyakoClient extends Client {
   }
 }
 
-module.exports = MiyakoClient;
+export default MiyakoClient;
