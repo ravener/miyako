@@ -37,6 +37,7 @@ class Exec extends Command {
 
   async paste(content) {
     const { body } = await request('https://ravener.vercel.app/api/paste', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': process.env.PASTEBIN
