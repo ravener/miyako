@@ -28,7 +28,8 @@ class Exec extends Command {
     const results = [output, outerr].join('\n');
 
     if (results.length > 2000) {
-      return ctx.reply(`Output too long, pasted at ${this.paste(results)}`);
+      const url = await this.paste(results);
+      return ctx.reply(`Output too long, pasted at ${url}`);
     }
 
     return ctx.reply(results);
