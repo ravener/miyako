@@ -28,10 +28,10 @@
   "homepage": "https://github.com/ravener/miyako#readme",
   "dependencies": {
     "common-tags": "^1.8.2",
-    "discord.js": "^14.11.0",
-    "dotenv": "^16.3.1",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
     "fastest-levenshtein": "^1.0.16",
     "img-api": "^1.0.5",
-    "mongodb": "^5.7.0"
+    "mongodb": "^6.4.0"
   }
 }
