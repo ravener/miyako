@@ -25,7 +25,7 @@ class YoMomma extends Command {
       return ctx.reply('My mom is doing fine thanks, how about yours?');
     }
 
-    const { joke } = await request('https://api.yomomma.info')
+    const { joke } = await request('https://yomama-jokes.com/api/random')
       .then(({ body }) => body.json());
 
     return ctx.reply(`${user}, ${joke}`);
