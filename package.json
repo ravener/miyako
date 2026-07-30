@@ -3,12 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "description": "General purpose Discord Bot",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "test": "eslint .",
-    "start": "node src/index.js",
-    "deploy": "node src/deploy-commands.js"
+    "build": "tsc",
+    "lint": "eslint .",
+    "test": "eslint . && tsc --noEmit",
+    "start": "node dist/index.js",
+    "deploy": "node dist/deploy-commands.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
   },
   "homepage": "https://github.com/ravener/miyako#readme",
   "dependencies": {
+    "@discordjs/rest": "^2.6.1",
     "common-tags": "^1.8.2",
     "discord.js": "^14.26.4",
     "dotenv": "^17.4.2",
@@ -34,5 +37,13 @@
     "img-api": "^1.0.5",
     "mongodb": "^7.2.0",
     "undici": "^8.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/common-tags": "^1.8.4",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.39.5",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.65.0"
   }
 }

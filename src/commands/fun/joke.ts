@@ -1,0 +1,43 @@
+import Command from '../../structures/Command.js';
+import { request } from 'undici';
+import type CommandContext from '../../structures/CommandContext.js';
+import type { CommandConstructorArgs } from '../../types.js';
+
+interface JokeResponse {
+  error?: unknown;
+  category: string;
+  flags: Record<string, boolean>;
+  type: string;
+  joke?: string;
+  setup?: string;
+  delivery?: string;
+}
+
+class Joke extends Command {
+  constructor(...args: CommandConstructorArgs) {
+    super(...args, {
+      description: 'Get a random joke.',
+      cooldown: 3,
+      aliases: ['jk']
+    });
+  }
+
+  async run(ctx: CommandContext) {
+    const body = await request('https://sv443.net/jokeapi/v2/joke/Any')
+      .then(({ body }) => body.json() as Promise<JokeResponse>);
+
+    if (body.error) {
+      return ctx.reply('Something went wrong with the API. Try again later.');
+    }
+
+    const flags = Object.entries(body.flags).filter((x) => x[1]).map((x) => x[0]).join(', ');
+
+    const embed = this.client.embed(ctx.author)
+      .setTitle(`${body.category}${flags ? ` (${flags})` : ''}`)
+      .setDescription(body.type === 'single' ? `${body.joke}` : `**${body.setup}**\n*${body.delivery}*`);
+
+    return ctx.reply({ embeds: [embed] });
+  }
+}
+
+export default Joke;
