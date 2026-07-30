@@ -14,8 +14,9 @@ $ cd miyako
 $ cp .env.example .env
 $ nano .env # Fill this
 $ npm install
-$ node src/deploy-commands.js # Deploy slash commands.
-$ node src/index.js
+$ npm run build # Compile TypeScript to dist/
+$ npm run deploy # Deploy slash commands.
+$ npm start
 ```
 
 ## License

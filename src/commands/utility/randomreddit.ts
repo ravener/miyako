@@ -1,0 +1,52 @@
+import Command from '../../structures/Command.js';
+import { request } from 'undici';
+import type CommandContext from '../../structures/CommandContext.js';
+import type { CommandConstructorArgs, OptionResolver, RedditListing } from '../../types.js';
+
+class RandomReddit extends Command {
+  errorMessage: string;
+
+  constructor(...args: CommandConstructorArgs) {
+    super(...args, {
+      description: 'Returns a random reddit post on a given subreddit.',
+      usage: 'randomreddit <subreddit>',
+      aliases: ['rreddit', 'randreddit'],
+      cooldown: 3,
+      cost: 3,
+      options: [
+        {
+          name: 'subreddit',
+          description: 'The subreddit the fetch a random post from.',
+          type: 'string',
+          required: true
+        }
+      ]
+    });
+
+    this.errorMessage = 'There was an error. Reddit may be down, or the subreddit doesnt exist.';
+  }
+
+  async run(ctx: CommandContext, options: OptionResolver) {
+    let subreddit = options.getString('subreddit');
+
+    if (subreddit.startsWith('r/')) {
+      subreddit = subreddit.slice(2);
+    }
+
+    const data = await request(`https://www.reddit.com/r/${subreddit}/random.json`)
+      .then(({ body }) => body.json() as Promise<RedditListing[] & { error?: unknown }>)
+      .then((body) => {
+        if (body.error) throw this.errorMessage;
+        return body[0].data.children[0].data;
+      })
+      .catch(() => { throw this.errorMessage; });
+
+    if (data.over_18 && !ctx.nsfw) {
+      return ctx.reply('The results I found was NSFW and I cannot post it in this channel.');
+    }
+
+    return ctx.reply(`${data.title} ${data.url}`);
+  }
+}
+
+export default RandomReddit;
